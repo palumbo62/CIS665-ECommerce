@@ -1,0 +1,7 @@
+/wildfly-15.0.1.Final
+/*.zip
+/Week01/*.mp4
+/Week01/*.crdownload
+*.crdownload
+*.zip
+*.~vsdx

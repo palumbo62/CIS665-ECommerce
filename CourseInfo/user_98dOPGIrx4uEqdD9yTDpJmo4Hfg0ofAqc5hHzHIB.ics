@@ -1,0 +1,57 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:icalendar-ruby
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Robert Palumbo Calendar (Canvas)
+X-WR-CALDESC:Calendar events for the user\, Robert Palumbo
+BEGIN:VEVENT
+DTSTAMP:20190117T014700Z
+UID:event-assignment-877765
+DTSTART;VALUE=DATE:20190129T000000
+DTEND;VALUE=DATE:20190129T000000
+CLASS:PUBLIC
+DESCRIPTION:Refer to syllabus for instructions.  Only one member per team 
+ has to make the submission.
+SEQUENCE:0
+SUMMARY:Project Proposal [2019SP-CIS-665-001]
+URL:https://colostate.instructure.com/calendar?include_contexts=course_7672
+ 1&month=01&year=2019#assignment_877765
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_37160000000000001/attachments/5730740/
+ canvas_global_app.css?AWSAccessKeyId=AKIAJFNFXH2V2O7RPCAA&amp\;Expires=195
+ 2081271&amp\;Signature=HmvPC4yL%2Bh9iq4SEug0u4BLa%2FL8%3D&amp\;response-ca
+ che-control=Cache-Control%3Amax-age%3D473364000.0%2C%20public&amp\;respons
+ e-expires=473364000.0"><p>Refer to syllabus for instructions.  Only one m
+ ember per team has to make the submission.</p><script src="https://instruc
+ ture-uploads.s3.amazonaws.com/account_37160000000000001/attachments/573074
+ 3/canvas_global_app.js?AWSAccessKeyId=AKIAJFNFXH2V2O7RPCAA&amp\;Expires=19
+ 52081295&amp\;Signature=VhzONsGkutAfSaFzzh2K5GTh2oY%3D&amp\;response-cache
+ -control=Cache-Control%3Amax-age%3D473364000.0%2C%20public&amp\;response-e
+ xpires=473364000.0"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190117T014400Z
+UID:event-assignment-877728
+DTSTART;VALUE=DATE:20190131T000000
+DTEND;VALUE=DATE:20190131T000000
+CLASS:PUBLIC
+DESCRIPTION:No message
+SEQUENCE:0
+SUMMARY:Research Presentation Topic - Due: Thursday\, January 31 (please re
+ fer to syllabus) [2019SP-CIS-665-001]
+URL:https://colostate.instructure.com/calendar?include_contexts=course_7672
+ 1&month=01&year=2019#assignment_877728
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_37160000000000001/attachments/5730740/
+ canvas_global_app.css?AWSAccessKeyId=AKIAJFNFXH2V2O7RPCAA&amp\;Expires=195
+ 2081271&amp\;Signature=HmvPC4yL%2Bh9iq4SEug0u4BLa%2FL8%3D&amp\;response-ca
+ che-control=Cache-Control%3Amax-age%3D473364000.0%2C%20public&amp\;respons
+ e-expires=473364000.0"><p>No message</p><script src="https://instructure-u
+ ploads.s3.amazonaws.com/account_37160000000000001/attachments/5730743/canv
+ as_global_app.js?AWSAccessKeyId=AKIAJFNFXH2V2O7RPCAA&amp\;Expires=19520812
+ 95&amp\;Signature=VhzONsGkutAfSaFzzh2K5GTh2oY%3D&amp\;response-cache-contr
+ ol=Cache-Control%3Amax-age%3D473364000.0%2C%20public&amp\;response-expires
+ =473364000.0"></script>
+END:VEVENT
+END:VCALENDAR

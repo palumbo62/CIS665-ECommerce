@@ -1,0 +1,111 @@
+The execution was successful
+
+- Initializing Data Flow Task (Success)
+
+- Initializing Connections (Success)
+
+- Setting SQL Command (Success)
+
+- Setting Source Connection (Success)
+
+- Setting Destination Connection (Success)
+
+- Validating (Warning)
+	Messages
+	* Warning 0x80049304: Data Flow Task 1: Warning: Could not open global shared memory to communicate with performance DLL; data flow performance counters are not available.  To resolve, run this package as an administrator, or on the system's console.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Saving (Success)
+
+- Prepare for Execute (Success)
+
+- Pre-execute (Success)
+
+- Executing (Success)
+
+- Copying to [dbo].[Active.Rentals] (Success)
+	* 0 rows transferred
+
+	Messages
+	* Information 0x402090df: Data Flow Task 1: The final commit for the data insertion in "Destination 4 - User CreditCard" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090df: Data Flow Task 1: The final commit for the data insertion in "Destination 1 - Rental Property" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090df: Data Flow Task 1: The final commit for the data insertion in "Destination - Active Rentals" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 1: The final commit for the data insertion  in "Destination 1 - Rental Property" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 1: The final commit for the data insertion  in "Destination 4 - User CreditCard" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 1: The final commit for the data insertion  in "Destination - Active Rentals" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Copying to [dbo].[Rental.Property] (Success)
+	* 0 rows transferred
+
+- Copying to [dbo].[sysdiagrams] (Success)
+	* 1 rows transferred
+
+	Messages
+	* Information 0x402090df: Data Flow Task 1: The final commit for the data insertion in "Destination 2 - sysdiagrams" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 1: The final commit for the data insertion  in "Destination 2 - sysdiagrams" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Copying to [dbo].[User.Account] (Success)
+	* 3 rows transferred
+
+	Messages
+	* Information 0x402090df: Data Flow Task 1: The final commit for the data insertion in "Destination 3 - User Account" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 1: The final commit for the data insertion  in "Destination 3 - User Account" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Copying to [dbo].[User.CreditCard] (Success)
+	* 0 rows transferred
+
+- Copying to [dbo].[User.PersonalInfo] (Success)
+	* 1 rows transferred
+
+	Messages
+	* Information 0x402090df: Data Flow Task 2: The final commit for the data insertion in "Destination 5 - User PersonalInfo" has started.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x402090e0: Data Flow Task 2: The final commit for the data insertion  in "Destination 5 - User PersonalInfo" has ended.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Post-execute (Success)
+	Messages
+	* Information 0x4004300b: Data Flow Task 1: "Destination - Active Rentals" wrote 0 rows.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination 1 - Rental Property" wrote 0 rows.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination 2 - sysdiagrams" wrote 1 rows.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination 3 - User Account" wrote 3 rows.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination 4 - User CreditCard" wrote 0 rows.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 2: "Destination 5 - User PersonalInfo" wrote 1 rows.
+	 (SQL Server Import and Export Wizard)
+	
+
+
+
