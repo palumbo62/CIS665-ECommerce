@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- this is a comment line, you can put what ever markup you want here, meta-tags, 
+        Html - ICE1
+        Author:  RP
+        Date:  01/24/2019
+    -->
+
+    <title>LMS400 Weight Machine</title>  <!-- shows up as the TAB name in browser -->
+    <meta charset="utf-8" /> <!-- tell browser to use this character set -->
+    <meta name="author" content="Robert Palumbo" />
+
+
+</head>
+
+<body>
+    <!-- body can have heaaders, paragraphs, etc each formatted accordingly -->
+    <header>
+        <!-- this is a logical tag defining what the area reflects
+         similar to footers,
+         Can be styled with CSS
+    -->
+        <h1>Body Systems </h1>
+
+        <br />
+
+        <!-- example of inline styling (not preferred way> 
+                colors can be represented by name, RGB, Hex, HSC (hue, saturation, color)
+            -->
+
+        <h1 style="color:brown; background-color:gray">Body Systems </h1>
+
+        <hr /> <!-- adds horizontal line across page, can be done with CSS -->
+
+        <h2>
+            Body Systems LSM400 Linear Smith Machine
+        </h2>
+        <nav>
+            <!-- navigation tags -->
+            <!-- a-tags used to create hyperlinks in document -->
+            <!-- this hyperlinks a relative path to another location -->
+            <a href="../htmlDemo1/ct_catering.html">Eat Right Catering</a>
+
+            <!-- need to force next aref on next line use br -->
+            <br />
+            <br />
+
+            <!-- this is another example link -->
+            <a href="https://colostate.instructure.com/courses/76721">CSU CIS665</a>
+            <br />
+            <br />
+
+            <!-- target open the link in a new tab in the browser-->
+            <a href="http://www.schwarzenegger.com" target="_blank">Schwarzie!</a>
+            <br />
+            <br />
+        </nav>
+
+    </header>
+
+    <section>
+    <!-- useful area for all sort of information (like in a book -->    
+        <!-- display an image
+            tag is a 'one sided' tag so it only needs a /> to close it
+        
+            alt is used to give an alternate source if the actual src is missing
+            -->
+
+        <img src="smith.jpg" alt="Image of LMS400"/>
+        <hr />
+        <h1>Overview</h1>
+        <p>
+            Linear Smith Machines are the ultimate in weight machines and the LSM400
+            leads the field. Designed for both serious fitness users and beginners, the
+            LSM400's vertical design provides all of the safety and control associated
+            with Smith Machines, while still allowing for the effective use of gravity
+            for effective resistance. You don't even need a workout partner. Lock points
+            can be set to prevent the bar from movement outside of your body's natural
+            range of motion.
+        </p>
+        <p>
+            You can tailor the LSM400 to meet you specific workout needs. Start with the
+            basic package of the Smith Machine rack and, as your needs grow, add a
+            lat/row, pec dec, plate tree, dip, and accessory organizer. Accessories are easy
+            to insert and remove, allowing you to continue your workout without delay.
+            The LSM400 works with all standard Olympic weight plates
+        </p>
+    </section>
+
+    <section>
+        <h2>Features</h2>
+        <!-- create a list of features, ordered <ol>, unordered <ul>, or definition list <dl> -->
+
+        <ul>
+            <!-- unordered list-->
+            <li>Smooth Smith Action </li>
+            <li>Proper Angle</li>
+            <li>Safety</li>
+            <li>Rugged/li>
+            <li>Warranty</li>
+        </ul>
+    </section>
+
+    <hr />
+
+    <footer>
+        <!-- again a logical tag only -->
+        <!-- to add nonbreaking space between these use &nbsp; i.e. &<keyword><semicolon>
+    or '&<# code><semicolon'
+    -->
+        Body Systems &nbsp;&nbsp;&nbsp;&nbsp;&#9991;
+        401 Commercial Drive &nbsp;&nbsp;&nbsp;&nbsp;&#9991;
+        Eaton, TX  87015 &nbsp;&nbsp;&nbsp;&nbsp;&#9991;
+
+        <!-- pulls up dialer on the host machine -->
+        <a href="tel:+18005552811">(800) 555-2811</a>&nbsp;&nbsp;&nbsp;&nbsp;&#9991;
+
+        <!-- pulls up default email client on the host to allow sending an email-->
+        <a href="mailto:body.systems@muscle.com">body.systems@muscle.com</a>
+    </footer>
+
+</body>
+</html>

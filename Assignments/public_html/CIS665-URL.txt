@@ -1,0 +1,7 @@
+
+
+https://buscisweb01.busdom.colostate.edu/CIS665/sp19palumbo.peebs/public_html
+
+HOE1-URL:
+file://buscisweb01.busdom.colostate.edu/CIS665/sp19palumbo.peebs/public_html/HOE1/HtmlHOE1Files/mpIndex.html
+https://buscisweb01.busdom.colostate.edu/CIS665/sp19palumbo.peebs/public_html/HOE1/HtmlHOE1Files/mpIndex.html
