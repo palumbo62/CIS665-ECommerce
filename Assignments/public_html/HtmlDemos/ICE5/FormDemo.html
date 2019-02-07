@@ -57,13 +57,75 @@
         <br /><br />
 
         <!-- range create a slider input -->
-        0<input name="exp" id="exp" type="range" min="0" max="50" value="10" step="5"/>50
+        0<input name="exp" id="exp" type="range" min="0" max="50" value="10" step="5" />50
 
         <br /><br />
 
+        <!-- Week 3 LECTURE 2 starts here -->
+        <input name="admitdate" id="admitdate" type="date" placeholder="date admitted" />
+
+        <br /><br />
+
+        <!-- Create a GROUP BOX
+        radio button, dist id is used to tie the label to the input dist
+        name=location creates the group the radio buttons are in
+        only 1 button can be 'checked' by default in the group because they are radio buttons
+        -->
+        <fieldset style="width:70%">
+            <legend>Location</legend>
+            <label for="dist">Distance</label>
+            <input name="location" id="dist" type="radio" value="D" checked />
+            <label for="camp">Campus</label>
+            <input name="location" id="camp" type="radio" value="C" />
+        </fieldset>
+
+        <br /><br />
+
+        <!-- Create CHECK-BOXES -->
+        <fieldset style="width:70%">
+            <legend>Degree</legend>
+            <label for="master">Master</label>
+            <input name="degree" id="master" type="checkbox" /> <br />
+            <label for="bach">Bachelor</label>
+            <input name="degree" id="bach" type="checkbox" />
+        </fieldset>
+
+        <fieldset style="width:40%">
+            <legend>Favorite Snacks</legend>
+            <label for="cheerio">Cheerio</label>
+            <input name="cheerio" id="cheerio" type="checkbox" value="cheerio" checked /> <br />
+            <label for="pretzels">Pretzelsr</label>
+            <input name="pretzels" id="pretzels" type="checkbox" value="pretzels" /> <br />
+            <label for="chips">Chips</label>
+            <input name="chips" id="chips" type="checkbox" value="chips" checked /> <br />
+        </fieldset>
+
+        <br /><br />
+
+        <!-- Create DROP-DOWN menu (these are use to converse real estate on the display
+     size indicates how many to display
+        multi-select allows more than one pick
+    -->
+        <select name="trails" style="font-size:0.9em" size="2">
+            <option value="arthurs">Arthurs</option>
+            <option value="pikespeak">Pikes Peak</option>
+            <option value="cherrycreek">Cherry Creak</option>
+            <option selected value="devilsbackbones">Devils Backbone</option>
+            <option value="horsetooth">Horsetooth</option>
+        </select>
+
+        <br /><br />
+
+        <!--Create text box-->
+        <textarea cols="50" rows="5" placeholder="comments"></textarea>
+        <br /> <br />
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/rsTXN6KK3Mg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <audio src="demo.mp4"></audio>
         <!-- Submit button will automatically check that all REQUIRED fields on the form actually has input -->
         <input name="submit" type="submit" value="Submit" />
 
+        <!-- LECTURE 2 -->
     </form>
 </body>
 </html>
