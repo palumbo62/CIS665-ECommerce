@@ -37,6 +37,7 @@ body {
     clear: none;
     float: none;
     min-height: 100%;*/
+    /*box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px, rgba(31, 61, 31, 0.9) -20px 0px 25px;*/
     width: 88.2%;
     min-height: 100%;
     max-width: 900px;
