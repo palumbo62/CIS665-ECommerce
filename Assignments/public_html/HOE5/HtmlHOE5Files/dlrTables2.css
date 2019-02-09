@@ -13,57 +13,77 @@
 
 table.programs {
    font-family: Arial, Verdana, sans-serif;
-  
+
+   /* RLP: Step 3a i-iii*/
+   width: 100%;
+   border: 15px outset rgb(151,151,151);
+   border-collapse: collapse;
 }
 
-
 tr {
-   
+    /* RLP: Step 3b */
+    height: 25px;
 }
 
 th, td {
-  
+    /* RLP: Step 3c */
+    border: 1px solid gray;
+    vertical-align: top; 
+    padding: 5px;
 }
 
 /* Table Caption Styles */
 
 caption {
-   
+    /* RLP: Step 3d */
+    caption-side: bottom;
+    text-align: center;
 }
 
 /* Table Column Styles */
 
 col.timeColumn {
-   
+    /* RLP: Step 3e */
+    width: 10%;
+    background-color: rgb(215,205,151);
 }
 
 col.wDayColumns {
-   
+    /* RLP: Step 3f */
+    width: 11%;
+    background-color: rgb(236,255,211);
 }
 
 col.wEndColumns {
-  
+    /* RLP: Step 3g */
+    width: 17%;
+    background-color: rgb(255,231,255);
 }
 
 /* Table Header styles */
 
 thead {
-   
+    /* RLP: Step 3h */
+    color: white;
+    background-color: rgb(105,177,60);
 }
 
 thead th:first-of-type {
-   
+    /* RLP: Step 3i */
+    background-color: rgb(153,86,7);
 }
 
 thead th:nth-of-type(7), thead th:nth-of-type(8) {
-   
+    /* RLP: Step 3j */
+    background-color: rgb(153,0,153);
 }
-
 
 /* Table Footer Styles */
 
 tfoot {
-   
+    /* RLP: Step 3k */
+    color: white;
+    background-color: black;
 }
 
 

@@ -1,20 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-   <!--
-      HTML - Hands-on-Exercise 5
+    <!--
+       Class:         CIS665
+       Assignment:    HOE4
+       Name:          Robert Palumbo
+       Due Date:      2.14.2019 @ 11:59pm
+             
+       HTML - Hands-on-Exercise 5
 
-      DLR Morning Schedule
-   
-      Filename: dlrMornings.html
+       DLR Morning Schedule
 
-   -->
-   
-   <meta charset="utf-8" />
-   <title>DLR Morning Schedule</title>
-   <link href="dlrReset2.css" rel="stylesheet" />
-   <link href="dlrStyles2.css" rel="stylesheet" />   
-   <link href="dlrTables2.css" rel="stylesheet" />  
+       Filename: dlrMornings.html
+
+    -->
+
+    <meta charset="utf-8" />
+    <title>DLR Morning Schedule</title>
+    <link href="dlrReset2.css" rel="stylesheet" />
+    <link href="dlrStyles2.css" rel="stylesheet" />
+    <link href="dlrTables2.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -45,92 +50,115 @@
             <br />Please refer below for our current morning schedule.</p>
 
          <table class="programs">
-             
-            
-            <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>Mon</th>
-                  <th>Tue</th>
-                  <th>Wed</th>
-                  <th>Thu</th>
-                  <th>Fri</th>
-                  <th>Sat</th>
-                  <th>Sun</th>
-               </tr>
-            </thead>
-            <tfoot>
-               <tr>
-                  <td colspan="">Support your Public Radio Station</td>
-               </tr>
-            </tfoot>
-            <tbody>
-               <tr>
-                  <th>5:00</th>
-                  <td rowspan="" colspan="">Dawn Air</td>
-                  <td rowspan="">Dawn Air Weekends</td>
-                  <td rowspan="">Sunday Magazine</td>
-               </tr>
-               <tr>
-                  <th>5:30</th>
-               </tr>
-               <tr>
-                  <th>6:00</th>
-                  <td rowspan="">Weekend Reflections</td>
-               </tr>
-               <tr>
-                  <th>6:30</th>
-               </tr>
-               <tr>
-                  <th>7:00</th>
-                  <td colspan="">Local News</td>
-                  <td rowspan="">Weekend Wrap</td>
-                  <td rowspan="">Radio U</td>
-               </tr>
-               <tr>
-                  <th>7:30</th>
-                  <td colspan="">World News Feed</td>
-               </tr>
-               <tr>
-                  <th>8:00</th>
-                  <td rowspan="" colspan="">Classical Roots</td>
-                  <td rowspan="">What Can You Say?</td>
-                  <td rowspan="">University on the Air</td>
-               </tr>
-               <tr>
-                  <th>8:30</th>
-               </tr>
-               <tr>
-                  <th>9:00</th>
-               </tr>
-               <tr>
-                  <th>9:30</th>
-                  <td rowspan="">Animal Talk</td>
-               </tr>
-               <tr>
-                  <th>10:00</th>
-                  <td rowspan="" colspan="">Symphony City</td>
-                  <td>Word Play</td>
-               </tr>
-               <tr>
-                  <th>10:30</th>
-                  <td>Brain Stew</td>
-               </tr>
-               <tr>
-                  <th>11:00</th>
-                  <td rowspan="">Opera Live from the East Coast</td>
-                  <td>The Inner Mind</td>
-               </tr>
-               <tr>
-                  <th>11:30</th>
-                  <td>Grammar Rules!!</td>
-               </tr>
-               <tr>
-                  <th>12:00</th>
-                  <td colspan="">Book Club</td>
-                  <td>Weekend Wrap</td>
-               </tr>
-            </tbody>
+             <!-- RLP: Step 2a -->
+             <caption>All Times Central</caption>
+
+             <!-- RLP: Step 2b -->
+             <colgroup>
+                 <col class="timeColumn" />
+                 <col class="wDayColumns" span="5" />
+                 <col class="wEndColumns" span="2" />
+             </colgroup>
+
+             <colgroup>
+                 <col id="firstCol" />
+                 <col class="dayCols" span="7" />
+             </colgroup>
+
+             <thead>
+                 <tr>
+                     <th>Time</th>
+                     <th>Mon</th>
+                     <th>Tue</th>
+                     <th>Wed</th>
+                     <th>Thu</th>
+                     <th>Fri</th>
+                     <th>Sat</th>
+                     <th>Sun</th>
+                 </tr>
+             </thead>
+             <tfoot>
+                 <tr>
+                     <!-- RLP: Step 2c -->
+                     <td colspan="8">Support your Public Radio Station</td>
+                 </tr>
+             </tfoot>
+             <tbody>
+                 <tr>
+                     <th>5:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="4" colspan="5">Dawn Air</td>
+                     <td rowspan="4">Dawn Air Weekends</td>
+                     <td rowspan="2">Sunday Magazine</td>
+                 </tr>
+                 <tr>
+                     <th>5:30</th>
+                 </tr>
+                 <tr>
+                     <th>6:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="2">Weekend Reflections</td>
+                 </tr>
+                 <tr>
+                     <th>6:30</th>
+                 </tr>
+                 <tr>
+                     <th>7:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td colspan="5">Local News</td>
+                     <td rowspan="2">Weekend Wrap</td>
+                     <td rowspan="2">Radio U</td>
+                 </tr>
+                 <tr>
+                     <th>7:30</th>
+                     <!-- RLP: Step 2c -->
+                     <td colspan="5">World News Feed</td>
+                 </tr>
+                 <tr>
+                     <th>8:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="4" colspan="5">Classical Roots</td>
+                     <td rowspan="3">What Can You Say?</td>
+                     <td rowspan="4">University on the Air</td>
+                 </tr>
+                 <tr>
+                     <th>8:30</th>
+                 </tr>
+                 <tr>
+                     <th>9:00</th>
+                 </tr>
+                 <tr>
+                     <th>9:30</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="3">Animal Talk</td>
+                 </tr>
+                 <tr>
+                     <th>10:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="4" colspan="5">Symphony City</td>
+                     <td>Word Play</td>
+                 </tr>
+                 <tr>
+                     <th>10:30</th>
+                     <td>Brain Stew</td>
+                 </tr>
+                 <tr>
+                     <th>11:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td rowspan="3">Opera Live from the East Coast</td>
+                     <td>The Inner Mind</td>
+                 </tr>
+                 <tr>
+                     <th>11:30</th>
+                     <td>Grammar Rules!!</td>
+                 </tr>
+                 <tr>
+                     <th>12:00</th>
+                     <!-- RLP: Step 2c -->
+                     <td colspan="5">Book Club</td>
+                     <td>Weekend Wrap</td>
+                 </tr>
+             </tbody>
          </table> 
          
       </section>

@@ -1,0 +1,75 @@
+﻿@charset "utf-8";
+
+/*
+   HTML - Hands-on-Exercise 5
+
+   Tables Style Sheet
+   
+   Filename: dlrTables2.css
+
+*/
+
+/* Table Styles */
+
+table.programs {
+   font-family: Arial, Verdana, sans-serif;
+  
+}
+
+
+tr {
+   
+}
+
+th, td {
+  
+}
+
+/* Table Caption Styles */
+
+caption {
+   
+}
+
+/* Table Column Styles */
+
+col.timeColumn {
+   
+}
+
+col.wDayColumns {
+   
+}
+
+col.wEndColumns {
+  
+}
+
+/* Table Header styles */
+
+thead {
+   
+}
+
+thead th:first-of-type {
+   
+}
+
+thead th:nth-of-type(7), thead th:nth-of-type(8) {
+   
+}
+
+
+/* Table Footer Styles */
+
+tfoot {
+   
+}
+
+
+
+
+
+
+
+
