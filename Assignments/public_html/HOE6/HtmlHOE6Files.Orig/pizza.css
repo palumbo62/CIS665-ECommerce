@@ -1,10 +1,4 @@
 /*
-
-   Class:         CIS665
-   Assignment:    HOE6
-   Name:          Robert Palumbo
-   Due Date:      2.19.2019 @ 11:59pm
-
    HTML - Hands-on-Exercise 6
 
    Pizza Order Style Sheet
@@ -28,22 +22,11 @@ fieldset
 #custInfo 
 {
    width: 55%;
-
-   /* RLP: Step 3 
-       Add specific block height and match to #buildPizza
-   */
-   height: 50%;
 }
 
 #buildPizza 
 {
    width: 40%;
-
-   /* RLP: Step 3 
-        Match height to #custInfo
-   */
-   height: 50%;
-
 }
 
 #toppings, #pizzaSize, #pizzaCrust
@@ -107,16 +90,14 @@ input[type="number"]
 
 /* Address field styles */
 
-textarea {
-    display: block;
-    float: left;
-    height: 110px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 50%;
-
-    /* RLP: Step 3*/
-    overflow-y: scroll;
+textarea 
+{
+   display: block;
+   float: left;
+   height: 110px;
+   margin-top: 5px;
+   margin-bottom: 5px;
+   width: 50%;
 }
 
 /* Crust selection list styles */

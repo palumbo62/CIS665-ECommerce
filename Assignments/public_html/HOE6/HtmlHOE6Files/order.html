@@ -1,21 +1,26 @@
 ﻿<!DOCTYPE html>
 <html>
 
-   <head>
-   <!--
-     HTML - Hands-on-Exercise 6
+<head>
+    <!--
+       Class:         CIS665
+       Assignment:    HOE6
+       Name:          Robert Palumbo
+       Due Date:      2.19.2019 @ 11:59pm
 
-      Red Ball Pizza Order Form
-      
-      Filename: order.html
-     
-   -->
-      <meta charset="UTF-8" />
-      <title>Build your own Pizza</title>
-      <link href="redball.css" rel="stylesheet" />
-      <link href="pizza.css" rel="stylesheet" />
+       HTML - Hands-on-Exercise 6
 
-   </head>
+       Red Ball Pizza Order Form
+
+       Filename: order.html
+
+    -->
+    <meta charset="UTF-8" />
+    <title>Build your own Pizza</title>
+    <link href="redball.css" rel="stylesheet" />
+    <link href="pizza.css" rel="stylesheet" />
+
+</head>
 
    <body>
 
@@ -48,37 +53,54 @@
 
       <form id="pizza" name="pizza" action="Not Set" method="post">
 
-         <fieldset id="custInfo">
-            <legend>Customer Information</legend>
+          <fieldset id="custInfo">
+              <legend>Customer Information</legend>
 
-            <label for="custname">Name *</label>
+              <label for="custname">Name *</label>
+              <input name="custname" id="custname" type="text" maxlength="30" placeholder="first and last name"
+                     required autofocus pattern="^[A-Za-z]+$" title="" />
 
-            <label for="street">Street address *</label>
+              <label for="street">Street address *</label>
+              <input name="street" id="street" type="text" maxlength="30" placeholder="street address"
+                     required autofocus pattern="^[0-9]+(\w)[A-Za-z]+$" title="Enter your street address" />
 
-             <label for="city">City *</label>
+              <label for="city">City *</label>
+              <input name="city" id="city" type="text" maxlength="30" placeholder="city"
+                     required autofocus pattern="^[A-Za-z]+$" title="Enter your city" />
 
-             <label for="zip">Postal code *</label>
-                        
-             <label for="phone">Phone *</label>
+              <label for="zip">Postal code *</label>
+              <input name="zip" id="zip" type="text" maxlength="5" placeholder="nnnnn"
+                     required autofocus pattern="^[0-9]{5}$" title="Enter your 5 digit zip code" />
 
-             <label for="request">Want it your way?</label>
+              <label for="phone">Phone *</label>
+              <input name="phone" id="phone" type="tel" maxlength="5" placeholder="nnn-nnn-nnnn"
+                     required autofocus title="Enter your 10 digit phone number" />
 
-             <label for="instruction">Out in the woods?</label>
-            
-            </fieldset>
+              <label for="request">Want it your way?</label>
+              <textarea name="request" id="request" cols="30" rows="5" 
+                        placeholder="special requests"  title="Enter any special requests"></textarea>
+
+              <label for="instruction">Out in the woods?</label>
+              <textarea name="instruction" id="instruction" cols="30" rows="5" 
+                        placeholder="delivery instructions" title="Enter helpful direction hints"></textarea>
+
+          </fieldset>
 
          <fieldset id="buildPizza">
             <legend>Build Your Own Pizza</legend>
             
             <fieldset id="pizzaSize">
-              <legend>Select Your Pizza Size</legend>
-                
+                <legend>Select Your Pizza Size</legend>
+
                 <label>10 inch</label>
-                
+                <input name="pizzasize" id="10 inch" type="radio" value="10" />
+
                 <label>12 inch</label>
-                
+                <input name="pizzasize" id="12 inch" type="radio" value="12" checked />
+
                 <label>14 inch</label>
-                
+                <input name="pizzasize" id="14 inch" type="radio" value="14" />
+
             </fieldset>
 
             <fieldset id="pizzaCrust">
