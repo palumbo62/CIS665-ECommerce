@@ -57,79 +57,107 @@
               <legend>Customer Information</legend>
 
               <label for="custname">Name *</label>
+              <!-- RLP: Step 2a -->
               <input name="custname" id="custname" type="text" maxlength="30" placeholder="first and last name"
-                     required autofocus pattern="^[A-Za-z]+$" title="" />
+                     required autofocus pattern="[A-Za-z]+(\s|,)[A-Za-z]{1,30}" title="Enter your first and last name" />
 
               <label for="street">Street address *</label>
+              <!-- RLP: Step 2a -->
               <input name="street" id="street" type="text" maxlength="30" placeholder="street address"
-                     required autofocus pattern="^[0-9]+(\w)[A-Za-z]+$" title="Enter your street address" />
+                     required autofocus title="Enter your street address" />
 
               <label for="city">City *</label>
+              <!-- RLP: Step 2a -->
               <input name="city" id="city" type="text" maxlength="30" placeholder="city"
-                     required autofocus pattern="^[A-Za-z]+$" title="Enter your city" />
+                     required autofocus  title="Enter your city" />
 
               <label for="zip">Postal code *</label>
-              <input name="zip" id="zip" type="text" maxlength="5" placeholder="nnnnn"
-                     required autofocus pattern="^[0-9]{5}$" title="Enter your 5 digit zip code" />
+              <!-- RLP: Step 2a & 2b -->
+              <input name="zip" id="zip" type="text" inputmode="numeric"  placeholder="nnnnn"
+                     required autofocus pattern="(\d{5}([\-]\d{4})?)" title="Enter your 5 digit zip code" />
 
               <label for="phone">Phone *</label>
-              <input name="phone" id="phone" type="tel" maxlength="5" placeholder="nnn-nnn-nnnn"
-                     required autofocus title="Enter your 10 digit phone number" />
+              <!-- RLP: Step 2a & 2b -->
+              <input name="phone" id="phone" type="tel" maxlength="12" placeholder="nnn-nnn-nnnn"
+                     required autofocus pattern="\d{3}[\-]\d{3}[\-]\d{4}" title="Enter your 10 digit phone number" />
 
               <label for="request">Want it your way?</label>
-              <textarea name="request" id="request" cols="30" rows="5" 
-                        placeholder="special requests"  title="Enter any special requests"></textarea>
+              <!-- RLP: Step 2a -->
+              <textarea name="request" id="request" cols="30" rows="5"
+                        placeholder="special requests" title="Enter any special requests"></textarea>
 
               <label for="instruction">Out in the woods?</label>
-              <textarea name="instruction" id="instruction" cols="30" rows="5" 
+              <!-- RLP: Step 2a -->
+              <textarea name="instruction" id="instruction" cols="30" rows="5"
                         placeholder="delivery instructions" title="Enter helpful direction hints"></textarea>
 
           </fieldset>
 
-         <fieldset id="buildPizza">
-            <legend>Build Your Own Pizza</legend>
-            
-            <fieldset id="pizzaSize">
-                <legend>Select Your Pizza Size</legend>
+          <fieldset id="buildPizza">
+              <legend>Build Your Own Pizza</legend>
 
-                <label>10 inch</label>
-                <input name="pizzasize" id="10 inch" type="radio" value="10" />
+              <fieldset id="pizzaSize">
+                  <legend>Select Your Pizza Size</legend>
 
-                <label>12 inch</label>
-                <input name="pizzasize" id="12 inch" type="radio" value="12" checked />
+                  <label>10 inch</label>
+                  <!-- RLP: Step 2c -->
+                  <input name="pizzasize" id="10 inch" type="radio" value="10" />
 
-                <label>14 inch</label>
-                <input name="pizzasize" id="14 inch" type="radio" value="14" />
+                  <label>12 inch</label>
+                  <!-- RLP: Step 2c -->
+                  <input name="pizzasize" id="12 inch" type="radio" value="12" checked />
 
-            </fieldset>
+                  <label>14 inch</label>
+                  <!-- RLP: Step 2c -->
+                  <input name="pizzasize" id="14 inch" type="radio" value="14" />
 
-            <fieldset id="pizzaCrust">
-              <legend>Choose Your Crust</legend>
-            
-                <select name="crust" id="crust">
-                   
-                </select>
+              </fieldset>
 
-            </fieldset>
-            
-            <fieldset id="toppings">
-               <legend>Pick your Toppings</legend>
+              <fieldset id="pizzaCrust">
+                  <legend>Choose Your Crust</legend>
 
-               <label for="pepperoni">Pepperoni</label>
-               
-               <label for="chicken">Chicken</label>
-              
-               <label for="mushrooms">Mushrooms</label>
-              
-               <label for="peppers">Green Peppers</label>
-               
-            </fieldset>
+                  <select name="crust" id="crust" size="4">
+                      <!-- RLP: Step 2c -->
+                      <option selected value="thin">Thin</option>
+                      <!-- RLP: Step 2c -->
+                      <option value="thick">Thick</option>
+                      <!-- RLP: Step 2c -->
+                      <option value="stuffed">Stuffed</option>
+                      <!-- RLP: Step 2c -->
+                      <option value="pan">Pan</option>
+                  </select>
+              </fieldset>
 
-             <label for="quantity">Quantity</label>
-           
-         </fieldset>  
+              <fieldset id="toppings">
+                  <legend>Pick your Toppings</legend>
 
-     </form>
+                  <label for="pepperoni">Pepperoni</label>
+                  <!-- Step 2 continued -->
+                  <input name="pepperoni" id="pepperoni" type="checkbox" value="pepperoni" /> <br />
+
+                  <label for="chicken">Chicken</label>
+                  <!-- Step 2 continued -->
+                  <input name="chicken" id="chicken" type="checkbox" value="chicken" /> <br />
+
+                  <label for="mushrooms">Mushrooms</label>
+                  <!-- Step 2 continued -->
+                  <input name="mushrooms" id="mushrooms" type="checkbox" value="mushrooms" /> <br />
+
+                  <label for="peppers">Green Peppers</label>
+                  <!-- Step 2 continued -->
+                  <input name="peppers" id="peppers" type="checkbox" value="peppers" /> <br />
+              </fieldset>
+
+              <label for="quantity">Quantity</label>
+              <input name="quantity" id="quantity" type="number" min="1" max="999" placeholder="1" 
+                     required autofocus pattern="^[0-9]{3}$" title="Enter quantity of pizzas of this type" />
+
+          </fieldset>
+
+          <!-- Submit button will automatically check that all REQUIRED fields on the form actually has input -->
+          <input name="submit" type="submit" value="Submit" />
+
+      </form>
 
    </section>
 

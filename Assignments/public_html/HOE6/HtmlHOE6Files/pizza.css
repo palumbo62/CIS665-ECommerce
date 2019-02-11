@@ -17,7 +17,6 @@
 
 fieldset 
 {
-   background-color: rgb(255, 246, 205);
    border: 1px solid rgb(233, 69, 0);
    float: left;
    margin: 1%;
@@ -97,6 +96,14 @@ input
 {
     width: 30%;
     margin-left: 20%;
+
+    /* RLP Step 3 - optional, I want the label to be closer to the input box */
+    text-align:center;        
+    vertical-align:bottom;
+    
+
+    /* RLP: Step 3 - optional, make sure build pizza block aligns on the bottom with Cust Info block */
+    margin-bottom: 6%;
 }
 
 input[type="number"]
@@ -149,6 +156,9 @@ input[type="submit"]
    font-size: 1.4em;
    clear: left;
    margin-left: 67%;
+
+   /* RLP: Step 3 - optional, add a little more space after the button */
+   margin-bottom: 2%;
    width: 175px;
    background-color: rgb(179, 20, 25);
    color: white;
