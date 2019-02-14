@@ -15,29 +15,9 @@ html {
     height: 100%;
     background: url("amp_background.jpg") no-repeat center center fixed;
     background-size: cover;
-    /*background-repeat: round;*/
-    /*background-size: cover;*/
 }
 
 body {
-    /*width: 88.2%;
-    max-width: 900px;
-    padding-left: 0.9%;
-    padding-right: 0.9%;
-    margin: 0px auto auto auto;
-    clear: none;
-    float: none;
-    background-color: white;
-    box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px, rgba(31, 61, 31, 0.9) -20px 0px 25px;*/
-    /*margin-left: auto;
-    margin-right: auto;
-    width: 81.9%;
-    padding-left: 4.55%;
-    padding-right: 4.55%;
-    clear: none;
-    float: none;
-    min-height: 100%;*/
-    /*box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px, rgba(31, 61, 31, 0.9) -20px 0px 25px;*/
     width: 88.2%;
     min-height: 100%;
     max-width: 900px;
@@ -45,7 +25,6 @@ body {
     padding-right: 5%;
     margin: 0px auto auto auto;
     clear: none;
-    float: none;
     background-color: beige;
     border-style: solid;
     border-bottom-width: thin;
@@ -64,20 +43,37 @@ h2 {
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
-article {
+section#sponsors {
     font-size: 0.9em;
     text-align: justify;
     width: 94%;
-    float: none;
-    margin: 0px auto;
     box-sizing: border-box;
-    box-decoration-break;
+    margin: 0px auto auto auto;
 }
 
-article img {
+section#sponsors img {
+    width: 15%;
+    margin: 0% 2% 3% 2%
+}
+
+article#main, article#locations, article#testimonials, article#contact, article#services, article#about {
+    font-size: 0.9em;
+    text-align: justify;
+    width: 94%;
+    margin: 0px auto;
+}
+
+article#main img, article#about img {
     float: right;
     width: 40%;
-    margin:  2% 2% 2% 2%
+    margin: 2% 2% 2% 2%;
+}
+
+article#main p:last-child {
+    font: bold, italic, 18px;
+    font-size:1.1em;
+    font-style:italic;
+    font-variant:small-caps;
 }
 
 article#testimonials p:first-of-type::first-line {
@@ -187,14 +183,6 @@ header img {
     float: none;
     width: 96%;
     margin: 2% 2% 0% 2%;
-}
-
-body p, body address {
-    margin: 3.5% 1%;
-    font-size: 1em;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
-    font-style: normal;
-    height: 100%;
 }
 
 dl {
