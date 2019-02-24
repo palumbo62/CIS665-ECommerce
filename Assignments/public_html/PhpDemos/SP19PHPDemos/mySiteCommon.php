@@ -3,7 +3,14 @@
     Purpose: Methods to render Common Site Header and Footer
     Author: LV
     Date: January 2019
-     */
+     
+    Class:         CIS665
+    Name:          Robert Palumbo
+
+    Modified for specific use in my assignments.
+    
+    Filename: mySiteCommon.php
+    */
 
 function displayPageHeader($pageTitle)
 {
@@ -13,7 +20,7 @@ function displayPageHeader($pageTitle)
    <head>
       <meta charset="UTF-8" />
       <title>Rockwell Studios</title>
-      <link rel="stylesheet" href="stylesCommon.css" type="text/css" />
+      <link rel="stylesheet" href="..\stylesCommon.css" type="text/css" />
    </head>
 
    <body>

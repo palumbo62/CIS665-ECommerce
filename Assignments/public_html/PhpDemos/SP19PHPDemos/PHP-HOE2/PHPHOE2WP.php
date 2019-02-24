@@ -16,7 +16,7 @@ and open the template in the editor.
 
        Web page to display Big Mac Price information
 
-       Filename: PHPHOE2.php
+       Filename: PHPHOE2WP.php
     -->
         <meta charset="UTF-8">
         <title></title>        <meta charset="UTF-8">
@@ -25,7 +25,7 @@ and open the template in the editor.
     <body>
         <?php
         // put your code here
-        require_once ("siteCommon.php");
+        require_once ("..\mySiteCommon.php");
  
         // call the displayPageHeader method in siteCommon.php
         
@@ -47,10 +47,6 @@ and open the template in the editor.
         
         echo
         '<table>
-            <colgroup>
-                 <col class="firstcol" />
-            </colgroup>
-            
             <thead>
                 <tr>
                     <th>Country</th>
@@ -72,35 +68,38 @@ and open the template in the editor.
 
         echo  '</tbody> </table> </section>';
         $avgPrice = $sum / count($bigMacInfo);
-        echo "$sum," .  count($bigMacInfo) . ", $avgPrice";
+//        echo "$sum," .  count($bigMacInfo) . ", $avgPrice";
         
-        echo '<hr /><body><p style="text-indent: 5em;">Average Price of a Big Mac: $' . $avgPrice . '</p></body>';
+        echo '<hr /><body><p style="text-indent: 5em;">Average Price of a Big Mac=> $' . $avgPrice . '</p></body>';
         
         $keys = array_keys($bigMacInfo);
         $closestToAvg = $bigMacInfo[$keys[0]]; 
+        $closestToAvgCountry = $keys[0];
  
-        for ($i=0; $i < count($bigMacInfo); $i++) {
-            echo "array $i: " . bigMacInfo[$keys[$i]] . "<br />";
-        }
-
+//        for ($i=0; $i < count($bigMacInfo); $i++) {
+//            echo "array $i: Country: $keys[$i]  Price: " . $bigMacInfo[$keys[$i]] . "<br />";
+//        }
         
         for ($i=1; $i < count($bigMacInfo); $i++) {
            $nextPrice = $bigMacInfo[$keys[$i]];
-           echo "old-closest=$closestToAvg  next-price=$nextPrice<br />";
+//           echo "old-closest=$closestToAvg  next-price=$nextPrice<br />";
            $nextClosest = abs($nextPrice - $avgPrice);
            $currClosest = abs($closestToAvg - $avgPrice);
            
            if ($nextClosest < $currClosest) {
-                echo "Swapping:  old-closest=$closestToAvg  new-closest=" . $nextPrice . "  curr: $currClosest  next: $nextClosest<br />";
+//                echo "Swapping:  old-closest=$closestToAvg  new-closest=" . $nextPrice . "  curr: $currClosest  next: $nextClosest<br />";
                 $closestToAvg = $nextPrice;
+                $closestToAvgCountry = $keys[$i];
              }
         }
-        echo "Closest: " . $closestToAvg;
         
-        echo "<pre> ";
-        print_r($bigMacInfo);
-        echo "</pre>";
-        displayPageFooter();
+        echo '<hr /><p style="text-indent: 5em;">Closest Price to the Average:  Country=> ' . $closestToAvgCountry .
+                '    Price=> $' . $closestToAvg . '</p>';
+        
+//        echo "<pre> ";
+//        print_r($bigMacInfo);
+//        echo "</pre>";
+        displayPageFooter('PHP-HOE2');
 
         ?>
      </body>

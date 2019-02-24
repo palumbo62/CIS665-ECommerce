@@ -1,36 +1,56 @@
 <?php
 /*
-    Purpose: Demo3 - Accessing and displaying data from a DB
-    Author: LV
-    Date: January 2019
-    Uses: siteCommon.php, d3Sql.php
+    Class:         CIS665
+    Assignment:    PHP-HOE3
+    Name:          Robert Palumbo
+    Due Date:      2.28.2019 @ 11:59pm
+
+    PHP - Hands-on-Exercise 3
+
+    Retrieve and display all the actors (NameFirst, NameLast, Age and Gender) 
+    in the RWStudios database. 
+ 
+    Filename: PHPHOE3WP.php
 */
 
-require_once ("siteCommon.php");
+require_once ("..\mySiteCommon.php");
 require_once ("d3Sql.php");
 
-// call the displayPageHeader method in siteCommon.php
+// call the displayPageHeader method in mySiteCommon.php
 
-displayPageHeader('Film List');
+displayPageHeader('RWStudios Actor List');
 
 echo '<section>';
 
-// call the getFilmsList() method in d3sql.php
+// call the getActorsList() method in d3sql.php
 
-$filmsList = getFilmsList();
+$ActorsList = getActorsList();
 
+echo    '<table>
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            <tbody>';
 
 // use a loop to display the results
-
-foreach ($filmsList as $film)
-{
-    echo $film['movietitle'] . '<br />' ;
+foreach ($ActorsList as $actor) {
+     echo   '<tr>
+                <td>' . $actor['NameLast'] . '</td>
+                <td>' . $actor['NameFirst'] . '</td>
+                <td>' . $actor['Age'] . '</td>
+                <td>' . $actor['Gender'] . '</td>
+            </tr>';
 }
 
-echo '</section>';
+echo  '</tbody> </table> </section>';
 
-// call the displayPageFooter method in siteCommon.php
+// call the displayPageFooter method in mySiteCommon.php
 
-displayPageFooter();
+displayPageFooter('PHP-HOE3');
 
 ?>
