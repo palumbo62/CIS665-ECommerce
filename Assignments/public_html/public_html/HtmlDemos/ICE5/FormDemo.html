@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Forms Demo</title>
+
+</head>
+<body>
+    <!-- Here is how to create a form using HTML -->
+    <form id="demo" name="demo" method="post" action="addsomethinghere">
+
+        <!--
+        id is useful on client side by javascript,
+        name is useful on server side to identify a specific form
+        method is the specific HTTP method used to exchange information
+            can send data to server using get or post
+
+        get used to retrieve info from the server and data comes back through the URL
+            is limited as to how much data can be sent back
+            its cached and remains in history by browser
+            don't use if you have sensitive data
+            used for queries / searches
+
+        post used to push data to the server
+            can be encoded as text or binary
+            no restrictions on amount of data
+
+        action refers to the script that will receive the data and act on it
+            can be php file that receives the form data
+            validates the data
+            preprocess the data
+            sends data to server via server API
+
+    -->
+        <!-- Now creates the controls to be visible on the form
+
+            required =  a required input
+            placeholder = indication as to what the field is for is no label is used
+            pattern = regular expression that defines the input format which is valid
+                ^ start of pattern
+                $ end of pattern
+                + 1 or more
+                * 0 or more
+                w whitespace
+                title is used in the error message when submit is clicked and input has errors
+
+           JAVASCRIPT is used to perform client side validation of input
+    -->
+        <input name="fname" id="fname" type="text" maxlength="15" placeholder="first name"
+               required autofocus pattern="^[A-Za-z]+$" title="One or more lettere" />
+
+        <br /><br />
+
+        <!-- Auto increment decremenet for the input box -->
+        <input name="age" id="age" type="number" min="21" max="100" step="2" value="32" />
+
+        <br /><br />
+
+        <!-- range create a slider input -->
+        0<input name="exp" id="exp" type="range" min="0" max="50" value="10" step="5" />50
+
+        <br /><br />
+
+        <!-- Week 3 LECTURE 2 starts here -->
+        <input name="admitdate" id="admitdate" type="date" placeholder="date admitted" />
+
+        <br /><br />
+
+        <!-- Create a GROUP BOX
+        radio button, dist id is used to tie the label to the input dist
+        name=location creates the group the radio buttons are in
+        only 1 button can be 'checked' by default in the group because they are radio buttons
+        -->
+        <fieldset style="width:70%">
+            <legend>Location</legend>
+            <label for="dist">Distance</label>
+            <input name="location" id="dist" type="radio" value="D" checked />
+            <label for="camp">Campus</label>
+            <input name="location" id="camp" type="radio" value="C" />
+        </fieldset>
+
+        <br /><br />
+
+        <!-- Create CHECK-BOXES -->
+        <fieldset style="width:70%">
+            <legend>Degree</legend>
+            <label for="master">Master</label>
+            <input name="degree" id="master" type="checkbox" /> <br />
+            <label for="bach">Bachelor</label>
+            <input name="degree" id="bach" type="checkbox" />
+        </fieldset>
+
+        <fieldset style="width:40%">
+            <legend>Favorite Snacks</legend>
+            <label for="cheerio">Cheerio</label>
+            <input name="cheerio" id="cheerio" type="checkbox" value="cheerio" checked /> <br />
+            <label for="pretzels">Pretzelsr</label>
+            <input name="pretzels" id="pretzels" type="checkbox" value="pretzels" /> <br />
+            <label for="chips">Chips</label>
+            <input name="chips" id="chips" type="checkbox" value="chips" checked /> <br />
+        </fieldset>
+
+        <br /><br />
+
+        <!-- Create DROP-DOWN menu (these are use to converse real estate on the display
+     size indicates how many to display
+        multi-select allows more than one pick
+    -->
+        <select name="trails" style="font-size:0.9em" size="2">
+            <option value="arthurs">Arthurs</option>
+            <option value="pikespeak">Pikes Peak</option>
+            <option value="cherrycreek">Cherry Creak</option>
+            <option selected value="devilsbackbones">Devils Backbone</option>
+            <option value="horsetooth">Horsetooth</option>
+        </select>
+
+        <br /><br />
+
+        <!--Create text box-->
+        <textarea cols="50" rows="5" placeholder="comments"></textarea>
+        <br /> <br />
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/rsTXN6KK3Mg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <audio src="demo.mp4"></audio>
+        <!-- Submit button will automatically check that all REQUIRED fields on the form actually has input -->
+        <input name="submit" type="submit" value="Submit" />
+
+        <!-- LECTURE 2 -->
+    </form>
+</body>
+</html>

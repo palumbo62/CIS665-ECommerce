@@ -1,0 +1,29 @@
+/* 
+    Document   : d2styles.css
+    Created on : January 2017
+    Author     : LV
+    Description: Style sheet for PHP - Demo 2
+*/
+
+header, section
+{
+    display: block;
+}
+
+body
+{
+    margin: 0px auto;
+    padding: 0px;
+    width: 98%;
+    max-width: 850px;
+    min-width: 250px;
+    
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 150%;
+    line-height: 1.5em;
+}
+
+ul
+{
+    list-style-type: none;
+}

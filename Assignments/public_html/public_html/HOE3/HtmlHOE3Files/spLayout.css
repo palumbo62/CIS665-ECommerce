@@ -1,0 +1,167 @@
+﻿@charset "utf-8";
+/*
+    CIS665 - HOE3
+    Robert Palumbo
+    2.1.2019
+
+    HTML - Hands-on-Exercise 3
+   
+    Layout styles for Slate and Pencil Tutoring
+   
+    Filename: spLayout.css
+
+*/
+/* Window and Body Styles */
+
+
+html {
+    /* step 3ai */
+    height: 100%;
+}
+
+body {
+    /* steps 3aii*/
+    width: 95%;
+    min-width: 640px;
+    max-width: 960px;
+    min-height: 100%;
+        
+    /* align page body centered */
+    margin: 0 auto;
+
+    /* Border Box for all elements */
+    box-sizing: border-box;
+}
+
+body * {
+        /* step 3aiii */
+        box-sizing: border-box;
+    }
+/* Row Styles */
+
+.row::after 
+{
+   clear: both;	
+   content: "";
+   display: table;
+}
+
+/* Page Header Styles */
+
+body > header > img 
+{
+    /* steps 3bi */
+    display: block;
+    width: 70%;
+    float: left;
+}
+
+body > header > nav 
+{
+    /* steps 3bii */
+    float: left; 
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 30%;
+}
+
+body > header > nav a
+{
+    /* steps 3biii */
+    display: block;
+    width: 100%
+}
+
+/* Horizontal Navigation List Styles */
+
+nav.horizontal li {
+    /* step 3c */
+    display: block;
+    width: 12.5%;
+    float: left;
+}
+
+/* Topics Styles */
+
+ul#topics li
+{
+    /* steps 3di */
+   display: block;
+   width: 20%;
+   float: left;
+   margin-left: 0%;
+   margin-right: 1.5%;
+}
+
+ul#topics li:first-of-type
+{
+    /* step 3dii */
+    margin-left: 7.75%;
+}  
+
+ul#topics li:last-of-type
+{
+    /* step 3dii */
+    margin-right: 7.75%;   
+}
+
+ul#topics li img {
+    /* steps 3diii */
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* HR Styles */
+
+hr
+{
+    /* step 3e */
+    width: 50%;   
+}
+
+/* Customer Comment Styles */
+
+ul#comments
+{
+    /* step 3fi */
+    width: 75%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul#comments li
+{
+    /* step 3fii */
+    display: block;
+    width: 50%;
+    float: left;
+    margin-bottom: 30px;
+}
+
+ul#comments li img
+{
+    /* step 3fiii */
+    width: 20%;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+ul#comments li p
+{
+    /* step 3fiv */
+    width: 70%;
+    float: left;
+}
+
+/* Footer Styles */
+
+footer
+{
+    /* step g */
+    clear: both;   
+}

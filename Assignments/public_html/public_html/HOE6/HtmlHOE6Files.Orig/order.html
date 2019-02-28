@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+
+   <head>
+   <!--
+     HTML - Hands-on-Exercise 6
+
+      Red Ball Pizza Order Form
+      
+      Filename: order.html
+     
+   -->
+      <meta charset="UTF-8" />
+      <title>Build your own Pizza</title>
+      <link href="redball.css" rel="stylesheet" />
+      <link href="pizza.css" rel="stylesheet" />
+
+   </head>
+
+   <body>
+
+      <header>
+         <img src="redball.png" alt="Red Ball Pizza" />
+         <nav>
+            <ul>
+               <li><a href="#">home</a></li>
+               <li><a href="#">menu</a></li>
+               <li><a href="#">directions</a></li>
+               <li><a href="#">coupons</a></li>
+               <li><a href="#">orders</a></li>
+               <li><a href="#">catering</a></li>
+               <li><a href="#">reviews</a></li>
+       </ul>
+         </nav>
+      
+         <article>
+            <h1>Online Ordering</h1>
+            <p>Thank you for using our <em>online ordering</em>
+               form for quick and easy orders, delivered free, fast, and 
+               hot to your door. If you need to talk to us directly,
+               call Red Ball Pizza at (386) 555 - 7499.
+            </p>
+         </article>
+      </header>
+
+   <section>
+      <p>Required values are marked by an asterisk (*)</p>
+
+      <form id="pizza" name="pizza" action="Not Set" method="post">
+
+         <fieldset id="custInfo">
+            <legend>Customer Information</legend>
+
+            <label for="custname">Name *</label>
+
+            <label for="street">Street address *</label>
+
+             <label for="city">City *</label>
+
+             <label for="zip">Postal code *</label>
+                        
+             <label for="phone">Phone *</label>
+
+             <label for="request">Want it your way?</label>
+
+             <label for="instruction">Out in the woods?</label>
+            
+            </fieldset>
+
+         <fieldset id="buildPizza">
+            <legend>Build Your Own Pizza</legend>
+            
+            <fieldset id="pizzaSize">
+              <legend>Select Your Pizza Size</legend>
+                
+                <label>10 inch</label>
+                
+                <label>12 inch</label>
+                
+                <label>14 inch</label>
+                
+            </fieldset>
+
+            <fieldset id="pizzaCrust">
+              <legend>Choose Your Crust</legend>
+            
+                <select name="crust" id="crust">
+                   
+                </select>
+
+            </fieldset>
+            
+            <fieldset id="toppings">
+               <legend>Pick your Toppings</legend>
+
+               <label for="pepperoni">Pepperoni</label>
+               
+               <label for="chicken">Chicken</label>
+              
+               <label for="mushrooms">Mushrooms</label>
+              
+               <label for="peppers">Green Peppers</label>
+               
+            </fieldset>
+
+             <label for="quantity">Quantity</label>
+           
+         </fieldset>  
+
+     </form>
+
+   </section>
+
+   <footer>
+      <address>
+         Red Ball Pizza &bull;
+         811 Beach Drive &bull;
+         Ormond Beach, FL  32175 &bull;
+         (386) 555 - 7499 
+      </address>
+   </footer>
+
+   </body>
+
+</html>
