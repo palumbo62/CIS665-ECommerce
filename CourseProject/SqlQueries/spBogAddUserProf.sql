@@ -31,7 +31,7 @@ CREATE OR ALTER PROCEDURE [dbo].[spBogAddUserProf]
 )
 AS
 BEGIN
-    DECLARE @result int = 0;
+    DECLARE @result int = -1;
 
     -- SET NOCOUNT ON added to prevent extra result sets from
     -- interfering with SELECT statements.
@@ -45,41 +45,36 @@ BEGIN
     SET @state = LTRIM(RTRIM(@state));
     
     -- Make sure parameters are valid
-    IF ((@email IS NULL)
-        OR (@password IS NULL)
-        OR (@firstName IS NULL)
-        OR (@lastName IS NULL)
-        OR (@address IS NULL)
-        OR (@city IS NULL) 
-        OR (@state IS NULL)
-        OR (@zipcode < 0) 
-        OR (@phoneNumber < 0))
+    IF ((@email IS NOT NULL)
+        AND (@password IS NOT NULL)
+        AND (@firstName IS NOT NULL)
+        AND (@lastName IS NOT NULL)
+        AND (@address IS NOT NULL)
+        AND (@city IS NOT NULL) 
+        AND (@state IS NOT NULL)
+        AND (@zipcode > 0) 
+        AND (@phoneNumber > 0))
         BEGIN   
-            RETURN -1;
-        END
+            -- Update the user profile
+            INSERT INTO [dbo].[UserT] 
+                VALUES (@email
+                    ,@password
+                    ,@firstName
+                    ,@lastName
+                    ,@address
+                    ,@city
+                    ,@state
+                    ,@zipcode
+                    ,@phoneNumber
+                    ,@ccNumber
+                    ,@ccExpDate
+                    ,@ccCvc
+                    );
 
-    -- Update the user profile
-    INSERT INTO [dbo].[UserT] 
-        VALUES (@email
-            ,@password
-            ,@firstName
-            ,@lastName
-            ,@address
-            ,@city
-            ,@state
-            ,@zipcode
-            ,@phoneNumber
-            ,@ccNumber
-            ,@ccExpDate
-            ,@ccCvc
-            );
+            SET @result = SCOPE_IDENTITY();
+        END
  
-    -- Error check the insert
-    IF (@@ERROR <> 0)
-        BEGIN
-            RETURN -1;
-        END    
-   
-    RETURN SCOPE_IDENTITY();
+    -- Return the results
+    RETURN @result;
 END
 GO

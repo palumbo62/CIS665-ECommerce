@@ -54,10 +54,10 @@ function executeQuery($query)
 
 //Uncomment these 4 lines to display $results
        
-//        echo '<pre style="font-size:large">';
-//        print_r($results);
-//        echo '</pre>';
-//        die;
+        echo '<pre style="font-size:large">';
+        print_r($results);
+        echo '</pre>';
+        die;
        
 //call dbDisconnect() method to close the connection
 

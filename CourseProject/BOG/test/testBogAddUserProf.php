@@ -14,35 +14,41 @@
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
-    displayPageHeader('BOG - Test bogGetUserProfById()');
+    displayPageHeader('BOG - Test testBogAddUserProf()');
 
     echo '<section>';
 
     // call the getActorsList() method in d3sql.php
 
-    #userId int,
-    $email = 'user1@bog.com';
+    $email = 'user16@bog.com';
     $password = 'password';
     $firstName = 'User1-First';
     $lastName = 'User1-Last';
     $address = '88457 N. Sante Fe';
     $city = 'Denver';
-    $state = 'CO';
+    $state = 'CO'; 
     $zipcode = 80301;
     $phoneNumber = 3035551000;
-    $ccNumber = 9845224259392243;
+    $ccNumber = 888523443;
     $ccExpDate = '01/31/2022';
     $ccCvc = 877;
 
-    // add the profile, procedure returns the user id on success
-    $userId = bogAddUserProf($email, $password, $firstName,
-                        $lastName, $address, $city, $state, $zipcode,
-                        $ccNumber, $ccExpDate, $ccCvc);
+    // add the profile
+    bogAddUserProf($email, $password, $firstName, $lastName, 
+                    $address, $city, $state, $zipcode, $phoneNumber, 
+                    $ccNumber, $ccExpDate, $ccCvc);
 
-    // now read it back
-    
-    
-    echo    '<table id="UserProfiles">
+    if (($errCode = bogGetLastErrorCode()) != 0) {
+        echo "User profile failed to be added to BOG database, err=$errCode";
+    }
+    else {
+        $userId = bogGetLastInsertId();
+        
+        echo "GET USER PROFILE FOR LAST INSERT ID='$userId'<br>";
+        
+        $userProfile = bogGetUserProfById($userId);
+        
+        echo '<table id="UserProfiles">
                 <thead>
                     <tr>
                         <th>UserID</th>
@@ -61,33 +67,32 @@
                 </thead>
                 <tbody>';
 
-    // display the results
+        // display the results
 
-    foreach ($userProfile as $user) {
-        echo   '<tr>
-                   <td>' . $user['UserID.PK'] . '</td>
-                   <td>' . $user['Email'] . '</td>
-                   <td>' . $user['FirstName'] . '</td>
-                   <td>' . $user['LastName'] . '</td>
-                   <td>' . $user['Address'] . '</td>
-                   <td>' . $user['City'] . '</td>
-                   <td>' . $user['State'] . '</td>
-                   <td>' . $user['Zipcode'] . '</td>
-                   <td>' . $user['PhoneNumber'] . '</td>
-                   <td>' . $user['CC.Number'] . '</td>
-                   <td>' . $user['CC.ExpDate'] . '</td>
-                   <td>' . $user['CC.Cvc'] . '</td>
-               </tr>';
+        foreach ($userProfile as $user) {
+            echo   '<tr>
+                       <td>' . $user['UserID.PK'] . '</td>
+                       <td>' . $user['Email'] . '</td>
+                       <td>' . $user['FirstName'] . '</td>
+                       <td>' . $user['LastName'] . '</td>
+                       <td>' . $user['Address'] . '</td>
+                       <td>' . $user['City'] . '</td>
+                       <td>' . $user['State'] . '</td>
+                       <td>' . $user['Zipcode'] . '</td>
+                       <td>' . $user['PhoneNumber'] . '</td>
+                       <td>' . $user['CC.Number'] . '</td>
+                       <td>' . $user['CC.ExpDate'] . '</td>
+                       <td>' . $user['CC.Cvc'] . '</td>
+                   </tr>';
+        }
+   
+        echo "<pre>";
+        print_r($userProfile);
+        echo "</pre >";
     }
         
-    
     echo  '</tbody> </table> </section>';
     
-    echo "<pre>";
-    print_r($userProfile);
-    echo "</pre >";
-    
-
     // call the displayPageFooter method in mySiteCommon.php
 
     displayPageFooter('BOG');

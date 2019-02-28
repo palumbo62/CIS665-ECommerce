@@ -139,7 +139,7 @@ table tbody tr:nth-of-type(even)
    background-color: rgb(215, 230, 220);
 }
 
-table#UserProfiles 
+table#UserProfiles, table#PropProfiles
 {
     table-layout: fixed;
     word-break: break-all;

@@ -12,6 +12,9 @@
         Database:  buscissql1601\cisweb\Team115DB
  */
 
+$BOG_LastSqlErrorCode = 0;
+$BOG_LastInsertId = 0;
+
 // function to connect to the database
 function dbConnect()
 {
@@ -54,17 +57,23 @@ function executeQuery($query)
         $stmt = $conn->query($query);
 
         if ($stmt->columnCount() > 0)  // if rows with columns are returned
-            {
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
-            }
-
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+        }
+     
+        global $BOG_LastInsertId, $BOG_LastSqlErrorCode;
+        
+        $BOG_LastSqlErrorCode = $stmt->errorCode();
+        $BOG_LastInsertId = $conn->lastInsertId();
+        
+        //echo "<br>LAST SQL ERRORCODE='$BOG_LastSqlErrorCode'<br>LAST INSERT ID='$BOG_LastInsertId'<br><br>";
 //Uncomment these 4 lines to display $results
        
 //        echo '<pre style="font-size:large">';
-//        print_r($results);
+//        print_r("QUERY RESULTS: " . $results);
 //        echo '</pre>';
 //        die;
-       
+//       
 //call dbDisconnect() method to close the connection
 
         dbDisconnect($conn);
@@ -78,7 +87,8 @@ function executeQuery($query)
         dbDisconnect($conn);
         die ('Query failed: ' . $e->getMessage());
     }
-}
+ }
+ 
 function dbDisconnect($conn)
 {
     // closes the specfied connection and releases associated resources
@@ -86,4 +96,22 @@ function dbDisconnect($conn)
     $conn = null;
 }
 
+function bogGetLastErrorCode() {
+    global $BOG_LastSqlErrorCode;
+
+    return $BOG_LastSqlErrorCode;
+}
+
+function bogGetLastInsertId() {
+    global $BOG_LastInsertId;
+    
+    $lastInsertId = $BOG_LastInsertId;
+    
+    if ($lastInsertId == null || $lastInsertId == '') {
+        $lastInsertId = -1;
+    }
+    
+    return $lastInsertId;
+}
 ?>
+
