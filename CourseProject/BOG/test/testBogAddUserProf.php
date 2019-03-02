@@ -20,7 +20,7 @@
 
     // call the getActorsList() method in d3sql.php
 
-    $email = 'user16@bog.com';
+    $email = 'user21@bog.com';
     $password = 'password';
     $firstName = 'User1-First';
     $lastName = 'User1-Last';
@@ -39,60 +39,59 @@
                     $ccNumber, $ccExpDate, $ccCvc);
 
     if (($errCode = bogGetLastErrorCode()) != 0) {
-        echo "User profile failed to be added to BOG database, err=$errCode";
-    }
-    else {
-        $userId = bogGetLastInsertId();
+        echo "User profile failed to be added to BOG database, err'$errCode'";
+    } else {
+        if (($userId = bogGetLastInsertId()) == -1) {
+            echo "User profile failed to be added to database!<br><br>";
+        } else {
+            $userProfile = bogGetUserProfById($userId);
         
-        echo "GET USER PROFILE FOR LAST INSERT ID='$userId'<br>";
-        
-        $userProfile = bogGetUserProfById($userId);
-        
-        echo '<table id="UserProfiles">
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>Email</th>
-                        <th>FName</th>
-                        <th>LName</th>
-                        <th>Addr</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip</th>
-                        <th>Phone#</th>
-                        <th>CC#</th>
-                        <th>ExpDate</th>
-                        <th>CVC</th>               
-                    </tr>
-                </thead>
-                <tbody>';
+            echo '<table id="UserProfiles">
+                    <thead>
+                        <tr>
+                            <th>UserID</th>
+                            <th>Email</th>
+                            <th>FName</th>
+                            <th>LName</th>
+                            <th>Addr</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Phone#</th>
+                            <th>CC#</th>
+                            <th>ExpDate</th>
+                            <th>CVC</th>               
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-        // display the results
+            // display the results
 
-        foreach ($userProfile as $user) {
-            echo   '<tr>
-                       <td>' . $user['UserID.PK'] . '</td>
-                       <td>' . $user['Email'] . '</td>
-                       <td>' . $user['FirstName'] . '</td>
-                       <td>' . $user['LastName'] . '</td>
-                       <td>' . $user['Address'] . '</td>
-                       <td>' . $user['City'] . '</td>
-                       <td>' . $user['State'] . '</td>
-                       <td>' . $user['Zipcode'] . '</td>
-                       <td>' . $user['PhoneNumber'] . '</td>
-                       <td>' . $user['CC.Number'] . '</td>
-                       <td>' . $user['CC.ExpDate'] . '</td>
-                       <td>' . $user['CC.Cvc'] . '</td>
-                   </tr>';
-        }
+            foreach ($userProfile as $user) {
+                echo   '<tr>
+                           <td>' . $user['UserID.PK'] . '</td>
+                           <td>' . $user['Email'] . '</td>
+                           <td>' . $user['FirstName'] . '</td>
+                           <td>' . $user['LastName'] . '</td>
+                           <td>' . $user['Address'] . '</td>
+                           <td>' . $user['City'] . '</td>
+                           <td>' . $user['State'] . '</td>
+                           <td>' . $user['Zipcode'] . '</td>
+                           <td>' . $user['PhoneNumber'] . '</td>
+                           <td>' . $user['CC.Number'] . '</td>
+                           <td>' . $user['CC.ExpDate'] . '</td>
+                           <td>' . $user['CC.Cvc'] . '</td>
+                       </tr>';
+            }
+            
+            echo  '</tbody> </table> </section>';
    
-        echo "<pre>";
-        print_r($userProfile);
-        echo "</pre >";
-    }
+            echo "<pre>";
+            print_r($userProfile);
+            echo "</pre >";
+        }
+     }
         
-    echo  '</tbody> </table> </section>';
-    
     // call the displayPageFooter method in mySiteCommon.php
 
     displayPageFooter('BOG');

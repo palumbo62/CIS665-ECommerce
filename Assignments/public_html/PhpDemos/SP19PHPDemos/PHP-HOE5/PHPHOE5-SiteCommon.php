@@ -1,15 +1,15 @@
 <?php
    /* 
     Class:         CIS665
-    Assignment:    PHP-HOE4
+    Assignment:    PHP-HOE5
     Name:          Robert Palumbo
-    Due Date:      3.5.2019 @ 11:59pm
+    Due Date:      3.7.2019 @ 11:59pm
 
-    PHP - Hands-on-Exercise 4
+    PHP - Hands-on-Exercise 5
 
     Methods to render Common Site Header and Footer  
     
-    Filename: PHPHOE4-SiteCommon.php
+    Filename: PHPHOE5-SiteCommon.php
 */
 
 function displayPageHeader($pageTitle)

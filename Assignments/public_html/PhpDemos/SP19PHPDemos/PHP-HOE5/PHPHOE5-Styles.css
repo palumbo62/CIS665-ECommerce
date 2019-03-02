@@ -3,6 +3,17 @@
     Created on : January 2019
     Author     : LV
     Description: Style sheet for PHP Demos
+
+    Class:         CIS665
+    Assignment:    PHP-HOE5
+    Name:          Robert Palumbo
+    Due Date:      3.7.2019 @ 11:59pm
+
+    PHP - Hands-on-Exercise 5
+
+    Style sheet for PHP assignment.
+
+    Filename: PHPHOE5-Styles.css
 */
 
 article, header, footer, figure, section, form
@@ -21,6 +32,7 @@ body
     margin: 0px auto;
     padding: 0px;
     width: 98%;
+    height: 100%;
     max-width: 950px;
     min-width: 250px;
     
@@ -32,167 +44,15 @@ body
 
 header h2
 {
-	background-color: rgb(30, 77, 43);
-	color: rgba(255, 255, 255, 0.8);
-	line-height: 1.4em;
-	text-align: center;
+    background-color: rgb(30, 77, 43);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4em;
+    text-align: center;
 }
 
 section
 {
    margin:36px;
-}
-
-nav
-{
-   width: 180px;
-   float:left;
-   margin-right: 10px;
-}
-
-nav ul
-{
-   background-color: rgb(200, 195, 114);
-   line-height: 2em;
-   list-style-type: none;
-   padding-left: 0.5em;
-}
-
-nav ul li:hover
-{
-   background-color: rgb(55, 102, 55);
-}
-
-nav ul li:first-of-type
-{
-   text-transform: uppercase;
-}
-
-nav ul li a
-{
-   color: white;
-   text-decoration: none;
-}
-
-table
-{
-   border-width: 6px;
-   border-style: outset;
-   border-color: rgb(55, 102, 55);
-   border-collapse: collapse;
-   font-family: Arial,Helvetica,sans-serif;
-   font-size: 0.85em;
-   line-height: 1.3em;
-   width: 100%
-}
-
-table col.firstcol
-{
-   width: 37%;
-}
-
-table tbody td:first-of-type
-{
-   font-weight: 600;
-}
-
-table tbody td:nth-of-type(2)
-{
-   font-style: italic;
-}
-table th, table td
-{
-   border: 1px solid gray;
-}
-
-table thead
-{
-   background-color: rgb(200, 195, 114);
-}
-
-table caption
-{
-   font-weight: bold;
-   font-size: 1.2em;
-}
-
-table tbody td
-{
-   padding: 5px;
-   vertical-align: top;
-}
-
-table tbody tr:nth-of-type(odd)
-{
-   background-color: rgb(213, 213, 184);
-}
-
-table tbody tr:nth-of-type(even)
-{
-   background-color: rgb(215, 230, 220);
-}
-
-table#allMovies
-{
-   width: 70%;
-   margin: 0px auto;
-}
-
-table#allMovies td
-{
-   font-style: normal;
-}
-
-table#merchandise
-{
-   border-style: hidden;
-   width: 70%;
-   margin: 0px auto;
-}
-
-table#merchandise tbody tr
-{
-   background-color: rgb(250,235,215);
-   border-style: hidden;
-   height: 100px;
-}
-
-table#merchandise tbody td
-{
-   border-style: hidden;
-   text-align: center;
-   padding-bottom: 20px;
-}
-
-figure
-{
-   text-align: center;
-}
-
-figure img
-{
-   height: 300px;
-   width: 250px;
-}
-
-article#MovieDetail
-{
-   margin: 20px;
-}
-
-article#MovieDetail dt
-{
-   font-weight: bold;
-}
-
-article#MovieDetail dd
-{
-   font-style: italic;
-}
-
-article#MovieDetail p
-{
-   text-align: center;
 }
 
 #error
@@ -239,17 +99,6 @@ form
    width: 80%;
 }
 
-form#loginForm
-{
-  width:70%;
-  float:left;
-}
-
-form#addUserForm
-{
-  float:left;
-}
-
 label
 {
   clear: left;
@@ -260,16 +109,6 @@ label
   font-weight: bold;
 }
 
-
-/*input
-{
-   display: block;
-   float: left;
-   width: 60%;
-   height: 30px;
-   font-size: 1.2em;
-   margin:10px 0px;
-}*/
 input {
     margin: .4rem;
 }
@@ -280,7 +119,7 @@ input#actorlname, input#actorfname, input#agentname
    float: left;
    width: 60%;
    height: 25px;
-   font-size: 1.2em;
+   font-size: 1.0em;
    margin:10px 0px;
 }
 
@@ -290,46 +129,7 @@ input#actorage
    float: left;
    width: 10%;
    height: 25px;
-   font-size: 1.2em;
-   margin:10px 0px;
-}
-
-input#gender
-{
-    padding-left: 25px;
-    text-align: center;
-    font-size: 1.4em;
-/*   width: 10%;
-   height: 25px;
-   font-size: 1.2em;
-   margin:10px 0px;*/
-}
-
-#searchmaxrows
-{
-   width:5%;
-}
-
-textarea
-{
-   display: block;
-   float: left;
-   width: 60%;
-   height: 130px;
-   font-size: 1.2em;
-   margin:10px 0px;
-}
-
-input.sm
-{
-   width: 30%;
-}
-
-select
-{
-   display: block;
-   float: left;
-   font-size: 1.2em;
+   font-size: 1.0em;
    margin:10px 0px;
 }
 
@@ -345,11 +145,7 @@ input[type="submit"]
    float:none;
    height: 40px;
    width: 180px;
-}
-
-input#proceed
-{
-   width: 210px;
+   font-size: 1.0em;
 }
 
 .err

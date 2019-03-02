@@ -20,10 +20,10 @@ require_once ("PHPHOE5-Sql.php");
 
 // Call the addMovie method
 
-addActorMovie($_POST['actorfname'], $_POST['actorlname'], (int) $_POST['actorage'],
-    $_POST['actorgender'], $_POST['agentname']);
+addActor($_POST['firstName'], $_POST['lastName'], (int) $_POST['age'],
+    $_POST['gender'], $_POST['agentName']);
 
-displayPageHeader("New actor {$_POST['actorfname']} {$_POST['actorlname']} added");
+displayPageHeader("New actor '{$_POST['firstName']}, {$_POST['lastName']}' added");
 
 ?>
 
@@ -32,5 +32,5 @@ displayPageHeader("New actor {$_POST['actorfname']} {$_POST['actorlname']} added
 </p>
 
 <?php
-displayPageFooter();
+displayPageFooter('PHPHOE5');
 ?>

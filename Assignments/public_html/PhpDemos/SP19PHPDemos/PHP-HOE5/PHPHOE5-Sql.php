@@ -1,88 +1,34 @@
 <?php
 /*
-    Purpose: Demo6 - Sql methods to access and update the RWStudios Database
-    Author: LV
-    Date: February 2019
-    Uses: dbConnExec.php
+    Class:         CIS665
+    Assignment:    PHP-HOE5
+    Name:          Robert Palumbo
+    Due Date:      3.7.2019 @ 11:59pm
+
+    PHP - Hands-on-Exercise 5
+ 
+    SQL code used by this assignment.
+ 
+    Filename: PHPHOE5-Sql.php
  */
 
-require_once '../dbConnExec.php';
+require_once ("PHPHOE5-dbConnExec.php");
 
-function addMovie($movieTitle, $pitchText, $amountBudgeted, $ratingFK, $summary, $dateInTheaters, $imageName)
+function addActor($firstName, $lastName, $age, $gender, $agentName)
 {
     // escape single quotes within the string (e.g., "Schindler's List" is escaped as "Schindler''s List" 
     
-    $movieTitle = str_replace('\'', '\'\'', trim($movieTitle));
-    $pitchText = str_replace('\'', '\'\'', trim($pitchText));
-    $summary = str_replace('\'', '\'\'',trim($summary));
-    $imageName = trim($imageName);
+    $firstName = str_replace('\'', '\'\'', trim($firstName));
+    $lastName = str_replace('\'', '\'\'', trim($lastName));
+    $agentName = str_replace('\'', '\'\'',trim($agentName));
     
     $query = <<<STR
-Insert Into film(movietitle,pitchtext,amountbudgeted,ratingfk,summary,dateintheaters,imagename)
-Values('$movieTitle','$pitchText',$amountBudgeted,$ratingFK,'$summary','$dateInTheaters', '$imageName')
+Insert Into actor(NameFirst,NameLast,Age,Gender,ActorAgent)
+Values('$firstName','$lastName',$age,'$gender','$agentName')
 STR;
 
-    executeQuery($query);
-}
-
-function getMovieRatings()
-{
-    $query = <<<STR
-Select ratingpk, rating
-From filmrating
-Order by ratingpk
-STR;
-
-    return executeQuery($query);
-}
-
-function getMovieList()
-{
-    $query = <<<STR
-Select filmpk, movietitle
-From film
-Order by movietitle
-STR;
+//    echo "Query to Execute: '$query'";
     
-    return executeQuery($query);
-}
-
-function getMovieDetailsByID($filmPK)
-{
-   $query = <<<STR
-Select filmpk, movietitle, pitchtext, summary, dateintheaters,amountbudgeted, ratingfk, imagename
-From film
-Where filmpk = $filmPK
-STR;
-    
-    return executeQuery($query);
-}
-
-function updateMovie($filmPK, $movieTitle, $pitchText, $amountBudgeted, $ratingFK, $summary, $dateInTheaters, $imageName)
-{
-    $movieTitle = str_replace('\'', '\'\'', trim($movieTitle));
-    $pitchText = str_replace('\'', '\'\'', trim($pitchText));
-    $summary = str_replace('\'', '\'\'',trim($summary));
-    $imageName = trim($imageName);
-
-    $query = <<<STR
-Update film
-Set movietitle = '$movieTitle', pitchtext = '$pitchText', amountbudgeted = $amountBudgeted, ratingfk = $ratingFK,
-summary = '$summary', dateintheaters = '$dateInTheaters', imagename = '$imageName'
-Where filmpk = $filmPK
-STR;
-
-    executeQuery($query);
-}
-
-function deleteMovie($filmPK)
-{
-    $query = <<<STR
-Delete
-From film
-Where filmpk = $filmPK
-STR;
-
     executeQuery($query);
 }
 

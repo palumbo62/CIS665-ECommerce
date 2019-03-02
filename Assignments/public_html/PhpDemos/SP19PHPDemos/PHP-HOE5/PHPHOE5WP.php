@@ -5,7 +5,7 @@
     Name:          Robert Palumbo
     Due Date:      3.7.2019 @ 11:59pm
 
-    PHP - Hands-on-Exercise 4
+    PHP - Hands-on-Exercise 5
 
     Create PHP pages/functions to allow users to add a new actor record. The 
     form should have appropriate controls to enter an actor’s first name 
@@ -20,37 +20,39 @@ require_once ("PHPHOE5-Sql.php");
 
 // call the displayPageHeader method in siteCommon.php
 
-displayPageHeader("Add a Movie");
+displayPageHeader("Add an Actor");
 ?>
 
 <script src="PHPHOE5-jsLibrary.js" type="text/javascript"></script>
 
 <form name ="addForm" id="addForm" action="PHPHOE5WP-Add.php" method="post" onsubmit="return checkForm(this)">
 
-    <label for="actorfname">First Name:</label>   
-    <input type="text" name="actorfname" id="actorfname" maxlength="50" autofocus required 
-           pattern="^[a-zA-Z0-9][\w\s\&,]*[a-zA-Z0-9\!\?\.]$" 
-           title="Actor First Name has invalid characters"/>
+    <label for="firstName">First Name:</label>   
+    <input type="text" name="firstName" id="actorfname" maxlength="50" autofocus required 
+           pattern="^[a-zA-Z ']+$" 
+           title="Enter the actor's First Name"/>
     
-    <label for="actorlname">Last Name:</label>   
-    <input type="text" name="actorlname" id="actorlname" maxlength="50" autofocus required 
-           pattern="^[a-zA-Z0-9][\w\s\&,]*[a-zA-Z0-9\!\?\.]$" 
-           title="Actor Last Name has invalid characters"/>
+    <label for="lastName">Last Name:</label>   
+    <input type="text" name="lastName" id="actorlname" maxlength="50" autofocus required 
+           pattern="^[a-zA-Z ']+$" 
+           title="Enter the actor's Last Name"/>
 
-    <label for="actorage">Age:</label>
-    <input type="number" name="actorage" id="actorage" required 
-           min="0" max="120" style="width: 3"/>
+    <label for="age">Age:</label>
+    <input type="number" name="age" id="actorage" required 
+           min="0" max="120" style="width: 3"
+           title="Enter the actor's Age"/>
     
     <div id="gender">
 
-    <input type="radio" id="gender" name="gender" value="male" checked> Male<br>
-    <input type="radio" id="gender" name="gender" value="female"> Female
+    <input type="radio" id="gender" name="gender" value="M" checked> Male<br>
+    <input type="radio" id="gender" name="gender" value="F"> Female
     </div>
     
-    <label for="agentname">Agent Name:</label>   
-    <input type="text" name="agentname" id="agentname" maxlength="50" autofocus required 
-           pattern="^[a-zA-Z0-9][\w\s\&,]*[a-zA-Z0-9\!\?\.]$" 
-           title="Agent Name has invalid characters"/>
+    <label for="agentName">Agent Name:</label>   
+    <input type="text" name="agentName" id="agentname"  value="Robert Palumbo"
+           maxlength="50" autofocus required 
+           pattern="^[a-zA-Z ']+$" 
+           title="Enter the agent's name for this actor"/>
 
     <p>
         <input type="submit" value="Add Actor" />
@@ -61,5 +63,5 @@ displayPageHeader("Add a Movie");
 
 // call the displayPageFooter method in siteCommon.php
 
-displayPageFooter();
+displayPageFooter('PHPHOE5');
 ?>

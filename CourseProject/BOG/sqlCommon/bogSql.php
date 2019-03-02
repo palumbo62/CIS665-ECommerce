@@ -124,6 +124,26 @@ STR;
 }
 
 //*************************************************************
+// FUNCTION:    bogGetAllPropProf
+//
+// PURPOSE:     Used to retrieve all property profiles from the
+// databas.  Upon success the property profile data is returned 
+// in a result set.
+// 
+//*************************************************************
+function bogGetAllPropProf()
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetAllPropProf;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
 // FUNCTION:    bogDelPropById
 //
 // PURPOSE:     Used to delete a property from the BOG system.
@@ -137,6 +157,63 @@ function bogDelPropById($propId)
 
     $query = <<<STR
 exec bogDelPropById '$propId';
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByUserId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// user id.
+//
+//*************************************************************
+function bogGetCommentsByUserId($userId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByUserId $userId;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByPropId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// property id.
+//
+//*************************************************************
+function bogGetCommentsByPropId($propId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByPropId $propId;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByPropIdUserId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// property id and user id.
+//
+//*************************************************************
+function bogGetCommentsByPropIdUserId($propId, $userId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByPropIdUserId $propId, $userId;
 STR;
    
    // execute the query and return the result

@@ -14,60 +14,64 @@
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
-    displayPageHeader('BOG - Test bogAddUserProf()');
+    displayPageHeader('BOG - Test bogGetUserProfById()');
 
     echo '<section>';
 
-    // call the getActorsList() method in d3sql.php
-
-    $userId = 3;
+    $userId = 2;
     $userProfile = bogGetUserProfById($userId);
 
-    echo    '<table id="UserProfiles">
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>Email</th>
-                        <th>FName</th>
-                        <th>LName</th>
-                        <th>Addr</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip</th>
-                        <th>Phone#</th>
-                        <th>CC#</th>
-                        <th>ExpDate</th>
-                        <th>CVC</th>               
-                    </tr>
-                </thead>
-                <tbody>';
+    if (($errCode = bogGetLastErrorCode()) != 0) { 
+        echo "Failed to retrieve user profile from database, err='$errCode'<br><br>";
+    } else if (count($userProfile) == 0) {
+        echo "User profile for userId='$userId' not found!<br><br>";
+    } else if (count($userProfile) > 1) {
+         echo "Multiple property profiles for userId='$userId' found!<br><br>";
+    } else {
+        echo    '<table id="UserProfiles">
+                    <thead>
+                        <tr>
+                            <th>UserID</th>
+                            <th>Email</th>
+                            <th>FName</th>
+                            <th>LName</th>
+                            <th>Addr</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Phone#</th>
+                            <th>CC#</th>
+                            <th>ExpDate</th>
+                            <th>CVC</th>               
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-    // display the results
+        // display the results
 
-    foreach ($userProfile as $user) {
-        echo   '<tr>
-                   <td>' . $user['UserID.PK'] . '</td>
-                   <td>' . $user['Email'] . '</td>
-                   <td>' . $user['FirstName'] . '</td>
-                   <td>' . $user['LastName'] . '</td>
-                   <td>' . $user['Address'] . '</td>
-                   <td>' . $user['City'] . '</td>
-                   <td>' . $user['State'] . '</td>
-                   <td>' . $user['Zipcode'] . '</td>
-                   <td>' . $user['PhoneNumber'] . '</td>
-                   <td>' . $user['CC.Number'] . '</td>
-                   <td>' . $user['CC.ExpDate'] . '</td>
-                   <td>' . $user['CC.Cvc'] . '</td>
-               </tr>';
+        foreach ($userProfile as $user) {
+            echo   '<tr>
+                       <td>' . $user['UserID.PK'] . '</td>
+                       <td>' . $user['Email'] . '</td>
+                       <td>' . $user['FirstName'] . '</td>
+                       <td>' . $user['LastName'] . '</td>
+                       <td>' . $user['Address'] . '</td>
+                       <td>' . $user['City'] . '</td>
+                       <td>' . $user['State'] . '</td>
+                       <td>' . $user['Zipcode'] . '</td>
+                       <td>' . $user['PhoneNumber'] . '</td>
+                       <td>' . $user['CCNumber'] . '</td>
+                       <td>' . $user['CCExpDate'] . '</td>
+                       <td>' . $user['CCCvc'] . '</td>
+                   </tr>';
+        }
+
+        echo  '</tbody> </table> </section>';
+
+        echo "<pre>";
+        print_r($userProfile);
+        echo "</pre >";
     }
-        
-    
-    echo  '</tbody> </table> </section>';
-    
-    echo "<pre>";
-    print_r($userProfile);
-    echo "</pre >";
-    
 
     // call the displayPageFooter method in mySiteCommon.php
 

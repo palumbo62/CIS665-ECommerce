@@ -3,13 +3,6 @@
     Created on : January 2019
     Author     : LV
     Description: Style sheet for PHP Demos
-
-    Class:         CIS665
-    Name:          Robert Palumbo
-
-    Modified for specific use in my assignments.
-    
-    Filename: BogStylesCommon.css
 */
 
 article, header, footer, figure, section, form
@@ -90,13 +83,13 @@ table
    font-family: Arial,Helvetica,sans-serif;
    font-size: 0.85em;
    line-height: 1.3em;
-/*   width: 100%*/
-   table-layout: fixed; width: 100%;
+   width: 100%
 }
 
-/*table col.firstcol {
-   width: 20%;
-}*/
+table col.firstcol
+{
+   width: 37%;
+}
 
 table tbody td:first-of-type
 {
@@ -137,14 +130,6 @@ table tbody tr:nth-of-type(odd)
 table tbody tr:nth-of-type(even)
 {
    background-color: rgb(215, 230, 220);
-}
-
-table#UserProfiles, table#PropProfiles, table#Comments
-{
-    table-layout: fixed;
-    word-break: break-all;
-    width: 100%;
-    margin: 0px auto;
 }
 
 table#allMovies
@@ -238,6 +223,15 @@ footer address
    text-align: center;
 }
 
+div#gender {
+/*    clear: both;*/
+    float: left;
+}
+
+div#gender input {
+    margin-left: 3em;
+}
+
 /* article#searchCriteria */
 form
 {
@@ -261,12 +255,13 @@ label
   clear: left;
   display: block;
   float: left;
-  width: 30%;
+  width: 25%;
   margin:10px 0px;
   font-weight: bold;
 }
 
-input
+
+/*input
 {
    display: block;
    float: left;
@@ -274,26 +269,40 @@ input
    height: 30px;
    font-size: 1.2em;
    margin:10px 0px;
+}*/
+input {
+    margin: .4rem;
 }
 
-input.ten
+input#actorlname, input#actorfname, input#agentname
 {
-   width: 25%
+   display: block;
+   float: left;
+   width: 60%;
+   height: 25px;
+   font-size: 1.2em;
+   margin:10px 0px;
 }
 
-input.twenty
+input#actorage
 {
-   width: 50%
+   display: block;
+   float: left;
+   width: 10%;
+   height: 25px;
+   font-size: 1.2em;
+   margin:10px 0px;
 }
 
-input#state
+input#gender
 {
-   width: 5%;
-}
-
-input#mailinglist
-{
-   width: 3%;
+    padding-left: 25px;
+    text-align: center;
+    font-size: 1.4em;
+/*   width: 10%;
+   height: 25px;
+   font-size: 1.2em;
+   margin:10px 0px;*/
 }
 
 #searchmaxrows
