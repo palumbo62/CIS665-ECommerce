@@ -220,4 +220,96 @@ STR;
    return executeQuery($query);
 }
 
+//*************************************************************
+// FUNCTION:    bogSearhcPropProfs
+//
+// PURPOSE:     Used to retrieve properties based upon the
+// specified parameter search criteria.
+// 
+// NOTE: It was just simpler to implement this complex search
+// inline versus a stored procedure doing the same.
+//
+//*************************************************************
+function bogSearhcPropProfs($propertyTypeID, $address, $city, $state, 
+                $zipcode, $dailyPrice, $numBedrooms, $numBathrooms, 
+                $sqft, $guestCnt)
+{
+    $query = <<<STR
+Select p.[PropertyID.PK], pt.PropertyTypeName, Address, City, State, Zipcode,
+DailyPrice, NumBedrooms, NumBathrooms, Sqft, GuestCnt, Pic
+From PropertyT p
+    Inner Join PropertyTypeT pt
+        On p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK]
+Where 0=0
+STR;
+    if ($propertyTypeID != '')
+    {
+    $query .= <<<STR
+ And p.[PropertyTypeID.FK] = $propertyTypeID
+STR;
+    }
+    if ($address != '')
+    {
+    $query .= <<<STR
+ And Address like '%$address%'
+STR;
+    }
+    if ($city != '')
+    {
+    $query .= <<<STR
+ And City like '%$city%'
+STR;
+    }
+    if ($state != '')
+    {
+    $query .= <<<STR
+ And State = '$state'
+STR;
+    }
+    if ($zipcode != '')
+    {
+    $query .= <<<STR
+ And Zipcode = $zipcode
+STR;
+    }
+    if ($dailyPrice != '')
+    {
+    $query .= <<<STR
+ And DailyPrice <= $dailyPrice
+STR;
+    }
+    if ($numBedrooms != '')
+    {
+    $query .= <<<STR
+ And NumBedrooms >= $numBedrooms
+STR;
+    }
+    if ($numBathrooms != '')
+    {
+    $query .= <<<STR
+ And NumBathrooms >= $numBathrooms
+STR;
+    }
+    if ($sqft != '')
+    {
+    $query .= <<<STR
+ And SqFt <= $sqft
+STR;
+    }
+    if ($guestCnt != '')
+    {
+    $query .= <<<STR
+ And GuestCnt >= $guestCnt
+STR;
+    }
+$query .= <<<STR
+ Order by p.[PropertyID.PK]
+STR;
+
+echo "Query to Execute: '$query'<br><br>";
+
+return executeQuery($query);
+
+}
+
 ?>

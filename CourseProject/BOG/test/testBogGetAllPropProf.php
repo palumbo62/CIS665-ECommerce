@@ -18,11 +18,11 @@
 
     echo '<section>';
 
-    $propProfile = bogGetAllPropProf();
+    $propProfiles = bogGetAllPropProf();
 
     if (($errCode = bogGetLastErrorCode()) != 0) {
         echo "User profile failed to be added to BOG database, err='$errCode'";
-    } else if (count($propProfile) == 0) {
+    } else if (count($propProfiles) == 0) {
         echo "No property profiles found in database!<br><br>";
     }
     else {
@@ -48,7 +48,7 @@
 
         // display the results
 
-        foreach ($propProfile as $prop) {
+        foreach ($propProfiles as $prop) {
             echo   '<tr>
                        <td>' . $prop['PropertyID.PK'] . '</td>
                        <td>' . $prop['PropertyTypeID.FK'] . '</td>
@@ -69,7 +69,7 @@
         echo  '</tbody> </table> </section>';
 
         echo "<pre>";
-        print_r($propProfile);
+        print_r($propProfiles);
         echo "</pre >";
     }
     
