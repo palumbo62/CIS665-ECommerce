@@ -221,6 +221,26 @@ STR;
 }
 
 //*************************************************************
+// FUNCTION:    bogAddReservProf
+//
+// PURPOSE:     Used to add a reservation to the BOG system
+// assuming the dates are available for the specified property.
+//
+//*************************************************************
+function bogAddReservProf($propId, $userId, $checkinDate, $checkoutDate)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogAddReservProf $propId, $userId, '$checkinDate', '$checkoutDate', 
+        1500, 4;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
 // FUNCTION:    bogSearhcPropProfs
 //
 // PURPOSE:     Used to retrieve properties based upon the
@@ -230,7 +250,7 @@ STR;
 // inline versus a stored procedure doing the same.
 //
 //*************************************************************
-function bogSearhcPropProfs($propertyTypeID, $address, $city, $state, 
+function bogSearchPropProfs($propertyTypeID, $address, $city, $state, 
                 $zipcode, $dailyPrice, $numBedrooms, $numBathrooms, 
                 $sqft, $guestCnt)
 {

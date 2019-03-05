@@ -252,6 +252,26 @@ input#mailinglist
    width: 3%;
 }
 
+input#propId, input#userId
+{
+   display: block;
+   float: left;
+   width: 10%;
+   height: 25px;
+   font-size: 1.0em;
+   margin:10px 0px;
+}
+
+input#checkinDate, input#checkoutDate
+{
+   display: inline;
+   float: left;
+   width: 25%;
+   height: 25px;
+   font-size: 1.0em;
+   margin:10px 0px;
+}
+
 #searchmaxrows
 {
    width:5%;
@@ -282,16 +302,17 @@ select
 
 form p
 {
-   clear:both;
-   text-align: center;
+    clear:both;
+    text-align: center;
 }
 
 input[type="submit"]
 {
-   display:inline;
-   float:none;
-   height: 40px;
-   width: 180px;
+    display:inline;
+    float:none;
+    height: 40px;
+    width: 180px;
+    font-size: 0.9em;
 }
 
 input#proceed
