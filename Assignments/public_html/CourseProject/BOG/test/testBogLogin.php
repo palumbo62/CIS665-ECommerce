@@ -11,66 +11,37 @@
         email address and password.
 
 */
+
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
-    displayPageHeader('BOG - Test bogLogin()');
+    displayPageHeader('BOG - testBogLogin()');
 
     echo '<section>';
+?>
 
-    // call the getActorsList() method in d3sql.php
+    <script src="..\javaScript\Bog-jsLibrary.js" type="text/javascript"></script>
 
-    $email = 'admin@bog.com';
-    $password = 'admin';
-    $userProfile = bogLogin($email, $password);
+    <form action="testLoginResults.php" name="loginForm" id="loginForm" method="post">
+        <label for="emailAddr">Email: </label>
+        <input type="text" name="emailAddr" id ="emailAddr" 
+            maxlength="50" autofocus="autofocus" required="required" 
+            pattern="^[\w@\.-]+$" title="Enter valid email address" />
 
-    echo    '<table id="UserProfiles">
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>Email</th>
-                        <th>FName</th>
-                        <th>LName</th>
-                        <th>Addr</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip</th>
-                        <th>Phone#</th>
-                        <th>CC#</th>
-                        <th>ExpDate</th>
-                        <th>CVC</th>               
-                    </tr>
-                </thead>
-                <tbody>';
+        <label for="password">Password:</label> 
+        <input type="password" name="password" id="userpassword" 
+            maxlength="20" required="required" 
+            pattern="^[\w@\.-]+$" title="Enter password" />
 
-    // display the results
+        <p>
+           <input type="submit" value="Login" name="login" 
+                  style="width: 150px; margin: 0 auto;" /> <br />
+        </p>
+    </form>
 
-    foreach ($userProfile as $user) {
-        echo   '<tr>
-                   <td>' . $user['UserID.PK'] . '</td>
-                   <td>' . $user['Email'] . '</td>
-                   <td>' . $user['FirstName'] . '</td>
-                   <td>' . $user['LastName'] . '</td>
-                   <td>' . $user['Address'] . '</td>
-                   <td>' . $user['City'] . '</td>
-                   <td>' . $user['State'] . '</td>
-                   <td>' . $user['Zipcode'] . '</td>
-                   <td>' . $user['PhoneNumber'] . '</td>
-                   <td>' . $user['CC.Number'] . '</td>
-                   <td>' . $user['CC.ExpDate'] . '</td>
-                   <td>' . $user['CC.Cvc'] . '</td>
-               </tr>';
-    }
-        
-    
-    echo  '</tbody> </table> </section>';
-    
-    echo "<pre>";
-    print_r($userProfile);
-    echo "</pre >";
-    
+<?php
 
-    // call the displayPageFooter method in mySiteCommon.php
+    // call the displayPageFooter method in siteCommon.php
 
     displayPageFooter('BOG');
 ?>

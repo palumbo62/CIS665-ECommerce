@@ -124,6 +124,26 @@ STR;
 }
 
 //*************************************************************
+// FUNCTION:    bogGetAllPropProf
+//
+// PURPOSE:     Used to retrieve all property profiles from the
+// databas.  Upon success the property profile data is returned 
+// in a result set.
+// 
+//*************************************************************
+function bogGetAllPropProf()
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetAllPropProf;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
 // FUNCTION:    bogDelPropById
 //
 // PURPOSE:     Used to delete a property from the BOG system.
@@ -141,6 +161,175 @@ STR;
    
    // execute the query and return the result
    return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByUserId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// user id.
+//
+//*************************************************************
+function bogGetCommentsByUserId($userId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByUserId $userId;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByPropId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// property id.
+//
+//*************************************************************
+function bogGetCommentsByPropId($propId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByPropId $propId;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogGetCommentsByPropIdUserId
+//
+// PURPOSE:     Used to retrieve all comments for the specified
+// property id and user id.
+//
+//*************************************************************
+function bogGetCommentsByPropIdUserId($propId, $userId)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogGetCommentsByPropIdUserId $propId, $userId;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogAddReservProf
+//
+// PURPOSE:     Used to add a reservation to the BOG system
+// assuming the dates are available for the specified property.
+//
+//*************************************************************
+function bogAddReservProf($propId, $userId, $checkinDate, $checkoutDate)
+{
+    // the SQL query to be executed on the database
+
+    $query = <<<STR
+exec spBogAddReservProf $propId, $userId, '$checkinDate', '$checkoutDate', 
+        1500, 4;
+STR;
+   
+   // execute the query and return the result
+   return executeQuery($query);
+}
+
+//*************************************************************
+// FUNCTION:    bogSearhcPropProfs
+//
+// PURPOSE:     Used to retrieve properties based upon the
+// specified parameter search criteria.
+// 
+// NOTE: It was just simpler to implement this complex search
+// inline versus a stored procedure doing the same.
+//
+//*************************************************************
+function bogSearchPropProfs($propertyTypeID, $address, $city, $state, 
+                $zipcode, $dailyPrice, $numBedrooms, $numBathrooms, 
+                $sqft, $guestCnt)
+{
+    $query = <<<STR
+Select p.[PropertyID.PK], pt.PropertyTypeName, Address, City, State, Zipcode,
+DailyPrice, NumBedrooms, NumBathrooms, Sqft, GuestCnt, Pic
+From PropertyT p
+    Inner Join PropertyTypeT pt
+        On p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK]
+Where 0=0
+STR;
+    if ($propertyTypeID != '')
+    {
+    $query .= <<<STR
+ And p.[PropertyTypeID.FK] = $propertyTypeID
+STR;
+    }
+    if ($address != '')
+    {
+    $query .= <<<STR
+ And Address like '%$address%'
+STR;
+    }
+    if ($city != '')
+    {
+    $query .= <<<STR
+ And City like '%$city%'
+STR;
+    }
+    if ($state != '')
+    {
+    $query .= <<<STR
+ And State = '$state'
+STR;
+    }
+    if ($zipcode != '')
+    {
+    $query .= <<<STR
+ And Zipcode = $zipcode
+STR;
+    }
+    if ($dailyPrice != '')
+    {
+    $query .= <<<STR
+ And DailyPrice <= $dailyPrice
+STR;
+    }
+    if ($numBedrooms != '')
+    {
+    $query .= <<<STR
+ And NumBedrooms >= $numBedrooms
+STR;
+    }
+    if ($numBathrooms != '')
+    {
+    $query .= <<<STR
+ And NumBathrooms >= $numBathrooms
+STR;
+    }
+    if ($sqft != '')
+    {
+    $query .= <<<STR
+ And SqFt <= $sqft
+STR;
+    }
+    if ($guestCnt != '')
+    {
+    $query .= <<<STR
+ And GuestCnt >= $guestCnt
+STR;
+    }
+$query .= <<<STR
+ Order by p.[PropertyID.PK]
+STR;
+
+echo "Query to Execute: '$query'<br><br>";
+
+return executeQuery($query);
+
 }
 
 ?>

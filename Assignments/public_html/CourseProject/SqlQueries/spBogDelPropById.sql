@@ -21,26 +21,23 @@ CREATE OR ALTER PROCEDURE [dbo].[spBogDelPropById]
 )
 AS
 BEGIN
+    DECLARE @result int =-1;
+
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
     -- Make sure parameters are valid
-    IF (@propId < 0)
+    IF (@propId > 0)
         BEGIN   
-            RETURN 1000;
+            -- Check for duplicates and return null if found
+            DELETE FROM [PropertyT]
+                WHERE [PropertyID.PK] = @propId;
+            
+            SET @result = @@ERROR;
         END
-
-    -- Check for duplicates and return null if found
-    DELETE FROM [Property.Tbl]
-        WHERE [PropertyID.PK] = @propId;
     
-    -- Error check the insert
-    IF (@@ERROR <> 0)
-        BEGIN
-            RETURN 2600;
-        END    
-   
-   RETURN 0;
+    RETURN @result;
 END
 GO
+

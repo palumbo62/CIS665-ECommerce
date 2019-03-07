@@ -1,7 +1,7 @@
 USE [Team115DB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[spBogGetPropProfById]    Script Date: 2/28/2019 3:30:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[spBogGetReservProfById]    Script Date: 2/28/2019 3:30:05 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE OR ALTER    PROCEDURE [dbo].[spBogGetPropProfById] 
+CREATE OR ALTER    PROCEDURE [dbo].[spBogGetReservProfByPropId] 
 (
 	-- Add the parameters for the stored procedure here
     @propId int = 0 
@@ -27,10 +27,13 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT p.*, pt.PropertyTypeName FROM PropertyT p
-        INNER JOIN PropertyTypeT pt
-            ON p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK] 
-        WHERE p.[PropertyID.PK] = @propId;
+	SELECT u.LastName, u.FirstName, p.Address, p.City, p.State, p.Zipcode, r.CheckIn, r.CheckOut, r.TotalPayment, r.GuestCnt
+	FROM ReservationT r
+        INNER JOIN PropertyT p
+            ON p.[PropertyID.PK] = r.[PropertyID.FK] 
+		INNER JOIN UserT u
+			ON r.[UserID.FK] = u.[UserID.PK] 
+    WHERE p.[PropertyID.PK] = @propId;
 
     IF (@@ROWCOUNT != 1)
         BEGIN

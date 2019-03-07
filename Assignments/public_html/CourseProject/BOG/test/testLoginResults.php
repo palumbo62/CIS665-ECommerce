@@ -5,28 +5,34 @@
     Team-115:       Robert Palumbo, Kiana Vigil, Valerie Duran
     Due Date:       5.7.2019 @ 11:59pm
 
-    Filename:       testGetUserProfById.php
+    Filename:       testLoginResults.php
     
-        PHP based web page used to test retrieving a user profile from the
-        database by user Id.
+        PHP based web page used to test logging into the BOG website by
+        email address and password.
 
 */
+
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
-    displayPageHeader('BOG - Test bogGetUserProfById()');
+    displayPageHeader('BOG - testBogLogin()');
 
     echo '<section>';
 
-    $userId = 2;
-    $userProfile = bogGetUserProfById($userId);
+    // call the getActorsList() method in d3sql.php
 
+    $email = $_POST['emailAddr'];
+    $password = $_POST['password'];
+    $userProfile = bogLogin($email, $password);
+    
+    //echo "email: $email   password: $password<br><br>";
+    
     if (($errCode = bogGetLastErrorCode()) != 0) { 
-        echo "Failed to retrieve user profile from database, err='$errCode'<br><br>";
-    } else if (count($userProfile) == 0) {
-        echo "User profile for userId='$userId' not found!<br><br>";
+         echo "Failed to retrieve user profile from database, err=$errCode<br><br>";
+     } else if (count($userProfile) == 0) {
+         echo "User profile for email address='$email' not found!<br><br>";
     } else if (count($userProfile) > 1) {
-         echo "Multiple property profiles for userId='$userId' found!<br><br>";
+         echo "Multiple user profiles for email='$email' found!<br><br>";
     } else {
         echo    '<table id="UserProfiles">
                     <thead>
@@ -60,20 +66,26 @@
                        <td>' . $user['State'] . '</td>
                        <td>' . $user['Zipcode'] . '</td>
                        <td>' . $user['PhoneNumber'] . '</td>
-                       <td>' . $user['CCNumber'] . '</td>
-                       <td>' . $user['CCExpDate'] . '</td>
-                       <td>' . $user['CCCvc'] . '</td>
+                       <td>' . $user['CC.Number'] . '</td>
+                       <td>' . $user['CC.ExpDate'] . '</td>
+                       <td>' . $user['CC.Cvc'] . '</td>
                    </tr>';
         }
-
+        
         echo  '</tbody> </table> </section>';
 
         echo "<pre>";
         print_r($userProfile);
         echo "</pre >";
     }
+?>
 
-    // call the displayPageFooter method in mySiteCommon.php
+    <p style="text-align: center">
+        <a href="testBogLogin.php">[Check another user account]</a>
+    </p>
 
-    displayPageFooter('BOG');
+<?php
+
+displayPageFooter('BOG');
+
 ?>

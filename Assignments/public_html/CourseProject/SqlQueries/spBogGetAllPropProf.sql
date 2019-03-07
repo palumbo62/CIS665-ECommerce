@@ -13,11 +13,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE OR ALTER    PROCEDURE [dbo].[spBogGetPropProfById] 
-(
-	-- Add the parameters for the stored procedure here
-    @propId int = 0 
-)
+CREATE OR ALTER    PROCEDURE [dbo].[spBogGetAllPropProf] 
 AS
 BEGIN
     DECLARE @result int = 0;
@@ -29,14 +25,8 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT p.*, pt.PropertyTypeName FROM PropertyT p
         INNER JOIN PropertyTypeT pt
-            ON p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK] 
-        WHERE p.[PropertyID.PK] = @propId;
-
-    IF (@@ROWCOUNT != 1)
-        BEGIN
-            SET @result = -1;
-        END
-
+            ON p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK] ;
+   
     RETURN @result;
 END
 GO
