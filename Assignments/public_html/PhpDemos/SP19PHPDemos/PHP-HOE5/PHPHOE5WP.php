@@ -39,13 +39,12 @@ displayPageHeader("Add an Actor");
 
     <label for="age">Age:</label>
     <input type="number" name="age" id="actorage" required 
-           min="0" max="120" style="width: 3"
+           min="0" max="120" value="21" style="width: 13"
            title="Enter the actor's Age"/>
     
     <div id="gender">
-
-    <input type="radio" id="gender" name="gender" value="M" checked> Male<br>
-    <input type="radio" id="gender" name="gender" value="F"> Female
+        <input type="radio" id="gender" value="M" name="gender" checked> Male<br>
+        <input type="radio" id="gender" value="F" name="gender" > Female
     </div>
     
     <label for="agentName">Agent Name:</label>   
