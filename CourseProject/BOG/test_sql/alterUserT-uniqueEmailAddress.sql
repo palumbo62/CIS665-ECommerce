@@ -1,5 +1,0 @@
-Use Team115DB
-Go
-
-ALTER  TABLE  UserT WITH CHECK 
-   ADD CONSTRAINT UniqueEmailIdx UNIQUE (email)
