@@ -1,12 +1,15 @@
-
+﻿
 html {
+    background-color:aliceblue;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100%;
-    background-size:cover;
 }
 
 
 body, input, select, textarea {
-    color: #444;
+    color: white;
     font-family: "Raleway", Helvetica, sans-serif;
     font-size: 10pt;
     font-weight: 400;
@@ -23,13 +26,93 @@ a {
         color: deepskyblue;
     }
 
+
+/*body {
+    font-family: "Raleway", Helvetica, sans-serif;
+}*/
+
+h1 {
+    font-size: 35px;
+    position: center;
+    padding-left: 150px;
+}
+
+form {
+    border: 10px solid #808080;
+    border-spacing: inherit;
+    position: center;
+    z-index: 1;
+    /*background-color: whitesmoke;*/
+    background-color: lightgray;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 15px auto 50px;
+    padding: 5px;
+    text-align: left;
+}
+
+label {
+    clear: left;
+    display: block;
+    font-size: 0.9em;
+    float: left;
+    padding-left: 5px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    width: 30%;
+}
+
+input {
+    display: block;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50%;
+}
+
+    input[placeholder] {
+        color: lightgrey;
+        opacity: unset;
+    }
+
+
+button {
+    /*background-color: deepskyblue;
+    color: white;
+    padding: 5px 30px;
+    margin: 30px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    position: center;*/
+    background-color: deepskyblue;
+    color: white;
+    padding: 5px 10px;
+    margin: 2px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.container {
+    padding: 16px;
+}
+
+
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
 /* Header */
 
 #header {
     background-color: #383b43;
     color: #ffffff;
     cursor: default;
-    font-size: 1.4em;
+    font-size: 1.1em;
     height: 6em;
     line-height: 6em;
     width: 100%;
@@ -88,117 +171,6 @@ a {
                     margin-left: 0;
                 }
 
-
-/* Banner */
-
-#banner {
-    background-image: url(../images/dark_tint.png), url(../images/beach.jpg);
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #ffffff;
-    padding: 14em 0em 14em;
-    text-align: center;
-}
-
-    #banner h2 {
-        color: #ffffff;
-        font-size: 4em;
-        line-height: 1.25em;
-        margin: 0 0 0.5em 0;
-        padding: 0;
-    }
-
-    #banner p {
-        font-size: 1.5em;
-        margin-bottom: 1.75em;
-    }
-
-h1 {
-    font-size: 35px;
-    position:center;
-    padding-left: 150px;
-}
-
-#banner form {
-    border: 10px solid #808080;
-    border-spacing: inherit;
-    z-index: 1;
-    background-color: lightgray;
-    opacity: 0.8;
-    max-width: 40%;
-    margin: auto;
-    padding: 5px;
-    text-align: center;
-    font-size: 11pt;
-    color: black;
-}
-
-#banner label {
-    float: left;
-    padding: auto;
-    margin-left: 20%;
-    /*text-align: left;*/
-}
-
-#banner input {
-    display: block;
-    float:none;
-    max-width: 30%;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 45%;
-    margin-right: 15px;
-}
-
-#banner input[placeholder] {
-    color: lightgrey;
-    opacity:unset;
-}
-
-#banner input[type=text] {
-    color: black;
-}
-#banner button {
-    clear: both;
-    background-color: deepskyblue;
-    color: white;
-    padding: 5px 10px;
-    margin: 20px 0;
-    border: activeborder;
-    border-style: outset;
-    cursor: pointer;
-    width: 20%;
-}
-
-#banner select#state {
-    height: 30px;
-    margin-left: -15%;
-}
-
-
-input:read-only { 
-  background-color: lightskyblue;
-  color: purple;
-}
-
-input:active, input:hover {
-    text-decoration: double;
-    color: deepskyblue;
-}
-
-
-.container {
-    padding: 16px;
-    text-align: center;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-
 /*Footer Styles*/
 
 footer {
@@ -218,6 +190,3 @@ footer {
         font-size: 0.8em;
         text-align: center;
     }
-   
-
-

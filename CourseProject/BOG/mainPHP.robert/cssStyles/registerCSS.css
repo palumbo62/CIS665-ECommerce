@@ -126,29 +126,22 @@ h1 {
     z-index: 1;
     background-color: lightgray;
     opacity: 0.8;
-    max-width: 40%;
-    margin: auto;
+    max-width: 20%;
+    margin: 15px auto 50px;
     padding: 5px;
-    text-align: center;
+    text-align: left;
     font-size: 11pt;
     color: black;
-}
-
-#banner label {
-    float: left;
-    padding: auto;
-    margin-left: 20%;
-    /*text-align: left;*/
 }
 
 #banner input {
     display: block;
     float:none;
-    max-width: 30%;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 45%;
-    margin-right: 15px;
+   
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    
 }
 
 #banner input[placeholder] {
@@ -159,39 +152,45 @@ h1 {
 #banner input[type=text] {
     color: black;
 }
+
+#banner input[type=radio] {
+    float: left;
+    margin: 10px 0;
+    max-width: 5%;
+
+    padding: 20px;
+    text-align: left;
+    font-size: 11pt;
+    color: black;
+
+    /*display: inline;*/
+}
+
 #banner button {
     clear: both;
     background-color: deepskyblue;
     color: white;
     padding: 5px 10px;
-    margin: 20px 0;
-    border: activeborder;
-    border-style: outset;
+    margin: 2px 0;
+    border: none;
     cursor: pointer;
-    width: 20%;
+    width: 30%;
+}
+#banner label {
+    float: left;
+    text-align: right;
 }
 
-#banner select#state {
-    height: 30px;
-    margin-left: -15%;
+#banner div#roletype {
+    clear: both;
 }
-
-
-input:read-only { 
-  background-color: lightskyblue;
-  color: purple;
-}
-
-input:active, input:hover {
-    text-decoration: double;
-    color: deepskyblue;
-}
-
+    
 
 .container {
     padding: 16px;
-    text-align: center;
 }
+
+
 
 span.psw {
     float: right;
