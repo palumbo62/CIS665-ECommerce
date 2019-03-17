@@ -12,7 +12,7 @@
 
 */
     require_once ("testSiteCommon.php");
-    require_once ("..\sqlCommon\bogSql.php");
+    require_once ("bogSql.php");
 
     displayPageHeader('BOG - Test testBogSearchPropProfByLoc()');
 
@@ -20,7 +20,7 @@
 
     $propType = '';
     $city = '';
-    $state = ''; 
+    $state = 'CO'; 
     $zipcode = '';
 
     // search for matching profiles

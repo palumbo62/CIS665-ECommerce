@@ -10,7 +10,7 @@
         Results page for adding a reservation to the system
  */
     require_once ("testSiteCommon.php");
-    require_once ("..\sqlCommon\bogSql.php");
+    require_once ("bogSql.php");
 
     displayPageHeader('BOG - Test testBogAddReservResults');
 

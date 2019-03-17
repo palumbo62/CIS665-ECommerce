@@ -12,17 +12,17 @@
 
 */
     require_once ("testSiteCommon.php");
-    require_once ("..\sqlCommon\bogSql.php");
+    require_once ("bogSql.php");
 
     displayPageHeader('BOG - Test bogGetUserProfById()');
 
     echo '<section>';
 
-    $userId = 47;
+    $userId = 3;
     $userProfile = bogGetUserProfByUserId($userId);
 
     $roles = bogGetUserRoles();
-    print_r($roles);
+    //print_r($roles[0]);
 
     if (($errCode = bogGetLastErrorCode()) != 0) { 
         echo "Failed to retrieve user profile from database, err='$errCode'<br><br>";
@@ -55,15 +55,15 @@
         // display the results
 
         foreach ($userProfile as $user) {
-            echo "<br><br>";
-            print_r($user['RoleIdFK']-1);
-            echo "<br><br>";
-            print_r($roles[1]);
-            echo "<br><br>";
-            print_r($roles[1]['RoleName']);
-            echo "<br><br>";
-            $role = $roles[$user['RoleIdFK']-1]['RoleName'];
-            print_r($role);
+//            echo "<br><br>";
+//            print_r($user['RoleIdFK']-1);
+//            echo "<br><br>";
+//            print_r($roles[1]);
+//            echo "<br><br>";
+//            print_r($roles[1]['RoleName']);
+//            echo "<br><br>";
+//            $role = $roles[$user['RoleIdFK']-1]['RoleName'];
+//            print_r($role);
             echo "<br><br>";
             echo   '<tr>
                         <td>' . $user['UserIdPK'] . '</td>

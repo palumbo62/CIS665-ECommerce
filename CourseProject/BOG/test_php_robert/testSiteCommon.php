@@ -18,7 +18,7 @@ function displayPageHeader($pageTitle)
    <head>
       <meta charset="UTF-8" />
       <title>BOG - Be Our Guest!</title>
-      <link rel="stylesheet" href="..\cssStyles\BogStylesCommon.css" type="text/css" />
+      <link rel="stylesheet" href="BogStylesCommon.css" type="text/css" />
    </head>
 
    <body>
