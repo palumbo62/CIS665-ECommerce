@@ -146,18 +146,17 @@ STR;
 // PURPOSE:     Used to add a new property to the BOG system.
 //
 //*************************************************************
-function bogAddPropProf($propertyType, $address, $city, $state, 
-            $zipcode, $dailyPrice, $numBedrooms, $numBathrooms,
-            $sqft, $guestCnt, $pic)
+function bogAddPropProf($proptype, $title, $address, $city, $state, 
+            $zipcode, $price, $numbeds, $numbaths,
+            $sqft, $guests, $pic)
 {
     // the SQL query to be executed on the database
 
     $query = <<<STR
-exec spBogAddPropProf $propertyType, '$address', '$city', 
-    '$state', $zipcode, $dailyPrice, $numBedrooms, 
-    $numBathrooms, $sqft, $guestCnt, '$pic';
+exec spBogAddPropProf $proptype, '$title', '$address', '$city', 
+    '$state', $zipcode, $price, $numbeds, $numbaths, $sqft, $guests, $pic;
 STR;
-   
+
     // execute the query and return the result
     return executeQuery($query);
 }

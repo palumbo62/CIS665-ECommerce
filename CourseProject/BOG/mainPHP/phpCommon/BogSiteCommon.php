@@ -81,7 +81,7 @@ function displayPageHeader($cssStyle, $pageTitle)
 <body>
     <!-- Header -->
     <header id="header">
-        <h1>BOG&nbsp;&nbsp;&nbsp;$pageTitle</h1>
+        <h1>$pageTitle</h1>
         <nav id="nav">
             <ul>
                 <li><a href="BogHome.php">Home</a></li>
@@ -100,8 +100,8 @@ STR;
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                          <a href="BogAdminAddProperty.php">Add Property</a>
-                          <a href="BogAdminDelProperty.php">Delete Property</a>
+                          <a href="BogAddProperty.php">Add Property</a>
+                          <a href="BogDelProperty.php">Delete Property</a>
                         </div>
                       </div> 
                     <li>';
@@ -207,7 +207,7 @@ function displayUserProfilePage()
 //   echo $output;
 }
 
-function displayAdminAddPropertyPage()
+function displayAddPropertyPage()
 {
 //DO NOTHING FOR NOW
 //    $output = <<<STR
@@ -216,7 +216,7 @@ function displayAdminAddPropertyPage()
 //   echo $output;
 }
 
-function displayAdminDelPropertyPage()
+function displayDelPropertyPage()
 {
 //DO NOTHING FOR NOW
 //    $output = <<<STR

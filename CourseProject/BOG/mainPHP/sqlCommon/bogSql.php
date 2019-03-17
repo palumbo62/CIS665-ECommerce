@@ -99,6 +99,28 @@ STR;
 }
 
 //*************************************************************
+// FUNCTION:    bogUpdateUserProfByUserId
+//
+// PURPOSE:     Used to update an existing profile to the BOG
+// system for the current user.
+// 
+//*************************************************************
+function bogUpdateUserProfByUserId($userId, $roleType, $email, $password,
+            $firstName, $lastName, $address, $city, $state, $zipcode, 
+            $phoneNumber, $ccNum, $ccExpDate, $ccCvc)
+{
+    $query = <<<STR
+        exec spBogUpdtUserProfByUserId $userId, $roleType, '$email', '$password', 
+            '$firstName', '$lastName','$address', '$city', '$state', $zipcode, 
+            $phoneNumber, $ccNum, '$ccExpDate', $ccCvc;
+STR;
+      
+    // execute the query and return the result
+    
+    return executeQuery($query);
+}
+
+//*************************************************************
 // FUNCTION:    bogGetUserProfByUserId
 //
 // PURPOSE:     Used to retrieve a user profile from the

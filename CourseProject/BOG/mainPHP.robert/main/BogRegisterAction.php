@@ -14,7 +14,7 @@
     session_start();
 
     require_once ("..\sqlCommon\bogSql.php");
-    require_once ("BogLibrary.php");
+    require_once ("..\phpCommon\BogLibrary.php");
     
     // Should have only made it here if Registration was 'submitted'
     $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogLoginPage.php';

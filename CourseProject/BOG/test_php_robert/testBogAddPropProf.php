@@ -18,8 +18,9 @@
 
     echo '<section>';
 
-    $propertyType = 6;
-    $address = '55237 NW 55th';
+    $propType = 6;
+    $propTitle = "Great Location";
+    $address = '566341 NW 55th';
     $city = 'St. Paul';
     $state = 'MN'; 
     $zipcode = 55817;
@@ -31,7 +32,7 @@
     $pic = null;
 
     // add the profile
-    bogAddPropProf($propertyType, $address, $city, $state, $zipcode,
+    bogAddPropProf($propType, $propTitle, $address, $city, $state, $zipcode,
                     $dailyPrice, $numBedrooms, $numBathrooms, $sqft,
                     $guestCnt, $pic);
 
@@ -48,6 +49,7 @@
                             <tr>
                                 <th>PropID</th>
                                 <th>PropType</th>
+                                <th>Title</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>State</th>
@@ -67,7 +69,8 @@
                 echo   '<tr>
                            <td>' . $prop['PropertyIdPK'] . '</td>
                            <td>' . $prop['PropertyTypeIdFK'] . '</td>
-                           <td>' . $prop['Address'] . '</td>
+                           <td>' . $prop['PropertyTitle'] . '</td>
+                           <td>' . $prop['Address'] . '</td>                               
                            <td>' . $prop['City'] . '</td>
                            <td>' . $prop['State'] . '</td>
                            <td>' . $prop['Zipcode'] . '</td>

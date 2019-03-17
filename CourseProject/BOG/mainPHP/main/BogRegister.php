@@ -15,7 +15,7 @@
 
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
-    require_once ("BogLibrary.php");
+    require_once ("..\phpCommon\BogLibrary.php");
     
     echo '<section>';
 
@@ -24,7 +24,7 @@
 
     $tag = "Registration Page";
 
-    displayPageHeader("..\cssStyles\registerCSS.css", $tag);
+    displayPageHeader("../cssStyles/registerCSS.css", $tag);
     displayRegisterPage();
 ?>
 
@@ -154,10 +154,14 @@
                 </select>
 
                 <div id="roletype">
-                <input type="radio" id="roletype" 
-                       name="roletype" value="2" checked> User Account
-                <input type="radio" id="roletype" 
-                       name="roletype" value="1"> Admin Account
+                <label>    
+                    <input type="radio" id="roletype"
+                           name="roletype" value="2" checked/>User Account
+                </label>
+                <label>    
+                    <input type="radio" id="roletype"
+                           name="roletype" value="1"/>Admin Account
+                </label>
                 </div>
                 
                 <!--Button Should reach out to php page and confirm user or admin access-->

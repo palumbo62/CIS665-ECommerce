@@ -18,8 +18,11 @@
     
     // Should have only made it here if Registration was 'submitted'
     $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogLoginPage.php';
-
-//    if (isset($register))
+    $register = $_POST['regSubmit'];
+    
+//    echo "REDIRECT='$redirect'  regSubmit='$register'<br>";
+    
+    if (isset($register))
     {
         // Set local variables to $_POST array elements 
 
@@ -48,41 +51,34 @@
 
             // Check the result of the add operation
             if (($errCode = bogGetLastErrorCode()) != 0) {
-                echo "User profile failed to be added to BOG database, err'$errCode'";
+                alertRedirect(3, 'BogRegiser.php', 
+                              "User profile failed to be added to BOG database, err'$errCode'");
+            } elseif (($userId = bogGetLastInsertId()) == -1) {
+                alertRedirect(3, 'BogRegiser.php', 
+                              "User profile failed to be added to database!");
             } else {
-                if (($userId = bogGetLastInsertId()) == -1) {
-                    echo "User profile failed to be added to database!<br><br>";
-                } else {
-                    // Save the registration information to the session
+                // Save the registration information to the session
 
-                    $regInfo = array('UserPK'=>$userId, 'Role'=>$roleType, 
-                                    'Email'=>$email, 'Password'=>$password,
-                                    'FirstName'=>$firstName, 'LastName'=>$lastName,
-                                    'Address'=>$address, 'City'=>$city,
-                                    'State'=>$state, 'Zipcode'=>$zipcode,
-                                    'PhoneNumber'=>$phoneNumber);
+                $regInfo = array('UserPK'=>$userId, 'Role'=>$roleType, 
+                                'Email'=>$email, 'Password'=>$password,
+                                'FirstName'=>$firstName, 'LastName'=>$lastName,
+                                'Address'=>$address, 'City'=>$city,
+                                'State'=>$state, 'Zipcode'=>$zipcode,
+                                'PhoneNumber'=>$phoneNumber);
 
-                    // Save the data to the session 
-                    $_SESSION['regInfo'] = $regInfo;
+                // Save the data to the session 
+                $_SESSION['regInfo'] = $regInfo;
 
-                    //typically not required; ensures that the session data is store
-                    session_write_close(); 
+                //typically not required; ensures that the session data is store
+                session_write_close(); 
 
-                    //alertMessage("UserID '$email' successfully registered!");
-                    
-                    // Redirect to the login page
-                    header('Refresh: 2; URL=BogLoginPage.php');
-
-                    echo '<h2>Thank you for Registering.  You will now be redirected to our login page.</h2>';
-                    die();
-                }
+                // Redirect to the login page
+                alertRedirect(3, 'BogLoginPage.php', 
+                              'Thank you for Registering.  You will now be redirected to our login page.');
             }
         } else {
-            alertMessage("invalid credentials - Display an appropriate error somwhere");
-
-            // Redirect to the login page
-            header('location:' . "BogRegisterPage.php");
-            die();
+            alertRedirect(3, 'BogRegister.php', 
+                          'Passwords do not match.  Please try again.');
         }
     }
 ?>

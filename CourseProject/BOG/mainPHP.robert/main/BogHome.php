@@ -26,7 +26,7 @@
         $tag = "Hello, and welcome to BeOurGuest!";
     }
 
-    displayPageHeader("../cssStyles/homeCSS.css", $tag);
+    displayPageHeader("..\cssStyles\homeCSS.css", $tag);
     displayHomePage();
 ?>
 

@@ -43,7 +43,7 @@ a {
 
 #header {
     background-color: #383b43;
-    color: #ffffff;
+    color: deepskyblue;
     cursor: default;
     font-size: 1.4em;
     height: 6em;
@@ -55,7 +55,7 @@ a {
     position: center;
 }
     #header h1 {
-        color: #ffffff;
+        color: deepskyblue;
         height: inherit;
         left: 3em;
         line-height: inherit;
@@ -113,7 +113,7 @@ a {
         background-image: url(../images/dark_tint.png), url(../images/BOGhouseBanner.jpg);
         background-position: center center;
         background-size: cover;
-        color: #ffffff;
+        color: deepskyblue;
         padding: 14em 0em 14em;
         text-align: center;
     }
@@ -121,7 +121,7 @@ a {
 
 
         #banner h2 {
-            color: #ffffff;
+            color: deepskyblue;
             font-size: 4em;
             line-height: 1.25em;
             margin: 0 0 0.5em 0;
@@ -178,7 +178,7 @@ form.example::after {
 
 
         #secondbanner h2 {
-            color: deepskyblue;
+            color: white;
             text-align: center;
             /*padding: 0px;*/
             font-size: 2em;
@@ -191,18 +191,20 @@ form.example::after {
 
         #secondbanner h3 {
             color: white;
-            padding: 50px;
             font-size: 1.5em;
             line-height: 1em;
             margin: 0 0 0.5em 0;
             padding: 10px;
+            text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
         }
 
         #secondbanner p {
-            font-size: 1.2em;
-            left: 60%;
             color: white;
-         
+            font-size: 1.2em;
+            line-height: 1em;
+            margin: 0 0 0.5em 0;
+            padding: 10px;
+            text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
         }
 
     * {
@@ -249,7 +251,7 @@ footer {
         footer p {
             color: dodgerblue;
             font-style: normal;
-            font-size: 0.8em;
+            font-size: 1em;
             text-align: center;
         }
    

@@ -14,8 +14,8 @@
     session_start();
 
     require_once ("..\phpCommon\BogSiteCommon.php");
+    require_once ("..\phpCommon\BogLibrary.php");
     require_once ("..\sqlCommon\bogSql.php");
-    require_once ("..\phpcommon\BogLibrary.php");
     
     echo '<section>';
 
@@ -24,7 +24,7 @@
 
     $tag = "Registration Page";
 
-    displayPageHeader("../cssStyles/registerCSS.css", $tag);
+    displayPageHeader('..\cssStyles\updateProfileCSS.css', $tag);
     displayRegisterPage();
 ?>
 
@@ -34,72 +34,69 @@
 
                 <h2>Sign Up</h2>
 
-                <!----- Email Id ---------------------------------------------------------->
-                <input type="text" name="email" required
-                       placeholder="EmailAddress"
-                       maxlength="50" autofocus="autofocus" required
-                       pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                <!----- Email Id ------------------------------------------------------->
+                <label for="email">Email Address:</label>
+                <input type="text" name="email" required autofocus
+                       maxlength="50"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,50}$" 
                        title="Enter email address (max 50 chars)">
 
-                <!----- Password ---------------------------------------------------------->
+                <!----- Password ------------------------------------------------------->
+                <label for="password">Password:</label>
                 <input type="password" name="password" required
-                       placeholder="Password"
-                       maxlength="20" required="required"
-                       title="Enter password (max 20 chars)">
+                       maxlength="20"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 
-                <!----- Password Conf---------------------------------------------------------->
-                <input type="password" name="passwordconf" required
-                       placeholder="Password-Confirmation"
-                       maxlength="20" required="required"
-                       title="Enter password confirmation (max 20 chars)">
+                <!----- Password Conf -------------------------------------------------->
+                <label for="confpass">Confirm Password:</label>
+                <input type="password" name="confpass" required
+                       maxlength="20"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" 
+                       title="Enter password confirmation">
 
                 <!--<pre></pre>-->
 
-                <!----- Mobile Number ---------------------------------------------------------->
+                <!----- Mobile Number -------------------------------------------------->
+                <label for="phonenumber">Phone Number:</label>
                 <input type="text" name="phonenumber" required
-                       placeholder="10-Digit-PhoneNumber"
-                       maxlength="10" autofocus="autofocus"
+                       maxlength="10"
                        pattern="^[0-9]{10}$"
-                       title="Enter phone number">
+                       title="Enter 10-digit phone number">
 
-                <!----- First Name ---------------------------------------------------------->
+                <!----- First Name ----------------------------------------------------->
+                <label for="firstname">First Name:</label>
                 <input type="text" name="firstname" required
-                       placeholder="FirstName"
-                       maxlength="30" autofocus="autofocus" 
-                       pattern="^[a-zA-Z ']+$"
-                       title="Enter first name (max 30 chars)">
+                       maxlength="30"
+                       pattern="^[a-zA-Z ']{1,30}$"
+                       title="Enter first name">
 
-                <!----- Last Name ---------------------------------------------------------->
-                <input type="text" name="lastname" required
-                       placeholder="LastName"
-                       maxlength="30" autofocus="autofocus"
-                       pattern="^[a-zA-Z ']+$"
-                       title="Enter last name (max 30 chars)">
+                <!----- Last Name ------------------------------------------------------>
+                <label for="lastname">Last Name:</label>
+                <input type="text" name="lastname" required 
+                       maxlength="30"
+                       pattern="^[a-zA-Z ']{1,30}$"
+                       title="Enter last name">
 
-                <!----- Address ---------------------------------------------------------->
+                <!----- Address -------------------------------------------------------->
+                <label for="address">Address:</label>
                 <input type="text" name="address" required
-                       placeholder="HomeAddress"
-                       maxlength="50" autofocus="autofocus"
+                       maxlength="50"
+                       pattern="^[a-zA-Z0-9 ']{1,30}$"
                        title="Enter home address">
 
-                <!----- City ---------------------------------------------------------->
+                <!----- City ----------------------------------------------------------->
+                <label for="city">City:</label>
                 <input type="text" name="city" required
-                       placeholder="City"
-                       maxlength="30" autofocus="autofocus"
-                       title="Enter home city (max 30 chars)">
-
-                <!----- ZIP Code ---------------------------------------------------------->
-                <input type="text" name="zipcode" required
-                       placeholder="5-Digit-Zipcode"
-                       maxlength="5" autofocus="autofocus"
-                       pattern="^[0-9]{5}$"                       
-                       title="Enter home zipcode">
+                       maxlength="30"
+                       pattern="^[a-zA-Z ']{1,30}$"
+                       title="Enter home city">
 
                 <!----- State ---------------------------------------------------------->
-                State &nbsp;&nbsp;<select id="state" name="state" 
-                        title="Enter home state"
-                        style='height: 25px'>
-                    <option value=""></option>
+                <label for="state">State:</label>
+                <select id="state" name="state" required
+                        title="Select home state">
+                    <option value="" disabled selected="">Select home state</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -151,12 +148,19 @@
                     <option value="WV">West Virginia</option>
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
-                </select>
+                </select><br>
+
+                <!----- ZIP Code ------------------------------------------------------->
+                <label for="zipcode">Zipcode:</label>                
+                <input type="text" name="zipcode" required
+                       maxlength="5"
+                       pattern="^[0-9]{5}$"                       
+                       title="Enter 5-digit zipcode">
 
                 <div id="roletype">
                 <label>    
-                    <input type="radio" id="roletype"
-                           name="roletype" value="2" checked/>User Account
+                    <input type="radio" id="roletype" 
+                           name="roletype" value="2" checked/>User Account&nbsp;&nbsp;
                 </label>
                 <label>    
                     <input type="radio" id="roletype"
@@ -165,10 +169,11 @@
                 </div>
                 
                 <!--Button Should reach out to php page and confirm user or admin access-->
-                <br>
-                <button name="regSubmit" type="submit" value="register">Register</button>
-                <button name="regReset" type="reset" value="reset">Reset</button>
-                <button type="button" onclick="location.href='BogHome.php';return false;">Cancel</button>
+                <div id="button">
+                    <button name="regSubmit" type="submit" value="register">Register</button>
+                    <button name="regReset" type="reset" value="reset">Reset</button>
+                    <button type="button" onclick="location.href='BogHome.php';return false;">Cancel</button>
+                </div>
             </div>
         </form>
     </section>

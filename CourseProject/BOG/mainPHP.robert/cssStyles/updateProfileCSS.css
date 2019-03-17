@@ -159,6 +159,7 @@ h1 {
 #banner input[type=text] {
     color: black;
 }
+
 #banner button {
     clear: both;
     background-color: deepskyblue;
@@ -176,6 +177,14 @@ h1 {
     margin-left: -15%;
 }
 
+#banner div#roletype {
+    clear: both;
+}
+
+#banner div#button {
+    clear: both;
+    margin: auto;
+}
 
 input:read-only { 
   background-color: lightskyblue;
