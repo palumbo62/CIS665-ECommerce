@@ -11,8 +11,6 @@
 */ 
     session_start();
 
-    require_once ("..\phpCommon\BogSiteCommon.php");
-    require_once ("..\phpCommon\BogLibrary.php");
     require_once ("..\sqlCommon\bogSql.php");
 
     // Set local variables to $_POST array elements (userlogin and userpassword) or empty strings
@@ -23,19 +21,24 @@
 
     $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogHome.php';
 
-    echo "REDIRECT='$redirect'  email='$email'  password='$password'  login='$login'<br>'";
     // if the form was submitted
 
-    if (isset($login)) {
-        //Call bogLogin to validate the user credentials
+    if (isset($login))
+    {
+        //Call getUser method to check credentials
+
+//XRLP - Temporary - Make sure to remove before submission!!!        
+//$email = 'admin@bog.com';
+//$password = 'Admin';
+
         $userList = bogLogin($email, $password);
 
         if (count($userList) === 1) //If credentials check out
         {
             extract($userList[0]);
-//            echo "<pre>";
-//            print_r($userList);
-//            echo "</pre>";
+            echo "<pre>";
+            print_r($userList);
+            echo "</pre>";
             
             // assign user info to an array
 
@@ -55,26 +58,46 @@
                 $redirect = "BobLoginResults_User.php";
             }
 
-            // Successful login - redirect to the home page
-            alertRedirect(2, 'BogHome.php', 'Login Successful!');
-        } else {
-            // Invalid credentials
+//            $ui = $_SESSION['userInfo'];
+//            if (isset($ui)) {
+//                echo "<pre>";
+//                print_r($ui);
+//                echo "</pre>";
+//            } else {
+//                echo "UINFO NOT SET - WHY????<br>";
+//            }
 
-            alertRedirect(3, 'BogLoginPage.php', 
-                         'User credential are invalid.  Please try again.');
+            $redirect = "BogHome.php";
+            header('location:' . $redirect);
+            die();
+        }
+        else // Otherwise, assign error message to $error
+        {
+            $error = 'Invalid login credentials<br />Please try again';
         }
     }
+    
+    // display form
 
-    // Display the page
+    require_once ("../phpCommon/BogSiteCommon.php");
+
+    // call the displayPageHeader method in siteCommon2.php
 
     displayPageHeader("../cssStyles/loginPageCSS.css", "Login Page");
     displayLoginPage();
+    
+    // if error variable was set, display it
+
+    if (isset($error))
+    {
+        echo '<div id="error">' . $error . '</div>';
+    }
 ?>
 
     <section id="banner">
         <form action="BogLoginPage.php">
             <div class="container">
-                <input type="hidden" name ="redirect" value ="<?php echo $redirect?>" /><br>
+                <input type="hidden" name ="redirect" value ="<?php echo $redirect ?>" /><br>
                 
                 <input type="text" placeholder="EmailAddress" name="email" required
                        maxlength="50" autofocus="autofocus" required
@@ -87,7 +110,7 @@
                  <!--Button Should reach out to php page and confirm user or admin access-->
                 <br>
                 <button name="userLogin" type="submit" value="login">Login</button>
-                <button name="userReset" type="reset" value="reset">Reset</button>
+                <button name="profReset" type="reset" value="reset">Reset</button>
                 <button type="button" onclick="location.href='BogHome.php';return false;">Cancel</button>
                
                 <!--<button type="submit" value="Login" name="login">Login</button>-->

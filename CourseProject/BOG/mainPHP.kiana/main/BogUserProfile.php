@@ -35,9 +35,9 @@
     // Retrieve the user profile for the current user
     $userProf = bogGetUserProfByUserId($userId);
     
-//    echo "USER PROFILE <pre><br>";
-//    print_r($userProf);
-//    echo "</pre>";
+    echo "USER PROFILE <pre><br>";
+    print_r($userProf);
+    echo "</pre>";
 //    die();
     
     // Check for any errors
@@ -59,7 +59,11 @@
     // to uniquely identify a user
     extract($userProf[0]);
 
-    displayPageHeader('..\cssStyles\updateProfileCSS.css', $tag);
+    echo "STATE='$State'<br>";
+    
+    //echo ($State == 'AL') ? 'true' : 'false';
+    echo ($State == 'AL' ? 'true' : 'false');
+    displayPageHeader("../cssStyles/updateProfileCSS.css", $tag);
     displayUserProfilePage();
 ?>
 
@@ -84,17 +88,16 @@
                        title="Readonly Field">
 
                 <!----- Password ---------------------------------------------------------->
-                       <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"--> 
                 <label for="password">Password:</label>
                 <input type="password" name="password" required autofocus
                        value="<?php echo $Password; ?>"
                        maxlength="20"
-                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                       title="Enter password (max 20 chars)">
 
                 <!----- Password Conf---------------------------------------------------------->
-                       <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"--> 
                 <label for="confpass">Confirm Password:</label>
                 <input type="password" name="confpass" required autofocus
+                       placeholder="Password-Confirmation"
                        maxlength="20"
                        title="Please confirm your password to update profile">
 
@@ -114,7 +117,7 @@
                        value="<?php echo $FirstName?>"
                        maxlength="30" 
                        pattern="^[a-zA-Z ']+$"
-                       title="Enter first name">
+                       title="Enter first name (max 30 chars)">
 
                 <!----- Last Name ---------------------------------------------------------->
                 <label for="lastname">Last Name:</label>
@@ -122,14 +125,13 @@
                        value="<?php echo $LastName?>"
                        maxlength="30" 
                        pattern="^[a-zA-Z ']+$"
-                       title="Enter last name">
+                       title="Enter last name (max 30 chars)">
 
                 <!----- Address ---------------------------------------------------------->
                 <label for="address">Address:</label>
                 <input type="text" name="address" required autofocus
                        value="<?php echo $Address?>"
                        maxlength="50"
-                       pattern="^[a-zA-Z0-9 ']+$"
                        title="Enter home address">
 
                 <!----- City ---------------------------------------------------------->
@@ -137,13 +139,19 @@
                 <input type="text" name="city" required autofocus
                        value="<?php echo $City?>"
                        maxlength="30"
-                       pattern="^[a-zA-Z ']+$"
                        title="Enter home city (max 30 chars)">
 
-                <!----- State --------------------------------------------------------->
+                <!----- ZIP Code ---------------------------------------------------------->
+                <label for="zipcode">Zipecode:</label>
+                <input type="text" name="zipcode" required autofocus
+                       value="<?php echo $Zipcode?>"
+                       maxlength="5" 
+                       pattern="^[0-9]{5}$"                       
+                       title="Enter home zipcode">
+
+                <!----- State ---------------------------------------------------------->
                 <label for="state">State:</label>
                 <select id="state" name="state" required autofocus
-                        style="height: 30px"
                         title="Enter home state">
                     <!--<option value=""></option>-->
                     <option value="" disabled selected><?php echo $State?></option>
@@ -198,15 +206,7 @@
                     <option value="WV" <?php echo ($State == 'WV' ? 'selected' : '');?>>West Virginia</option>
                     <option value="WI" <?php echo ($State == 'WI' ? 'selected' : '');?>>Wisconsin</option>
                     <option value="WY" <?php echo ($State == 'WY' ? 'selected' : '');?>>Wyoming</option>
-                </select><br>
-
-                <!----- ZIP Code ------------------------------------------------------>
-                <label for="zipcode">Zipcode:</label>
-                <input type="text" name="zipcode" required autofocus
-                       value="<?php echo $Zipcode?>"
-                       maxlength="5" 
-                       pattern="^[0-9]{5}$"                       
-                       title="Enter home zipcode">
+                </select>
 
                 <!--Button Should reach out to php page and confirm user or admin access-->
                 <br>

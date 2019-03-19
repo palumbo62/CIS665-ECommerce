@@ -1,0 +1,354 @@
+/*
+Project Test Template
+Be Our Guest(BOG) Vacation Rentals
+
+Team: Kiana Vigil, Valerie Duran, Robert Palumbo
+Date: 2/25/2019
+
+Filename: HomeStyleSheet.css
+*/
+
+html {
+    height: 100%;
+    background-size: cover;
+}
+
+
+body, input, select, textarea {
+    color: #444;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: 400;
+    line-height: 1.65em;
+}
+
+
+a {
+    color: #383b43;
+    text-decoration: none;
+}
+
+    a:active, a:hover {
+        text-decoration: double;
+        color: deepskyblue;
+    }
+
+
+
+/* Header */
+
+#header {
+    background-color: #383b43;
+    color: #ffffff;
+    cursor: default;
+    font-size: 1.4em;
+    height: 6em;
+    line-height: 6em;
+    width: 100%;
+}
+
+    #header h2 {
+        position: center;
+    }
+
+    #header h1 {
+        color: #ffffff;
+        height: inherit;
+        left: 3em;
+        line-height: inherit;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+    }
+
+        #header h1 a {
+            font-size: 1.25em;
+        }
+
+    #header nav {
+        height: inherit;
+        line-height: inherit;
+        position: absolute;
+        right: 3em;
+        vertical-align: middle;
+    }
+
+        #header nav > ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+
+            #header nav > ul > li {
+                border-radius: 4px;
+                display: inline-block;
+                margin-left: 2em;
+                padding-left: 0;
+            }
+
+                #header nav > ul > li a {
+                    transition: color 0.2s ease-in-out;
+                    color: #ffffff;
+                    display: inline-block;
+                }
+
+                    #header nav > ul > li a:active, #header nav > ul > li a:hover {
+                        color: deepskyblue;
+                    }
+
+                #header nav > ul > li:first-child {
+                    margin-left: 0;
+                }
+
+#banner {
+    background-image: url(../images/dark_tint.png);
+    background-position: center center;
+    color: #ffffff;
+    padding: 1em 0em 1em;
+    text-align: center;
+}
+
+
+
+    #banner h2 {
+        color: #ffffff;
+        font-size: 4em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+    }
+
+    #banner p {
+        font-size: 1.0em;
+        margin-bottom: 1.0em;
+        color: gray;
+    }
+
+
+
+
+
+/* Banner */
+
+#secondbanner {
+    background-image: url(../images/dark_tint.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 1em 0em 1em;
+    text-align: center;
+    margin: 0px;
+}
+
+    #secondbanner form {
+        border: 10px solid #808080;
+        border-spacing: inherit;
+        position: center;
+        z-index: 1;
+        /*background-color: whitesmoke;*/
+        background-color: lightgray;
+        opacity: 0.8;
+        max-width: 500px;
+        margin: 15px auto 50px;
+        padding: 5px;
+        text-align: left;
+    }
+
+    #secondbanner h2 {
+        color: deepskyblue;
+        text-align: left;
+        /*padding: 0px;*/
+        font-size: 2em;
+        line-height: 1em;
+        margin-top: 0px;
+        margin-left: 230px;
+        padding-top: 0px;
+        padding: 0.1px;
+    }
+
+    #secondbanner h3 {
+        color: black;
+        padding: 50px;
+        font-size: 1.5em;
+        line-height: 1em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+    }
+
+    #secondbanner p {
+        font-size: 1.2em;
+        left: 60%;
+        color: black;
+    }
+
+    /** {
+    box-sizing: border-box;
+}*/
+
+
+#thirdbanner {
+    background-image: url(../images/dark_tint.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 1em 0em 14em;
+    text-align: center;
+}
+
+    #secondbanner h1 {
+        color: deepskyblue;
+        text-align: left;
+        /*padding: 0px;*/
+        font-size: 2em;
+        line-height: 1em;
+        margin-top: 0px;
+        margin-left: 230px;
+        padding-top: 0px;
+        padding: 0.1px;
+    }
+
+    #secondbanner h2 {
+        color: black;
+        padding: 50px;
+        font-size: 1.5em;
+        line-height: 1em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+    }
+
+    #secondbanner p {
+        font-size: 1.2em;
+        left: 60%;
+        color: black;
+    }
+
+
+
+
+
+    /* LIST STYLE*/
+
+
+    #secondbanner form > .article-list-vertical {
+        list-style: none;
+        margin-left: 60px;
+        /*margin:  auto;*/
+        max-width: 800px;
+        text-align: center;
+        padding: 0;
+    }
+
+        #secondbanner form > .article-list-vertical ul {
+            width: 600px;
+        }
+
+        #secondbanner form > .article-list-vertical li {
+            display: block;
+            box-sizing: border-box;
+            border-radius: 3px;
+            text-align: left;
+            box-shadow: 1px 3px 1px 0 rgba(0, 0, 0, 0.08);
+            border: 1px solid #cfcfcf;
+            overflow: hidden;
+            background-color: #fff;
+            font: normal 13px sans-serif;
+            margin-bottom: 8px;
+            max-width: 575px;
+        }
+
+            /* Article photo */
+
+            #secondbanner form > .article-list-vertical li > a {
+                float: left;
+                width: 200px;
+                height: 200px;
+                display: block;
+                background-size: cover;
+            }
+
+            #secondbanner form > .article-list-vertical li div {
+                float: left;
+                box-sizing: border-box;
+                max-width: 350px;
+                padding: 15px;
+            }
+
+                /* Article title */
+
+                #secondbanner form > .article-list-vertical li div h2 {
+                    font-size: 16px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin: 0;
+                }
+
+                    #secondbanner form > .article-list-vertical li div h2 a {
+                        color: #2b2b2b;
+                        text-decoration: none;
+                    }
+
+                /* Article excerpt */
+
+                #secondbanner form > .article-list-vertical li div p {
+                    line-height: 20px;
+                    color: #5d5d5d;
+                    margin: 20px 0;
+                }
+
+            #secondbanner form > .article-list-vertical li a.read-more {
+                background-color: #87bcd7;
+                cursor: pointer;
+                font-size: 12px;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 4px 8px;
+                border-radius: 2px;
+                margin: 20px 0;
+                font-weight: bold;
+            }
+
+@media (max-width: 600px) {
+
+    #secondbanner form > .article-list-vertical {
+        max-width: 350px;
+    }
+
+        #secondbanner form > .article-list-vertical li {
+            max-width: 325px;
+        }
+
+            #secondbanner form > .article-list-vertical li > a {
+                float: none;
+                width: 100%;
+            }
+
+            #secondbanner form > .article-list-vertical li div {
+                float: none;
+                padding: 30px;
+            }
+}
+
+
+
+/*Footer Styles*/
+
+footer {
+    /*border: 1px solid black;*/
+    background-color: dimgrey;
+    clear: left;
+    margin-top: 20px;
+    padding: 5px 0px;
+    bottom: 0;
+    width: 100%;
+    position: static;
+}
+
+    footer p {
+        color: dodgerblue;
+        font-style: normal;
+        font-size: 0.8em;
+        text-align: center;
+    }

@@ -26,7 +26,8 @@
     echo "REDIRECT='$redirect'  email='$email'  password='$password'  login='$login'<br>'";
     // if the form was submitted
 
-    if (isset($login)) {
+    if (isset($login))
+    {
         //Call bogLogin to validate the user credentials
         $userList = bogLogin($email, $password);
 

@@ -22,14 +22,14 @@
     
 //    echo "REDIRECT='$redirect'  regSubmit='$register'<br>";
     
-    if (isset($register)) {
-        // Set local variables from $_POST array elements 
+    if (isset($register))
+    {
+        // Set local variables to $_POST array elements 
 
-        $userId = -1; // if the add is successful then update with new ID below
-        $roletype = (isset($_POST['roletype'])) ? trim($_POST['roletype']) : '';
+        $roleType = (isset($_POST['roletype'])) ? trim($_POST['roletype']) : '';
         $email = (isset($_POST['email'])) ? trim($_POST['email']) : ''; 
         $password = (isset($_POST['password'])) ? trim($_POST['password']) : '';
-        $confpass = (isset($_POST['confpass'])) ? trim($_POST['confpass']) : '';
+        $passwordconf = (isset($_POST['passwordconf'])) ? trim($_POST['passwordconf']) : '';
         $firstName = (isset($_POST['firstname'])) ? trim($_POST['firstname']) : '';
         $lastName = (isset($_POST['lastname'])) ? trim($_POST['lastname']) : '';
         $address = (isset($_POST['address'])) ? trim($_POST['address']) : '';
@@ -40,31 +40,12 @@
         $ccNumber = -1;
         $ccExpDate = '';
         $ccCvc = -1;
-        
-        // Save the registration information to the session
+        $userId = -1; // if the add is successful then update with new ID below
 
-        $regInfo = array('userid'=>$userId, 'roletype'=>$roletype, 
-                        'email'=>$email, 'password'=>$password,
-                        'firstname'=>$firstName, 'lastname'=>$lastName,
-                        'address'=>$address, 'city'=>$city,
-                        'state'=>$state, 'zipcode'=>$zipcode,
-                        'phoneNumber'=>$phoneNumber, 'ccnumber'=>$ccNumber,
-                        'ccexpdate'=>$ccExpDate, 'cccvc'=>$ccCvc);
-
-        // Save the data to the session 
-        $_SESSION['regInfo'] = $regInfo;
-
-        // Ensure that the email is unique that is the key - this check is
-        // performed here to ensure the registration page retains it contents
-        if (bogVerifyEmail($email) != 1) {
-            alertRedirect(3, 'BogRegister.php', 
-                          "The chosen email address '$email' is already in use.");
-        }
-
-        if ($password == $confpass) {
+        if ($password == $passwordconf) {
             // Pull all the data from the POST array and call the SQL query
             // to add the registration to the database.
-            bogAddUserProf($roletype, $email, $password, $firstName, $lastName,
+            bogAddUserProf($roleType, $email, $password, $firstName, $lastName,
                             $address, $city, $state, (int)$zipcode, (int)$phoneNumber,
                             (int)$ccNum, $ccExpDate, (int)$ccCvc);
 
@@ -76,8 +57,17 @@
                 alertRedirect(3, 'BogRegiser.php', 
                               "User profile failed to be added to database!");
             } else {
-                // Successful registration - don't need this data saved anymore 
-                unset($_SESSION['regInfo']);
+                // Save the registration information to the session
+
+                $regInfo = array('UserPK'=>$userId, 'Role'=>$roleType, 
+                                'Email'=>$email, 'Password'=>$password,
+                                'FirstName'=>$firstName, 'LastName'=>$lastName,
+                                'Address'=>$address, 'City'=>$city,
+                                'State'=>$state, 'Zipcode'=>$zipcode,
+                                'PhoneNumber'=>$phoneNumber);
+
+                // Save the data to the session 
+                $_SESSION['regInfo'] = $regInfo;
 
                 //typically not required; ensures that the session data is store
                 session_write_close(); 
@@ -90,9 +80,5 @@
             alertRedirect(3, 'BogRegister.php', 
                           'Passwords do not match.  Please try again.');
         }
-    } else {
-        alertRedirect(3, 'BogHome.php', 
-                      'OOPS!  Something went wrong - contact the System Administrator!');
     }
-    
 ?>

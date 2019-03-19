@@ -14,26 +14,7 @@
         Database:  buscissql1601\cisweb\Team115DB
  */
 
-require_once ("..\phpCommon\bogDbConnExec.php");
-
-//*************************************************************
-// FUNCTION:    bogVerifyEmail
-//
-// PURPOSE:     Used to check if an email address already
-// exists within the database.
-// 
-//*************************************************************
-function bogVerifyEmail($email)
-{
-    // the SQL query to be executed on the database
-
-    $query = <<<STR
-exec fnBogVerifyEmail '$email';
-STR;
-   
-   // execute the query and return the result
-   return executeQuery($query);
-}
+require_once ("bogDbConnExec.php");
 
 //*************************************************************
 // FUNCTION:    bogLogin
@@ -165,19 +146,18 @@ STR;
 // PURPOSE:     Used to add a new property to the BOG system.
 //
 //*************************************************************
-function bogAddPropProf($proptype, $title, $address, $city, $state, 
-            $zipcode, $price, $numbeds, $numbaths,
-            $sqft, $guests, $pic, $imageName)
+function bogAddPropProf($propertyType, $address, $city, $state, 
+            $zipcode, $dailyPrice, $numBedrooms, $numBathrooms,
+            $sqft, $guestCnt, $pic)
 {
     // the SQL query to be executed on the database
 
     $query = <<<STR
-exec spBogAddPropProf $proptype, '$title', '$address', '$city', 
-    '$state', $zipcode, $price, $numbeds, $numbaths,
-     $sqft, $guests, $pic, '$imageName';
-            
+exec spBogAddPropProf $propertyType, '$address', '$city', 
+    '$state', $zipcode, $dailyPrice, $numBedrooms, 
+    $numBathrooms, $sqft, $guestCnt, '$pic';
 STR;
-
+   
     // execute the query and return the result
     return executeQuery($query);
 }
@@ -483,4 +463,3 @@ return executeQuery($query);
 }
 
 ?>
-

@@ -9,28 +9,35 @@
     
         Main entry point to the BOG website
 */ 
-    // this method call should be placed at the start (top) of every php file that uses session variables
+// this method call should be placed at the start (top) of every php file that uses session variables
+
     session_start();
+
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
+ 
+
+    // the session array element "userInfo" will be set (see d10loginform.php) if the user has been authenticated
 
     $userName = (isset($_SESSION['userInfo'])) ? $_SESSION['userInfo']['firstName'] : "";   
 
     if (!empty($userName)) {
         $tag = "Welcome back to BeOurGuest, $userName!";
     } else {
-        $tag = "Hello and welcome to BeOurGuest!";
+        $tag = "Hello, and welcome to BeOurGuest!";
     }
-    
-    displayPageHeader("..\cssStyles\homeCSS.css", $tag);
+
+    displayPageHeader("../cssStyles/homeCSS.css", $tag);
     displayHomePage();
 ?>
 
     <section id="banner">
+       
         <!-- Load icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
 
-        <h2>BeOurGuest</h2>
+        <h2>BeOurGuest(BOG)</h2>
 
         <p>
             We have a ride range of vacation homes
