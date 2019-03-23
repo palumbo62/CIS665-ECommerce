@@ -29,22 +29,14 @@
         $guestCnt = (isset($_POST['GuestCnt'])) ? trim($_POST['GuestCnt']) : '';        
         $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogHome.php';
  
-       if(isset($reserve)== !empty($userId)) {
-        $tag = "UserID='$userId' Search / Rent listing";
-             } else {
-         alertRedirect(3, 'BogLoginPage.php', 
+        if(isset($reserve)== !empty($userId)) {
+            $tag = "UserID='$userId' Search / Rent listing";
+        } else {
+            alertRedirect(3, 'BogLoginPage.php', 
                      'Must be logged in to make reservations.<br>'
                     . 'You will now be redirected to our Login page.');
-             };
+        };
              
-//               if (!empty($userId)) {
-//        $tag = "UserID='$userId' Search / Rent listing";
-//             } else {
-//         alertRedirect(3, 'BogLoginPage.php', 
-//                     'Must be logged in to make reservations.<br>'
-//                    . 'You will now be redirected to our Login page.');
-//             };
-        
         // Save the reservation information to the session
 
         $resInfo = array('propId'=>$propId, 'CheckIn'=>$checkInDate, 
@@ -54,32 +46,29 @@
         $_SESSION['resInfo'] = $resInfo;
 
         // Ensure that the reservation is available            
+        bogAddReservProf($propId, $userId, $checkinDate, $checkoutDate);
 
-         
-            bogAddReservProf($propId, $userId, $checkinDate, $checkoutDate);
+        // Check the result of the add operation
+        if (($errCode = bogGetLastErrorCode()) != 0) {
+            alertRedirect(3, 'BogRentalPage.php', 
+                        "Reservation failed to be added to BOG database, err'$errCode'");
+        } elseif (($userId = bogGetLastInsertId()) == -1) {
+            alertRedirect(3, 'BogRentalPage.php', 
+                        "Reservation failed to be added to BOG database. You will be redirected to the Reservation Page.");
+        } else {
+            // Successful reservation - don't need this data saved anymore 
+            unset($_SESSION['resInfo']);
 
-            // Check the result of the add operation
-            if (($errCode = bogGetLastErrorCode()) != 0) {
-                alertRedirect(3, 'BogRentalPage.php', 
-                              "Reservation failed to be added to BOG database, err'$errCode'");
-            } elseif (($userId = bogGetLastInsertId()) == -1) {
-                alertRedirect(3, 'BogRentalPage.php', 
-                              "Reservation failed to be added to BOG database. You will be redirected to the Reservation Page.");
-            } else {
-                // Successful reservation - don't need this data saved anymore 
-                unset($_SESSION['resInfo']);
+            //typically not required; ensures that the session data is store
+            session_write_close(); 
 
-                //typically not required; ensures that the session data is store
-                session_write_close(); 
-
-                // Redirect to the login page
-                alertRedirect(3, 'BogHomePage.php', 
-                              'Thank you for booking with us! You will now be redirected to our home page.');
-            }
-         
-            } else {
-                alertRedirect(3, 'BogHome.php', 
-                      'OOPS!  Something went wrong - contact the System Administrator!');
+            // Redirect to the login page
+            alertRedirect(3, 'BogHomePage.php', 
+                          'Thank you for booking with us! You will now be redirected to our home page.');
+        }
+    } else {
+        alertRedirect(3, 'BogHome.php', 
+                'OOPS!  Something went wrong - contact the System Administrator!');
     }
     
 ?>

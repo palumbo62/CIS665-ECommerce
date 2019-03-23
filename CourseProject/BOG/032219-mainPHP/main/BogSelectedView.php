@@ -1,3 +1,4 @@
+
 <?php
 /* 
     Class:          CIS665
@@ -13,6 +14,7 @@
 
     session_start();
 
+    require_once ("..\phpCommon\BogLibrary.php");
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
@@ -20,50 +22,112 @@
 
     // the session array element "userInfo" will be set (see d10loginform.php) if the user has been authenticated
 
-    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : "";   
+    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : '';   
+    $propId = $_GET['propId'];
 
     if (!empty($userId)) {
-        $tag = "UserID='$userId' Add new testimonial";
-    } else {
-        $tag = "UserID NOT Set";
+        $tag = "Listing Page Property ID '$propId";
+    } elseif (empty($propId)) {
+        alertRedirect(3, 'BogHome.php', 
+                      'OOPS!  Something went wrong - contact the System Administrator!');
     }
-
-  
      
     displayPageHeader("..\cssStyles\BOG_Style_Layout_All.css", $tag);
     displayTestimonialsPage();
 ?>
 
     <!-- Banner -->
-    <section id="bannerList"> 
+    <!--From val_reservation--->
+    <section id="bannerList">       
+        <h2>Selected View</h2> 
+        <button type="submit" onclick="location.href='BogRentalPage.php?propId=<?php echo $propId ?>';return false;">Reserve</button>
+        <button type="submit" onclick="location.href='BogViewReservation.php?propId=<?php echo $propId ?>';return false;">View Reservations</button>
+        <button type="submit" onclick="location.href='BogListings.php';return false;">Cancel</button>
+    </section>
+<!--    <section id="bannerList"> 
         <form action="BogRentalAction.php" method='post'>
         <h2>Selected View</h2>
         <button name="reserveSubmit" type="submit" value="reserve" onclick="location.href='BogRentalPage.php';return false;">Reserve</button>
         <button name="viewReserve" type="submit" value="reserve" onclick="location.href='BogViewReservation.php';return false;">View Reservation</button>
-<!--        <button type="reserveSubmit" onclick="location.href='BogRentalPage.php';return false;">Reserve</button>-->
-<!--        <button type="submit" onclick="location.href='BogViewReservation.php';return false;">View Reservations</button>-->
+        <button type="reserveSubmit" onclick="location.href='BogRentalPage.php';return false;">Reserve</button>
+        <button type="submit" onclick="location.href='BogViewReservation.php';return false;">View Reservations</button>
         </form>
-    </section>
+    </section>-->
+    
+    
+    <!--FROM Val_reservation--->
+    <?php     
+                
+    // get the details for rental
+
+    $propertyDetails = bogGetPropProfById($propId);
+
+    if (($errCode = bogGetLastErrorCode()) != 0) {
+        echo "Failed to retrieve property profile from database, err='$errCode'<br><br>";
+    } else if (count($propertyDetails) == 0) {
+        echo "Property profile for propId='$propId' not found!<br><br>";
+        var_dump($_GET);
+    } else if (count($propertyDetails) > 1) {
+        echo "Multiple property profiles for propId='$propId' found!<br><br>";
+    } else {
+        echo '<table id="PropProfiles">
+                            <thead>
+                                <tr>
+                                     <th>PropId</th>
+                                     <th>PropTypeId</th>
+                                     <th>Addr</th>
+                                     <th>City</th>
+                                     <th>State</th>
+                                     <th>Zip</th>
+                                     <th>Price</th>
+                                     <th>#Beds</th>
+                                     <th>#Baths</th>
+                                     <th>Sqft</th>               
+                                     <th>#Guest</th>               
+                                     <th>Pic</th>               
+                                     <th>Type</th>               
+                             </tr>
+                        </thead>
+                    <tbody>';
+
+
+
+
+
+        foreach ($propertyDetails as $details) {
+            echo '<tr>
+                       <td>' . $details['PropertyIdPK'] . '</td>
+                       <td>' . $details['PropertyTypeIdFK'] . '</td>
+                       <td>' . $details['Address'] . '</td>
+                       <td>' . $details['City'] . '</td>
+                       <td>' . $details['State'] . '</td>
+                       <td>' . $details['Zipcode'] . '</td>
+                       <td>' . $details['DailyPrice'] . '</td>
+                       <td>' . $details['NumBedrooms'] . '</td>
+                       <td>' . $details['NumBathrooms'] . '</td>
+                       <td>' . $details['SqFt'] . '</td>
+                       <td>' . $details['GuestCnt'] . '</td>
+                       <td>' . $details['Pic'] . '</td>
+                       <td>' . $details['PropertyTypeName'] . '</td>
+                   </tr>';
+        }
+
+        echo '</tbody> </table> </section>';
+
+        echo "<pre>";
+        print_r($propProfile);
+        echo "</pre >";
+    }
+    ?> 
     
     <section id="banner">
         <form action="BogTestimonials.php"  method="POST">
             <div class="containerComment">    
                 <label for="listingSelected">Title of Listing</label>
-                <p>This is where we need to connect the button with the title that
-                was selected. This might be tricky</p>
+                <p><?php echo $details['Address']  ?></p>
                 <br />
                 <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                
+           
                 <hr>
                 <label for="listingSelected">Reviews</label>
                 <p>This is where we will call from the data base of stored comments 

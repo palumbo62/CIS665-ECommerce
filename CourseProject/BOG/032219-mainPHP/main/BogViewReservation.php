@@ -13,22 +13,28 @@
 
     session_start();
 
+    require_once ("..\phpCommon\BogLibrary.php");
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
     echo '<section>';
 
     // the session array element "userInfo" will be set (see d10loginform.php) if the user has been authenticated
-
-    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : "";   
-
+    $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogLoginPage.php';
+    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : '';   
+    $propId = $_GET['propId'];
+    
     if (!empty($userId)) {
-        $tag = "UserID='$userId' Add new testimonial";
-    } else {
-        $tag = "UserID NOT Set";
-    }
+        $tag = "View Reservations - Property ID: $propId";
 
-  
+        if (empty($propId)) {
+            alertRedirect(3, 'BogLoginPage.php', 
+                      'OOPS!  Something went wrong - contact the System Administrator!');
+        }
+    } else {
+            alertRedirect(3, 'BogLoginPage.php', 
+                     'You must be logged in to view reservations. You will now be redirected to our Login page.');
+    }
      
     displayPageHeader("..\cssStyles\BOG_Style_Layout_All.css", $tag);
     displayTestimonialsPage();

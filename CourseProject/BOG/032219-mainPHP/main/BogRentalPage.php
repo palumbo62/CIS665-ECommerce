@@ -13,42 +13,36 @@
 
     session_start();
 
+    require_once ("..\phpCommon\BogLibrary.php");
     require_once ("..\phpCommon\BogSiteCommon.php");
     require_once ("..\sqlCommon\bogSql.php");
 
     echo '<section>';
 
     // the session array element "userInfo" will be set (see d10loginform.php) if the user has been authenticated
-
-    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : "";   
-
-    if (!empty($userId)) {
-        $tag = "UserID='$userId' Rent Property - page needs work!";
-    } else {
-        $tag = "UserID NOT Set";
-    }
-//        if (!empty($userId)) {
-//        $tag = "UserID='$userId' Rent Property - page needs work!";
-//    } else {
-//        alertRedirect(3, 'BogLoginPage.php', 
-//                     'Must be logged in to make reservations.<br>'
-//                    . 'You will now be redirected to our Login page.');
-//    }
-//    echo "userId='$userId'  propID='$propId', checkIn='$checkinDate', checkOut='$checkoutDate', guestCnt='$guestCnt'";
-//    $tag = "Reservation Page";
-    
-    
     $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogLoginPage.php';
+    $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : '';   
+    $propId = $_GET['propId'];
+    
+    if (!empty($userId)) {
+        $tag = "Listing Page - Property ID '$propId";
+
+        if (empty($propId)) {
+            alertRedirect(3, 'BogLoginPage.php', 
+                      'OOPS!  Something went wrong - contact the System Administrator!');
+        }
+    } else {
+            alertRedirect(3, 'BogLoginPage.php', 
+                     'You must be logged in to make reservations. You will now be redirected to our Login page.');
+    }
      
-     
-     
-     if (isset($_SESSION['resInfo'])) {
+    if (isset($_SESSION['resInfo'])) {
         $userId = $_SESSION['resInfo']['userId'];
         $propId = $_SESSION['resInfo']['propId'];
         $checkInDate = $_SESSION['resInfo']['checkIn'];
         $checkOutDate = $_SESSION['resInfo']['$checkOut'];
         $guestCnt = $_SESSION['resInfo']['$GuestCnt'];
-          }
+    }
 
     displayPageHeader("../cssStyles/BOG_Style_Layout_All.css", $tag);
     displayRentPropertyPage();
@@ -104,7 +98,7 @@ $(function() {
                 
                 <button name="reserveSubmit" type="submit" value="reserve">Reserve</button>
                 <button name="reserveReset" type="reset" value="reset">Reset</button>
-                <button type="button" onclick="location.href='BogHome.php';return false;">Cancel</button>
+                <button type="button" onclick="location.href='BogListings.php';return false;">Cancel</button>
             </div>         
            
         </form>

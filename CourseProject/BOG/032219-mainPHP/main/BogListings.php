@@ -23,33 +23,7 @@
 
     $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : '';   
 
-    if (!empty($userId)) {
-        $tag = "Current Property Listings";
-    } else {
-        $tag = "UserID NOT Set";
-    };
-    
-//    $reserve = $_POST['reserveSubmit'];
-//    
-////    echo "REDIRECT='$redirect'  regSubmit='$register'<br>";
-//    
-//    if (isset($reserve)) {
-//        // Set local variables from $_POST array elements 
-//        $userId = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['userId'] : "";   
-//        $propId= $_GET['propId']; 
-//        $checkInDate = (isset($_POST['CheckIn'])) ? trim($_POST['CheckIn']) : '';        
-//        $checkOutDate = (isset($_POST['CheckOut'])) ? trim($_POST['CheckOut']) : ''; 
-//        $guestCnt = (isset($_POST['GuestCnt'])) ? trim($_POST['GuestCnt']) : '';        
-//        $redirect = (isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 'BogHome.php';
-// 
-//       if(isset($reserve)== !empty($userId)) {
-//        $tag = "UserID='$userId' Search / Rent listing";
-//             } else {
-//         alertRedirect(3, 'BogLoginPage.php', 
-//                     'Must be logged in to make reservations.<br>'
-//                    . 'You will now be redirected to our Login page.');
-//             };
-    
+    $tag = "Current Property Listings";    
     $propMenu = null;
  
     $proptype = $_POST['proptype'];
@@ -61,7 +35,7 @@
     $city = preg_replace("/[^a-zA-Z0-9\s]/", '', $city);
     $zipcode = preg_replace("/[^a-zA-Z0-9\s]/", '', $zipcode);
     
-    //Call the bogSearchPropProfsByLoc method
+    // Retrieve the current listings from the database
 
     $displayListings = bogSearchPropProfsByLoc($proptype, $city, $state, $zipcode);
 
@@ -171,7 +145,7 @@
 
     <!-- Banner -->
     <section id="secondbannerList">
-        <form method="POST" action="BogListingAction.php">
+        <form method="post">
 
             <!---Vacation Listings-->
             <ul class="article-list-vertical">
@@ -180,7 +154,7 @@
                 <li>
                 <font color='#000000'/>
                     <?php echo              
-                        "  Property ID: " . $listing['PropertyIdPK'] .
+                        "<br>  Property ID: " . $listing['PropertyIdPK'] .
                         "<br>  Property Title: " . $listing["PropertyTitle"]. 
                         "<br>  Property Type: ".$listing["PropertyTypeName"] . "<br>" .
                         "<br>  Address: " . $listing["Address"]. " ". 
@@ -195,23 +169,20 @@
                             ? $listing['ImageName']
                             : 'default-house.jpg'; 
                     ?>
-                 
-                    <img src="<?php echo '../images/'.$imageName?>" />
+                    <input type="hidden" name="propId" value="<?php echo $listing['PropertyIdPK']?>" />;
 
-                    <h2><a href="RentalSelection.html"><?php echo $PropertyTitle; ?></a></h2><br />
-       
+                    <img src="<?php echo '../images/'.$imageName?>" />
                     <p>Description: <?php echo $listing['Description']?></p><br />
                     
                     <font color='#000000'/>
-                    <?php echo 'Price Per Night:  $' . $listing["DailyPrice"] ?>
+                    <?php echo 'Price Per Night:  $' . sprintf("%.2f",$listing["DailyPrice"]) ?>
                     
                     <br/>
                     <br/>
-<!--                     <button name="reserveSubmit" type="submit" value="reserve">Reserve</button>-->
-<!--                    <button name="reserveBtn" type="submit" onclick="location.href='BogRentalPage.php';return false;">Reserve</button>-->
-                    
-                    
-                </li>
+                    <?php echo $resvButton?>
+                    <button type="button" onclick="location.href='BogSelectedView.php?propId=<?php echo $listing['PropertyIdPK']?>';return false;">View</button>
+                    <button type="button" onclick="location.href='BogHome.php?propId=<?php echo $listing['PropertyIdPK']?>';return false;">Home Page</button>
+                 </li>
                 <?php } ?>
             </ul>      
         </form>
