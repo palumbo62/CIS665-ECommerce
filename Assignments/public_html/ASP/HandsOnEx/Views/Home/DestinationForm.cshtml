@@ -1,0 +1,47 @@
+﻿
+@model SBDestination
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Desintation Form</title>
+</head>
+
+<body style="font-size: x-large">
+    <form asp-action="DestinationForm" method="post">
+
+        <p>
+            <label asp-for="Name">Your Name:</label>
+            <input asp-for="Name" />
+        </p>
+
+        <p>
+            <label asp-for="Destination">Where did you go?:</label>
+            <input asp-for="Destination" />
+        </p>
+
+        <p>
+            <label asp-for="Cost">How much did it cost?</label>
+            <input asp-for="Cost" />
+        </p>
+        <p>
+            <label asp-for="TravelMode">How did you get there?</label>
+            <select asp-for="TravelMode">
+                <option value="">Choose an option</option>
+                <option value="road">By Road</option>
+                <option value="train">By Train</option>
+                <option value="air">By Air</option>
+            </select>
+        </p>
+
+        <input type="submit" value="Submit Form" />
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿@*
+    Demo 1 - MVC Basics; LV
+*@
+
+@*the ListenerRequest class is used to build a strongly-typed view*@
+
+@model Demo1.Models.ListenerRequest
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Song Request Form</title>
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="card">
+        <div class="card-title bg-success text-center">
+            <h4>Request a Song</h4>
+        </div>
+        <div class="card-body">
+            <form class = "p-3" asp-action=" SongForm" method="post">
+                @*the asp-validation-summary attribute is set to display all validation errors*@
+                <div asp-validation-summary="All"></div>
+                <div class="form-group">
+                    <label asp-for="SongTitle">Song Title:</label>
+                    <input asp-for="SongTitle" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ArtistName">Artist:</label>
+                    <input asp-for="ArtistName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ListenerName">Your Name:</label>
+                    <input asp-for="ListenerName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Your Email:</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>How do you listen to us?</label>
+                    <select asp-for="HowListen" class="form-control">
+                        <option value="">Choose an option</option>
+                        <option value="radio">Radio</option>
+                        <option value="online">Online</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="smart">Smart Device</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">Make a Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

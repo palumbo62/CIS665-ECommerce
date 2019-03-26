@@ -1,0 +1,44 @@
+﻿@*
+    Demo 1 - MVC Basics; LV
+*@
+@model IEnumerable<Demo1.Models.ListenerRequest>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Song Requests</title>
+</head>
+<body>
+    <div class="card-body">
+        <h2>
+            Here is the list of songs requested
+        </h2>
+
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Song Title</th>
+                    <th>Artist Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ListenerRequest r in Model)
+                {
+                    <tr>
+                        <td>@r.SongTitle</td>
+                        <td>@r.ArtistName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-primary" asp-action="SongForm">Make another Request</a>
+    </div>
+</body>
+</html>

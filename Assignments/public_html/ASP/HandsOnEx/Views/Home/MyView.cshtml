@@ -1,0 +1,28 @@
+﻿
+@Model SBDesinationForm
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyView</title>
+</head>
+<body style="font-size: x-large">
+    <h2>Look Pa, I can use a Razor View!</h2>
+
+    <!--Razor expression to access ViewBag which is C# code -->
+    <!--// This is dynamic properties -->
+    <h3>@ViewBag.Message</h3> 
+    <h4>Where did yo go?</h4>
+
+    <!-- asp-action handles all path resolutions etc. -->
+    <a asp-action="DestinationForm" >Give us the scoop</a>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@*
+    Demo 1 - MVC Basics; LV
+*@
+
+@*the domain model type used to strongly type this view*@
+
+@model Demo1.Models.ListenerRequest
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanks</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <p>
+        <h1>
+            Thank you, @Model.ListenerName!
+        </h1>
+        
+        @if (Model.HowListen == "radio")
+        {
+            @:Crank up that old radio!
+
+        }
+        else if (Model.HowListen == "online")
+        {
+            @:How is multi-tasking working out for you?
+
+        }
+        else if (Model.HowListen == "mobile")
+        {
+            @:We'll keep you on the move. Watch the road please!
+
+        }
+        else
+        {
+            @:Smart and hip - just what our advertisers ordered!
+
+        }
+    </p>
+    Click<a class="nav-link" asp-action="ListRequests">here</a>to see a list of requested songs.
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@*
+    Demo 2 - C# Review; LV
+*@
+
+@model IEnumerable<string>
+
+@{Layout = null;}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo 2 - C# Language Features</title>
+</head>
+<body style="font-size:xx-large">
+    
+    @*display each string as a list item*@
+
+    <ul>
+        @foreach (string s in Model)
+        {
+            <li>@s</li>
+        }
+    </ul>
+</body>
+</html>
