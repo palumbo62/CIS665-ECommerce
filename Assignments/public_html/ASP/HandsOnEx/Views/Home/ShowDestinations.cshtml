@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@* We want the repo for the destination to display with foreach etc*@
+@model IEnumerable<SBDestination>
+
+@{
+    Layout = null;
+}
+
+@* Create the View HTML *@
+
+@*Modified to support BootStrap CSS*@
+
+<html>
+<head>
+    @* Viewport defines what the user sees abased on the device they are using *@
+    <meta name="viewport" content="width=device-width" />
+    <title>Show Destinations</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+
+<body style="font-size=x-large">
+    <div class="card-body">
+        <h2>List of Destinations</h2>
+
+        @* Put the list into a table *@
+        <table class="table table-sm table-striped table-bordered" >
+            <thead>
+                <tr>
+                    <th>Name</th> 
+                    <th>Destination</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* display the list here*@
+                @foreach (SBDestination d in Model)  {
+                    <tr>
+                        <td>@d.Name</td>
+                        <td>@d.Destination</td>
+                        <td>@d.Cost</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @* Add button to allow user to add more destinations
+        Don't forget to go back to the HomeController and create
+        the link to respond to the request when a ShowDestinations
+        is received
+        *@
+        <a asp-action="DestinationForm" class="btn btn-primary">Submit another destination?</a>
+    </div>
+</body>
+</html>

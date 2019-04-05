@@ -16,12 +16,7 @@ package com.cis665.demo;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.annotation.PostConstruct;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +30,6 @@ public class IocDemoController {
     private static final String template = "IocDemo: [%s]";
     private final AtomicLong counter = new AtomicLong();
     
-	@Autowired
-	Logger log;
-	
 	// Define the build processor object reference which is where
 	// dependency injection will occur.  If an instance of an
 	// IIocBuildProcessor exists within the environment it will
@@ -49,26 +41,20 @@ public class IocDemoController {
 	@Autowired
 	IIocBuildProcessor buildProcessor;
 	
-	@PostConstruct
-	private void postInit() {
-		log.info("Controller has been started...");
-	}
-
-
-	// HTTP Get requests for a 'heartbeat' response are
+	// HTTP Get requests for a build-processor 'submit' response are
 	// routed to this method for processing.  In this very
 	// simple case demonstrating how dependency injection can
-	// application development, the heart response from the
+	// application development, the 'submit' response from the
 	// configured build processor is returned as just a text
-	// based message and a status of "OK" is provided in 
-	// response.
+	// based message with a time-stamp to signal the request has
+	// been processed.
     @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/Heartbeat")
+            method = RequestMethod.POST,
+            value = "/BuildResponse")
     @ResponseBody
-    public IocHeartbeatResp heartbeat() throws Exception {
-    	return new IocHeartbeatResp(counter.incrementAndGet(),
-                String.format(template, buildProcessor.heartBeat()));
+    public IoCBuildResponse buildProcResponse() throws Exception {
+    	return new IoCBuildResponse(counter.incrementAndGet(),
+                String.format(template, buildProcessor.submit()));
     }
 }
 

@@ -17,8 +17,7 @@ package com.cis665.demo.BuildProcessor;
 
 public interface IIocBuildProcessor {
 	
-	// Method used to indicate a 'heart-beat' action to periodically
-	// test if the build processor is alive
-	String heartBeat();
+	// Method used to "submit" a build request to the build processor.
+	String submit();
 	
 }

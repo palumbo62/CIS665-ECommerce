@@ -1,0 +1,52 @@
+﻿@* This view will reeive an Employee model for a single employee
+
+    @model needs to know the type of data to use*@
+
+@*Can only have 1 model per view so comment out the orginal*@
+@*@model Employee;*@
+
+@*Array of employees*@
+@model Employee[];
+
+
+@{
+    ViewData["Title"] = "Empoyee Info";
+    Layout = "~/Views/Shared/_HOE3Layout.cshtml";
+
+    //Or just use Layout="_HOE3Layout" and it will find it in the shared folder autoomatically
+}
+
+@*<h1>index</h1>
+
+    @*All of these use the object nullable check*@
+@*<p>Employee Name: @Model?.Name </p>
+    <p>Department: @Model?.Department</p>
+    <p>Salary: @($"{Model?.Salary:c0}")</p>*@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employees</title>
+</head>
+<body style="font-size: large">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Employee e in Model)
+            {
+                <tr>
+                    <td>@e?.Name</td>
+                    <td>@($"{e?.Salary:c0}")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -32,8 +32,8 @@ public class IocBuildProcessTest implements IIocBuildProcessor {
 	protected Logger log;
 	
 	@Override
-	public String heartBeat() {
-		String hbMsg = "TEST-SERVER ==> build-processor heartbeat response: Tmstmp='" +  LocalDateTime.now() + "'";
+	public String submit() {
+		String hbMsg = "TEST-SERVER ==> build-processor response: Tmstmp='" +  LocalDateTime.now() + "'";
 		log.info(hbMsg);
 		
 		return hbMsg;		

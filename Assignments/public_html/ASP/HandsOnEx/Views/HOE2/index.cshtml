@@ -1,0 +1,30 @@
+﻿@*This view expects a list collection that we can iterate over 
+coming from Employee*@
+
+@model IEnumerable<string>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>C# Features</title>
+</head>
+<body style="font-size: large">
+
+    <ul>
+        @*Razor code here*@
+        @foreach (string s in Model)
+        {
+            <li>
+                @*Display the current string object from the list*@
+                @s
+            </li>
+        }
+    </ul>
+</body>
+</html>

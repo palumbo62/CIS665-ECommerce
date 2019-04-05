@@ -1,28 +1,25 @@
 ﻿
-@Model SBDesinationForm
-
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
+@*Modified to support BootStrap CSS*@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>MyView</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
-<body style="font-size: x-large">
-    <h2>Look Pa, I can use a Razor View!</h2>
+<body style="font-size:x-large">
+    <div class="text-center">
 
-    <!--Razor expression to access ViewBag which is C# code -->
-    <!--// This is dynamic properties -->
-    <h3>@ViewBag.Message</h3> 
-    <h4>Where did yo go?</h4>
+        <h2>Look Pa, I can use a Razor View</h2>
+        <h3>@ViewBag.Message</h3>
+        <h4>Where did you go?</h4>
+        <a class="btn btn-primary" asp-action="DestinationForm">Give us the scoop</a>
 
-    <!-- asp-action handles all path resolutions etc. -->
-    <a asp-action="DestinationForm" >Give us the scoop</a>
-
-
+    </div>
 </body>
 </html>

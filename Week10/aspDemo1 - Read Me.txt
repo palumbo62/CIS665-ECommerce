@@ -1,0 +1,11 @@
+Extract the files from aspDemo1.zip.
+
+Create a new ASP.Net Core Web Application Project within your ASP folder.  Call the project, Demo1.
+
+Add styles.css to the wwwroot/css folder.
+
+Replace HomeController.cs in the Controllers folder.
+
+Add ListenerRequest.cs and ListenerRequestList.cs to the Models folder.
+
+Add ListRequests.cshtml, MyView.cshtml, SongForm.cshtml, and Thanks.cshtml to the Views/Home folder.

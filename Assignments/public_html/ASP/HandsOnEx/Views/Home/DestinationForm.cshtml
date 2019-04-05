@@ -1,37 +1,39 @@
-﻿
-@model SBDestination
-
+﻿@model SBDestination
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
+@*Modified to support BootStrap CSS*@
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Desintation Form</title>
+    <title>Destination Form</title>
+    <link href="~/css/ErrorStyles.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
-
 <body style="font-size: x-large">
-    <form asp-action="DestinationForm" method="post">
-
-        <p>
+    <form asp-action="DestinationForm" method="post" class="p-3">
+        @* Tag helper required for showing any errors detected for this
+        view by our defined validation
+        *@
+        <div asp-validation-summary="All"></div>
+        <p class="form-group">
             <label asp-for="Name">Your Name:</label>
             <input asp-for="Name" />
         </p>
-
-        <p>
-            <label asp-for="Destination">Where did you go?:</label>
+        <p class="form-group">
+            <label asp-for="Destination">Where did you go?</label>
             <input asp-for="Destination" />
         </p>
-
-        <p>
+        <p class="form-group">
             <label asp-for="Cost">How much did it cost?</label>
             <input asp-for="Cost" />
         </p>
-        <p>
-            <label asp-for="TravelMode">How did you get there?</label>
+        <p class="form-group">
+            <label asp-for="TravelMode">How did your get there?</label>
             <select asp-for="TravelMode">
                 <option value="">Choose an option</option>
                 <option value="road">By Road</option>
@@ -39,9 +41,11 @@
                 <option value="air">By Air</option>
             </select>
         </p>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit Form</button>
+        </div>
 
-        <input type="submit" value="Submit Form" />
-
+        @*<input type="submit" value="Submit Form" />*@
     </form>
 </body>
 </html>

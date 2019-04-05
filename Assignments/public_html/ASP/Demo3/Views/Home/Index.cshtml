@@ -1,0 +1,95 @@
+﻿@*
+    Demo 3 - Razor Basics; LV
+
+    Views are used to format and present content to the user
+
+    Avoid using views to perform business logic or process data (it is a controller's job to get and modify the data required by a view)
+*@
+
+@*
+    the @model directive specifies the type of object that will passed to this view from the action method in the controller class
+
+    makes the view, a strongly-typed view
+*@
+
+@*@model Car*@
+
+@model Car[]
+
+@* a Razor layout file contains the common elements that are shared by multiple views *@
+
+@* this is an example of a Razor code block *@
+
+@{
+    Layout = "_BasicLayout";
+    ViewBag.Title = "Car Info";
+}
+
+<div class="text-center">
+
+    @* this is an example of a Razor expression used to insert data into the html markup *@
+
+    @*<p>Car Manufacturer: @Model.CarManufacturer</p>
+    <p>Car Model: @Model.CarModel</p>
+    <p>Car Price: @($"{Model.CarPrice:c2}")</p>*@
+
+    @*a conditional (switch) Razor statement *@
+
+    <p>
+        Inventory:
+        @switch (ViewBag.Inventory)
+        {
+            case 0:
+
+                //the @: character prevents Razor from interpreting this as a C# statement
+
+                @: None on our lot
+                break;
+            case 1:
+            case 2:
+                <b>Running low on inventory (@ViewBag.Inventory) in stock</b>
+                break;
+            default:
+                @: @ViewBag.Inventory in stock
+                break;
+        }
+    </p>
+
+    @*a conditional (if) Razor statement *@
+
+    <p>
+        Inventory:
+        @if (ViewBag.Inventory == 0)
+        {
+            @: We are all out
+        }
+        else if (ViewBag.Inventory > 0 && ViewBag.Inventory < 3)
+        {
+            <b>Get them while you can, only (@ViewBag.Inventory) in stock</b>
+        }
+        else
+        {
+            @: @ViewBag.Inventory in stock
+        }
+    </p>
+    
+    @*an iteration (foreach) Razor statement*@
+
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Car c in Model)
+            {
+                <tr>
+                    <td>@c.CarModel</td>
+                    <td>@($"{c.CarPrice:c0}")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

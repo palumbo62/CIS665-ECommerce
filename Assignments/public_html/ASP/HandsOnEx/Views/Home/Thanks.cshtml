@@ -1,0 +1,42 @@
+﻿@model SBDestination;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@*Modified to support BootStrap CSS*@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanks</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="font-size: x-large" class="text-center">
+    <h1>Thank you, @Model.Name</h1>
+
+    @*Razor block example*@
+
+    <p>
+
+        @*Embedded C#*@
+        @if (Model.TravelMode == "road") {
+            // Like PHP echo command
+            @: On the Road Again?
+        } else if (Model.TravelMode == "train") {
+            @: On the Taggert Transcontinental Express?
+        } else {
+            @: Fly like an Eagle?
+        }
+
+        @*Asp-action to show a new View*@
+
+        <br /><br />
+        Click <a asp-action="ShowDestinations">here</a> to see all the destinations.
+
+    </p>
+
+</body>
+</html>

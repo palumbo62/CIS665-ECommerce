@@ -1,0 +1,13 @@
+Extract the files from aspDemo3.zip.
+
+Create a new ASP.Net Core Web Application Project within your ASP folder.  Call the project, Demo3.
+
+Replace HomeController.cs in the Controllers folder.
+
+Add Car.cs to the Models folder.
+
+Replace Index.cshtml in the Views/Home folder.
+
+Add _BasicLayout.cshtml to the Views/Shared folder.
+
+Replace _ViewImports.cshtml and _ViewStart.cshtml in the Views folder
