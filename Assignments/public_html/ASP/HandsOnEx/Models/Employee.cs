@@ -33,10 +33,10 @@ namespace HandsOnEx.Models
 
         // For demoing only we are puttint everything in the class
         public static Employee[] GetEmployees() {
-            Employee robert = new Employee { Name = "robert palumbo", Department = "Executive", Salary = 250000 };
-            Employee christian = new Employee { Name = "christian palumbo", Department = "R&D", Salary = 150000 };
-            Employee nat = new Employee { Name = "natalie palumbo", Department = "HR", Salary = 130000 };
-            Employee alex = new Employee { Name = "alex palumbo", Department = "Finance", Salary = 150000 };
+            Employee robert = new Employee { Name = "Robert Palumbo", Department = "Executive", Salary = 250000 };
+            Employee christian = new Employee { Name = "Christian Palumbo", Department = "R&D", Salary = 150000, IsFullTime = false};
+            Employee nat = new Employee { Name = "Natalie Palumbo", Department = "HR", Salary = 130000 };
+            Employee alex = new Employee { Name = "Alex Palumbo", Department = "Finance", Salary = 150000, IsFullTime = false};
 
 
             return new Employee[] { robert, christian, nat, alex, null};

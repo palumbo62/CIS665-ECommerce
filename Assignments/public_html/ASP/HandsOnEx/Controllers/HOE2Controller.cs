@@ -36,13 +36,13 @@ namespace HandsOnEx.Controllers
 
             // Anonymous type example - we commented out the return  View(results) to show this
             //    data type is inferrred from the actual data - which are strings
-            var departments = new[] { "IT", "HR", "Accounting", "Shipping", "Production" };
+            //var departments = new[] { "IT", "HR", "Accounting", "Shipping", "Production" };
 
             // Model just expects a collection of strings so this should be fine.
-            return View(departments);
+            //return View(departments);
 
             // Pass our results list on to the View so it can be rendered - this is the original return value
-            //return View(results);
+            return View(results);
         }
     }
 }
