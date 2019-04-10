@@ -1,0 +1,4 @@
+Scaffold-DbContext "Server=buscissql1601\cisweb;Database=TaraStore;User ID=csu;Password=rams;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables Product,SubCategory,Category
+
+
+Scaffold-DbContext "Server=buscissql1601\cisweb;Database=Team115DB;User ID=exposed;Password=source;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables CommentsT,PropertyT,PropertyTypeT,ReservationT,RolesT,UserT

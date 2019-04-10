@@ -1,0 +1,45 @@
+﻿@model BogAddProperty;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanks</title>
+</head>
+<body style="font-size: large">
+    <h1>Property has been added. @Model.</h1>
+
+    @*Razor block example*@
+
+    <p>
+
+        @*Embedded C#*@
+        @if (true)
+        {
+            @: @Model.address
+            @: @Model.city
+            @: @Model.state
+            @: @Model.zipcode
+            @: @Model.dailyPrice
+            @: @Model.numBeds
+            @: @Model.numBaths
+            @: @Model.guestCnt
+            @: @Model.imageFname
+            @: @Model.imageFname
+            @: @Model.imageFname
+        }
+
+        @*Asp-action to show a new View*@
+
+        <br /><br />
+        Click <a asp-action="BogAddProperty">here</a> to add another another property.
+
+    </p>
+
+</body>
+</html>
