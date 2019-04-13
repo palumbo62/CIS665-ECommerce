@@ -1,4 +1,4 @@
-﻿@model BogHomeSearch;
+﻿@model BogLoginCreds;
 
 @{
     Layout = null;
@@ -9,29 +9,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Bog Home Search</title>
 </head>
 <body style="font-size: large">
-    <h1>Search for Poperties</h1>
-
     @*Razor block example*@
 
     <p>
-
         @*Embedded C#*@
-        @if (true)
+        @if (Model.valid())
         {
-            @: @Model.propertyType
-            @: @Model.city
-            @: @Model.state
-            @: @Model.zipcode
+            @: Login was successful! You will now be redirected to the home page.
+        }
+        else
+        {
+            @: Login was not successful.  Please try again.
         }
 
-
-        @*Asp-action to show a new View*@
-
         <br /><br />
-        Click <a asp-action="BogHome">here</a> to return to the Home Page.
+        Click <a asp-action="Register">here</a> to add another user.
 
     </p>
 

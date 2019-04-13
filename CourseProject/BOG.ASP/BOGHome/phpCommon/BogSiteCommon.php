@@ -114,7 +114,7 @@ STR;
                           <a href="BogDelProperty.php">Delete Property</a>
                         </div>
                       </div> 
-                    <li>';
+                    </li>';
     } elseif ($roleType == 2) {
         // Registered user
         $output .= '<li><a href="BogUserProfile.php">Account</a></li>';

@@ -56,7 +56,7 @@ namespace BOG.ASP
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+                    name: "Default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

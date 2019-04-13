@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Libs - Copy\**" />
+    <Content Remove="Libs - Copy\**" />
+    <EmbeddedResource Remove="Libs - Copy\**" />
+    <None Remove="Libs - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\fonts\css\font-awesome.css" />
     <None Include="wwwroot\fonts\css\font-awesome.min.css" />
     <None Include="wwwroot\fonts\fonts\fontawesome-webfont.eot" />

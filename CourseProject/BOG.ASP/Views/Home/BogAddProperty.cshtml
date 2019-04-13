@@ -1,18 +1,16 @@
-﻿@model BogAddProperty
+﻿@model PropertyT
 
 @{
     Layout = null;
+    ViewData["Title"] = "BeOurGuest - Add Property";
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Bog Add Property</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-</head>
-<body>
+<body style="font-size:12pt">
+    <partial name="_BogHeaderView" />
+
     <section id="bannerList">
         <h2>Add Property</h2>
     </section>
@@ -24,8 +22,8 @@
 
                 <!--dynamic menu option for property type-->
                 <p>
-                    <label class="BogLabel" asp-for="propType">Property Type:</label>
-                    <select class="BogInput" asp-for="propType" id="proptype" required>
+                    <label class="BogLabel" asp-for="PropertyTypeIdFk">Property Type:</label>
+                    <select class="BogInput" asp-for="PropertyTypeIdFk" id="proptype" required>
                         <option value="" disabled selected>Property Type</option>;';
                         <option value="1">Home</option>
                         <option value="2">Cabin</option>
@@ -35,24 +33,24 @@
                         <option value="6">Cottage</option>
 
                         @*<?php
-                                        $proptypes = bogGetPropertyTypes();
+                                                    $proptypes = bogGetPropertyTypes();
 
-                                        foreach ($proptypes as $proptype) {
-                                        extract($proptype);
-                                        $output .= <<
-                                        <HTML
-                                            <option value="$PropertyTypeIdPK">$PropertyTypeName</option>
-                HTML;
-                                        }
-                                        echo "$output<br>";
-                                    ?>*@
+                                                    foreach ($proptypes as $proptype) {
+                                                    extract($proptype);
+                                                    $output .= <<
+                                                    <HTML
+                                                        <option value="$PropertyTypeIdPK">$PropertyTypeName</option>
+                            HTML;
+                                                    }
+                                                    echo "$output<br>";
+                                                ?>*@
                     </select>
                 </p>
 
                 <!----- Listing Title -------------------------------------------------->
                 <p>
-                    <label class="BogLabel" asp-for="title">Listing Title:</label>
-                    <input class="BogInput" type="text" asp-for="title" required
+                    <label class="BogLabel" asp-for="PropertyTitle">Listing Title:</label>
+                    <input class="BogInput" type="text" asp-for="PropertyTitle" required
                            maxlength="50"
                            size="50"
                            pattern="^[a-zA-Z '!?.]{1,50}$"
@@ -61,8 +59,8 @@
 
                 <!----- Address -------------------------------------------------------->
                 <p>
-                    <label class="BogLabel" asp-for="address">Address:</label>
-                    <input class="BogInput" type="text" asp-for="address" required
+                    <label class="BogLabel" asp-for="Address">Address:</label>
+                    <input class="BogInput" type="text" asp-for="Address" required
                            maxlength="50"
                            size="50"
                            pattern="^[a-zA-Z0-9 '.]{1,30}$"
@@ -71,8 +69,8 @@
 
                 <!----- City ---------------------------------------------------------->
                 <p>
-                    <label class="BogLabel" asp-for="city">City:</label>
-                    <input class="BogInput" type="text" asp-for="city" required
+                    <label class="BogLabel" asp-for="City">City:</label>
+                    <input class="BogInput" type="text" asp-for="City" required
                            maxlength="30"
                            size="30"
                            pattern="^[a-zA-Z '.]+$"
@@ -81,8 +79,8 @@
 
                 <!----- State ---------------------------------------------------------->
                 <p>
-                    <label class="BogLabel" asp-for="state">State:</label>
-                    <select class="BogInput" id="state" asp-for="state"
+                    <label class="BogLabel" asp-for="State">State:</label>
+                    <select class="BogInput" id="state" asp-for="State"
                             title="Select state">
                         <option value="" disabled selected="">Select listing state</option>
                         <option value="AL">Alabama</option>
@@ -141,8 +139,8 @@
 
                 <!----- ZIP Code ---------------------------------------------------------->
                 <p>
-                    <label class="BogLabel" asp-for="zipcode">Zipcode:</label>
-                    <input class="BogInput" type="text" asp-for="zipcode" required
+                    <label class="BogLabel" asp-for="Zipcode">Zipcode:</label>
+                    <input class="BogInput" type="text" asp-for="Zipcode" required
                            maxlength="5"
                            size="5"
                            pattern="^[0-9]{5}$"
@@ -152,8 +150,8 @@
                 <hr>
 
                 <p>
-                    <label class="BogLabel" asp-for="dailyPrice">Daily Price: $</label>
-                    <input class="BogInput" type="number" asp-for="dailyPrice" id="price" required
+                    <label class="BogLabel" asp-for="DailyPrice">Daily Price: $</label>
+                    <input class="BogInput" type="number" asp-for="DailyPrice" id="price" required
                            maxlength="8"
                            size="8"
                            min="0.01" step="0.01" max="99999.99"
@@ -163,8 +161,8 @@
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="numBeds">Bedrooms:&nbsp;</label>
-                    <input class="BogInput" type="number" asp-for="numBeds" id="numbeds" required
+                    <label class="BogLabel" asp-for="NumBedrooms">Bedrooms:&nbsp;</label>
+                    <input class="BogInput" type="number" asp-for="NumBedrooms" id="numbeds" required
                            maxlength="3"
                            size="3"
                            min="0" max="50"
@@ -174,8 +172,8 @@
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="numBaths">Bathrooms:&nbsp;</label>
-                    <input class="BogInput" type="number" asp-for="numBaths" id="numbaths" required
+                    <label class="BogLabel" asp-for="NumBathrooms">Bathrooms:&nbsp;</label>
+                    <input class="BogInput" type="number" asp-for="NumBathrooms" id="numbaths" required
                            maxlength="3"
                            size="3"
                            min="0" max="50"
@@ -185,8 +183,8 @@
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="guestCnt">Sleeps:&nbsp;</label>
-                    <input class="BogInput" type="number" asp-for="guestCnt" id="guestcnt" required
+                    <label class="BogLabel" asp-for="GuestCnt">Sleeps:&nbsp;</label>
+                    <input class="BogInput" type="number" asp-for="GuestCnt" id="guestcnt" required
                            maxlength="3"
                            size="3"
                            min="0" max="50"
@@ -196,8 +194,8 @@
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="sqft">Square Footage:&nbsp;</label>
-                    <input class="BogInput" type="number" asp-for="sqft" id="sqft"
+                    <label class="BogLabel" asp-for="SqFt">Square Footage:&nbsp;</label>
+                    <input class="BogInput" type="number" asp-for="SqFt" id="sqft"
                            value="0"
                            maxlength="5"
                            size="5"
@@ -208,16 +206,16 @@
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="propDesc">Description:&nbsp;</label>
-                    <textarea class="BogInput" asp-for="propDesc" rows="5" cols="50"
+                    <label class="BogLabel" asp-for="Description">Description:&nbsp;</label>
+                    <textarea class="BogInput" asp-for="Description" rows="5" cols="50"
                               pattern="^[a-zA-Z0-9 '!?.]{1,250}$"
                               value=""
                               title="Enter a description for this listing"></textarea>
                 </p>
 
                 <p>
-                    <label class="BogLabel" asp-for="imageFname">Image File:&nbsp;</label>
-                    @*<input class="BogInput" type="file" asp-for="imageFname" id="imagename" maxlength="50" />*@
+                    <label class="BogLabel" asp-for="ImageName">Image File:&nbsp;</label>
+                    @*<input class="BogInput" type="file" asp-for="ImageName" id="imagename" maxlength="50" />*@
                 </p>
 
                 <!--Button Should reach out to php page and confirm user or admin access-->
@@ -229,6 +227,9 @@
             </div>
         </form>
     </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
 
 </body>
 </html>

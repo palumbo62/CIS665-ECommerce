@@ -139,7 +139,7 @@
                 </select>
             
                 <label for="Zipcode" >Zipcode</label>
-                <input type="text" placeholder="Zipcode" name="Zipcode"
+                <input type="text" placeholder="Zipcode" name="zipcode"
                        value="<?php echo $zipcode?>"> 
             
                 <button name="propSearch" type="submit" value="search">

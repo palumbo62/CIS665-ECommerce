@@ -133,39 +133,29 @@ footer {
         font-size: 1.0em;
         text-align: center;
     }
-/*------------------BASICS/HEADER/FOOTER SECTION--------------------------*/
-/*---------------------------STANDARD CSS STYLE AND LAYOUT FOR ALL WEB PAGES ---------------------------*/
-/*END*/
-                
-                
-                
-                
-                
- /*---------------------------                 CUSTOMIZED SETTINGS PER PAGE           ---------------------------*/               
-               
                 
  /*---------------------------HOME PAGE-------------------------------*/               
      /* BannerHome */
 
 #bannerHome {
-        background-image: url(../images/BOGhouseBanner.jpg);
-        background-position: center center;
-        background-size: cover;
-        color: white;
-        padding: 14em 0 14em;
-        text-align: center;
-        width: 100%;
-        
-    }
+    background-image: url(../images/BOGhouseBanner.jpg);
+    background-position: center center;
+    background-size: cover;
+    color: white;
+    padding: 14em 0 14em;
+    text-align: center;
+    width: 100%;
+    height: 100%
+}
 
-#bannerHome h2 {
-            font-size: 4em;
-            line-height: 1.25em;
-            margin: 0 0 0.5em 0;
-            padding: 0;
-            color: deepskyblue;
-            text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;            
-        }
+    #bannerHome h2 {
+        font-size: 4em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+        color: deepskyblue;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
 
 #bannerHome p {
             color: white;
@@ -217,13 +207,15 @@ footer {
             padding: 10px;
             text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
         }
-        #secondBannerHome #about p {
-            color: white;
-            font-size: 1.2em;
-            line-height: 1em;
-            margin: 0 10em 0 10em;
-            text-align: justify;
-        }
+
+    #secondBannerHome #about p {
+        color: white;
+        font-size: 1.2em;
+        line-height: 1em;
+        margin: 0 10em 0 10em;
+        text-align: justify;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
         
 #secondBannerHome p {
             color: white;
@@ -233,13 +225,59 @@ footer {
             padding: 10px;
         }
 
+    /*#secondBannerHome button {
+        background-color: deepskyblue;
+        color: white;
+        padding: 8px;
+        margin: 2px 0;
+        border: none;
+        cursor: pointer;
+    }*/
 
-/*---------------------------END OF HOME PAGE-------------------------------*/ 
+/*---------------------------END OF HOME PAGE-------------------------------*/
 
 
+/*--------------------------ABOUT PAGE-------------------------------*/
+#bannerAbout {
+    background-image: url(../images/banner1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: white;
+    padding: 14em 0 14em;
+    text-align: center;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
 
+#bannerAbout h2 {
+    font-size: 4em;
+    line-height: 1.25em;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    color: deepskyblue;
+    text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+}
 
+    #bannerAbout p {
+        color: white;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+        text-align: justify;
+        font-size: 1.5em;
+        margin-bottom: 1.75em;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 
+    #bannerAbout button {
+        background-color: deepskyblue;
+        color: white;
+        padding: 8px;
+        margin: 2px 0;
+        border: none;
+        cursor: pointer;
+        width: 8%;
+    }
 
 /*--------------------------LISTINGS PAGE-------------------------------*/ 
         
@@ -271,21 +309,11 @@ footer {
         }
 
         
-/*#bannerList input {       
-            color: #444;
-            font-family: "Raleway", Helvetica, sans-serif;
-            font-size: 10pt;
-            font-weight: 400;
-            line-height: 1.65em;
-            position: relative;
-        }*/
 #bannerList input {
     display: inline-block;
     height: 30px;
-    /*padding-right: 30px;*/
     background-color: white;
     color: black;
-    /*margin-right: 30px;*/
 }
 
 
@@ -506,9 +534,11 @@ footer {
     }
 
     #banner p {
+        color: white;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
         font-size: 1.5em;
         margin-bottom: 1.75em;
-    }
+}
 
 #banner h1 {
     font-size: 35px;
