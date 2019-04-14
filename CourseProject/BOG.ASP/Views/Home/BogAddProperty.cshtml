@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    ViewData["Title"] = "BeOurGuest - Add Property";
+    ViewData["PageTitle"] = "BeOurGuest - Add Property";
 }
 
 <!DOCTYPE html>
@@ -31,19 +31,6 @@
                         <option value="4">Apartment</option>
                         <option value="5">TinyHome</option>
                         <option value="6">Cottage</option>
-
-                        @*<?php
-                                                    $proptypes = bogGetPropertyTypes();
-
-                                                    foreach ($proptypes as $proptype) {
-                                                    extract($proptype);
-                                                    $output .= <<
-                                                    <HTML
-                                                        <option value="$PropertyTypeIdPK">$PropertyTypeName</option>
-                            HTML;
-                                                    }
-                                                    echo "$output<br>";
-                                                ?>*@
                     </select>
                 </p>
 

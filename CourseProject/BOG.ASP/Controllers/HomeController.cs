@@ -3,22 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace BOG.ASP.Controllers
 {
     public class HomeController : Controller
     {
-        protected BogAppContext bogAppContext = new BogAppContext();
+        // Context to access the database
+        private Team115DBContext aBogContext;
+
+        protected BogAppContext aBogAppContext = new BogAppContext();
 
         private  ILogger _logger { get; }
 
-        public HomeController(ILogger<Program> logger)
+        public HomeController(ILogger<Program> logger, Team115DBContext aContext)
         {
             _logger = logger;
+            aBogContext = aContext;
         }
 
         public IActionResult Index() {
-            ViewBag.Title = "Hello and Welcome to BeOurGuest!";
+            ViewData["PageTitle"] = "Hello and Welcome to BeOurGuest!";
 
             //return View("BogListings");
             return View("BogHome");
@@ -36,22 +42,69 @@ namespace BOG.ASP.Controllers
 
         [HttpPost]
         public IActionResult BogHome() {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
 
             string tag;
 
-            if (bogAppContext.UserLoggedIn)
+            if (aBogAppContext.UserLoggedIn)
             {
-                tag = $"Welcome back to BeOurGuest, {bogAppContext.currUser.FirstName}" ;
+                tag = $"Welcome back to BeOurGuest, {aBogAppContext.currUser.FirstName}" ;
             }
             else
             {
                 tag = $"Hello and Welcome to BeOurGuest!";
             }
 
-            ViewBag.PageTitle = tag;
+            ViewData["PageTitle"] = tag;
 
             return View();
+        }
+
+
+        /*
+        ********************************************************
+        * HANDLE LOGIN/LOGOUT EVENTS HERE
+        ********************************************************
+        */
+        [HttpGet]
+        public IActionResult BogLoginPage()
+        {
+            ViewData["BogAppContext"] = aBogAppContext;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult BogLoginPage(BogLoginCreds aLogin)
+        {
+            ViewData["BogAppContext"] = aBogAppContext;
+
+            _logger.LogDebug($"Login Credentials: email={aLogin.email} password={aLogin.password}");
+
+            if (ModelState.IsValid && (aLogin != null))
+            {
+                if (aLogin.valid())
+                {
+                    ViewData["PageTitle"] = $"Welcome back to BeOurGuest, {aBogAppContext.currUser.FirstName}";
+
+                    ViewData["userCred"] = aLogin;
+
+                    HttpContext.Session.SetInt32("UserLoggedIn", aLogin.userLoggedIn());
+                    HttpContext.Session.SetInt32("UserRoleType", aLogin.getRoleType());
+
+                    return View("BogHome");
+                }
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult BogLogout()
+        {
+            ViewData["BogAppContext"] = aBogAppContext;
+
+            return View("BogHome");
         }
 
         /*
@@ -68,7 +121,7 @@ namespace BOG.ASP.Controllers
 
         [HttpPost]
         public IActionResult BogHomeSearch(BogHomeSearch aSearch) {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
 
             //RLP Validate 
             if (ModelState.IsValid && (aSearch != null)) {
@@ -82,7 +135,7 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public IActionResult BogSelectedProperty(PropertyT aProperty)
         {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
             ViewBag.PropertyId = aProperty.PropertyIdPk;
 
             _logger.LogDebug($"VIEW SELECTED PROPERTY DETAILS HERE! ID={aProperty.PropertyIdPk} Addr={aProperty.Address} " +
@@ -111,7 +164,7 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public IActionResult BogReserveProperty(ReservationT aReservation)
         {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
 
             _logger.LogDebug($"RESERVE PROPERTY HERE! Chkin={aReservation.CheckIn} Chkout={aReservation.CheckOut} " +
                 $"GuestCnt={aReservation.GuestCnt} PropId={aReservation.PropertyIdFk}");
@@ -128,7 +181,7 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public IActionResult BogStartReservation(PropertyT aProperty)
         {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
             ViewBag.PropertId = 34;//  aProperty.PropertyIdPk;
 
             _logger.LogDebug($"RESERVE PROPERTY HERE! PropId={aProperty.PropertyIdPk}  Addr={aProperty.Address} City={aProperty.City} State={aProperty.State} Zip={aProperty.Zipcode}");
@@ -142,40 +195,6 @@ namespace BOG.ASP.Controllers
             return View("BogReservationPage");
         }
 
-
-        /*
-        ********************************************************
-        * HANDLE LOGIN EVENTS HERE
-        ********************************************************
-        */
-        [HttpGet]
-        public IActionResult BogLoginPage()
-        {
-            ViewData["BogAppContext"] = bogAppContext;
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult BogLoginPage(BogLoginCreds aLogin)
-        {
-            ViewData["BogAppContext"] = bogAppContext;
-
-            _logger.LogDebug($"Login Credentials: email={aLogin.email} password={aLogin.password}");
-            
-            if (ModelState.IsValid && (aLogin != null))
-            {
-                if (aLogin.valid())
-                {
-                    string tag = $"Welcome back to BeOurGuest, {bogAppContext.currUser.FirstName}";
-
-                    return View("BogHome");
-                }
-            }
-
-            return View();
-        }
-
         /*
         ********************************************************
         * HANDLE USER REGISTRATION EVENTS HERE
@@ -183,14 +202,14 @@ namespace BOG.ASP.Controllers
         */
         [HttpGet]
         public IActionResult BogRegister() {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
 
             return View();
         }
 
         [HttpPost]
         public IActionResult BogRegister(BogUserProfile aUser) {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
             
             if (ModelState.IsValid && (aUser != null)) {
                 return View("BogRegisterThanks", aUser);
@@ -207,7 +226,7 @@ namespace BOG.ASP.Controllers
         */
         [HttpGet]
         public IActionResult BogAddProperty() {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
             
             return View();
         }
@@ -215,7 +234,7 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public IActionResult BogAddPropertyAction(BogAddProperty aProperty)
         {
-            ViewData["BogAppContext"] = bogAppContext;
+            ViewData["BogAppContext"] = aBogAppContext;
             
             if (ModelState.IsValid && (aProperty != null))
             {
@@ -227,6 +246,37 @@ namespace BOG.ASP.Controllers
 
             return View();
         }
+
+        /*
+        ********************************************************
+        * HANDLE PROPERTY DELETIONS HERE
+        ********************************************************
+        */
+        [HttpGet]
+        public IActionResult BogDelProperty()
+        {
+            ViewData["BogAppContext"] = aBogAppContext;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult BogDelPropertyAction(PropertyT aProperty)
+        {
+            ViewData["BogAppContext"] = aBogAppContext;
+
+            if (ModelState.IsValid && (aProperty != null))
+            {
+                return View("BogAddPropertyThanks", aProperty);
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+            }
+
+            return View();
+        }
+
 
 
         /*

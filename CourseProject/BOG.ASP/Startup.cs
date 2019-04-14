@@ -10,6 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+// XRLP **************************************************************
+//4.9.19 From Class
+using BOG.ASP.Models;
+using Microsoft.EntityFrameworkCore;
+// XRLP **************************************************************
+
 namespace BOG.ASP
 {
     public class Startup
@@ -33,6 +39,27 @@ namespace BOG.ASP
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // XRLP **************************************************************
+            // 4.9.19 - Added Service to connect to the TaraStore database using 
+            // the Entity Framework.  Dependency Injection of the DB context to 
+            // use. All the classes created from the database Scaffold command
+            // are used to create access to the tables and data.
+            services.AddDbContext<Team115DBContext>(options => options.UseSqlServer(Configuration["Data:Team115DB:ConnectionString"]));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // XRLP **************************************************************
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +79,7 @@ namespace BOG.ASP
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
