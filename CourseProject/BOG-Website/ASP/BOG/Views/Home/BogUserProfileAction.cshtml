@@ -1,0 +1,43 @@
+﻿@model UserT;
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Update Profile";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    @*Razor block example*@
+    <section id="secondbannerList">
+        <form>
+            <ul class="article-list-vertical-Select">
+                <li>
+                    <br />
+                    <h1>User profile for 'Email=@Model.Email' has been updated!</h1>
+                    <hr />
+                    <p>
+                        <br />First Name: &nbsp; @Model.FirstName
+                        <br />Last Name: &nbsp; @Model.LastName
+                        <br />Address: &nbsp; @Model.Address
+                        <br />City: &nbsp; @Model.City
+                        <br />State: &nbsp; @Model.State
+                        <br />Zipcode: &nbsp; @Model.Zipcode
+                        <br />Phone Number: ID:&nbsp; @Model.PhoneNumber
+                        <br /><br /><hr />
+                        <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
+                    </p>
+                    <hr />
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿@model PropertyT;
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Delete Property";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    @*Razor block example*@
+    <section id="secondbannerList">
+        <form>
+            <ul class="article-list-vertical-Select">
+                <li>
+                    <br />
+                    <h1>Property listing 'ID=@Model.PropertyIdPk' has been successfully deleted!</h1>
+                    <br />
+                    <hr />
+                    <p>
+                        <br />Property ID:&nbsp; @Model.PropertyIdPk
+                        <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
+                        <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
+                        <br />
+
+                        <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
+
+                        <br /><br />
+
+                        <a asp-action="BogAddProperty" class="btn btn-sm btn-primary">Add Another?</a>
+                        <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
+                    </p>
+                    <hr />
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

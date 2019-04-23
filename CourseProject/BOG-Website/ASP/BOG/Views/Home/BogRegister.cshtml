@@ -1,0 +1,121 @@
+﻿@model UserT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Registstration Page";
+
+    string confPassword = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    <section id="bannerList">
+        <h2>Register</h2>
+    </section>
+
+    <section id="banner">
+        <form asp-action="BogRegister" method='post'>
+             @* Tag helper required for showing any errors detected for this
+                view by our defined validation *@
+            <div class="containerAddProp" asp-validation-summary="All">
+                <!----- Email Id ------------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="Email">Email Address:</label>
+                    <input class="BogInput" asp-for="Email" type="email" required
+                           autofocus
+                           maxlength="50"
+                           size="50"
+                           title="Enter email address (max 50 chars)">
+                </p>
+
+                <!----- Password ------------------------------------------------------->
+                <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"-->
+
+                <p>
+                    <label class="BogLabel" asp-for="Password">Password:</label>
+                    <input class="BogInput" asp-for="Password" type="password" required
+                           autofocus
+                           maxlength="20"
+                           size="20"
+                           title="Enter a passsword with 8 or more characters containing t least one number, one uppercase and lowercase letter">
+                </p>
+
+                <!----- Password Conf -------------------------------------------------->
+                <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"-->
+
+                <p>
+                    <label class="BogLabel">Confirm Password:</label>
+                    <input class="BogInput" for="@confPassword" type="password" required
+                           autofocus
+                           maxlength="20"
+                           size="20"
+                           title="Enter password confirmation">
+                </p>
+                /
+                <!--<pre></pre>-->
+                <!----- Mobile Number -------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="PhoneNumber">Phone Number:</label>
+                    <input class="BogInput" asp-for="PhoneNumber" type="text" required
+                           autofocus
+                           maxlength="10"
+                           size="10"
+                           pattern="^[0-9]{10}$"
+                           title="Enter a 10-digit phone number">
+                </p>
+
+                <!----- First Name ----------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="FirstName">First Name:</label>
+                    <input class="BogInput" type="text" asp-for="FirstName" required
+                           autofocus
+                           maxlength="30"
+                           size="30"
+                           pattern="^[a-zA-Z ']{1,30}$"
+                           title="Enter first name">
+                </p>
+
+                <!----- Last Name ------------------------------------------------------>
+                <p>
+                    <label class="BogLabel" asp-for="LastName">Last Name:</label>
+                    <input class="BogInput" type="text" asp-for="LastName" required
+                           autofocus
+                           maxlength="30"
+                           size="30"
+                           pattern="^[a-zA-Z ']{1,30}$"
+                           title="Enter last name">
+                </p>
+
+                <!----- Address City State Zip------------------------------------------>
+                <partial name="_BogAddressView" model="Model" />
+
+                <div class="RadioButtonOptions">
+                    <p>
+                        <label class="BogLabel" asp-for="RoleIdFk">User Account:</label><br>
+                        <input class="BogInput" type="radio" asp-for="RoleIdFk" id="roletype" checked value="2" />
+
+                        <label class="BogLabel" asp-for="RoleIdFk">Admin Account:</label>
+                        <input class="BogInput" type="radio" asp-for="RoleIdFk" id="roletype" value="1" />
+                    </p>
+                </div>
+
+                <!--Button Should reach out to php page and confirm user or admin access-->
+                <div id="button">
+                    <button class="btn btn-sm btn-primary" asp-action="BogRegister"
+                            asp-route-confPassword="@confPassword">Register</button>
+                    <button class="btn btn-sm btn-info" type="reset">Reset</button>
+                    <a class="btn btn-sm btn-info" asp-action="BogHome">Return</a>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

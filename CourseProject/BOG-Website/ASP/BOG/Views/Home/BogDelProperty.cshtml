@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PropertyT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Delete Property";
+
+    var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
+    var ptList = ViewBag.PropTypeList as IEnumerable<SelectListItem>;
+
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    <section id="bannerList">
+        <h2>Narrow your seach here</h2>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form action="BogDelPropertyAction" method="post">
+                <div class="containerAddProp">
+                    <partial name="_BogPropertySearchView" model="Model" />
+
+                    <button name="propSearch" type="submit" value="search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section id="secondbannerList">
+        <form action="BogDelPropertyAction" method="post">
+
+            <!---Vacation Listings-->
+            <ul class="article-list-vertical">
+                <li>
+                    DISPLAY PROPERTIES HERE
+                </li>
+                <li>
+                    DISPLAY PROPERTIES HERE
+                </li>
+                <li>
+                    DISPLAY PROPERTIES HERE
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model UserT;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <h1>Thank you, @Model.FirstName</h1>
+
+    @*Razor block example*@
+
+    <p>
+
+        @*Embedded C#*@
+        @if (true)
+        {
+            @: @Model.FirstName
+            @: @Model.LastName
+            @: @Model.Address
+            @: @Model.City
+            @: @Model.State
+            @: @Model.Zipcode
+            @: @Model.RoleIdFk
+        }
+
+
+        @*Asp-action to show a new View*@
+
+        <br /><br />
+        Click <a asp-action="Register">here</a> to add another user.
+
+    </p>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

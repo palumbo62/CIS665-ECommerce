@@ -1,0 +1,62 @@
+﻿@*@model BogHomeSearch*@
+
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor HttpContextAccessor;
+
+    Layout = null;
+
+    if (TempData["loggedOut"] != null)
+    {
+        ViewData["PageTitle"] = TempData["loggedOut"];
+        TempData["loggedOut"] = null;
+    }
+    else if (TempData["loggedIn"] != null)
+    {
+        ViewData["PageTitle"] = TempData["loggedIn"];
+        TempData["loggedIn"] = null;
+    }
+    else if (TempData["success"] != null)
+    {
+        ViewData["PageTitle"] = TempData["success"];
+        TempData["success"] = null;
+    }
+    else if (ViewData["PageTitle"] == null)
+    {
+        ViewData["PageTitle"] = "Welcome to BeOurGuest! Take your time and browse our properties!";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    <section id="bannerHome">
+        <!-- Home Page Custom Banner-->
+        <h2>BeOurGuest</h2>
+        <p>
+            It's time to enjoy our wide range of vacation homes from city townhomes, <br />
+            country cabins, luxury family homes, and even ocean front condos. <br />
+            Your next getaway is waiting on you!<br />
+        </p>
+        <p>Book your perfect vacation home today! </p><br>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form asp-action="BogHomeSearch" method="get">
+                <partial name="_BogPropertySearchView" />
+
+                <button name="propSearch" type="submit" value="search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

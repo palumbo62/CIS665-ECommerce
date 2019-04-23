@@ -1,0 +1,22 @@
+﻿@*    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    Layout = null;
+
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+}
+
+
+
+<footer id="footer">
+    <p>&copy; BeOurGuest, Inc.&nbsp; @DateTime.Now.Year.ToString()</p>
+    <p>Robert Palumbo</p>
+    <p>
+        UserID='@HttpContextAccessor.HttpContext.Session.GetInt32("UserId")'&nbsp;&nbsp;
+        FirstName='@HttpContextAccessor.HttpContext.Session.GetString("UserFirstName")'&nbsp;&nbsp;
+        LastName='@HttpContextAccessor.HttpContext.Session.GetString("UserLastName")'&nbsp;&nbsp;
+        RoleType='@HttpContextAccessor.HttpContext.Session.GetInt32("UserRoleType")'
+    </p>
+</footer>

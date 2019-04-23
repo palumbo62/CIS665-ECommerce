@@ -1,0 +1,105 @@
+﻿@model IEnumerable<PropertyT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Current Properties";
+    var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
+
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    <section id="bannerList">
+        <h2>Narrow your seach here</h2>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form asp-action="BogHomeSearch" method="get">
+                <partial name="_BogPropertySearchView" model="@propSearchModel" />
+
+                <button name="propSearch" type="submit" value="search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section id="secondbannerList">
+        <form asp-action="@HttpContextAccessor.HttpContext.Session.GetString("PropAction")" method="post">
+            <!-- Display the property listings -->
+            <div>
+                @if (Model.Count() > 0)
+                {
+                    <ul class="article-list-vertical">
+                        @foreach (var p in Model)
+                        {
+                        <li>
+                            <font color='#000000' />
+                            <br />Property ID:&nbsp;    @p.PropertyIdPk
+                            <br />Property Title:&nbsp; @p.PropertyTitle
+                            <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
+                            <br />
+                            <br />Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
+                            <br />
+                            <br />Number of Bedrooms:&nbsp; @p.NumBedrooms
+                            <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
+                            <br />Square Footage:&nbsp; @p.SqFt
+                            <br />Number of Guests:&nbsp; @p.GuestCnt
+                            <br />
+                            <br />Description:&nbsp; @p.Description
+                            <hr>
+
+                            <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk" />
+
+                            <br />
+
+                            <font color='#000000' />
+
+                            <br /><br /><br /><br />
+
+                            <a asp-action="@HttpContextAccessor.HttpContext.Session.GetString("PropAction")"
+                                class="btn btn-sm btn-warning" 
+                                asp-route-propId="@p.PropertyIdPk">@HttpContextAccessor.HttpContext.Session.GetString("PropActionButton")</a>
+                            &nbsp;
+                            <a asp-action="BogHome" class="btn btn-sm btn-primary">Home Page</a>
+                            <hr />
+                        </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul class="article-list-vertical">
+                        <li>
+                            <div class="NoPropsFound">
+                                <font color='#000000' />
+                                <br />
+                                <h2>No listings found using the specified search criteria.</h2>
+                                <h2>Please try again!</h2>
+                                <br />
+                                <br />
+                                <br />
+                                <img src="~/images/SadFace.jpg" alt="No Properties" style="text-align:center" width="100" height="100" />
+
+                                <br />
+                            </div>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

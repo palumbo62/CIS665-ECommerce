@@ -1,0 +1,127 @@
+﻿@model PropertyT
+
+@{
+    Layout = null;
+
+    var currDate = DateTime.Now.ToString("yyyy-MM-dd");
+    var reviews = ViewData["Reviews"] as List<CommentsT>;
+
+    ViewData["PageTitle"] = $"BeOurGuest - Viewing Property {Model.PropertyIdPk}";
+
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <partial name="_BogHeaderView" />
+
+    <!-- Banner -->
+    <section id="bannerList">
+        <h2>Property View</h2>
+        <!--<form asp-action="BogReservationPage" method="post"> -->
+
+        <form>
+            <button class="btn btn-sm btn-primary" asp-action="BogStartReservation">Reserve</button>
+            <button class="btn btn-sm btn-primary" asp-action="BogViewReservationsByPropId">View Reservations</button>
+            <button class="btn btn-sm btn-primary" asp-action="BogProperties">Cancel</button>
+        </form>
+    </section>
+
+    <section id="secondbannerList">
+        <form action="BogAddCommentAction" method="post">
+            <ul class="article-list-vertical-Select">
+                <li>
+                    <br />
+                    <h1>@Model.PropertyTitle</h1>
+                    <br />
+                    <hr />
+                    <p>
+                        <br />Property ID:&nbsp; @Model.PropertyIdPk
+                        <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
+                        <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
+                        <br />
+                        <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
+                        <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
+                        <br />Square Footage:&nbsp; @Model.SqFt
+                        <br />Guest Count: &nbsp; @Model.GuestCnt
+                        <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
+
+                        <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
+
+                        <br />Description:&nbsp; @Model.Description
+                        <br />
+                    </p>
+                    <hr />
+                    
+                    @if (HttpContextAccessor.HttpContext.Session.GetInt32("UserLoggedIn") == 1)
+                    {
+                        <!---------------SUBMIT COMMENT---------------------->
+                        <h2>Add Review</h2>
+
+                        <br />
+                        <p>
+                            <label for="RatingID"> Rating: </label>
+                            <select name="RatingID" id="RatingID" required>
+                                <option value="5">5 - Very Satisfied</option>
+                                <option value="4">4 - Satisfied</option>
+                                <option value="3">3 - Fair</option>
+                                <option value="2">2 - Dissatisfied</option>
+                                <option value="1">1 - Very Dissatisfied</option>
+                            </select>
+                            <br />
+                            <br />
+                            <label for="MonthYearVisit"> Date Visited: </label>
+                            <input type="date" name="MonthYearVisit" id="MonthYearVisit"
+                                   required
+                                   min="1900-01-01" max="@currDate" />
+                            <br />
+                            <br />
+                            <label for="comment">Comment: </label>
+                            <br /><br />
+                            <textarea rows="5" cols="50" name="comments" id="comment" placeholder="Enter review comments here..."></textarea>
+                            <br /><br />
+                            <button name="commentSubmit" type="submit" value="submit">Submit</button>
+                            <hr>
+                        </p>
+                        <br />
+                    }
+
+                    <!-----REVIEWS POPULATED FROM DB------->
+                    <h2>Property Reviews</h2>
+                    <p>
+                        ADD REVIEWS FOR PROPERTY HERE
+
+                        <table id="Comments">
+                            <thead>
+                                <tr>
+                                    <th>DateSubmitted</th>
+                                    <th>Rating</th>
+                                    <th>DateOfVisit</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var r in reviews) {
+                                <tr>
+                                    <td>@r.DateSubmitted</td>
+                                    <td>@r.Rating</td>
+                                    <td>@r.MonthYearVisit</td>
+                                    <td>@r.Comments</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </p>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>
