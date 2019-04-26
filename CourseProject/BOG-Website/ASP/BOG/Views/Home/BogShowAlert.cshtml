@@ -1,0 +1,28 @@
+﻿@model BogAlertMsg
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        @*Razor block example*@
+        <section id="bannerList">
+            <h3 class="alert-heading">@Model.alertMsg</h3>
+
+            <br /><br />
+            <a class="btn btn-sm btn-warning" asp-action="@Model.retryPage">@Model.buttonText</a>
+            <a class="btn btn-sm btn-info" asp-action="BogHome">Home Page</a>
+            <br />
+            <br />
+            <br />
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+    </body>
+</html>

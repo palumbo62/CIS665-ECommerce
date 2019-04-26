@@ -1,0 +1,73 @@
+﻿@model UserT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Registstration Page";
+
+    string confPassword = (string)ViewData["BogConfPassword"];
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        <section id="bannerList">
+            <h2>Register</h2>
+        </section>
+
+        @if (TempData["warning"] != null)
+        {
+            <div class="alert alert-warning">@TempData["warning"]</div>
+        }
+
+        <section id="banner">
+            <form asp-action="BogRegisterValidate" method='post'>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="containerRegister">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email:</label>
+                        <input asp-for="Email" class="form-inline" size="30"/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">Password:</label>
+                        <input asp-for="Password" class="form-inline" size="20" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label">First Name:</label>
+                        <input asp-for="FirstName" class="form-inline" size="30"/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label">Last Name:</label>
+                        <input asp-for="LastName" class="form-inline" size="30"/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <partial name="_BogUserAddressView" model="@Model" />
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label">Phone Number:</label>
+                        <input asp-for="PhoneNumber" class="form-inline" size="10"/>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <a asp-action="BogRegisterValidate" class="btn btn-sm btn-success" formmethod="post">Create Account</a>
+                    <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
+
+                </div>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+
+    </body>
+</html>

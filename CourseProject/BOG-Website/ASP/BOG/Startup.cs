@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,14 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-// XRLP **************************************************************
-//4.9.19 From Class
+// Add the following using statements
+
 using BOG.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-// XRLP **************************************************************
 
-namespace BOG.ASP
+namespace BOG
 {
     public class Startup
     {
@@ -34,30 +34,26 @@ namespace BOG.ASP
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+
+                // Set the user consent for non-essential cookies to false
+
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // XRLP **************************************************************
-            // 4.9.19 - Added Service to connect to the TaraStore database using 
-            // the Entity Framework.  Dependency Injection of the DB context to 
-            // use. All the classes created from the database Scaffold command
-            // are used to create access to the tables and data.
+            // enable the session-based TempData provider
+
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession();
+
+            // the AddDBContext method is used to add TaraStoreContext as a service
+            // the Configuration Property is used to access the Connection String Information from appsettings.jason
+
             services.AddDbContext<PalumboDBContext>(options => options.UseSqlServer(Configuration["Data:PalumboDB:ConnectionString"]));
-
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = true;
-            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // the AddAuthentication and AddCookie methods add cookie authentication as a service
 
@@ -67,8 +63,6 @@ namespace BOG.ASP
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
             });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // XRLP **************************************************************
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,15 +82,19 @@ namespace BOG.ASP
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseSession();
 
             // add this statement to use authentication
+
             app.UseAuthentication();
+
+            // add this statement to allow the session system to automatically asscociate requests with sessions when they arrive from the client.
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "Default",
+                    name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

@@ -1,50 +1,64 @@
-﻿@model PropertyT
+﻿@model IEnumerable<ReservationT>
 
 @{
     Layout = null;
-    //ViewData["Title"] = ViewBag.Title;
-    //ViewData["PageTitle"] = $"BeOurGuest - Reservation for {Model.PropertyIdPk}";
-    ViewData["PageTitle"] = $"BeOurGuest - Reservation for Property ID [NEED TO USE REAL ID HERE]";
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations for Property ID: {@ViewData["ReturnPropId"]}";
+    var property = Model.First();
+    var propId = ViewData["ReturnPropId"];
 }
 
 <!DOCTYPE html>
 
 <html>
-<body>
     <partial name="_BogHeaderView" />
+    <body>
 
-    <!-- Banner -->
-    <section id="bannerList">
-        <h2>Reservations</h2>
-    </section>
+        <!-- Banner -->
+        <section id="bannerList">
+            <h2>Upcoming Reservations</h2>
+        </section>
 
-    <form asp-action="BogSelectedProperty" method="post">
         <section id="bannerBlue">
-            <table class="blueTable">
+            <table class="blueTable" align="center">
                 <thead>
                     <tr>
-                        <th>PropertyID</th>
+                        <th height="50px" colspan="3" style="color:darkred; font-size:x-large">
+                            Property Address: &nbsp;&nbsp;
+                            @property.PropertyIdFkNavigation.Address
+                            @property.PropertyIdFkNavigation.City
+                            @property.PropertyIdFkNavigation.State
+                            @property.PropertyIdFkNavigation.Zipcode
+                        </th>
+                    </tr>
+                    <tr>
                         <th>CheckIn-Date</th>
                         <th>CheckOut-Date</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zipcode</th>
+                        <th>Total Days</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>DISPLAY PROPTY RESERVATIONS HERE</td>
-                    </tr>
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td>
+                                @r.CheckIn.Date.ToString("MM/dd/yyyy")
+                            </td>
+                            <td>
+                                @r.CheckOut.Date.ToString("MM/dd/yyyy")
+                            </td>
+                            <td>
+                                @r.CheckOut.Date  - @r.CheckIn.Date
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
-            <br>
-            <button class="btn btn-primary" type="submit">Return</button>
+            <br /><br />
+            <a asp-action="BogViewProperty" asp-route-propId="@propId" class="btn btn-sm btn-success">Return</a>
+
         </section>
-    </form>
 
-    <!-- Display the page footer -->
-    <partial name="_BogFooterView" />
-
-</body>
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+    </body>
 </html>

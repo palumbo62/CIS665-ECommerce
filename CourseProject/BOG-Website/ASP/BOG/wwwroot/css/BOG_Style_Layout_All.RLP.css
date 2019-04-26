@@ -85,7 +85,27 @@ a {
         vertical-align: middle;
     }
 
-        #header nav > ul {
+        header nav > ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+            #header nav > ul > li {
+                border-radius: 4px;
+                display: inline-block;
+                margin-left: 2em;
+                padding-left: 0;
+            }
+                #header nav > ul > li a {
+                    transition: color 0.2s ease-in-out;
+                    color: #ffffff;
+                    display: inline-block;
+                }
+                    #header nav > ul > li a:active, #header nav > ul > li a:hover {
+                        color: #007bff;
+                }
+
+        /*#header nav > ul {
             list-style: none;
             margin: 0;
             padding-left: 0;
@@ -110,7 +130,7 @@ a {
 
                 #header nav > ul > li:first-child {
                     margin-left: 0;
-                }
+                }*/
 
                 
                 
@@ -157,12 +177,12 @@ footer {
         text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
     }
 
-#bannerHome p {
-            color: white;
-            text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;            
-            font-size: 1.5em;
-            margin-bottom: 1.75em;
-        }
+    #bannerHome p {
+                color: white;
+                text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;            
+                font-size: 1.5em;
+                margin-bottom: 1.75em;
+            }
 
     #bannerHome button {
         background-color: #007bff;
@@ -183,9 +203,9 @@ footer {
         text-align: left;
     }
 
-#secondBannerHome .column {
-        background-image: url(../images/dark_tint.png);
-    }
+    #secondBannerHome .column {
+            background-image: url(../images/dark_tint.png);
+        }
 
     #secondBannerHome h2 {
         color: #007bff;
@@ -537,14 +557,31 @@ footer {
     text-align: center;
 }
 
+#bannerLogin {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 10em 0;
+    /*padding: 10em 0 10em;
+    padding: 5em 0 5em;*/
+    text-align: center;
+}
+#bannerLogin input[id='code'] {
+    color: white;
+}
+
+
 #bannerBlue {
     background-image: url(../images/banner1.jpg);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     color: #ffffff;
-    padding: 20em 0 20em;
+    padding: 5em 0 10em 10em;
     text-align: center;
+    padding:
     
 }
 
@@ -575,125 +612,69 @@ footer {
 
 /*--------------------------LOGIN PAGE-------------------------------*/ 
 /* Login Table*/
-#banner form div.containerLogin {
+#bannerLogin form div.containerLogin {
     border: 8px solid #808080;
     position: center;
     background-color: lightgray;
     opacity: 0.9;
-    width: 300px;
+    width: 500px;
     margin: auto;
     padding: 50px;
     text-align: center;
 }
 
-/*#banner form div.containerLogin button {
-    background-color: deepskyblue;
-    color: white;
-    padding: 5px 10px;
-    margin: 2px 0;
-    border: none;
-    cursor: pointer;
-    width: 30%;
-}*/
-
-/*--------------------------REGISTER PAGE-------------------------------*/ 
-
-#banner form .BogLabel, .BogInput {
-    display:block;
-    width:250px;
-    float:right;
-    margin-bottom: 2px;
-}
-
-#banner form .BogRadio {
-    display:block;
-    width:250px;
-    float:right;
-    margin-bottom: 200px;
-}
-
-#banner form .containerRegister {
-    border: 8px solid #808080;
-    background-color: lightgray;
-    width: 35%;
-    margin: -5% auto;
-    padding: 20px;
-    align-content: center;
-}
-
-#banner form .containerRegister hr {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-
-
-#banner form .containerRegister label {
-    display: block;
-    float: left;
-    padding-top: 5px;
-    padding-right: 5px;
-    text-align: justify;
-    color: black;
-}
-#banner form .containerRegister input {
-    display: block;
-    float: none;
-    width: 300px;
-    margin: 0;
-    margin-left: 1px;
-    color: black;
-    
-   
-}
-
-#banner form .containerRegister select {
-    float:left;
-    height: 30px;
-    width: 10em;
-    color: black;
-    margin-left: -200px;
-}
-#banner form .containerRegister select[proptype] {
-    float:none;
-    height: 30px;
-    width: 10em;
-    color: black;
-    margin-left: 3px;
-}
-
-#banner form .containerRegister textarea {
-    float:none;
-    width: 50%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: black;
-    margin-left: 28px;
-}
-
-
-#banner form .containerRegister input[placeholder] {
-    font-weight: lighter;
-    opacity: unset;
-}
-
-
-    #banner form .containerRegister button {
-        background-color: #007bff;
-        color: white;
-        padding: 5px 10px;
-        margin: 20px 0;
-        border: none;
-        cursor: pointer;
-        width: 10em;
-        position: center;
+    #bannerLogin form div.containerLogin input {
+        margin: 3px;
+        border: 1.5px solid darkgrey;
+        padding-left: 2px;
+        color: black;
     }
 
-#banner form .containerRegister input.BogRadio{
-    margin-left: 4px;
-    padding: 90px;
-    width: 100px;
+/*--------------------------REGISTER PAGE-------------------------------*/
+
+#banner form div.containerRegister {
+    border: 8px solid #808080;
+    background-color: lightgray;
+    width: 700px;
+    padding: 20px;
+    opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+    #banner form div.containerRegister label {
+        display: inline-block;
+        clear: both;
+        float: left;
+        padding-top: 5px;
+        padding-right: 5px;
+        text-align: right;
+        margin: 0 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister input {
+        display: inline-block;
+        float: none;
+        border: 1.5px solid darkgrey;
+        /*margin: 0;*/
+        margin: 0 0 2px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister select {
+        display: inline-block
+        float: none;
+        height: 30px;
+        width: 10em;
+        margin: 5px 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister input[placeholder] {
+        font-weight: lighter;
+        opacity: unset;
+    }
 /*--------------------------REGISTER PAGE-------------------------------*/ 
 
 /*--------------------------ADD PROPERTY PAGE-------------------------------*/ 
@@ -746,7 +727,7 @@ footer {
     display: block;
     float:none;
     /*margin: 0;*/
-    margin: 0 0 5px 0;
+    margin: 0 0 3px 0;
     color: black;
 }
 
@@ -815,14 +796,14 @@ footer {
     margin-top: 5px;
 }
 
-#banner form div.containerAddProp button {
+/*#banner form div.containerAddProp button {
     background-color: #007bff;
     color: white;
     padding: 5px 10px;
     margin: 20px 0;
     border: none;
     cursor: pointer;
-    width: 10em;
+    width: 10em;*/
 }
 /*--------------------------END OF ADD PROPERTY PAGE------------------------*/ 
 
@@ -948,7 +929,7 @@ footer {
 
 
 #secondBannerReview p {
-            color: white;
+            color: black;
             font-size: 1.5em;
             line-height: 1em;
             margin: 0 0 0.5em 0;
@@ -1043,77 +1024,112 @@ table.blueTable {
   font-family: Arial, Helvetica, sans-serif;
   border: 2px solid #090E05;
   background-color: #CDD0CD;
-  width: 70%;
+  width: 60%;
   height: 80px;
   text-align: left;
   border-collapse: collapse;
-  margin-top: -100px;
-  margin-left: 200px;
+  /*margin-top: -50px;
+  margin-left: 200px;*/
   opacity: 0.9;
 }
-table.blueTable td, table.blueTable th {
-  border: 1px solid #AAAAAA;
-  padding: 1px 2px;
-}
-table.blueTable tbody td {
-  font-size: 13px;
-  color: #0A3305;
-}
-table.blueTable thead {
-  background: #00BFFF;
-  background: -moz-linear-gradient(top, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
-  background: -webkit-linear-gradient(top, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
-  background: linear-gradient(to bottom, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
-  border-bottom: 2px solid #444444;
-}
-table.blueTable thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #0F0F0F;
-}
+    table.blueTable td, table.blueTable th {
+      border: 1px solid #AAAAAA;
+      padding: 1px 2px;
+      height: 30px;
+    }
+    table.blueTable thead {
+      background: #00BFFF;
+      background: -moz-linear-gradient(top, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
+      background: -webkit-linear-gradient(top, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
+      background: linear-gradient(to bottom, #40cfff 0%, #19c5ff 66%, #00BFFF 100%);
+      border-bottom: 2px solid #444444;
+    }
+        table.blueTable thead th {
+          font-size: larger;
+          font-weight: bold;
+          color: #0F0F0F;
+        }
+    table.blueTable tbody td {
+        font-size: large;
+        color: #0A3305;
+    }
+
 table.blueTable tfoot td {
-  font-size: 14px;
+  font-size:large
 }
 /*--------------------------END RESERVE PAGE------------------------*/
 
-/*--------------------------USER PROFILE PAGE-------------------------------*/ 
-#banner form div.usercontainer {
-    border: 8px solid #808080;
-    position: center;
-    background-color: lightgray;
-    opacity: 0.9;
-    width: 300px;
-    margin: auto;
-    padding: 16px;
+/*--------------------------USER PROFILE PAGE-------------------------------*/
+
+#bannerRegister {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 10em 0;
+    /*padding: 10em 0 10em;
+    padding: 5em 0 5em;*/
     text-align: center;
 }
 
-
-#banner form div.usercontainer label {
-    float: left;
-    text-align: right;
-    color: black;
-}
-
-#banner form div.usercontainer input {
-    display: block;
-    float:none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 100%;
-    color: black;
-
-}
-
-#banner form div.usercontainer input[placeholder] {
-        font-weight: lighter;
-        opacity: unset;
+    #bannerRegister form div.usercontainer {
+        border: 8px solid #808080;
+        position: center;
+        background-color: lightgray;
+        opacity: 0.9;
+        width: 35%;
+        margin: auto;
+        padding: 16px;
+        text-align: center;
     }
-    
-#banner form div.usercontainer input[radio] {
-        margin-top: 80px;
-        opacity: unset;
-    }
+
+
+        #bannerRegister form div.usercontainer label {
+            display: block;
+            float: left;
+            text-align: right;
+            color: black;
+            min-width: 25%;
+            max-width: 25%;
+            padding-right: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        #bannerRegister form div.usercontainer input {
+            display: block;
+            float: none;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+        #bannerRegister form div.usercontainer select {
+            display: block;
+            float: none;
+            height: 30px;
+            min-width: 25%;
+            max-width: 25%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+        #bannerRegister form div.usercontainer button {
+            float: none;
+        }
+
+        #bannerRegister form div.usercontainer input[placeholder] {
+            font-weight: lighter;
+            opacity: unset;
+        }
+
+        #bannerRegister form div.usercontainer input[radio] {
+            margin-top: 80px;
+            opacity: unset;
+        }
+/*--------------------------USER PROFILE PAGE-------------------------------*/ 
 
 
 #banner form listingcontainer button {
@@ -1176,12 +1192,12 @@ form select {
 }
 /*----------------- END OF FORM STYLE--------------------*/
 
-.SearchState label {
+/*.SearchState label {
     display: inline-block;
     margin-right: 30px;
     color: white;
     text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
-}
+}*/
 
 .SearchState select {
     display: inline-block;
@@ -1386,5 +1402,16 @@ form select {
     text-align: center;
     height: 70%;
     width: 100%;
-    
 }
+
+#propertyReviews {
+    color: black;
+    text-align: left;
+}
+    #propertyReviews th {
+        color: black;
+    }
+
+    #propertyReviews td {
+        color: black;
+    }

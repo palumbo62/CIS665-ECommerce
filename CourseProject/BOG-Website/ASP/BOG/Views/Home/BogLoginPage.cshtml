@@ -6,43 +6,46 @@
 <!DOCTYPE html>
 
 <html>
-<body>
     <partial name="_BogHeaderView" />
+    <body>
 
-    <section id="bannerList">
-        <h2>Login</h2>
-    </section>
+        <section id="bannerList">
+            <h2>Login</h2>
+        </section>
 
-    @if (TempData["message"] != null)
-    {
-        <div class="alert alert-success">@TempData["message"]</div>
-    }
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
 
-    <section id="banner">
-        <form asp-action="BogLoginValidateAsync" method="get" class="p-3">
-            <div class="containerLogin">
-                <input type="text" placeholder="Email Address" name="email" required
-                       maxlength="50"
-                       autofocus="autofocus"
-                       title="Enter email address"><br>
+        @*<section id="banner">*@
+        <section id="bannerLogin">
+            <form asp-action="BogLoginValidate" method="post" class="p-3">
+                <div class="containerLogin">
+                    <input type="text" placeholder="Email Address" name="email" required
+                           maxlength="50"
+                           size="30"
+                           autofocus="autofocus"
+                           title="Enter a valid email address"><br>
 
-                <input type="password" placeholder="Password" name="password" required
-                       maxlength="20"
-                       autofocus="autofocus"
-                       title="Enter password"><br>
+                    <input type="password" placeholder="Password" name="password" required
+                           maxlength="20"
+                           size="20"
+                           autofocus="autofocus"
+                           title="Enter password"><br>
 
-                <!--Button Should reach out to php page and confirm user or admin access-->
-                <br>
-                <button class="btn btn-sm btn-primary" type="submit">Login</button>
-                <button class="btn btn-sm btn-primary" asp-action="BogHome">Cancel</button>
-                <br /> <br />
-                <a asp-action="BogRegisterPage" class="btn btn-sm btn-info">Register for Account</a>
-            </div>
-        </form>
-    </section>
+                    <!--Button Should reach out to php page and confirm user or admin access-->
+                    <br>
+                    <button class="btn btn-sm btn-success" type="submit">Login</button>
+                    <button class="btn btn-sm btn-primary" asp-action="BogHome">Cancel</button>
+                    <br /> <br />
+                    <a asp-action="BogRegisterPage" class="btn btn-sm btn-info">BOG Signup</a>
+                </div>
+            </form>
+        </section>
 
-    <!-- Display the page footer -->
-    <partial name="_BogFooterView" />
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
 
-</body>
+    </body>
 </html>

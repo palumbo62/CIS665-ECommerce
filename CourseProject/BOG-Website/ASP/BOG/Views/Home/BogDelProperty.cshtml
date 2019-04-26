@@ -14,47 +14,47 @@
 <!DOCTYPE html>
 
 <html>
-<body>
     <partial name="_BogHeaderView" />
+    <body>
 
-    <section id="bannerList">
-        <h2>Narrow your seach here</h2>
+        <section id="bannerList">
+            <h2>Narrow your seach here</h2>
 
-        <!----------Search form inside banner ----------- -->
-        <div class="SearchState">
+            <!----------Search form inside banner ----------- -->
+            <div class="SearchState">
+                <form action="BogDelPropertyAction" method="post">
+                    <div class="containerAddProp">
+                        <partial name="_BogPropertySearchView" model="Model" />
+
+                        <button name="propSearch" type="submit" value="search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Banner -->
+        <section id="secondbannerList">
             <form action="BogDelPropertyAction" method="post">
-                <div class="containerAddProp">
-                    <partial name="_BogPropertySearchView" model="Model" />
 
-                    <button name="propSearch" type="submit" value="search">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
+                <!---Vacation Listings-->
+                <ul class="article-list-vertical">
+                    <li>
+                        DISPLAY PROPERTIES HERE
+                    </li>
+                    <li>
+                        DISPLAY PROPERTIES HERE
+                    </li>
+                    <li>
+                        DISPLAY PROPERTIES HERE
+                    </li>
+                </ul>
             </form>
-        </div>
-    </section>
+        </section>
 
-    <!-- Banner -->
-    <section id="secondbannerList">
-        <form action="BogDelPropertyAction" method="post">
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
 
-            <!---Vacation Listings-->
-            <ul class="article-list-vertical">
-                <li>
-                    DISPLAY PROPERTIES HERE
-                </li>
-                <li>
-                    DISPLAY PROPERTIES HERE
-                </li>
-                <li>
-                    DISPLAY PROPERTIES HERE
-                </li>
-            </ul>
-        </form>
-    </section>
-
-    <!-- Display the page footer -->
-    <partial name="_BogFooterView" />
-
-</body>
+    </body>
 </html>

@@ -8,48 +8,48 @@
 <!DOCTYPE html>
 
 <html>
-<body>
     <partial name="_BogHeaderView" />
+    <body>
 
-    <!-- Banner -->
-    <section id="bannerList">
-        <h2>Reservation Form</h2>
-    </section>
+        <!-- Banner -->
+        <section id="bannerList">
+            <h2>Reservation Form</h2>
+        </section>
 
-    <!-- Banner -->
-    <section id="banner">
-        <form action="BogReserveProperty" method='post'>
-            <div class="containerReserve">
-                <label asp-for="CheckIn">CheckIn Date:</label>
-                <input type="date" asp-for="CheckIn" id="checkInDate"
-                       autofocus required
-                       value="<?php echo $minDate ?>"
-                       min="<?php echo $minDate ?>"
-                       title="Enter Check-in Date" />
+        <!-- Banner -->
+        <section id="banner">
+            <form action="BogReserveProperty" method='post'>
+                <div class="containerReserve">
+                    <label asp-for="CheckIn">CheckIn Date:</label>
+                    <input type="date" asp-for="CheckIn" id="checkInDate"
+                           autofocus required
+                           value="<?php echo $minDate ?>"
+                           min="<?php echo $minDate ?>"
+                           title="Enter Check-in Date" />
 
-                <br />
-                <br />
+                    <br />
+                    <br />
 
-                <!----- Check Out Date ------------------------------------------------------->
-                <label asp-for="CheckOut">CheckOut Date:</label>
-                <input type="date" asp-for="CheckOut" id="checkOutDate"
-                       autofocus required
-                       value="<?php echo $minDate ?>"
-                       min="<?php echo $minDate ?>"
-                       title="Enter Check-out Date" />
-                <br />
-                <br />
+                    <!----- Check Out Date ------------------------------------------------------->
+                    <label asp-for="CheckOut">CheckOut Date:</label>
+                    <input type="date" asp-for="CheckOut" id="checkOutDate"
+                           autofocus required
+                           value="<?php echo $minDate ?>"
+                           min="<?php echo $minDate ?>"
+                           title="Enter Check-out Date" />
+                    <br />
+                    <br />
 
-                <!----- Number of Guests ----------------------------------------------------->
-                <label asp-for="GuestCnt"> Number of Guests: </label>
-                <input type="number" asp-for="GuestCnt" id="guestCnt" maxlength="4"
-                       value="1" min="1" max="9999"
-                       title="Enter number of guests " />
-                <br>
-                <br>
+                    <!----- Number of Guests ----------------------------------------------------->
+                    <label asp-for="GuestCnt"> Number of Guests: </label>
+                    <input type="number" asp-for="GuestCnt" id="guestCnt" maxlength="4"
+                           value="1" min="1" max="9999"
+                           title="Enter number of guests " />
+                    <br>
+                    <br>
 
-                <!----- Check In Date ------------------------------------------------------->
-                @*<label for="checkInDate">CheckIn Date:</label>
+                    <!----- Check In Date ------------------------------------------------------->
+                    @*<label for="checkInDate">CheckIn Date:</label>
                     <input type="date" name="checkInDate" id="checkInDate"
                            autofocus required
                            value="<?php echo $minDate ?>"
@@ -77,17 +77,17 @@
                     <br>
                     <br>*@
 
-                <input type="hidden" name="propId" value="<?php echo $propId ?>" />
+                    <input type="hidden" name="propId" value="<?php echo $propId ?>" />
 
-                <button class="btn button-primary" name="reserveSubmit" type="submit" value="reserve">Reserve</button>
-                <button class="btn button-primary" name="reserveReset" type="reset" value="reset">Reset</button>
-                <button class="btn btn-primary" asp-controller="Home" asp-action="BogProperties">Cancel</button>
-            </div>
-        </form>
-    </section>
+                    <button class="btn button-primary" name="reserveSubmit" type="submit" value="reserve">Reserve</button>
+                    <button class="btn button-primary" name="reserveReset" type="reset" value="reset">Reset</button>
+                    <button class="btn btn-primary" asp-controller="Home" asp-action="BogProperties">Cancel</button>
+                </div>
+            </form>
+        </section>
 
-    <!-- Display the page footer -->
-    <partial name="_BogFooterView" />
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
 
-</body>
+    </body>
 </html>

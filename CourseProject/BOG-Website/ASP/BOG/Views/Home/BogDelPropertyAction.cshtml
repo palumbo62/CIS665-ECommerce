@@ -16,46 +16,46 @@
 <!DOCTYPE html>
 
 <html>
-<body>
     <partial name="_BogHeaderView" />
+    <body>
 
-    @*Razor block example*@
-    <section id="secondbannerList">
-        <form asp-action="BogDelPropertyConfirmed" method="post">
-            <ul class="article-list-vertical-Select">
-                <li>
-                    <br />
-                    <h1>@Model.PropertyTitle</h1>
-                    <br />
-                    <hr />
-                    <p>
-                        <br />Property ID:&nbsp; @Model.PropertyIdPk
-                        <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
-                        <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
+        @*Razor block example*@
+        <section id="secondbannerList">
+            <form asp-action="BogDelPropertyConfirmed" method="post">
+                <ul class="article-list-vertical-Select">
+                    <li>
                         <br />
-                        <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
-                        <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
-                        <br />Square Footage:&nbsp; @Model.SqFt
-                        <br />Guest Count: &nbsp; @Model.GuestCnt
-                        <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
+                        <h1>@Model.PropertyTitle</h1>
                         <br />
+                        <hr />
+                        <p>
+                            <br />Property ID:&nbsp; @Model.PropertyIdPk
+                            <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
+                            <br />
+                            <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
+                            <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
+                            <br />Square Footage:&nbsp; @Model.SqFt
+                            <br />Guest Count: &nbsp; @Model.GuestCnt
+                            <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
+                            <br />
 
-                        <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
+                            <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
 
-                        <br />Description:&nbsp; @Model.Description
-                        <br /><br /><br />
+                            <br />Description:&nbsp; @Model.Description
+                            <br /><br /><br />
 
-                        <a asp-action="BogDelPropertyConfirmed" asp-route-propId="@Model.PropertyIdPk" class="btn btn-sm btn-danger">Confirm Deletion?</a>
-                        <a asp-action="BogDelProperty" class="btn btn-sm btn-info">Return</a>
-                    </p>
-                    <hr />
-                </li>
-            </ul>
-        </form>
-    </section>
+                            <a asp-action="BogDelPropertyConfirmed" asp-route-propId="@Model.PropertyIdPk" class="btn btn-sm btn-danger">Confirm Deletion?</a>
+                            <a asp-action="BogDelProperty" class="btn btn-sm btn-info">Return</a>
+                        </p>
+                        <hr />
+                    </li>
+                </ul>
+            </form>
+        </section>
 
-    <!-- Display the page footer -->
-    <partial name="_BogFooterView" />
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
 
-</body>
+    </body>
 </html>

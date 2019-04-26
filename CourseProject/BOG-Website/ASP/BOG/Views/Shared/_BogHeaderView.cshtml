@@ -6,11 +6,8 @@
     @using Microsoft.AspNetCore.Http
     @inject IHttpContextAccessor HttpContextAccessor
 
-    var userId = TempData["UserID"];
-
-    var uid = Context.User.Identity;
-    var intx = userId;
-
+    var userId = TempData["UserId"];
+    var xUserId = TempData["UserId"];
 }
 
 <head>
@@ -19,84 +16,24 @@
     <title>BeOurGuest - Vacation Rentals</title>
     <link href="~/css/BOG_Style_Layout_All.RLP.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../fonts/css/font-awesome.css">
-
-    <style>
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: deepskyblue;
-        }
-
-        .dropdown {
-            position: relative;
-            display: block;
-        }
-
-            .dropdown .dropbtn {
-                font-size: inherit;
-                border: none;
-                outline: none;
-                color: white;
-                padding: 14px 16px;
-                background-color: inherit;
-                font-family: inherit;
-                margin: 0;
-            }
-
-        .dropbtn {
-            font-size: inherit;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
-
-        .dropdown-content {
-            display: none;
-            width: 100%;
-            position: absolute;
-            background-color: #383b43;
-            margin: 0;
-            padding: 0;
-            min-width: 160px;
-            line-height: 1.75em;
-            box-shadow: none;
-        }
-
-            .dropdown-content a {
-                margin: 0;
-                width: 100%;
-                border: solid;
-                background-color: inherit;
-                border-width: thin;
-            }
-
-        .dropdown:hover .dropdown-content {
-            display: inline-block;
-        }
-    </style>
 </head>
 
 <div>
-    <!-- Header -->
     <header id="header">
         <h1>
             @ViewData["PageTitle"]
         </h1>
-        <nav id="nav">
-            <ul>
-                <li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-brand">
+                <li class="nav-item">
                     <a asp-action="index">Home</a>
                 </li>
-                <li>
+                <li class="nav-item" style="text-decoration:none">
                     <a asp-action="BogProperties">Properties</a>
                 </li>
-
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
-                    <li>
+                    <li class="nav-item">
                         <a asp-action="BogLoginPage">Login/Register</a>
                     </li>
                 }
@@ -104,32 +41,42 @@
                 {
                     if (Context.User.IsInRole("Admin"))
                     {
-                        <li>
-                            <div class="dropdown">
-                                <button class="dropbtn">Admin<i class="fa fa-caret-down"></i></button>
-                                <div class="dropdown-content">
-                                    <a asp-action="BogAddProperty" class="dropdown-item">Add Property</a>
-                                    <a asp-action="BogDelProperty" class="dropdown-item">Delete Property</a>
-                                </div>
+                        <li class="nav-item dropdown">
+                            <a asp-action="#" style="max-height: 40px" dropdown-toggle" id="navbarDropdown"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div style="max-height: 40px" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a style="max-height: 40px" asp-action="BogAddProperty" 
+                                    class="dropdown-link" formmethod="get" >Add Property</a>
+                                <a style="max-height: 40px" asp-action="BogDelProperty" 
+                                    class="dropdown-item" formmethod="get" >Delete Property</a>
                             </div>
                         </li>
+
+                        @*<li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Admin<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-content">
+                            <a asp-action="BogAddProperty" class="dropdown-item">Add Property</a>
+                            <a asp-action="BogDelProperty" class="dropdown-item">Delete Property</a>
+                        </div>
+                    </div>
+                </li>*@
                     }
                     else if (Context.User.IsInRole("User"))
                     {
                         // Registered User
-                        <li>
-                            <a asp-action="BogUserProfile" asp-route-userId="@userId">Account</a>
+                        <li class="nav-item">
+                            <a asp-action="BogUserProfile" asp-route-userId="@TempData["UserId"]">Account</a>
                         </li>
                     }
 
-                    <li>
+                    <li class="nav-item">
                         <a asp-action="BogLogout">Logout</a>
                     </li>
                 }
-                <li>
+                <li class="nav-item">
                     <a asp-action="BogAbout">About</a>
                 </li>
-
             </ul>
         </nav>
     </header>
