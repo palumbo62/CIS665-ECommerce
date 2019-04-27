@@ -6,9 +6,6 @@
 
     var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
     var ptList = ViewBag.PropTypeList as IEnumerable<SelectListItem>;
-
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor HttpContextAccessor
 }
 
 <!DOCTYPE html>
@@ -25,7 +22,6 @@
             <form asp-action="BogAddPropertyAction" method='post' enctype="multipart/form-data">
                 <div class="containerAddProp">
 
-                    <!--dynamic menu option for property type-->
                     <p>
                         <!--dynamic menu option for property type-->
                         <label class="BogLabel">Property Type: </label>
@@ -198,16 +194,12 @@
                                   title="Enter a description for this listing"></textarea>
                     </p>
 
-                    <p>
-                        <label class="BogLabel" asp-for="ImageName">Image File:&nbsp;</label>
-                        @*<input class="BogInput" type="file" asp-for="ImageName" id="imagename" maxlength="50" />*@
-                    </p>
-
                     <!--Button Should reach out to php page and confirm user or admin access-->
                     <br>
-                    <button name="propAdd" class="btn btn-sm btn-primary" type="submit" value="add">Add</button>
+                    <hr />
+                    <button name="propAdd" class="btn btn-sm btn-success" type="submit" value="add">Add</button>
                     <button name="propReset" class="btn btn-sm btn-primary" type="reset" value="reset">Reset</button>
-                    <a asp-action="BogHome" class="btn btn-sm btn-primary">Home</a>
+                    <a asp-action="BogHome" class="btn btn-sm btn-info">Home</a>
 
                 </div>
             </form>

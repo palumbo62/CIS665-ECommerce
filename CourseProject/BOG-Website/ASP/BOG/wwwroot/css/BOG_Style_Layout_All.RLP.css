@@ -63,7 +63,7 @@ a {
 
     #header h1 {
         color: #007bff;
-        font-size: 1.0em;
+        font-size: 2.0em;
         font-style: italic;
         height: inherit;
         left: 3em;
@@ -184,7 +184,7 @@ footer {
                 margin-bottom: 1.75em;
             }
 
-    #bannerHome button {
+    /*#bannerHome button {
         background-color: #007bff;
         color: white;
         padding: 8px;
@@ -192,7 +192,7 @@ footer {
         border: none;
         cursor: pointer;
         width: 8%;
-    }
+    }*/
     /* Second Banner on Home Page */
 
 #secondBannerHome {
@@ -418,15 +418,15 @@ footer {
 }*/
 
     #secondbannerList form .article-list-vertical-Select button {
-        background-color: #007bff;
         color: white;
+        /*background-color: #007bff;
         padding: 5px 10px;
         margin: 2px 0;
         border: none;
         cursor: pointer;
         width: 7em;
         position: center;
-        margin-left: 9px;
+        margin-left: 9px;*/
     }
     /*----------------- LIST STYLE--------------------*/
 .article-list-vertical {
@@ -581,7 +581,7 @@ footer {
     color: #ffffff;
     padding: 5em 0 10em 10em;
     text-align: center;
-    padding:
+    padding: 0;
     
 }
 
@@ -645,7 +645,7 @@ footer {
     #banner form div.containerRegister label {
         display: inline-block;
         clear: both;
-        float: left;
+        /*float: left;*/
         padding-top: 5px;
         padding-right: 5px;
         text-align: right;
@@ -663,7 +663,7 @@ footer {
     }
 
     #banner form div.containerRegister select {
-        display: inline-block
+        display: inline-block;
         float: none;
         height: 30px;
         width: 10em;
@@ -685,6 +685,10 @@ footer {
     margin-bottom: 2px;
 }
 
+input:read-only {
+    background-color: lightsteelblue;
+}
+
 #banner form .BogRadio {
     display:block;
     width:250px;
@@ -698,7 +702,7 @@ footer {
     width: 700px;
     
     padding: 20px;
-    opacity: 0.9;
+    opacity: 0.95;
     margin-left: auto;
     margin-right: auto;
 }
@@ -710,7 +714,7 @@ footer {
 
 #banner form div.containerAddProp p {
     margin: auto;
-    font-size: 1.1em;
+    font-size: 1.0em;
 }
 
 #banner form div.containerAddProp label {
@@ -727,7 +731,7 @@ footer {
     display: block;
     float:none;
     /*margin: 0;*/
-    margin: 0 0 3px 0;
+    margin: 0 0 5px 0;
     color: black;
 }
 
@@ -745,6 +749,7 @@ footer {
     width: 50%;
     margin-top: 5px;
     color: black;
+    overflow:auto;
 }
 
 #banner form div.containerAddProp input[placeholder] {
@@ -803,8 +808,8 @@ footer {
     margin: 20px 0;
     border: none;
     cursor: pointer;
-    width: 10em;*/
-}
+    width: 10em;
+}*/
 /*--------------------------END OF ADD PROPERTY PAGE------------------------*/ 
 
 /*--------------------------SELECTED VIEW PAGE------------------------*/
@@ -997,7 +1002,7 @@ footer {
 }
 
 
-    #banner form .containerReserve button {
+    /*#banner form .containerReserve button {
         background-color: #007bff;
         color: white;
         padding: 5px 10px;
@@ -1006,7 +1011,7 @@ footer {
         cursor: pointer;
         width: 10em;
         position: center;
-    }
+    }*/
 
 /*VIEW RESERVATIONS PAGE*/
 
@@ -1021,16 +1026,17 @@ footer {
 }
 
 table.blueTable {
-  font-family: Arial, Helvetica, sans-serif;
-  border: 2px solid #090E05;
-  background-color: #CDD0CD;
-  width: 60%;
-  height: 80px;
-  text-align: left;
-  border-collapse: collapse;
-  /*margin-top: -50px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid #090E05;
+    background-color: #CDD0CD;
+    width:50%; 
+    margin: 0 auto; 
+    height: 80px;
+    text-align: center;
+    border-collapse: collapse;
+    /*margin-top: -50px;
   margin-left: 200px;*/
-  opacity: 0.9;
+    opacity: 0.9;
 }
     table.blueTable td, table.blueTable th {
       border: 1px solid #AAAAAA;
@@ -1054,9 +1060,9 @@ table.blueTable {
         color: #0A3305;
     }
 
-table.blueTable tfoot td {
-  font-size:large
-}
+    table.blueTable tfoot td {
+      font-size:large
+    }
 /*--------------------------END RESERVE PAGE------------------------*/
 
 /*--------------------------USER PROFILE PAGE-------------------------------*/
@@ -1102,7 +1108,7 @@ table.blueTable tfoot td {
             float: none;
             margin-top: 5px;
             margin-bottom: 5px;
-            color: black;
+            color: purple;
         }
 
         #bannerRegister form div.usercontainer select {
@@ -1126,9 +1132,19 @@ table.blueTable tfoot td {
         }
 
         #bannerRegister form div.usercontainer input[radio] {
+            float: left;
             margin-top: 80px;
             opacity: unset;
         }
+        #bannerRegister form div.usercontainer span {
+            height: 30px;
+            text-align: left;
+            padding-bottom: 5px;
+        }
+
+
+
+
 /*--------------------------USER PROFILE PAGE-------------------------------*/ 
 
 
@@ -1233,19 +1249,19 @@ form select {
     margin-right: 15px;
 }
 
-.SearchState button {
+/*.SearchState button {
     display: inline-block;
     height: 35px;
     max-width: 50px;
     margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    /*padding-left: 25px;*/
-    /*padding-right: 30px;*/
+    padding-left: 25px;
+    padding-right: 30px;
     background-color: #007bff;
     color: white;
-    /*margin-right: 30px;*/
-}
+    margin-right: 30px;
+}*/
 
 /*-----------BANNER SELECTED VIEW---------*/
 #bannerSelect {
@@ -1385,7 +1401,7 @@ form select {
 }
 
     .article-list-vertical-Select li button {
-        color: #007bff;
+        color: white;
         margin-left: 8px;
     }
 
@@ -1415,3 +1431,8 @@ form select {
     #propertyReviews td {
         color: black;
     }
+
+#validationError {
+    height: 20px;
+    text-align: left;
+}

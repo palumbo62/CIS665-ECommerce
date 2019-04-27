@@ -17,19 +17,23 @@ using BOG.ASP.Libs;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Http;
 
 namespace BOG.ASP.Controllers
 {
     public class HomeController : Controller
     {
-        private BogSharedLib libs = new BogSharedLib();
-
         // Context to access the database
         private PalumboDBContext _bogDbContext;
+
+        // Shared library
+        private BogSharedLib _bogLib;
 
         protected BogAppContext aBogAppContext = new BogAppContext();
 
         protected BogHomeSearch propSearchModel = new BogHomeSearch();
+
 
         // List of property types                                                               
         private IEnumerable<SelectListItem> propTypeList = null; 
@@ -42,6 +46,8 @@ namespace BOG.ASP.Controllers
 
             _bogDbContext = aContext;
 
+            _bogLib = new BogSharedLib();
+
             // Retrieve the propertypes from the DB - this list will be used
             // to autogen the property types drop-down
             propTypeList = _bogDbContext.PropertyTypeT.Distinct().Select(p => new SelectListItem() {
@@ -49,6 +55,8 @@ namespace BOG.ASP.Controllers
                                 Text = p.PropertyTypeName
                             }).ToList();
         }
+
+
 
         private void bogSetTempData(string viewMsg)
         {
@@ -61,6 +69,8 @@ namespace BOG.ASP.Controllers
             //ViewData["PageTitle"] = "Hello and Welcome to BeOurGuest!";
             //TempData["PropTypeList"] = propTypeList;
             //TempData["PropSearchModel"] = propSearchModel;
+
+            _bogLib = new BogSharedLib();
 
             return RedirectToAction(nameof(BogHome));
         }
@@ -80,8 +90,6 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public IActionResult BogHome()
         {
-            string tag;
-
             if (TempData["PageTitle"] != null)
             {
 
@@ -186,7 +194,7 @@ namespace BOG.ASP.Controllers
                 }
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Invalid credentials entereded!", v2 = "BogLoginPage", v3 = "Login?" });
         }
@@ -280,12 +288,15 @@ namespace BOG.ASP.Controllers
                 ViewData["PropSearchModel"] = propSearchModel;
                 ViewData["DBContext"] = _bogDbContext;
 
+                ViewData["ViewAction"] = "BogViewProperty";
+                ViewData["ViewButtonText"] = "View Property";
+
                 // RLP Perform a search
                 return View("BogProperties", 
                             await properties.OrderBy(p => p.PropertyTypeIdFk).ThenBy(p => p.State).ThenBy(p => p.Zipcode).ToListAsync());
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retrieving properties!", v2 = "BogHomePage", v3 = "Retry?" });
         }
@@ -327,19 +338,97 @@ namespace BOG.ASP.Controllers
         ********************************************************
         */
         [HttpGet]
+        public IActionResult BogReservationRetry()
+        {
+            return RedirectToAction(nameof(BogStartReservation), new { propId = TempData["propId"] });
+        }
+
+        [HttpGet]
+        public IActionResult BogStartReservation(int? propId)
+        {
+            // User must be logged in to make a reservation
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid && (propId != null))
+                {
+                    // Get the user id from the Claims auth
+                    var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
+
+                    TempData["propId"] = propId;
+                    TempData["userId"] = Convert.ToInt32(sid.Value);
+
+                    // RLP - Add reservation and check for errors...
+                    return View("BogAddReservation");
+                }
+                else if (propId == null)
+                {
+                    logModelState(ModelState);
+
+                    return RedirectToAction("BogShowAlert", new { v1 = "Oops!A reservation error has occurred!", v2 = "BogProperties", v3 = "Go Back?" });
+                }
+            }
+
+            return RedirectToAction("BogShowAlert", new { v1 = "You must be logged in to make a reservation!", v2 = "BogLoginPage", v3 = "Login?" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BogAddReservationAction(ReservationT aReservation)
+        {
+            _logger.LogDebug($"Reserve Property: Chkin={aReservation.CheckIn} Chkout={aReservation.CheckOut} " +
+                $"GuestCnt={aReservation.GuestCnt} PropId={aReservation.PropertyIdFk}");
+
+            if (ModelState.IsValid && (aReservation != null))
+            {
+                // Need these in case of an error
+                TempData["propId"] = aReservation.PropertyIdFk;
+                TempData["userId"] = aReservation.UserIdFk;
+
+                // Need access to the property details - wasn't include earlier in the process
+                aReservation.PropertyIdFkNavigation = _bogDbContext.PropertyT.Find(aReservation.PropertyIdFk);
+                                
+                // Let's make sure the checkin/checkout dates are valid
+                var now = DateTime.Now;
+
+                if (aReservation.CheckOut <= aReservation.CheckIn)
+                {
+                    return RedirectToAction("BogShowAlert", new { v1 = "CheckOut must occur after CheckIn", v2 = "BogReservationRetry", v3 = "Retry?" });
+                }
+                else if (aReservation.CheckIn < now || aReservation.CheckOut < now)
+                {
+                    return RedirectToAction("BogShowAlert", new { v1 = "CheckIn/CheckOut dates cannot be in the past", v2 = "BogReservationRetry", v3 = "Retry?" });
+                }
+
+                _logger.LogDebug("MUST CHECK FOR OVERLAPS OF REGISTRATION - CANT ALLOW");
+
+                // Go ahead and add the reservation
+                _bogDbContext.Add(aReservation);
+                await _bogDbContext.SaveChangesAsync();
+
+                // RLP - Add reservation and check for errors...
+                return View(aReservation);
+            }
+
+            logModelState(ModelState);
+
+            return RedirectToAction("BogShowAlert", new { v1 = "Oops! A reservation error has occurred!", v2 = "BogReservationPage", v3 = "Retry?" });
+        }
+
+        [HttpGet]
         public IActionResult BogViewReservationsByPropId(int? propId)
         {
             if (propId == null)
             {
-                return RedirectToAction(nameof(Index));
+                // Dont' mess with us
+                return RedirectToAction(nameof(BogHome));
             }
+
+            TempData["ReturnPropId"] = propId;
 
             var reservations = _bogDbContext.ReservationT.Include(p => p.PropertyIdFkNavigation).Where(p => p.PropertyIdFk == propId);
 
             // Only display the reservation table if there are any for the property
             if (reservations.Count() > 0)
             {
-                ViewData["ReturnPropId"] = propId;
 
                 return View("BogViewReservationsByPropId", reservations);
             }
@@ -347,51 +436,35 @@ namespace BOG.ASP.Controllers
             return RedirectToAction("BogShowAlert", new { v1 = "There are no reservations for this property!", v2 = "BogReservationPage", v3 = "Retry?" });
         }
 
-        [HttpPost]
-        public IActionResult BogReserveProperty(ReservationT aReservation)
+        [HttpGet]
+        public IActionResult BogViewReservationsByUserId(int? userId)
         {
-            ViewData["BogAppContext"] = aBogAppContext;
-
-            _logger.LogDebug($"RESERVE PROPERTY HERE! Chkin={aReservation.CheckIn} Chkout={aReservation.CheckOut} " +
-                $"GuestCnt={aReservation.GuestCnt} PropId={aReservation.PropertyIdFk}");
-
-            if (ModelState.IsValid && (aReservation != null))
+            if (userId == null)
             {
-                // RLP - Add reservation and check for errors...
-                return View("index");
+                // Dont' mess with us
+                return RedirectToAction(nameof(BogHome));
             }
 
-            libs.logModelState(ModelState);
+            var now = DateTime.Now;
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! A reservation error has occurred!", v2 = "BogReservationPage", v3 = "Retry?" });
-        }
+            // All reservations with property and user infor
+            var reservations = _bogDbContext.ReservationT.Include(p => p.PropertyIdFkNavigation).Include(u => u.UserIdFkNavigation);
 
-        [HttpPost]
-        public IActionResult BogStartReservation(PropertyT aProperty)
-        {
-            ViewData["BogAppContext"] = aBogAppContext;
-            ViewBag.PropertId = aProperty.PropertyIdPk;
+            // Now filter out just those for the current user
+            var uReservations = reservations.Where(u => u.UserIdFk == userId);
 
-            _logger.LogDebug($"RESERVE PROPERTY HERE! PropId={aProperty.PropertyIdPk}  " +
-                $"Addr={aProperty.Address} City={aProperty.City} State={aProperty.State} Zip={aProperty.Zipcode}");
+            // Finally only get those that are in the future (upcoming)
+            uReservations = uReservations.Where(u => u.CheckIn.Date >= now.Date);
 
-            // User must be logged in to make a reservation
-            if (HttpContext.User.Identity.IsAuthenticated)
+            // Only display the reservation table if there are any for the property
+            if (uReservations.Count() > 0)
             {
-                if (ModelState.IsValid && (aProperty != null))
-                {
-                    // RLP - Add reservation and check for errors...
-                    return View("BogReservationPage");
-                }   
-            }
-            else
-            {
-                return RedirectToAction("BogShowAlert", new { v1 = "You must be logged in to make a reservation!", v2 = "BogLoginPage", v3 ="Login?" });
+                ViewData["ReturnUserId"] = userId;
+
+                return View("BogViewReservationsByUserId", uReservations);
             }
 
-            libs.logModelState(ModelState);
-
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops!A reservation error has occurred!", v2 = "BogProperties", v3 = "Go Back?" });
+            return RedirectToAction("BogShowAlert", new { v1 = "You currently have no upcoming reservations!", v2 = "BogReservationPage", v3 = "Retry?" });
         }
 
         /*
@@ -400,14 +473,14 @@ namespace BOG.ASP.Controllers
         ********************************************************
         */
         [HttpGet]
-        public IActionResult BogRegisterPage() {
+        public IActionResult BogRegister() {
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BogRegisterValidate(UserT aUser, string confPassword) {
+        public async Task<IActionResult> BogRegisterValidate(UserT aUser) {
             _logger.LogCritical("*** NEED TO VALIDATE PASSWORDS BEFORE ADDING USER!");
             _logger.LogCritical("*** NEED TO DISPLAY REGISTRATION COINFIRMATION THEN REDIRECT TO LOGIN PAGE!");
 
@@ -445,9 +518,9 @@ namespace BOG.ASP.Controllers
                 }
             }
 
-            libs.logModelState(ModelState);
+           logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! A reservation error has occurred!", v2 = "BogRegister", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", new { v1 = "Oops! A registration error has occurred!", v2 = "BogRegister", v3 = "Retry?" });
         }
 
 
@@ -472,6 +545,9 @@ namespace BOG.ASP.Controllers
             
             if (ModelState.IsValid && (aProperty != null))
             {
+                // just defaulting the image for now
+                aProperty.ImageName = "Default-House.jpg";
+
                 _bogDbContext.Add(aProperty);
                 await _bogDbContext.SaveChangesAsync();
 
@@ -480,7 +556,7 @@ namespace BOG.ASP.Controllers
                 return View(aProperty);
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred adding property!", v2 = "BogAddProperty", v3 = "Retry?" });
         }
@@ -522,7 +598,7 @@ namespace BOG.ASP.Controllers
                 return View(property);
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
         }
@@ -567,7 +643,7 @@ namespace BOG.ASP.Controllers
                 return RedirectToAction("BogShowAlert", new { v1 = "Property has been successfully deleted!", v2 = "BogDelProperty", v3 = "Delete Another?" });
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
         }
@@ -580,8 +656,18 @@ namespace BOG.ASP.Controllers
         [HttpGet]
         public IActionResult BogUserProfile(int? userId)
         {
-            //var UserID = TempData["UserID"];
-            //var UserID = HttpContext.Session.GetInt32("UserID");
+            if (userId == null)
+            {
+                // Get the user id from the Claims auth
+                var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
+
+                if (!String.IsNullOrEmpty(sid.Type))
+                {
+                    userId = Convert.ToInt32(sid.Value);
+                }
+
+            }
+
             if (userId != null)
             {
                 var user = _bogDbContext.UserT.Find(userId);
@@ -592,7 +678,7 @@ namespace BOG.ASP.Controllers
                 }
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retreiving user profile!", v2 = "BogUserProfile", v3 = "Retry?" });
         }
@@ -600,23 +686,43 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> BogUserProfileAction(UserT aUser)
         {
+            string msg = null;
+
             if (ModelState.IsValid && aUser != null)
             {
                 _bogDbContext.UserT.Update(aUser);
                 await _bogDbContext.SaveChangesAsync();
 
-                TempData["message"] = "User profile has been updated!";
                 return View(aUser);
             }
             else
             {
-                TempData["message"] = "User profile update could not be processed!";
+                if (aUser == null)
+                {
+                    msg = "Oops!  An error occurred retrieving user profile!";
+                }
             }
 
-            libs.logModelState(ModelState);
+            logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retreiving user profile!", v2 = "BogUserProfile", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", new { v1 = msg, v2 = "BogUserProfile", v3 = "Retry?" });
         }
+
+        /*
+        ********************************************************
+        * HANDLE COMMENT EVENTS HERE
+        ********************************************************
+        */
+        public IActionResult BogAddCommentsAction(FormCollection fc)
+        {
+            string comments = fc["Comments"];
+            string rating = fc["Rating"];
+            string userId = fc["UserId"];
+            string propId = fc["PropId"];
+
+            return (View("Index"));
+        }
+        
 
 
         /*
@@ -628,6 +734,30 @@ namespace BOG.ASP.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        /*
+        ********************************************************
+        * GENERAL USE METHODS HERE
+        ********************************************************
+        */
+
+        public void logModelState(ModelStateDictionary model)
+        {
+
+            var errors = model.Values.SelectMany(v => v.Errors);
+
+            try
+            {
+                foreach (ModelError e in errors)
+                {
+                    _logger.LogDebug($"****** ModelError: {e.ErrorMessage}");
+                }
+            }
+            catch
+            {
+                // no _logger available - just bail
+            }
         }
     }
 }

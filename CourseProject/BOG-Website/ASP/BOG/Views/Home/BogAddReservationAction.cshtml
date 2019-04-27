@@ -1,0 +1,75 @@
+﻿@model ReservationT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations";
+
+    var propId = TempData["propId"];
+    var userId = TempData["userId"];
+
+    var prop = Model.PropertyIdFkNavigation;
+
+    var numDays = (Model.CheckOut.Date.Subtract(Model.CheckIn.Date).TotalDays + 1);
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        <!-- Banner -->
+        <section id="bannerList">
+            <h2>Thank you for booking with us.  Your Reservation ID is: @Model.ReservationIdPk</h2>
+        </section>
+
+        <!-- Banner -->
+        <section id="banner">
+            <form>
+                <div class="containerAddProp">
+                    <p>
+                        <label class="BogLabel" asp-for="CheckIn">Check-In</label>
+                        <input class="BogInput" value="@Model.CheckIn.Date.ToString("MM/dd/yyyy")" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="CheckOut">Check-Out</label>
+                        <input class="BogInput" value="@Model.CheckOut.Date.ToString("MM/dd/yyyy")" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel">Number of Days</label>
+                        <input class="BogInput" value="@numDays" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel">Address</label>
+                        <input class="BogInput" value="@prop.Address" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel">City</label>
+                        <input class="BogInput" value="@prop.City" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel">Zipcode</label>
+                        <input class="BogInput" value="@prop.Zipcode" readonly />
+                    </p>
+                    <p>
+                        <label class="BogLabel" asp-for="GuestCnt">Number of Guests</label>
+                        <input class="BogInput" asp-for="GuestCnt" readonly />
+                    </p>
+
+                    <br />
+                    <hr />
+                    <a class="btn btn-sm btn-info" asp-action="BogHome">Home Page</a>
+                </div>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+    </body>
+</html>

@@ -5,10 +5,6 @@
     ViewData["PageTitle"] = "BeOurGuest - Update Profile";
 
     var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
-    var ptList = ViewBag.PropTypeList as IEnumerable<SelectListItem>;
-
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor HttpContextAccessor
 }
 
 <!DOCTYPE html>
@@ -19,7 +15,9 @@
 
         <section id="bannerList">
             <h2>User Account</h2>
-            <a asp-action="BogViewReservationsByUserId" class="btn btn-sm btn-primary">View Reservations</a>
+            <a asp-action="BogViewReservationsByUserId" asp-route-userid="@Model.UserIdPk"
+                class="btn btn-sm btn-primary"
+                title="View your upcoming reservation...">View Reservations</a>
         </section>
 
         <!-- User profile management  -->
@@ -35,6 +33,7 @@
                         <label class="BogLabel" asp-for="Email">Email Address:</label>
                         <input class="BogInput" asp-for="Email" type="text" id="readonly" readonly
                                required autofocus
+                               maxlength="50"
                                size="40"
                                title="Readonly Field">
                     </p>
@@ -83,8 +82,9 @@
                     <partial name="_BogUserAddressView" model="Model" />
 
                     <!--Button Should reach out to php page and confirm user or admin access-->
-                    <br>
-                    <button class="btn btn-sm btn-primary" type="submit" value="update">Update</button>
+                    <br /><hr />
+
+                    <button class="btn btn-sm btn-success" type="submit" value="update">Update</button>
                     <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
                 </div>
             </form>

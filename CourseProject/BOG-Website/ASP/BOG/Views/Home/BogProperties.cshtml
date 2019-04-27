@@ -4,9 +4,6 @@
     Layout = null;
     ViewData["PageTitle"] = "BeOurGuest - Current Properties";
     var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
-
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor HttpContextAccessor
 }
 
 <!DOCTYPE html>
@@ -23,9 +20,7 @@
                 <form asp-action="BogHomeSearch" method="get">
                     <partial name="_BogPropertySearchView" model="@propSearchModel" />
 
-                    <button name="propSearch" type="submit" value="search">
-                        <i class="fa fa-search"></i>
-                    </button>
+                    <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
                 </form>
             </div>
         </section>
@@ -38,36 +33,43 @@
                     <ul class="article-list-vertical">
                         @foreach (var p in Model)
                         {
-                            <li>
-                                <font color='#000000' />
-                                <br />Property ID:&nbsp;    @p.PropertyIdPk
-                                <br />Property Title:&nbsp; @p.PropertyTitle
-                                <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
-                                <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
-                                <br />
-                                <br />Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
-                                <br />
-                                <br />Number of Bedrooms:&nbsp; @p.NumBedrooms
-                                <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
-                                <br />Square Footage:&nbsp; @p.SqFt
-                                <br />Number of Guests:&nbsp; @p.GuestCnt
-                                <br />
-                                <br />Description:&nbsp; @p.Description
-                                <hr>
+                        <li>
+                            <font color='#000000' />
+                            <br />Property ID:&nbsp;    @p.PropertyIdPk
+                            <br />Property Title:&nbsp; @p.PropertyTitle
+                            <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
+                            <br />
+                            <br />Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
+                            <br />
+                            <br />Number of Bedrooms:&nbsp; @p.NumBedrooms
+                            <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
+                            <br />Square Footage:&nbsp; @p.SqFt
+                            <br />Number of Guests:&nbsp; @p.GuestCnt
+                            <br />
+                            <br />Description:&nbsp; @p.Description
+                            <hr>
 
-                                <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk" />
+                            @if (String.IsNullOrEmpty(p.ImageName) || (p.ImageName.Trim().Length == 0))
+                            {
+                                <img src="~/images/default-house.jpg" alt="Property @p.PropertyIdPk Info" />
+                            }
+                            else
+                            {
+                                <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
+                            }
 
-                                <br />
+                            <br />
 
-                                <font color='#000000' />
+                            <font color='#000000' />
 
-                                <br /><br /><br /><br />
+                            <br /><br /><br /><br />
 
-                                <a asp-action="@ViewData["ViewAction"]"
-                                    asp-route-propId="@p.PropertyIdPk" class="btn btn-sm btn-success">@ViewData["ViewButtonText"]</a>
-                                <a asp-action="BogHome" class="btn btn-sm btn-primary">Home Page</a>
-                                <hr />
-                            </li>
+                            <a asp-action="@ViewData["ViewAction"]"
+                               asp-route-propId="@p.PropertyIdPk" class="btn btn-sm btn-success">@ViewData["ViewButtonText"]</a>
+                            <a asp-action="BogHome" class="btn btn-sm btn-primary">Home Page</a>
+                            <hr />
+                        </li>
                         }
                     </ul>
                 </div>

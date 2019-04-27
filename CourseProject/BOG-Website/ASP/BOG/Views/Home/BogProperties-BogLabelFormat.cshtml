@@ -1,0 +1,119 @@
+﻿@model IEnumerable<PropertyT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Current Properties";
+    var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        <section id="bannerList">
+            <h2>Narrow your seach here</h2>
+
+            <!----------Search form inside banner ----------- -->
+            <div class="SearchState">
+                <form asp-action="BogHomeSearch" method="get">
+                    <partial name="_BogPropertySearchView" model="@propSearchModel" />
+
+                    <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Banner -->
+        <section id="secondbannerList">
+            <form asp-action="@ViewData["ViewAction"]" method="post">
+                <!-- Display the property listings -->
+     @*           <div class="containerAddProp">*@
+                    <div class="containerAddProp">
+                        <ul class="article-list-vertical">
+                            @foreach (var p in Model)
+                            {
+                                <li>
+                                    <font color='#000000' />
+                                    <p>
+                                        <label class="BogLabel">Property ID</label>
+                                        <input class="BogInput" value="@p.PropertyIdPk" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Property Title</label>
+                                        <input class="BogInput" value="@p.PropertyTitle" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Property Type</label>
+                                        <input class="BogInput" value="@p.PropertyTypeIdFkNavigation.PropertyTypeName" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Price Per Night</label>
+                                        <input class="BogInput" value="@p.DailyPrice.ToString("c")" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Address</label>
+                                        <input class="BogInput" value="&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Number of Bedrooms</label>
+                                        <input class="BogInput" value="@p.NumBedrooms" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Number of Bathrooms</label>
+                                        <input class="BogInput" value="@p.NumBathrooms" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Square Footage</label>
+                                        <input class="BogInput" value="@p.SqFt" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Number of Guests</label>
+                                        <input class="BogInput" value="@p.GuestCnt" readonly />
+                                    </p>
+
+                                    <p>
+                                        <label class="BogLabel">Description</label>
+                                        <input class="BogInput" value="@p.Description" readonly />
+                                    </p>
+
+                                    <hr>
+
+                                    @if (String.IsNullOrEmpty(p.ImageName) || (p.ImageName.Trim().Length == 0))
+                                    {
+                                        <img src="~/images/default-house.jpg" alt="Property @p.PropertyIdPk Info" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
+                                    }
+
+                                    <br />
+
+                                    <br /><br /><br /><br />
+
+                                    <a asp-action="@ViewData["ViewAction"]"
+                                       asp-route-propId="@p.PropertyIdPk" class="btn btn-sm btn-success">@ViewData["ViewButtonText"]</a>
+                                    <a asp-action="BogHome" class="btn btn-sm btn-primary">Home Page</a>
+                                    <hr />
+                                </li>
+                            }
+                        </ul>
+                    </div>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+    </body>
+</html>

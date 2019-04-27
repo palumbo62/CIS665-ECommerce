@@ -10,29 +10,64 @@
 <html>
     <partial name="_BogHeaderView" />
     <body>
+        <section id="bannerList">
+            <h2>Review User Profile</h2>
+            <h3>User profile has been updated!</h3>
+        </section>
 
         @*Razor block example*@
-        <section id="secondbannerList">
+        <section id="banner">
             <form>
-                <ul class="article-list-vertical-Select">
-                    <li>
-                        <br />
-                        <h1>User profile for 'Email=@Model.Email' has been updated!</h1>
-                        <hr />
-                        <p>
-                            <br />First Name: &nbsp; @Model.FirstName
-                            <br />Last Name: &nbsp; @Model.LastName
-                            <br />Address: &nbsp; @Model.Address
-                            <br />City: &nbsp; @Model.City
-                            <br />State: &nbsp; @Model.State
-                            <br />Zipcode: &nbsp; @Model.Zipcode
-                            <br />Phone Number: ID:&nbsp; @Model.PhoneNumber
-                            <br /><br /><hr />
-                            <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
-                        </p>
-                        <hr />
-                    </li>
-                </ul>
+                <div class="containerAddProp">
+                    <p>
+                        <label class="BogLabel" asp-for="Email">Email Address:</label>
+                        <input class="BogInput" asp-for="Email" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="Password">Password:</label>
+                        <input class="BogInput" asp-for="Password" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="PhoneNumber">Phone Number:</label>
+                        <input class="BogInput" asp-for="PhoneNumber" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="FirstName">First Name:</label>
+                        <input class="BogInput" asp-for="FirstName" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="LastName">Last Name:</label>
+                        <input class="BogInput" asp-for="LastName" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="Address">Address:</label>
+                        <input class="BogInput" asp-for="Address" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="City">City:</label>
+                        <input class="BogInput" asp-for="City" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="State">State:</label>
+                        <input class="BogInput" asp-for="State" readonly />
+                    </p>
+
+                    <p>
+                        <label class="BogLabel" asp-for="Zipcode">Zipcode:</label>
+                        <input class="BogInput" asp-for="Zipcode" readonly />
+                    </p>
+
+                    <hr />
+                    <a asp-action="BogUserProfile" class="btn btn-sm btn-success">More Updates?</a>
+                    <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
+                </div>
             </form>
         </section>
 

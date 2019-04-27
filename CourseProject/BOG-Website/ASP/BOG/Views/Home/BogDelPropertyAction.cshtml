@@ -8,9 +8,6 @@
     var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
     var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
     var ptList = ViewBag.PropTypeList as IEnumerable<SelectListItem>;
-
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor HttpContextAccessor
 }
 
 <!DOCTYPE html>
@@ -45,7 +42,9 @@
                             <br />Description:&nbsp; @Model.Description
                             <br /><br /><br />
 
-                            <a asp-action="BogDelPropertyConfirmed" asp-route-propId="@Model.PropertyIdPk" class="btn btn-sm btn-danger">Confirm Deletion?</a>
+                            <a asp-action="BogDelPropertyConfirmed" 
+                               asp-route-propId="@Model.PropertyIdPk" 
+                               class="btn btn-sm btn-danger">Confirm Deletion?</a>
                             <a asp-action="BogDelProperty" class="btn btn-sm btn-info">Return</a>
                         </p>
                         <hr />

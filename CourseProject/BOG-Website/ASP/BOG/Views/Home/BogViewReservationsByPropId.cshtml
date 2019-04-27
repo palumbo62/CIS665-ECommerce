@@ -2,9 +2,9 @@
 
 @{
     Layout = null;
-    ViewData["PageTitle"] = $"BeOurGuest - Reservations for Property ID: {@ViewData["ReturnPropId"]}";
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations";
     var property = Model.First();
-    var propId = ViewData["ReturnPropId"];
+    var propId = TempData["ReturnPropId"];
 }
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 
         <!-- Banner -->
         <section id="bannerList">
-            <h2>Upcoming Reservations</h2>
+            <h2>Upcoming Reservations for  Property: @prodId</h2>
         </section>
 
         <section id="bannerBlue">
@@ -33,7 +33,7 @@
                     <tr>
                         <th>CheckIn-Date</th>
                         <th>CheckOut-Date</th>
-                        <th>Total Days</th>
+                        <th>Total-Days</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,15 +47,15 @@
                                 @r.CheckOut.Date.ToString("MM/dd/yyyy")
                             </td>
                             <td>
-                                @r.CheckOut.Date  - @r.CheckIn.Date
+                                @(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <br /><br />
+            <br />
             <a asp-action="BogViewProperty" asp-route-propId="@propId" class="btn btn-sm btn-success">Return</a>
-
+            <br /><br />
         </section>
 
         <!-- Display the page footer -->

@@ -4,18 +4,25 @@
 *@
 
 <!----- Address ----------------------------------------------------------->
-<label asp-for="Address">Address:</label>
-<input asp-for="Address" size="50" />
-<span asp-validation-for="Address" class="text-danger"></span>
+<label class="BogLabel" asp-for="Address">Address:</label>
+<input class="BogInput" asp-for="Address"
+       size="30"
+       maxlength="50"
+       pattern="^[a-zA-Z0-9 ']+$"
+       title="Enter home address">
 
 <!----- City ----------------------------------------------------------->
-<label asp-for="City" class="custom-control-inline">City:</label>
-<input asp-for="City" class="form-inline" size="30" />
-<span asp-validation-for="City" class="text-danger"></span>
+<label class="BogLabel" asp-for="City">City:</label>
+<input class="BogInput" asp-for="City"
+       maxlength="30"
+       pattern="^[a-zA-Z ']+$"
+       size="30"
+       title="Enter home city">
+
 
 <!----- State ---------------------------------------------------------->
-<label asp-for="State">State:</label>
-<select asp-for="State" title="Select state">
+<label class="BogLabel" asp-for="State">State:</label>
+<select class="BogInput" asp-for="State" title="Select state">
     <option value="" disabled selected="">Property State</option>
     <option value="AL">Alabama</option>
     <option value="AK">Alaska</option>
@@ -69,8 +76,12 @@
     <option value="WI">Wisconsin</option>
     <option value="WY">Wyoming</option>
 </select>
+<span asp-validation-for="State" class="text-danger"></span>
 
 <!----- ZIP Code ------------------------------------------------------->
-<label asp-for="Zipcode">Zipcode:</label>
-<input asp-for="Zipcode" size="5" />
-<span asp-validation-for="Zipcode" class="text-danger"></span>
+<label class="BogLabel" asp-for="Zipcode">Zipcode:</label>
+<input class="BogInput" asp-for="Zipcode" 
+       size="5" 
+       maxlength="5"
+       pattern="^[0-9]{5}$"
+       title="Enter 5-digit zipcode">

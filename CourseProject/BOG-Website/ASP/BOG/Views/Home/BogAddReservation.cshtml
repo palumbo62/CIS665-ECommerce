@@ -1,0 +1,70 @@
+﻿@model ReservationT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations";
+
+    var propId = TempData["propId"];
+    var userId = TempData["userId"];
+    var now = DateTime.Now;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        <!-- Banner -->
+        <section id="bannerList">
+            <h2>Reservation for Property: @propId</h2>
+        </section>
+
+        <!-- Banner -->
+        <section id="banner">
+            <form action="BogAddReservationAction" method='post'>
+                <div class="containerAddProp">
+                    <input type="hidden" asp-for="UserIdFk" value="@userId" />
+                    <input type="hidden" asp-for="PropertyIdFk" value="@propId" />
+
+                    <p>
+                        <label class="BogLabel" asp-for="CheckIn">CheckIn Date:</label>
+                        <input class="BogInput" type="date" asp-for="CheckIn"
+                               autofocus required
+                               min="@now"
+                               title="Enter Check-in Date" />
+                        <br />
+                    </p>
+
+                        <!----- Check Out Date ------------------------------------------------------->
+                    <p>
+                        <label class="BogLabel" asp-for="CheckOut">CheckOut Date:</label>
+                        <input class="BogInput" type="date" asp-for="CheckOut"
+                               autofocus required
+                               min="@now"
+                               title="Enter Check-out Date" />
+                        <br />
+                    </p>
+
+                        <!----- Number of Guests ----------------------------------------------------->
+                    <p>
+                        <label class="BogLabel" asp-for="GuestCnt"> Number of Guests: </label>
+                        <input class="BogInput" type="number" asp-for="GuestCnt"
+                               maxlength="4"
+                               size="4"
+                               value="1" min="1" max="9999"
+                               title="Enter number of guests" />
+                    </p>
+                    <br />
+                    <hr />
+                    <button class="btn btn-sm btn-success" type="submit">Reserve</button>
+                    <a class="btn btn-sm btn-info" asp-action="BogViewProperty" asp-route-propId="@propId">Cancel</a>
+                </div>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+    </body>
+</html>

@@ -12,18 +12,8 @@ namespace BOG.ASP.Libs
 {
     public class BogSharedLib
     {
-        private PalumboDBContext _bogDbContext;
-
-        private ILogger _logger { get; }
-
         public BogSharedLib()
         {
-
-        }
-        public BogSharedLib(ILogger<Program> logger, PalumboDBContext aContext)
-        {
-            _logger = logger;
-            _bogDbContext = aContext;
         }
 
         public bool validateLogin(BogLoginCreds aLogin)
@@ -33,17 +23,6 @@ namespace BOG.ASP.Libs
 
             // validate the user credentials here
             return (true);
-        }
-
-        public void logModelState(ModelStateDictionary model)
-        {
-            
-            var errors = model.Values.SelectMany(v => v.Errors);
-
-            foreach (ModelError e in errors)
-            {
-                _logger.LogDebug($"****** ModelError: {e.ErrorMessage}");
-            }
         }
     }
 }

@@ -16,6 +16,8 @@
     <title>BeOurGuest - Vacation Rentals</title>
     <link href="~/css/BOG_Style_Layout_All.RLP.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../fonts/css/font-awesome.css">
+
 </head>
 
 <div>
@@ -41,16 +43,38 @@
                 {
                     if (Context.User.IsInRole("Admin"))
                     {
-                        <li class="nav-item dropdown">
-                            <a asp-action="#" style="max-height: 40px" dropdown-toggle" id="navbarDropdown"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-                            <div style="max-height: 40px" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a style="max-height: 40px" asp-action="BogAddProperty" 
-                                    class="dropdown-link" formmethod="get" >Add Property</a>
-                                <a style="max-height: 40px" asp-action="BogDelProperty" 
-                                    class="dropdown-item" formmethod="get" >Delete Property</a>
-                            </div>
+                        <li class="nav-item">
+                            <a asp-action="BogAddProperty">Add Property</a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-action="BogDelProperty">Delete Property</a>
+                        </li>
+
+
+                        @*<li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a asp-action="BogUserProfile" asp-route-userId="@TempData["UserId"]">Account</a>
+                </li>
+
+                    <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown07">
+                        <a style="max-height: 40px" asp-action="BogAddProperty"
+                           class="dropdown-item" formmethod="get">Add Property</a>
+                        <a style="max-height: 40px" asp-action="BogAddProperty"
+                           class="dropdown-item" formmethod="get">Add Property</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a style="max-height: 40px" id="navbarDropdown"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div style="max-height: 40px" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a style="max-height: 40px" asp-action="BogAddProperty"
+                           class="dropdown-item" formmethod="get">Add Property</a>
+                        <a style="max-height: 40px" asp-action="BogDelProperty"
+                           class="dropdown-item" formmethod="get">Delete Property</a>
+                    </div>
+                </li>*@
 
                         @*<li>
                     <div class="dropdown">

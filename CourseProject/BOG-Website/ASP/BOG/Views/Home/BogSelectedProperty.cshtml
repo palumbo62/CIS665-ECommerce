@@ -6,10 +6,9 @@
     var currDate = DateTime.Now.ToString("yyyy-MM-dd");
     var reviews = ViewData["Reviews"] as List<CommentsT>;
 
-    ViewData["PageTitle"] = $"BeOurGuest - Viewing Property {Model.PropertyIdPk}";
+    ViewData["PageTitle"] = $"BeOurGuest - Current Properties";
 
-    @using Microsoft.AspNetCore.Http
-    @inject IHttpContextAccessor HttpContextAccessor
+    string image = (String.IsNullOrEmpty(Model.ImageName) ? "Default-House.jpg" : Model.ImageName);
 }
 
 <!DOCTYPE html>
@@ -20,18 +19,22 @@
 
         <!-- Banner -->
         <section id="bannerList">
-            <h2>Property View</h2>
+            <h2>Property @Model.PropertyIdPk Details</h2>
             <!--<form asp-action="BogReservationPage" method="post"> -->
 
             <form>
-                <a asp-action="BogStartReservation" asp-route-propId="@Model.PropertyIdPk" class="btn btn-success">Reserve</a>
-                <a asp-action="BogViewReservationsByPropId" asp-route-propId="@Model.PropertyIdPk" class="btn btn-primary">View Reservations</a>
-                <button class="btn btn-secondary" asp-action="BogProperties">Cancel</button>
+                <a asp-action="BogStartReservation" 
+                   asp-route-propId="@Model.PropertyIdPk" 
+                   class="btn btn-sm btn-success">Reserve</a>
+                <a asp-action="BogViewReservationsByPropId" 
+                   asp-route-propId="@Model.PropertyIdPk" 
+                   class="btn btn-sm btn-primary">View Reservations</a>
+                <button asp-action="BogProperties"
+                   class="btn btn-sm btn-secondary">Cancel</button>
             </form>
         </section>
 
         <section id="secondbannerList">
-            <form action="BogAddCommentAction" method="post">
                 <ul class="article-list-vertical-Select">
                     <li>
                         <br />
@@ -49,21 +52,26 @@
                             <br />Guest Count: &nbsp; @Model.GuestCnt
                             <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
 
-                            <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
+                            <img src="~/images/@image" alt="Property @Model.PropertyIdPk Specs" />
 
                             <br />Description:&nbsp; @Model.Description
                             <br />
                         </p>
                         <hr />
 
-                        @if (Context.User.Identity.IsAuthenticated)
+                        @if ((Context.User.Identity.IsAuthenticated) && (Context.User.IsInRole("User")))
                         {
                             <!---------------SUBMIT COMMENT---------------------->
-                            <h2>Add Review</h2>
+                            <h1>Add a Review</h1>
+                            <br /><br />
 
-                            <br />
-                            <p>
-                                <label for="RatingID"> Rating: </label>
+                            <form action="BogAddCommentAction" method="post">
+                                <input type="hidden" name="PropId" value="@Model.PropertyIdPk" />
+                                <input type="hidden" name="UserId" value="@TempData["UserId"]"/>
+
+                                @*var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;*@
+
+                                <label for="Rating"> Rating: </label>
                                 <select name="RatingID" id="RatingID" required>
                                     <option value="5">5 - Very Satisfied</option>
                                     <option value="4">4 - Satisfied</option>
@@ -79,15 +87,15 @@
                                        min="1900-01-01" max="@currDate" />
                                 <br />
                                 <br />
-                                <label for="comment">Comment: </label>
-                                <br /><br />
-                                <textarea rows="5" cols="50" 
-                                          name="comments" id="comment" 
+                                <label for="Comments">Comments: </label>
+                                <br />
+                                <textarea rows="3" cols="50"
+                                          name="Comments" id="comment"
                                           placeholder="Enter review comments here..."></textarea>
                                 <br /><br />
-                                <button name="commentSubmit" type="submit" value="submit">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                 <hr>
-                            </p>
+                            </form>
                             <br />
                         }
 
@@ -118,7 +126,6 @@
                         </p>
                     </li>
                 </ul>
-            </form>
         </section>
 
         <!-- Display the page footer -->

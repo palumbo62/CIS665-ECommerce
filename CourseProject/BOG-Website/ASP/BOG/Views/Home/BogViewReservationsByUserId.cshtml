@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ReservationT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations";
+    var property = Model.First();
+    var userId = ViewData["ReturnUserId"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<partial name="_BogHeaderView" />
+<body>
+
+    <!-- Banner -->
+    <section id="bannerList">
+        <h2>Your Upcoming Reservations</h2>
+    </section>
+
+    <section id="bannerBlue">
+        <table class="blueTable" align="center">
+            <thead>
+                <tr>
+                    <th>CheckIn-Date</th>
+                    <th>CheckOut-Date</th>
+                    <th>Total-Days</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zipcode</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.CheckIn.Date.ToString("MM/dd/yyyy")</td>
+                        <td>@r.CheckOut.Date.ToString("MM/dd/yyyy")</td>
+                        <td>@(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)</td>
+                        <td>@r.PropertyIdFkNavigation.Address</td>
+                        <td>@r.PropertyIdFkNavigation.City</td>
+                        <td>@r.PropertyIdFkNavigation.State</td>
+                        <td>@r.PropertyIdFkNavigation.Zipcode</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <a asp-action="BogUserProfile" asp-route-userId="@userId" class="btn btn-sm btn-info">Return</a>
+        <br /><br />
+
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+</body>
+</html>
