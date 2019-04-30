@@ -5,8 +5,10 @@
 
     var currDate = DateTime.Now.ToString("yyyy-MM-dd");
     var reviews = ViewData["Reviews"] as List<CommentsT>;
+    var userId = TempData["userId"];
 
     ViewData["PageTitle"] = $"BeOurGuest - Current Properties";
+    ViewData["ReturnAction"] = "BogSelectedProperty";
 
     string image = (String.IsNullOrEmpty(Model.ImageName) ? "Default-House.jpg" : Model.ImageName);
 }
@@ -23,14 +25,23 @@
             <!--<form asp-action="BogReservationPage" method="post"> -->
 
             <form>
-                <a asp-action="BogStartReservation" 
-                   asp-route-propId="@Model.PropertyIdPk" 
-                   class="btn btn-sm btn-success">Reserve</a>
-                <a asp-action="BogViewReservationsByPropId" 
-                   asp-route-propId="@Model.PropertyIdPk" 
+                @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("User"))
+                {
+                    <a asp-action="BogStartReservation"
+                       asp-route-propId="@Model.PropertyIdPk"
+                       class="btn btn-sm btn-success">Reserve</a>
+                }
+                @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Admin"))
+                {
+                    <a asp-action="BogDelProperty"
+                       asp-route-propId="@Model.PropertyIdPk"
+                       class="btn btn-sm btn-warning">Delete</a>
+                }
+                <a asp-action="BogViewReservationsByPropId"
+                   asp-route-propId="@Model.PropertyIdPk"
                    class="btn btn-sm btn-primary">View Reservations</a>
-                <button asp-action="BogProperties"
-                   class="btn btn-sm btn-secondary">Cancel</button>
+
+                <a asp-action="BogProperties" class="btn btn-sm btn-info">Cancel</a>
             </form>
         </section>
 
@@ -42,7 +53,7 @@
                         <br />
                         <hr />
                         <p>
-                            <br />Property ID:&nbsp; @Model.PropertyIdPk
+                            Property ID:&nbsp; @Model.PropertyIdPk
                             <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
                             <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
                             <br />
@@ -59,20 +70,24 @@
                         </p>
                         <hr />
 
-                        @if ((Context.User.Identity.IsAuthenticated) && (Context.User.IsInRole("User")))
+                        @if (Context.User.Identity.IsAuthenticated)
                         {
                             <!---------------SUBMIT COMMENT---------------------->
                             <h1>Add a Review</h1>
                             <br /><br />
 
-                            <form action="BogAddCommentAction" method="post">
-                                <input type="hidden" name="PropId" value="@Model.PropertyIdPk" />
-                                <input type="hidden" name="UserId" value="@TempData["UserId"]"/>
+                            <form asp-action="BogAddPropertyReview" 
+                                  asp-route-userId="userId" 
+                                  asp-route-propId="propId" 
+                                  asp-route-rating="rating" 
+                                  asp-route-myVisit="myVisit" 
+                                  asp-route-comments="comments" 
+                                  method="get">
+                                <input type="hidden" name="propId" value="@Model.PropertyIdPk" />
+                                <input type="hidden" name="userId" value="@userId"/>
 
-                                @*var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;*@
-
-                                <label for="Rating"> Rating: </label>
-                                <select name="RatingID" id="RatingID" required>
+                                <label for="rating">Rating:</label>
+                                <select name="rating" required>
                                     <option value="5">5 - Very Satisfied</option>
                                     <option value="4">4 - Satisfied</option>
                                     <option value="3">3 - Fair</option>
@@ -81,16 +96,15 @@
                                 </select>
                                 <br />
                                 <br />
-                                <label for="MonthYearVisit"> Date Visited: </label>
-                                <input type="date" name="MonthYearVisit" id="MonthYearVisit"
-                                       required
+                                <label for="myVisit">Date Visited:</label>
+                                <input type="date" name="myVisit" required
                                        min="1900-01-01" max="@currDate" />
                                 <br />
                                 <br />
-                                <label for="Comments">Comments: </label>
+                                <label for="comments">Comments: </label>
                                 <br />
-                                <textarea rows="3" cols="50"
-                                          name="Comments" id="comment"
+                                <textarea rows="5" cols="50"
+                                          name="comments"
                                           placeholder="Enter review comments here..."></textarea>
                                 <br /><br />
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>

@@ -1,4 +1,4 @@
-﻿@model PropertyT;
+﻿@model PropertyT
 
 @{
     Layout = null;
@@ -10,31 +10,32 @@
 <html>
     <partial name="_BogHeaderView" />
     <body>
+        <section id="bannerList">
+            <h1>Property listing 'ID=@Model.PropertyIdPk' has been created!</h1>
+        </section>
 
         @*Razor block example*@
         <section id="secondbannerList">
             <form>
                 <ul class="article-list-vertical-Select">
                     <li>
-                        <br />
-                        <h1>Property listing 'ID=@Model.PropertyIdPk' has been created!</h1>
-                        <hr />
                         <p>
                             <br />Property ID:&nbsp; @Model.PropertyIdPk
                             <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
                             <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
-                            <br />
+                            <br /><hr />
                             <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
                             <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
                             <br />Square Footage:&nbsp; @Model.SqFt
                             <br />Guest Count: &nbsp; @Model.GuestCnt
                             <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
                             <br />
+                            <hr />
 
                             <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
 
                             <br />Description:&nbsp; @Model.Description
-                            <br /><br /><hr />
+                            <br /><br /><hr />&nbsp;
                             <a asp-action="BogAddProperty" class="btn btn-sm btn-primary">Add Another?</a>
                             <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
                         </p>

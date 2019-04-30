@@ -2,9 +2,12 @@
 
 @{
     Layout = null;
+
     ViewData["PageTitle"] = $"BeOurGuest - Reservations";
+
     var property = Model.First();
     var propId = TempData["ReturnPropId"];
+    var returnAction = TempData["ReturnAction"];
 }
 
 <!DOCTYPE html>
@@ -15,7 +18,7 @@
 
         <!-- Banner -->
         <section id="bannerList">
-            <h2>Upcoming Reservations for  Property: @prodId</h2>
+            <h2>Upcoming Reservations for Property @propId</h2>
         </section>
 
         <section id="bannerBlue">
@@ -54,7 +57,7 @@
                 </tbody>
             </table>
             <br />
-            <a asp-action="BogViewProperty" asp-route-propId="@propId" class="btn btn-sm btn-success">Return</a>
+                <a asp-action="@returnAction" asp-route-propId="@propId" class="btn btn-sm btn-primary">Return</a>
             <br /><br />
         </section>
 

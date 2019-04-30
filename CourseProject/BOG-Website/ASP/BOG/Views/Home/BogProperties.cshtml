@@ -3,46 +3,50 @@
 @{
     Layout = null;
     ViewData["PageTitle"] = "BeOurGuest - Current Properties";
+    ViewData["ReturnAction"] = "BogProperties";
+
     var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
 }
 
 <!DOCTYPE html>
 
 <html>
-    <partial name="_BogHeaderView" />
-    <body>
+<partial name="_BogHeaderView" />
+<body>
 
-        <section id="bannerList">
-            <h2>Narrow your seach here</h2>
+    <section id="bannerList">
+        <h2>Narrow your seach here</h2>
 
-            <!----------Search form inside banner ----------- -->
-            <div class="SearchState">
-                <form asp-action="BogHomeSearch" method="get">
-                    <partial name="_BogPropertySearchView" model="@propSearchModel" />
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form asp-action="BogHomeSearch" method="get">
+                <partial name="_BogPropertySearchView" model="@propSearchModel" />
 
-                    <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
-                </form>
-            </div>
-        </section>
+                <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
+            </form>
+        </div>
+    </section>
 
-        <!-- Banner -->
-        <section id="secondbannerList">
-            <form asp-action="@ViewData["ViewAction"]" method="post">
-                <!-- Display the property listings -->
-                <div>
-                    <ul class="article-list-vertical">
-                        @foreach (var p in Model)
-                        {
-                        <li>
-                            <font color='#000000' />
-                            <br />Property ID:&nbsp;    @p.PropertyIdPk
-                            <br />Property Title:&nbsp; @p.PropertyTitle
+    <!-- Banner -->
+    <section id="secondbannerList">
+        <form asp-action="@ViewData["ViewAction"]" method="post">
+            <!-- Display the property listings -->
+            <div>
+                <ul class="article-list-vertical-Select">
+                    @foreach (var p in Model)
+                    {
+                    <li>
+                        <h1>@p.PropertyTitle</h1>
+                        <hr />
+                        <p>
+                            Property ID:&nbsp;    @p.PropertyIdPk
+                            <br />Property Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
                             <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
                             <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
-                            <br />
-                            <br />Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
-                            <br />
-                            <br />Number of Bedrooms:&nbsp; @p.NumBedrooms
+                        </p>
+                        <hr />
+                        <p>
+                            Number of Bedrooms:&nbsp; @p.NumBedrooms
                             <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
                             <br />Square Footage:&nbsp; @p.SqFt
                             <br />Number of Guests:&nbsp; @p.GuestCnt
@@ -58,26 +62,33 @@
                             {
                                 <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
                             }
+                        </p>
 
-                            <br />
+                        <hr />
 
-                            <font color='#000000' />
-
-                            <br /><br /><br /><br />
-
-                            <a asp-action="@ViewData["ViewAction"]"
-                               asp-route-propId="@p.PropertyIdPk" class="btn btn-sm btn-success">@ViewData["ViewButtonText"]</a>
-                            <a asp-action="BogHome" class="btn btn-sm btn-primary">Home Page</a>
-                            <hr />
-                        </li>
+                        @if (!Context.User.Identity.IsAuthenticated || Context.User.IsInRole("User"))
+                        {
+                            <a asp-action="BogViewProperty"
+                               asp-route-propId="@p.PropertyIdPk" 
+                               class="justify-content-center btn btn-sm btn-success">View</a>
                         }
-                    </ul>
-                </div>
-            </form>
-        </section>
+                        else
+                        {
+                            <a asp-action="BogDelPropertyAction"
+                               asp-route-propId="@p.PropertyIdPk"
+                               class="justify-content-center btn btn-sm btn-warning">Delete</a>
+                        }
 
-        <!-- Display the page footer -->
-        <partial name="_BogFooterView" />
+                        <a asp-action="BogHome" class="justify-content-center btn btn-sm btn-primary">Home</a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </form>
+    </section>
 
-    </body>
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
 </html>

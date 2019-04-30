@@ -4,6 +4,7 @@
     Layout = null;
     ViewData["PageTitle"] = "BeOurGuest - Update Profile";
 
+    var pwTitle = ViewData["PasswordTitle"];
     var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
 }
 
@@ -14,10 +15,13 @@
     <body>
 
         <section id="bannerList">
-            <h2>User Account</h2>
+            <h2>Enter profile changes to update</h2>
+            <a asp-action="BogChangePassword" asp-route-userid="@Model.UserIdPk"
+               class="btn btn-sm btn-success"
+               title="Change your password">Change Password</a>
             <a asp-action="BogViewReservationsByUserId" asp-route-userid="@Model.UserIdPk"
-                class="btn btn-sm btn-primary"
-                title="View your upcoming reservation...">View Reservations</a>
+               class="btn btn-sm btn-primary"
+               title="View your upcoming reservation">View Reservations</a>
         </section>
 
         <!-- User profile management  -->
@@ -30,7 +34,7 @@
 
                     <!----- Email Id ---------------------------------------------------------->
                     <p>
-                        <label class="BogLabel" asp-for="Email">Email Address:</label>
+                        <label class="BogLabel" asp-for="Email">Email Address</label>
                         <input class="BogInput" asp-for="Email" type="text" id="readonly" readonly
                                required autofocus
                                maxlength="50"
@@ -41,16 +45,16 @@
                     <!----- Password ---------------------------------------------------------->
                     <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"-->
                     <p>
-                        <label class="BogLabel" asp-for="Password">Password:</label>
+                        <label class="BogLabel" asp-for="Password">Password</label>
                         <input type="password" asp-for="Password" required
                                maxlength="20"
                                size="20"
-                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
+                               title="Enter your password to update profile" />
                     </p>
 
                     <!----- Mobile Number ---------------------------------------------------------->
                     <p>
-                        <label class="BogLabel" asp-for="PhoneNumber">Phone Number:</label>
+                        <label class="BogLabel" asp-for="PhoneNumber">Phone Number</label>
                         <input class="BogInput" type="text" asp-for="PhoneNumber" required
                                maxlength="10"
                                pattern="^[0-9]{10}$"
@@ -60,7 +64,7 @@
 
                     <!----- First Name ---------------------------------------------------------->
                     <p>
-                        <label class="BogLabel" asp-for="FirstName">First Name:</label>
+                        <label class="BogLabel" asp-for="FirstName">First Name</label>
                         <input class="BogInput" type="text" asp-for="FirstName" required
                                maxlength="30"
                                pattern="^[a-zA-Z ']+$"
@@ -70,7 +74,7 @@
 
                     <!----- Last Name ---------------------------------------------------------->
                     <p>
-                        <label class="BogLabel" asp-for="LastName">Last Name:</label>
+                        <label class="BogLabel" asp-for="LastName">Last Name</label>
                         <input class="BogInput" type="text" asp-for="LastName" required
                                maxlength="30"
                                pattern="^[a-zA-Z ']+$"

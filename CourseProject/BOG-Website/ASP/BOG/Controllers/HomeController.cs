@@ -13,27 +13,21 @@ using System.Threading.Tasks;
 
 using BOG.Models;
 using BOG.ASP.Models;
-using BOG.ASP.Libs;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Http;
+using BOG.ASP;
 
-namespace BOG.ASP.Controllers
+namespace BOG.Controllers
 {
     public class HomeController : Controller
     {
         // Context to access the database
         private PalumboDBContext _bogDbContext;
 
-        // Shared library
-        private BogSharedLib _bogLib;
-
-        protected BogAppContext aBogAppContext = new BogAppContext();
-
         protected BogHomeSearch propSearchModel = new BogHomeSearch();
-
 
         // List of property types                                                               
         private IEnumerable<SelectListItem> propTypeList = null; 
@@ -45,8 +39,6 @@ namespace BOG.ASP.Controllers
             _logger = logger;
 
             _bogDbContext = aContext;
-
-            _bogLib = new BogSharedLib();
 
             // Retrieve the propertypes from the DB - this list will be used
             // to autogen the property types drop-down
@@ -66,12 +58,6 @@ namespace BOG.ASP.Controllers
 
         public IActionResult Index()
         {
-            //ViewData["PageTitle"] = "Hello and Welcome to BeOurGuest!";
-            //TempData["PropTypeList"] = propTypeList;
-            //TempData["PropSearchModel"] = propSearchModel;
-
-            _bogLib = new BogSharedLib();
-
             return RedirectToAction(nameof(BogHome));
         }
 
@@ -137,11 +123,6 @@ namespace BOG.ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                // check if login credentials are valid
-
-                //// Try to find the credentials in the database
-                //var aUser = _bogDbContext.UserT.FirstOrDefaultAsync(p => (p.Email == email && p.Password == password));
-
                 // Try to find the credentials in the database
                 var aUser = await _bogDbContext.UserT.FirstOrDefaultAsync(p => (p.Email == email && p.Password == password));
 
@@ -196,7 +177,7 @@ namespace BOG.ASP.Controllers
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Invalid credentials entereded!", v2 = "BogLoginPage", v3 = "Login?" });
+            return RedirectToAction("BogShowAlert", new { v1 = "Invalid credentials entered!", v2 = "BogLoginPage", v3 = "Login?" });
         }
 
 
@@ -219,6 +200,60 @@ namespace BOG.ASP.Controllers
 
         /*
          ********************************************************
+         * HANDLE PASSWORD MANAGEMENT EVENTS HERE
+         ********************************************************
+         */
+        [HttpGet]
+        public IActionResult BogChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BogChangePasswordValidate(BogPassword aPassword)
+        {
+            if (aPassword != null)
+            {
+                // Get current user profile  to validate against current password
+                var currUser = _bogDbContext.UserT.Find(BogGetCurrUserId());
+
+                // Make sure the 'current' password matches the profile, if not bail
+                if (currUser.Password != aPassword.CurrPassword)
+                {
+                    return RedirectToAction("BogShowAlert",
+                                            new { v1 = "Current password is incorrect!", v2 = "BogChangePassword", v3 = "Retry?" });
+                }
+
+                // Now make sure new password matches the confirmation password, if not bail
+                if (aPassword.NewPassword != aPassword.ConfPassword)
+                {
+                    return RedirectToAction("BogShowAlert",
+                                            new { v1 = "New password does not match confirmation password!", v2 = "BogChangePassword", v3 = "Retry?" });
+                }
+
+                // Now make sure new password matches the confirmation password, if not bail
+                if (aPassword.NewPassword == currUser.Password)
+                {
+                    return RedirectToAction("BogShowAlert",
+                                            new { v1 = "New password cannot be the same as current password!", v2 = "BogChangePassword", v3 = "Retry?" });
+                }
+
+                // Look like good to go so update the password
+                currUser.Password = aPassword.NewPassword;
+
+                _bogDbContext.UserT.Update(currUser);
+                await _bogDbContext.SaveChangesAsync();
+
+                return RedirectToAction("BogShowAlert",
+                                        new { v1 = "Password has been changed!", v2 = "BogUserProfile", v3 = "Back to Profile?" });
+            }
+
+            return RedirectToAction("BogShowAlert",
+                                    new { v1 = "Oops! An error has occurred attempting password change!", v2 = "BogChangePassword", v3 = "Retry?" });
+        }
+
+        /*
+         ********************************************************
          * HANDLE PROPERTY SEARCH EVENTS HERE
          ********************************************************
          */
@@ -233,7 +268,9 @@ namespace BOG.ASP.Controllers
                 ViewData["PropSearchModel"] = propSearchModel;
 
                 ViewData["ViewAction"] = "BogViewProperty";
-                ViewData["ViewButtonText"] = "View Property";
+                ViewData["ViewButtonText"] = "View";
+
+                TempData["ReturnAction"] = "BogProperties";
 
                 return View(await properties.ToListAsync());
             }
@@ -289,16 +326,23 @@ namespace BOG.ASP.Controllers
                 ViewData["DBContext"] = _bogDbContext;
 
                 ViewData["ViewAction"] = "BogViewProperty";
-                ViewData["ViewButtonText"] = "View Property";
+                ViewData["ViewButtonText"] = "View";
 
-                // RLP Perform a search
-                return View("BogProperties", 
-                            await properties.OrderBy(p => p.PropertyTypeIdFk).ThenBy(p => p.State).ThenBy(p => p.Zipcode).ToListAsync());
+                // Could be that no properties were found so let user know as well
+                if (properties.Count() > 0)
+                {
+                    return View("BogProperties",
+                                await properties.OrderBy(p => p.PropertyTypeIdFk).ThenBy(p => p.State).ThenBy(p => p.Zipcode).ToListAsync());
+                }
+                else
+                {
+                    return RedirectToAction("BogShowAlert", new { v1 = "No properties were found!", v2 = "BogProperties", v3 = "Retry?" });
+                }
             }
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retrieving properties!", v2 = "BogHomePage", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retrieving properties!", v2 = "BogProperties", v3 = "Retry?" });
         }
 
         [HttpGet]
@@ -306,7 +350,7 @@ namespace BOG.ASP.Controllers
         {
             if (propId == null)
             {
-                return RedirectToAction(nameof(Index));
+                propId = (int)TempData["ReturnPropId"];
             }
 
             // retrieve the selected property
@@ -325,6 +369,9 @@ namespace BOG.ASP.Controllers
 
             ViewData["Reviews"] = await propReviews.ToListAsync();
             ViewData["Reservations"] = await propReservations.ToListAsync();
+            TempData["ReturnAction"] = "BogViewProperty";
+
+            TempData["userId"] = BogGetCurrUserId();
 
             _logger.LogDebug($"VIEW SELECTED PROPERTY DETAILS HERE! ID={property.PropertyIdPk} Addr={property.Address} " +
                 $"City={property.City} State={property.State} Zip={property.Zipcode}");
@@ -352,10 +399,11 @@ namespace BOG.ASP.Controllers
                 if (ModelState.IsValid && (propId != null))
                 {
                     // Get the user id from the Claims auth
-                    var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
+                    //var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
 
                     TempData["propId"] = propId;
-                    TempData["userId"] = Convert.ToInt32(sid.Value);
+                    //TempData["userId"] = Convert.ToInt32(sid.Value);
+                    TempData["userId"] = BogGetCurrUserId();
 
                     // RLP - Add reservation and check for errors...
                     return View("BogAddReservation");
@@ -389,11 +437,11 @@ namespace BOG.ASP.Controllers
                 // Let's make sure the checkin/checkout dates are valid
                 var now = DateTime.Now;
 
-                if (aReservation.CheckOut <= aReservation.CheckIn)
+                if (aReservation.CheckOut.Date <= aReservation.CheckIn.Date)
                 {
                     return RedirectToAction("BogShowAlert", new { v1 = "CheckOut must occur after CheckIn", v2 = "BogReservationRetry", v3 = "Retry?" });
                 }
-                else if (aReservation.CheckIn < now || aReservation.CheckOut < now)
+                else if (aReservation.CheckIn.Date < now.Date || aReservation.CheckOut.Date < now.Date)
                 {
                     return RedirectToAction("BogShowAlert", new { v1 = "CheckIn/CheckOut dates cannot be in the past", v2 = "BogReservationRetry", v3 = "Retry?" });
                 }
@@ -433,7 +481,8 @@ namespace BOG.ASP.Controllers
                 return View("BogViewReservationsByPropId", reservations);
             }
 
-            return RedirectToAction("BogShowAlert", new { v1 = "There are no reservations for this property!", v2 = "BogReservationPage", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "There are no reservations for this property!", v2 = $"{TempData["ReturnAction"]}", v3 = "Go Back?" });
         }
 
         [HttpGet]
@@ -464,7 +513,8 @@ namespace BOG.ASP.Controllers
                 return View("BogViewReservationsByUserId", uReservations);
             }
 
-            return RedirectToAction("BogShowAlert", new { v1 = "You currently have no upcoming reservations!", v2 = "BogReservationPage", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "You currently have no upcoming reservations!", v2 = "BogReservationPage", v3 = "Retry?" });
         }
 
         /*
@@ -514,7 +564,8 @@ namespace BOG.ASP.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("BogShowAlert", new { v1 = $"Email address '{aUser.Email}' has already been taken", v2 = "BogRegisterPage", v3 = "Retry?" });
+                    return RedirectToAction("BogShowAlert", 
+                                            new { v1 = $"Email address '{aUser.Email}' has already been taken", v2 = "BogRegister", v3 = "Retry?" });
                 }
             }
 
@@ -541,8 +592,6 @@ namespace BOG.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> BogAddPropertyAction(PropertyT aProperty)
         {
-            ViewData["BogAppContext"] = aBogAppContext;
-            
             if (ModelState.IsValid && (aProperty != null))
             {
                 // just defaulting the image for now
@@ -561,6 +610,29 @@ namespace BOG.ASP.Controllers
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred adding property!", v2 = "BogAddProperty", v3 = "Retry?" });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BogAddPropertyReview(int userId, int propId, byte rating, DateTime myVisit, String comments)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userId > 0 && propId > 0)
+                {
+                    var aReview = new CommentsT(userId, propId, rating, myVisit, comments);
+
+                    _bogDbContext.Add(aReview);
+                    await _bogDbContext.SaveChangesAsync();
+
+                    aReview.PropertyIdFkNavigation = await _bogDbContext.PropertyT.FindAsync(propId); 
+
+                    return View("BogAddPropertyReviewConfirmed", aReview);
+                }
+            }
+
+            logModelState(ModelState);
+
+            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred adding property review!", v2 = "BogAddProperty", v3 = "Retry?" });
+        }
+
         /*
         ********************************************************
         * HANDLE PROPERTY DELETIONS HERE
@@ -575,7 +647,7 @@ namespace BOG.ASP.Controllers
             ViewData["PropSearchModel"] = propSearchModel;
 
             ViewData["ViewAction"] = "BogDelPropertyAction";
-            ViewData["ViewButtonText"] = "Delete Property";
+            ViewData["ViewButtonText"] = "Delete";
 
             return View("BogProperties", properties.ToList());
         }
@@ -583,8 +655,13 @@ namespace BOG.ASP.Controllers
         [HttpGet]
         public async Task<IActionResult> BogDelPropertyAction(int? propId)
         {
-            if (ModelState.IsValid  && propId != null) 
+            if (ModelState.IsValid)
             {
+                if (propId == null)
+                {
+                    propId = (int)TempData["ReturnPropId"];
+                } 
+
                 // retrieve the selected property
                 var property = await _bogDbContext.PropertyT.Include(p => p.PropertyTypeIdFkNavigation).
                                     Where(p => p.PropertyIdPk == propId).FirstOrDefaultAsync();
@@ -595,6 +672,7 @@ namespace BOG.ASP.Controllers
                     RedirectToAction(nameof(BogHome));
                 }
 
+                TempData["ReturnAction"] = "BogDelPropertyAction";
                 return View(property);
             }
 
@@ -658,14 +736,14 @@ namespace BOG.ASP.Controllers
         {
             if (userId == null)
             {
-                // Get the user id from the Claims auth
-                var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
+                //// Get the user id from the Claims auth
+                //var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
 
-                if (!String.IsNullOrEmpty(sid.Type))
-                {
-                    userId = Convert.ToInt32(sid.Value);
-                }
-
+                //if (!String.IsNullOrEmpty(sid.Type))
+                //{
+                //    userId = Convert.ToInt32(sid.Value);
+                //}
+                userId = BogGetCurrUserId();
             }
 
             if (userId != null)
@@ -741,6 +819,21 @@ namespace BOG.ASP.Controllers
         * GENERAL USE METHODS HERE
         ********************************************************
         */
+        public int? BogGetCurrUserId()
+        {
+            int? userId = null;
+
+            var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
+
+            if (sid != null) {
+                if (!String.IsNullOrEmpty(sid.Type))
+                {
+                    userId = Convert.ToInt32(sid.Value);
+                }
+            }
+
+            return userId;
+        }
 
         public void logModelState(ModelStateDictionary model)
         {

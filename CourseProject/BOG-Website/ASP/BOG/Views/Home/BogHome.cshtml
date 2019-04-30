@@ -1,7 +1,4 @@
 ﻿@{
-    @using Microsoft.AspNetCore.Http;
-    @inject IHttpContextAccessor HttpContextAccessor;
-
     Layout = null;
 
     if (TempData["message"] != null)
@@ -34,7 +31,7 @@
             <div class="SearchState">
                 <form asp-action="BogHomeSearch" method="get">
                     <partial name="_BogPropertySearchView" />
-                    @*<button type="submit" class="btn btn-info"></button>*@
+
                     <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
                 </form>
             </div>
@@ -42,6 +39,5 @@
 
         <!-- Display the page footer -->
         <partial name="_BogFooterView" />
-
     </body>
 </html>

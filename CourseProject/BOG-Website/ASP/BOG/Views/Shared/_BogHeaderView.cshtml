@@ -14,8 +14,8 @@
     <meta name="viewport" content="width=device-width" />
 
     <title>BeOurGuest - Vacation Rentals</title>
-    <link href="~/css/BOG_Style_Layout_All.RLP.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/BOG_Style_Layout_All.RLP.css" rel="stylesheet" />
     <link rel="stylesheet" href="../fonts/css/font-awesome.css">
 
 </head>
@@ -31,7 +31,7 @@
                     <a asp-action="index">Home</a>
                 </li>
                 <li class="nav-item" style="text-decoration:none">
-                    <a asp-action="BogProperties">Properties</a>
+                    <a asp-action="BogProperties">Listings</a>
                 </li>
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
@@ -46,9 +46,9 @@
                         <li class="nav-item">
                             <a asp-action="BogAddProperty">Add Property</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a asp-action="BogDelProperty">Delete Property</a>
-                        </li>
+                        </li>*@
 
 
                         @*<li class="nav-item dropdown">

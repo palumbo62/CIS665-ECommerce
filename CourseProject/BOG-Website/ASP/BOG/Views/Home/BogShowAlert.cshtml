@@ -2,6 +2,8 @@
 
 @{
     Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Alert Message";
+
 }
 
 <!DOCTYPE html>
@@ -11,15 +13,14 @@
     <body>
 
         @*Razor block example*@
-        <section id="bannerList">
+        <section id="bannerAlert">
             <h3 class="alert-heading">@Model.alertMsg</h3>
 
             <br /><br />
             <a class="btn btn-sm btn-warning" asp-action="@Model.retryPage">@Model.buttonText</a>
             <a class="btn btn-sm btn-info" asp-action="BogHome">Home Page</a>
-            <br />
-            <br />
-            <br />
+        </section>
+        <section id="bannerAlertFill">
         </section>
 
         <!-- Display the page footer -->

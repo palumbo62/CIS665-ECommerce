@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    ViewData["PageTitle"] = "BeOurGuest - Registstration Page";
+    ViewData["PageTitle"] = "BeOurGuest - Registration Page";
 
     string confPassword = (string)ViewData["BogConfPassword"];
 }
@@ -14,55 +14,84 @@
 <body>
 
     <section id="bannerList">
-        <h2>Register</h2>
+        <h2>Enter required account information</h2>
     </section>
 
-    @if (TempData["warning"] != null)
-    {
-        <div class="alert alert-warning">@TempData["warning"]</div>
-    }
-
-    <section id="bannerRegister">
+    <section id="banner">
         <form asp-action="BogRegisterValidate">
-            <div asp-validation-summary="ModelOnly" class="text-left text-danger"></div>
-            <div class="usercontainer">
-                <label asp-for="Email">Email:</label>
-                <input asp-for="Email" size="30" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="containerAddProp">
+                <p>
+                    <label class="BogLabel" asp-for="Email">Email Address</label>
+                    <input class="BogInput" type="text" asp-for="Email" required autofocus
+                           maxlength="50"
+                           size="50"
+                           pattern="^[a-zA-Z0-9._]+@@[a-z0-9.-]+\.[a-z]{3,50}$"
+                           title="Enter email address, e.g. johndoe@email.com (max 50 chars)">
+                </p>
 
-                <label asp-for="Password">Password:</label>
-                <input asp-for="Password" size="20" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <!----- Password ------------------------------------------------------->
 
-                <label asp-for="FirstName">First Name:</label>
-                <input asp-for="FirstName" size="30" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <p>
+                    <label class="BogLabel" asp-for="Password">Password</label>
+                    <input class="BogInput" type="password" asp-for="Password" required
+                           pattern="^[a-zA-Z0-9 .!$]{4,20}$"
+                           maxlength="20"
+                           size="20"
+                           title="Must be 4-20 in length using alpha-numeric and the set of [ !.$] characters" />
+                </p>
 
-                <label asp-for="LastName">Last Name:</label>
-                <input asp-for="LastName" size="30" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <p>
+                    <label class="BogLabel" for="confPassword">Confirmation Password</label>
+                    <input class="BogInput" type="password" for="confPassword" 
+                           pattern="^[a-zA-Z0-9 .!$]{4,20}$"
+                           maxlength="20"
+                           size="20"
+                           title="Must match password" />
+                </p>
+
+                <p>
+                    <label class="BogLabel" asp-for="FirstName">First Name</label>
+                    <input class="BogInput" type="text" asp-for="FirstName" required
+                           maxlength="30"
+                           size="30"
+                           pattern="^[a-zA-Z ']{1,30}$"
+                           title="Enter first name">
+                </p>
+
+                <!----- Last Name ------------------------------------------------------>
+                <p>
+                    <label class="BogLabel" asp-for="LastName">Last Name</label>
+                    <input class="BogInput" type="text" asp-for="LastName" required
+                           maxlength="30"
+                           size="30"
+                           pattern="^[a-zA-Z ']{1,30}$"
+                           title="Enter last name">
+                </p>
 
                 <partial name="_BogUserAddressView" model="@Model" />
 
-                <label asp-for="PhoneNumber">Phone Number:</label>
-                <input asp-for="PhoneNumber" size="10" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <p>
+                    <label class="BogLabel" asp-for="PhoneNumber">Phone Number</label>
+                    <input class="BogInput" type="text" asp-for="PhoneNumber" required
+                           maxlength="10"
+                           size="10"
+                           pattern="^[0-9]{10}$"
+                           title="Enter 10-digit phone number">
+                </p>
 
-                <label asp-for="RoleIdFk">User Account</label>
-                <input type="radio" asp-for="RoleIdFk" value="2" checked />
+                <p>
+                    <label class="BogLabel" asp-for="RoleIdFk">User Account</label>
+                    <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="2" checked />
+                </p>
 
-                <label asp-for="RoleIdFk">Admin Accoun:</label>
-                <input type="radio" asp-for="RoleIdFk" value="1" />
+                <p>
+                    <label class="BogLabel" asp-for="RoleIdFk">Admin Account</label>
+                    <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="1" />
+                </p>
 
-                Account Type <%= Html.RadioButton("RoleIdFK","2") %> User
-                <%= Html.RadioButton("RoleIdFk","1") %> Admin <br />
-
-                <div>
-                    <hr />
-                    <button class="btn btn-sm btn-success" type="submit">Create Account</button>
-                    <button class="btn btn-sm btn-primary" type="reset">Reset</button>
-                    <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
-                </div>
+                <hr />
+                <button class="btn btn-sm btn-success" type="submit">Create Account</button>
+                <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
             </div>
         </form>
     </section>

@@ -1,0 +1,74 @@
+﻿@model CommentsT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Property Review";
+
+    DateTime myVisit = DateTime.Now;
+
+    if (Model.MonthYearVisit != null)
+    {
+        myVisit = (DateTime)Model.MonthYearVisit;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<partial name="_BogHeaderView" />
+<body>
+    <section id="bannerList">
+        <h2>Review for Property @Model.PropertyIdFk is confirmed</h2>
+    </section>
+
+    @*Razor block example*@
+    <section id="banner">
+        <form>
+            <div class="containerAddProp">
+                <p>
+                    <label class="BogLabel">Date Submitted</label>
+                    <input class="BogInput" value="@Model.DateSubmitted.Date.ToString("MM/dd/yyyy")" size="12" readonly />
+                </p>
+                <p>
+                    @if (Model.MonthYearVisit != null)
+                    {
+                        <label class="BogLabel">Month/Year of Visit</label>
+                        <input class="BogInput"  value="@myVisit.Date.ToString("MM/yyyy")" size="12" readonly />
+                    }
+                    else
+                    {
+                        <label class="BogLabel">Month/Year of Visit</label>
+                        <input class="BogInput" value="Not Specified" size="12" readonly />
+                    }
+                </p>
+                <p>
+                    <label class="BogLabel">Rating</label>
+                    <input class="BogInput"  value="@Model.Rating" size="2" readonly />
+                </p>
+                <p>
+                    <label class="BogLabel">Review Comments</label>
+                    <textarea class="BogInput" rows="5" cols="50" readonly>@Model.Comments</textarea>
+                </p>
+                <hr />
+                <p>
+                    <label class="BogLabel">Address</label>
+                    <input class="BogInput" value="@Model.PropertyIdFkNavigation.Address" size="30" readonly />
+                    <label class="BogLabel">City</label>
+                    <input class="BogInput" value="@Model.PropertyIdFkNavigation.City" size="30" readonly />
+                    <label class="BogLabel">State</label>
+                    <input class="BogInput" value="@Model.PropertyIdFkNavigation.State" size="2" readonly />
+                    <label class="BogLabel">Zipcode</label>
+                    <input class="BogInput" value="@Model.PropertyIdFkNavigation.Zipcode" size="5" readonly />
+                </p>
+                <hr />
+                <a asp-action="BogViewProperty" asp-route-propId="@Model.PropertyIdFk" class="btn btn-sm btn-success">Add Another?</a>
+                <a asp-action="BogHome" class="btn btn-sm btn-info">Home</a>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>
