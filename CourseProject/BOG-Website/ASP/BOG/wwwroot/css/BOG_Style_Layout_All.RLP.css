@@ -52,7 +52,7 @@ a {
     cursor: default;
     font-size: 1.5em;
     height: 100px;
-    line-height: 6em;
+    line-height: 100px;
     width: 100%;
 }
 
@@ -67,7 +67,7 @@ a {
         height: inherit;
         left: 3em;
         line-height: inherit;
-        margin: 0;
+        margin: auto;
         padding: 0;
         position: absolute;
     }
@@ -160,6 +160,16 @@ footer {
         font-size: 1.5em;
         margin-bottom: 1.75em;
     }
+
+#bannerBlue {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 20em 0em 20em;
+    text-align: center;
+}
 
 #secondBannerHome {
     background-color: dimgray;
@@ -1215,6 +1225,13 @@ form select {
 .PropertyReservationDetails {
     height: 575px;
     width: 600px;
+    overflow: auto;
+    margin: unset;
+}
+
+.PropertyReservationDetailsUser {
+    height: 575px;
+    width: 800px;
     overflow: auto;
     margin: unset;
 }

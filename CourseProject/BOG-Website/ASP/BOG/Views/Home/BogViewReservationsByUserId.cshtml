@@ -16,40 +16,46 @@
     <!-- Banner -->
     <section id="bannerList">
         <h2>Your Upcoming Reservations</h2>
+        <a asp-action="BogUserProfile" class="btn btn-sm btn-info">Return</a>
     </section>
 
-    <section id="bannerBlue">
-        <table class="blueTable" align="center">
-            <thead>
-                <tr>
-                    <th>CheckIn-Date</th>
-                    <th>CheckOut-Date</th>
-                    <th>Total-Days</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zipcode</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var r in Model)
-                {
-                    <tr>
-                        <td>@r.CheckIn.Date.ToString("MM/dd/yyyy")</td>
-                        <td>@r.CheckOut.Date.ToString("MM/dd/yyyy")</td>
-                        <td>@(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)</td>
-                        <td>@r.PropertyIdFkNavigation.Address</td>
-                        <td>@r.PropertyIdFkNavigation.City</td>
-                        <td>@r.PropertyIdFkNavigation.State</td>
-                        <td>@r.PropertyIdFkNavigation.Zipcode</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <br />
-        <a asp-action="BogUserProfile" asp-route-userId="@userId" class="btn btn-sm btn-info">Return</a>
-        <br /><br />
+    <section id="secondbannerList" style="padding: 2em 0 2em">
+        <ul class="article-list-vertical-Select">
+            <li class="PropertyReservationDetailsUser">
 
+                <!-----REVIEWS POPULATED FROM DB------->
+                <h1>Property Reservations</h1><hr />
+                <p>
+                    <table id="propertyReviews">
+                        <thead>
+                            <tr>
+                                <th>CheckIn-Date</th>
+                                <th>CheckOut-Date</th>
+                                <th>#-Days</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zipcode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var r in Model)
+                            {
+                                <tr>
+                                    <td style="width:15%">@r.CheckIn.Date.ToString("MM/dd/yyyy")</td>
+                                    <td style="width:15%">@r.CheckOut.Date.ToString("MM/dd/yyyy")</td>
+                                    <td style="width:10%">@(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)</td>
+                                    <td style="width:25%">@r.PropertyIdFkNavigation.Address</td>
+                                    <td style="width:15%">@r.PropertyIdFkNavigation.City</td>
+                                    <td style="width:8%">@r.PropertyIdFkNavigation.State</td>
+                                    <td style="width:7%">@r.PropertyIdFkNavigation.Zipcode</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </p>
+            </li>
+        </ul>
     </section>
 
     <!-- Display the page footer -->

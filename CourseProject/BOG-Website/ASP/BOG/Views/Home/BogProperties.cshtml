@@ -22,7 +22,8 @@
             <form asp-action="BogHomeSearch" method="get">
                 <partial name="_BogPropertySearchView" model="@propSearchModel" />
 
-                <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
+                <button type="submit" class="btn btn-lg btn-success fa fa-search"></button>
+                <button type="reset" class="btn btn-sm btn-info">Reset</button>
             </form>
         </div>
     </section>
@@ -32,7 +33,6 @@
         <form asp-action="@ViewData["ViewAction"]" method="post">
             <!-- Display the property listings -->
             <div>
-
                 <ul class="article-list-vertical-Select">
                     @foreach (var p in Model)
                     {

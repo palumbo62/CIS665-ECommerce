@@ -18,7 +18,7 @@
             <h2>Enter Property Details</h2>
         </section>
 
-        <section id="banner">
+        <section id="banner" style="padding: 2em 0 4em">
             <form asp-action="BogAddPropertyAction" method='post' enctype="multipart/form-data">
                 <div class="containerAddProp">
                     <p>
@@ -193,10 +193,9 @@
                                   title="Enter a description for this listing"></textarea>
                     </p>
 
-                    <!--Button Should reach out to php page and confirm user or admin access-->
                     <hr />
+                    <!--Button Should reach out to php page and confirm user or admin access-->
                     <button name="propAdd" class="btn btn-sm btn-success" type="submit" value="add">Add</button>
-                    <button name="propReset" class="btn btn-sm btn-primary" type="reset" value="reset">Reset</button>
                     <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
                 </div>
             </form>

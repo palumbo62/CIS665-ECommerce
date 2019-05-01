@@ -7,7 +7,6 @@
     @inject IHttpContextAccessor HttpContextAccessor
 
     var userId = TempData["UserId"];
-    var xUserId = TempData["UserId"];
 }
 
 <head>
@@ -27,12 +26,28 @@
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <ul class="navbar-brand">
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item" style="color: limegreen">
+                        Logged In:&nbsp;
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            @:Admin
+                        }
+                        else
+                        {
+                            @:User
+                        }
+                    </li>
+                }
+
                 <li class="nav-item">
                     <a asp-action="index">Home</a>
                 </li>
                 <li class="nav-item" style="text-decoration:none">
                     <a asp-action="BogProperties">Listings</a>
                 </li>
+
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
@@ -47,44 +62,8 @@
                             <a asp-action="BogAddProperty">Add Property</a>
                         </li>
                         @*<li class="nav-item">
-                            <a asp-action="BogDelProperty">Delete Property</a>
-                        </li>*@
-
-
-                        @*<li class="nav-item dropdown">
-                <li class="nav-item">
-                    <a asp-action="BogUserProfile" asp-route-userId="@TempData["UserId"]">Account</a>
-                </li>
-
-                    <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a style="max-height: 40px" asp-action="BogAddProperty"
-                           class="dropdown-item" formmethod="get">Add Property</a>
-                        <a style="max-height: 40px" asp-action="BogAddProperty"
-                           class="dropdown-item" formmethod="get">Add Property</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a style="max-height: 40px" id="navbarDropdown"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-                    <div style="max-height: 40px" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a style="max-height: 40px" asp-action="BogAddProperty"
-                           class="dropdown-item" formmethod="get">Add Property</a>
-                        <a style="max-height: 40px" asp-action="BogDelProperty"
-                           class="dropdown-item" formmethod="get">Delete Property</a>
-                    </div>
-                </li>*@
-
-                        @*<li>
-                    <div class="dropdown">
-                        <button class="dropbtn">Admin<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-content">
-                            <a asp-action="BogAddProperty" class="dropdown-item">Add Property</a>
-                            <a asp-action="BogDelProperty" class="dropdown-item">Delete Property</a>
-                        </div>
-                    </div>
-                </li>*@
+                                <a asp-action="BogDelProperty">Delete Property</a>
+                            </li>*@
                     }
                     else if (Context.User.IsInRole("User"))
                     {

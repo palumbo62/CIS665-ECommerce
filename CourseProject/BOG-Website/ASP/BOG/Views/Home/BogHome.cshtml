@@ -10,6 +10,8 @@
     {
         ViewData["PageTitle"] = "Welcome to BeOurGuest! Take your time and browse our properties!";
     }
+
+    var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
 }
 
 <!DOCTYPE html>
@@ -17,7 +19,7 @@
 <html>
     <partial name="_BogHeaderView" />
     <body>
-        <section id="bannerHome">
+        <section id="bannerHome" style="padding: 8em 0 22em">
             <!-- Home Page Custom Banner-->
             <h2>BeOurGuest</h2>
             <p>
@@ -32,7 +34,8 @@
                 <form asp-action="BogHomeSearch" method="get">
                     <partial name="_BogPropertySearchView" />
 
-                    <button type="submit" class="btn btn-lg btn-info fa fa-search"></button>
+                    <button type="submit" class="btn btn-lg btn-success fa fa-search"></button>
+                    <button type="reset" class="btn btn-sm btn-info">Reset</button>
                 </form>
             </div>
         </section>

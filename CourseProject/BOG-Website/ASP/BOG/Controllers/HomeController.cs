@@ -3,21 +3,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Http;
 
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
+using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 using BOG.Models;
-using BOG.ASP.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Http;
 using BOG.ASP;
 
 namespace BOG.Controllers
@@ -210,6 +209,7 @@ namespace BOG.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> BogChangePasswordValidate(BogPassword aPassword)
         {
             if (aPassword != null)
@@ -399,10 +399,7 @@ namespace BOG.Controllers
                 if (ModelState.IsValid && (propId != null))
                 {
                     // Get the user id from the Claims auth
-                    //var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
-
                     TempData["propId"] = propId;
-                    //TempData["userId"] = Convert.ToInt32(sid.Value);
                     TempData["userId"] = BogGetCurrUserId();
 
                     // RLP - Add reservation and check for errors...
@@ -529,7 +526,6 @@ namespace BOG.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> BogRegisterValidate(UserT aUser) {
             _logger.LogCritical("*** NEED TO VALIDATE PASSWORDS BEFORE ADDING USER!");
             _logger.LogCritical("*** NEED TO DISPLAY REGISTRATION COINFIRMATION THEN REDIRECT TO LOGIN PAGE!");
@@ -630,7 +626,8 @@ namespace BOG.Controllers
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred adding property review!", v2 = "BogAddProperty", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "Oops! An error has occurred adding property review!", v2 = "BogAddProperty", v3 = "Retry?" });
         }
 
         /*
@@ -678,7 +675,8 @@ namespace BOG.Controllers
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
         }
 
         [HttpGet]
@@ -715,15 +713,18 @@ namespace BOG.Controllers
                 }
                 catch
                 {
-                    return RedirectToAction("BogShowAlert", new { v1 = "Property could not be deleted!", v2 = "BogDelProperty", v3 = "Retry?" });
+                    return RedirectToAction("BogShowAlert", 
+                                            new { v1 = $"Property {propId} could not be deleted!", v2 = "BogDelProperty", v3 = "Retry?" });
                 }
 
-                return RedirectToAction("BogShowAlert", new { v1 = "Property has been successfully deleted!", v2 = "BogDelProperty", v3 = "Delete Another?" });
+                return RedirectToAction("BogShowAlert", 
+                                        new { v1 = $"Property {propId} has been successfully deleted!", v2 = "BogDelProperty", v3 = "Delete Another?" });
             }
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
         }
 
         /*
@@ -758,7 +759,8 @@ namespace BOG.Controllers
 
             logModelState(ModelState);
 
-            return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retreiving user profile!", v2 = "BogUserProfile", v3 = "Retry?" });
+            return RedirectToAction("BogShowAlert", 
+                                    new { v1 = "Oops! An error has occurred retreiving user profile!", v2 = "BogUserProfile", v3 = "Retry?" });
         }
 
         [HttpPost]
@@ -768,6 +770,15 @@ namespace BOG.Controllers
 
             if (ModelState.IsValid && aUser != null)
             {
+                // Make sure the password is correct
+                UserT bUser = _bogDbContext.UserT.Find(BogGetCurrUserId());
+
+                if (aUser.Password != bUser.Password)
+                {
+                    return RedirectToAction("BogShowAlert",
+                                            new { v1 = "Your have entered an invalid password!", v2 = "BogUserProfile", v3 = "Retry?" });
+                }
+
                 _bogDbContext.UserT.Update(aUser);
                 await _bogDbContext.SaveChangesAsync();
 

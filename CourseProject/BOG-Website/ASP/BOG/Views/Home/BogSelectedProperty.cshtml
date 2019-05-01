@@ -22,8 +22,6 @@
         <!-- Banner -->
         <section id="bannerList">
             <h2>Property @Model.PropertyIdPk Details</h2>
-            <!--<form asp-action="BogReservationPage" method="post"> -->
-
             <form>
                 @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("User"))
                 {

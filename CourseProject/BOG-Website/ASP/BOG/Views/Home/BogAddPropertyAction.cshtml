@@ -8,45 +8,57 @@
 <!DOCTYPE html>
 
 <html>
-    <partial name="_BogHeaderView" />
-    <body>
-        <section id="bannerList">
-            <h1>Property listing 'ID=@Model.PropertyIdPk' has been created!</h1>
-        </section>
+<partial name="_BogHeaderView" />
+<body>
+    <section id="bannerList">
+        <h2>Property listing 'ID=@Model.PropertyIdPk' has been created!</h2>
+    </section>
 
-        @*Razor block example*@
-        <section id="secondbannerList">
-            <form>
+    @*Razor block example*@
+    <section id="secondbannerList" style="padding: 2em 0 7em">
+        <form>
+            <div>
                 <ul class="article-list-vertical-Select">
-                    <li>
+                    <li lass="PropertyDetails">
+                        <h1>@Model.PropertyTitle</h1>
+                        <hr />
                         <p>
-                            <br />Property ID:&nbsp; @Model.PropertyIdPk
-                            <br />Property Type:&nbsp; @Model.PropertyTypeIdFkNavigation.PropertyTypeName
-                            <br />Location:&nbsp; @Model.Address &nbsp; @Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
-                            <br /><hr />
-                            <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
-                            <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
-                            <br />Square Footage:&nbsp; @Model.SqFt
-                            <br />Guest Count: &nbsp; @Model.GuestCnt
-                            <br />Daily Price: &nbsp; @Model.DailyPrice.ToString("c")
-                            <br />
-                            <hr />
-
-                            <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk" />
-
-                            <br />Description:&nbsp; @Model.Description
-                            <br /><br /><hr />&nbsp;
-                            <a asp-action="BogAddProperty" class="btn btn-sm btn-primary">Add Another?</a>
-                            <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
+                            Property ID:&nbsp; @Model.PropertyIdPk
+                            <br />Property Address:&nbsp;@Model.Address &nbsp;@Model.City &nbsp; Model.State &nbsp @Model.Zipcode
+                            <br />Property Type:&nbsp;  @Model.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Price Per Night:&nbsp; @Model.DailyPrice.ToString("c")
                         </p>
                         <hr />
+                        <p>
+                            Number of Bedrooms:&nbsp; @Model.NumBedrooms
+                            <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
+                            <br />Square Footage:&nbsp; @Model.SqFt
+                            <br />Number of Guests:&nbsp; @Model.GuestCnt
+                            <br />
+                            <br />Description:&nbsp; @Model.Description
+                            <hr>
+
+                            @if (String.IsNullOrEmpty(Model.ImageName) || (Model.ImageName.Trim().Length == 0))
+                            {
+                                <img src="~/images/default-house.jpg" alt="Property @Model.PropertyIdPk Info" />
+                            }
+                            else
+                            {
+                                <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk Info" />
+                            }
+                        </p>
+
+                        <hr />
+                        <a asp-action="BogAddProperty" class="btn btn-sm btn-primary">Add Another?</a>
+                        <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
                     </li>
                 </ul>
-            </form>
-        </section>
+            </div>
+        </form>
+    </section>
 
-        <!-- Display the page footer -->
-        <partial name="_BogFooterView" />
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
 
-    </body>
+</body>
 </html>
