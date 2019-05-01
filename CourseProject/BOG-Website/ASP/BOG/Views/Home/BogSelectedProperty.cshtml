@@ -45,9 +45,9 @@
             </form>
         </section>
 
-        <section id="secondbannerList">
+        <section id="secondbannerList" style="padding: 2em 0 2em">
                 <ul class="article-list-vertical-Select">
-                    <li>
+                    <li class="PropertyDetails">
                         <br />
                         <h1>@Model.PropertyTitle</h1>
                         <br />
@@ -125,7 +125,7 @@
                                         <th style="width:55%">Comments</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="padding-bottom: 20px">
                                     @foreach (var r in reviews)
                                     {
                                         <tr>

@@ -28,59 +28,60 @@
     </section>
 
     <!-- Banner -->
-    <section id="secondbannerList">
+    <section id="secondbannerList" style="padding: 3em 0 7em">
         <form asp-action="@ViewData["ViewAction"]" method="post">
             <!-- Display the property listings -->
             <div>
+
                 <ul class="article-list-vertical-Select">
                     @foreach (var p in Model)
                     {
-                    <li>
-                        <h1>@p.PropertyTitle</h1>
-                        <hr />
-                        <p>
-                            Property ID:&nbsp;    @p.PropertyIdPk
-                            <br />Property Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
-                            <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
-                            <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
-                        </p>
-                        <hr />
-                        <p>
-                            Number of Bedrooms:&nbsp; @p.NumBedrooms
-                            <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
-                            <br />Square Footage:&nbsp; @p.SqFt
-                            <br />Number of Guests:&nbsp; @p.GuestCnt
-                            <br />
-                            <br />Description:&nbsp; @p.Description
-                            <hr>
+                        <li>
+                            <h1>@p.PropertyTitle</h1>
+                            <hr />
+                            <p>
+                                Property ID:&nbsp;    @p.PropertyIdPk
+                                <br />Property Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
+                                <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
+                                <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
+                            </p>
+                            <hr />
+                            <p>
+                                Number of Bedrooms:&nbsp; @p.NumBedrooms
+                                <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
+                                <br />Square Footage:&nbsp; @p.SqFt
+                                <br />Number of Guests:&nbsp; @p.GuestCnt
+                                <br />
+                                <br />Description:&nbsp; @p.Description
+                                <hr>
 
-                            @if (String.IsNullOrEmpty(p.ImageName) || (p.ImageName.Trim().Length == 0))
+                                @if (String.IsNullOrEmpty(p.ImageName) || (p.ImageName.Trim().Length == 0))
+                                {
+                                    <img src="~/images/default-house.jpg" alt="Property @p.PropertyIdPk Info" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
+                                }
+                            </p>
+
+                            <hr />
+
+                            @if (!Context.User.Identity.IsAuthenticated || Context.User.IsInRole("User"))
                             {
-                                <img src="~/images/default-house.jpg" alt="Property @p.PropertyIdPk Info" />
+                                <a asp-action="BogViewProperty"
+                                   asp-route-propId="@p.PropertyIdPk"
+                                   class="btn btn-sm btn-success">View</a>
                             }
                             else
                             {
-                                <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
+                                <a asp-action="BogDelPropertyAction"
+                                   asp-route-propId="@p.PropertyIdPk"
+                                   class="btn btn-sm btn-warning">Delete</a>
                             }
-                        </p>
 
-                        <hr />
-
-                        @if (!Context.User.Identity.IsAuthenticated || Context.User.IsInRole("User"))
-                        {
-                            <a asp-action="BogViewProperty"
-                               asp-route-propId="@p.PropertyIdPk" 
-                               class="justify-content-center btn btn-sm btn-success">View</a>
-                        }
-                        else
-                        {
-                            <a asp-action="BogDelPropertyAction"
-                               asp-route-propId="@p.PropertyIdPk"
-                               class="justify-content-center btn btn-sm btn-warning">Delete</a>
-                        }
-
-                        <a asp-action="BogHome" class="justify-content-center btn btn-sm btn-primary">Home</a>
-                    </li>
+                            <a asp-action="BogHome" class="btn btn-sm btn-primary">Home</a>
+                        </li>
                     }
                 </ul>
             </div>

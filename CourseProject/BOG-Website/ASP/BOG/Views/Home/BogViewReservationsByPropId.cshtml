@@ -13,55 +13,102 @@
 <!DOCTYPE html>
 
 <html>
-    <partial name="_BogHeaderView" />
-    <body>
+<partial name="_BogHeaderView" />
+<body>
 
-        <!-- Banner -->
-        <section id="bannerList">
-            <h2>Upcoming Reservations for Property @propId</h2>
-        </section>
+    <!-- Banner -->
+    <section id="bannerList">
+        <h2>Upcoming Reservations for Property @propId</h2>
+        <a asp-action="BogViewProperty" asp-route-propId="@propId" class="btn btn-sm btn-info">Return</a>
+    </section>
 
-        <section id="bannerBlue">
-            <table class="blueTable" align="center">
-                <thead>
-                    <tr>
-                        <th height="50px" colspan="3" style="color:darkred; font-size:x-large">
-                            Property Address: &nbsp;&nbsp;
-                            @property.PropertyIdFkNavigation.Address
-                            @property.PropertyIdFkNavigation.City
-                            @property.PropertyIdFkNavigation.State
-                            @property.PropertyIdFkNavigation.Zipcode
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>CheckIn-Date</th>
-                        <th>CheckOut-Date</th>
-                        <th>Total-Days</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var r in Model)
-                    {
+    <section id="secondbannerList" style="padding: 2em 0 2em">
+        <ul class="article-list-vertical-Select">
+            <li class="PropertyReservationDetails">
+
+                <!-----REVIEWS POPULATED FROM DB------->
+                <h1>Property Reservations</h1><hr />
+                <p>
+                    <table id="propertyReviews">
+                        <thead>
+                            <tr>
+                                <th height="50px" colspan="3" style="color:darkred; font-size: large">
+                                    @property.PropertyIdFkNavigation.Address
+                                    @property.PropertyIdFkNavigation.City
+                                    @property.PropertyIdFkNavigation.State
+                                    @property.PropertyIdFkNavigation.Zipcode
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="width:25%">CheckIn-Date</th>
+                                <th style="width:25%">CheckOut-Date</th>
+                                <th style="width:25%">Total-Days</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var r in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @r.CheckIn.Date.ToString("MM/dd/yyyy")
+                                    </td>
+                                    <td>
+                                        @r.CheckOut.Date.ToString("MM/dd/yyyy")
+                                    </td>
+                                    <td>
+                                        @(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </p>
+            </li>
+        </ul>
+    </section>
+
+
+    @*<section id="bannerBlue" style="padding: 2em 0 3em">
+                <table class="blueTable" align="center">
+                    <thead>
                         <tr>
-                            <td>
-                                @r.CheckIn.Date.ToString("MM/dd/yyyy")
-                            </td>
-                            <td>
-                                @r.CheckOut.Date.ToString("MM/dd/yyyy")
-                            </td>
-                            <td>
-                                @(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)
-                            </td>
+                            <th height="50px" colspan="3" style="color:darkred; font-size:x-large">
+                                &nbsp;&nbsp;
+                                @property.PropertyIdFkNavigation.Address
+                                @property.PropertyIdFkNavigation.City
+                                @property.PropertyIdFkNavigation.State
+                                @property.PropertyIdFkNavigation.Zipcode
+                                &nbsp;&nbsp;
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            <br />
-                <a asp-action="@returnAction" asp-route-propId="@propId" class="btn btn-sm btn-primary">Return</a>
-            <br /><br />
-        </section>
+                        <tr>
+                            <th>CheckIn-Date</th>
+                            <th>CheckOut-Date</th>
+                            <th>Total-Days</th>
+                        </tr>
+                    </thead>
 
-        <!-- Display the page footer -->
-        <partial name="_BogFooterView" />
-    </body>
+                    <tbody>
+                        @foreach (var r in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @r.CheckIn.Date.ToString("MM/dd/yyyy")
+                                </td>
+                                <td>
+                                    @r.CheckOut.Date.ToString("MM/dd/yyyy")
+                                </td>
+                                <td>
+                                    @(r.CheckOut.Date.Subtract(r.CheckIn.Date).TotalDays + 1)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>*@
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+</body>
 </html>
