@@ -130,6 +130,9 @@ footer {
         margin: 0;
     }
 
+    footer p div {
+        color: limegreen;
+    }
 /*---------------------------HOME PAGE-------------------------------*/
 /* BannerHome */
 
@@ -1227,6 +1230,18 @@ form select {
     width: 600px;
     overflow: auto;
     margin: unset;
+}
+
+.PropertyReservationDetailsConfirmed {
+    height: 500px;
+    width: 600px;
+    overflow: auto;
+    margin: unset;
+}
+
+.PropertyReservationDetailsConfirmed p img {
+    height: 400px;
+    width: 500px;
 }
 
 .PropertyReservationDetailsUser {

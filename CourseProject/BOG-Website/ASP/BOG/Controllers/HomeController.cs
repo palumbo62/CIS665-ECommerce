@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
 using BOG.Models;
 using BOG.ASP;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BOG.Controllers
 {
@@ -75,6 +76,10 @@ namespace BOG.Controllers
         [HttpPost]
         public IActionResult BogHome()
         {
+            var sid = BogGetCurrUserId();
+            var gn = BogGetCurrUserGivenname();
+            var sn = BogGetCurrUserSurname();
+
             if (TempData["PageTitle"] != null)
             {
 
@@ -137,7 +142,9 @@ namespace BOG.Controllers
 
                     // the Type property can be used to store information about the claim
 
-                    claims.Add(new Claim(ClaimTypes.Name, aUser.FirstName + aUser.LastName));
+                    claims.Add(new Claim(ClaimTypes.Name, aUser.FirstName));
+                    claims.Add(new Claim(ClaimTypes.GivenName, aUser.FirstName));
+                    claims.Add(new Claim(ClaimTypes.Surname, aUser.LastName));
                     claims.Add(new Claim(ClaimTypes.Sid, aUser.UserIdPk.ToString()));
 
                     // role(s) are stored as a comma-delimited list in the "UserRoles" column in the LoginInfo table
@@ -174,14 +181,14 @@ namespace BOG.Controllers
                 }
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Invalid credentials entered!", v2 = "BogLoginPage", v3 = "Login?" });
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> BogLogout()
+        public async Task<RedirectToActionResult> BogLogout()
         {
             ViewData["PropTypeList"] = propTypeList;
             ViewData["PropSearchModel"] = propSearchModel;
@@ -340,7 +347,7 @@ namespace BOG.Controllers
                 }
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred retrieving properties!", v2 = "BogProperties", v3 = "Retry?" });
         }
@@ -407,7 +414,7 @@ namespace BOG.Controllers
                 }
                 else if (propId == null)
                 {
-                    logModelState(ModelState);
+                    LogModelState(ModelState);
 
                     return RedirectToAction("BogShowAlert", new { v1 = "Oops!A reservation error has occurred!", v2 = "BogProperties", v3 = "Go Back?" });
                 }
@@ -428,9 +435,6 @@ namespace BOG.Controllers
                 TempData["propId"] = aReservation.PropertyIdFk;
                 TempData["userId"] = aReservation.UserIdFk;
 
-                // Need access to the property details - wasn't include earlier in the process
-                aReservation.PropertyIdFkNavigation = _bogDbContext.PropertyT.Find(aReservation.PropertyIdFk);
-                                
                 // Let's make sure the checkin/checkout dates are valid
                 var now = DateTime.Now;
 
@@ -449,11 +453,15 @@ namespace BOG.Controllers
                 _bogDbContext.Add(aReservation);
                 await _bogDbContext.SaveChangesAsync();
 
+                // Need access to the property details - wasn't include earlier in the process
+                aReservation.PropertyIdFkNavigation = _bogDbContext.PropertyT.Find(aReservation.PropertyIdFk);
+                aReservation.PropertyIdFkNavigation.PropertyTypeIdFkNavigation = _bogDbContext.PropertyTypeT.Find(aReservation.PropertyIdFkNavigation.PropertyTypeIdFk);
+
                 // RLP - Add reservation and check for errors...
                 return View(aReservation);
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! A reservation error has occurred!", v2 = "BogReservationPage", v3 = "Retry?" });
         }
@@ -575,7 +583,7 @@ namespace BOG.Controllers
                 }
             }
 
-           logModelState(ModelState);
+           LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! A registration error has occurred!", v2 = "BogRegister", v3 = "Retry?" });
         }
@@ -586,6 +594,7 @@ namespace BOG.Controllers
         ********************************************************
         */
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult BogAddProperty()
         {
             ViewData["PropTypeList"] = propTypeList;
@@ -595,6 +604,7 @@ namespace BOG.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BogAddPropertyAction(PropertyT aProperty)
         {
             if (ModelState.IsValid && (aProperty != null))
@@ -610,7 +620,7 @@ namespace BOG.Controllers
                 return View(aProperty);
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! An error has occurred adding property!", v2 = "BogAddProperty", v3 = "Retry?" });
         }
@@ -633,7 +643,7 @@ namespace BOG.Controllers
                 }
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", 
                                     new { v1 = "Oops! An error has occurred adding property review!", v2 = "BogAddProperty", v3 = "Retry?" });
@@ -645,6 +655,7 @@ namespace BOG.Controllers
         ********************************************************
         */
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult BogDelProperty()
         {
             var properties = _bogDbContext.PropertyT.Include(p => p.PropertyTypeIdFkNavigation);
@@ -659,6 +670,7 @@ namespace BOG.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BogDelPropertyAction(int? propId)
         {
             if (ModelState.IsValid)
@@ -682,13 +694,14 @@ namespace BOG.Controllers
                 return View(property);
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", 
                                     new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BogDelPropertyConfirmed(int? propId)
         {
             if (ModelState.IsValid && propId != null)
@@ -730,7 +743,7 @@ namespace BOG.Controllers
                                         new { v1 = $"Property {propId} has been successfully deleted!", v2 = "BogDelProperty", v3 = "Delete Another?" });
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", 
                                     new { v1 = "Oops! An error has occurred deleting property!", v2 = "BogDelProperty", v3 = "Retry?" });
@@ -766,7 +779,7 @@ namespace BOG.Controllers
                 }
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", 
                                     new { v1 = "Oops! An error has occurred retreiving user profile!", v2 = "BogUserProfile", v3 = "Retry?" });
@@ -801,7 +814,7 @@ namespace BOG.Controllers
                 }
             }
 
-            logModelState(ModelState);
+            LogModelState(ModelState);
 
             return RedirectToAction("BogShowAlert", new { v1 = msg, v2 = "BogUserProfile", v3 = "Retry?" });
         }
@@ -839,13 +852,37 @@ namespace BOG.Controllers
         * GENERAL USE METHODS HERE
         ********************************************************
         */
+        public string BogGetCurrUserGivenname()
+        {
+            var gn = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("givenname"));
+
+            if (gn != null) {
+                return gn.Value;
+            }
+
+            return null;
+        }
+
+        public string BogGetCurrUserSurname()
+        {
+            var sn = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("surname"));
+
+            if (sn != null)
+            {
+                return sn.Value;
+            }
+
+            return null;
+        }
+
         public int? BogGetCurrUserId()
         {
             int? userId = null;
 
             var sid = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Contains("sid"));
 
-            if (sid != null) {
+            if (sid != null)
+            {
                 if (!String.IsNullOrEmpty(sid.Type))
                 {
                     userId = Convert.ToInt32(sid.Value);
@@ -855,9 +892,8 @@ namespace BOG.Controllers
             return userId;
         }
 
-        public void logModelState(ModelStateDictionary model)
+        public void LogModelState(ModelStateDictionary model)
         {
-
             var errors = model.Values.SelectMany(v => v.Errors);
 
             try

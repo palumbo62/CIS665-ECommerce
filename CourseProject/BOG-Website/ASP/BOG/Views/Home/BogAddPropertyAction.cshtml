@@ -19,12 +19,12 @@
         <form>
             <div>
                 <ul class="article-list-vertical-Select">
-                    <li lass="PropertyDetails">
+                    <li class="PropertyDetails">
                         <h1>@Model.PropertyTitle</h1>
                         <hr />
                         <p>
                             Property ID:&nbsp; @Model.PropertyIdPk
-                            <br />Property Address:&nbsp;@Model.Address &nbsp;@Model.City &nbsp; Model.State &nbsp @Model.Zipcode
+                            <br />Property Address:&nbsp;@Model.Address &nbsp;@Model.City &nbsp; @Model.State &nbsp; @Model.Zipcode
                             <br />Property Type:&nbsp;  @Model.PropertyTypeIdFkNavigation.PropertyTypeName
                             <br />Price Per Night:&nbsp; @Model.DailyPrice.ToString("c")
                         </p>
@@ -49,8 +49,8 @@
                         </p>
 
                         <hr />
-                        <a asp-action="BogAddProperty" class="btn btn-sm btn-primary">Add Another?</a>
-                        <a asp-action="BogHome" class="btn btn-sm btn-info">Home Page</a>
+                        <a asp-action="BogAddProperty" class="btn btn-sm btn-success">Add Another?</a>
+                        <a asp-action="BogHome" class="btn btn-sm btn-info">Home</a>
                     </li>
                 </ul>
             </div>

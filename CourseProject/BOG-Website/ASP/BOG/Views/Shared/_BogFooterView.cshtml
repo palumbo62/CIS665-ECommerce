@@ -3,10 +3,36 @@
 
 @{
     Layout = null;
+
+    string sid = null;
+    string gname = null;
+    string sname = null;
+
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        sid = Context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid).Value;
+        gname = Context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName).Value;
+        sname = Context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname).Value;
+    }
 }
 
 <footer id="footer">
-    <p>&copy; BeOurGuest, Inc.&nbsp; @DateTime.Now.Year.ToString()&nbsp;&nbsp;<br />Colorado State University&nbsp;CIS665 - Robert Palumbo</p>
+    <p>
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <footer1>
+                [Logged In: &nbsp; @gname @sname &nbsp;&nbsp; ID=@sid]
+            </footer1>
+            <br />
+            @:&copy; BeOurGuest, Inc. &nbsp; @DateTime.Now.Year.ToString()&nbsp; &nbsp;
+            @:Colorado State University &nbsp;&nbsp; CIS665 - Robert Palumbo
+        }
+        else
+        {
+            @:&copy; BeOurGuest, Inc. &nbsp; @DateTime.Now.Year.ToString()&nbsp; &nbsp;
+            @:<br />Colorado State University &nbsp;&nbsp; CIS665 - Robert Palumbo
+        }
+    </p>
 </footer>
 
 
