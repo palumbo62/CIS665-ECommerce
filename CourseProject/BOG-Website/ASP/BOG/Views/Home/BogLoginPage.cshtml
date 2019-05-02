@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
     ViewData["PageTitle"] = "BeOurGuest - Log In Page";
+
+    var loginEmail = TempData["LoginEmail"] != null ? TempData["LoginEmail"] : null;
 }
 
 <!DOCTYPE html>
@@ -11,9 +13,9 @@
         @if (TempData["success"] != null)
         {
             <section id="bannerList">
-                    <h2>
-                        @TempData["success"]
-                    </h2>
+                <h2>
+                    @TempData["success"]
+                </h2>
             </section>
         }
         else
@@ -27,13 +29,16 @@
         <section id="bannerLogin" style="padding: 5em 0 20em">
             <form asp-action="BogLoginValidate" method="post" class="p-3">
                 <div class="containerLogin">
-                    <input type="text" placeholder="Email Address" name="email" required
+                    <input type="text" placeholder="Email Address" name="email" 
+                           value="@loginEmail"
+                           required
                            maxlength="50"
                            size="30"
                            autofocus="autofocus"
                            title="Enter a valid email address"><br>
 
-                    <input type="password" placeholder="Password" name="password" required
+                    <input type="password" placeholder="Password" name="password" 
+                           required
                            maxlength="20"
                            size="20"
                            autofocus="autofocus"

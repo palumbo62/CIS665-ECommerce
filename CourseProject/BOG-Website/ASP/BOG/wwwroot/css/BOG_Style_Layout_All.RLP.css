@@ -633,10 +633,10 @@ footer {
 #BogRadio {
     display: block;
     float: none;
-    width: 30px;
-    height: 30px;
-    padding-left: 15px;
-    padding-top: 30px;
+    width: 22px;
+    height: 22px;
+    /*padding-left: 30px;
+    padding-top: 30px;*/
 }
 
 input:read-only {

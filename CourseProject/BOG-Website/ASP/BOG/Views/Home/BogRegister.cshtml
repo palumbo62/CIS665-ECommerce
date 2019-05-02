@@ -5,6 +5,19 @@
     ViewData["PageTitle"] = "BeOurGuest - Registration Page";
 
     string confPassword = (string)ViewData["BogConfPassword"];
+
+    //var userInfo = new Dictionary<string, string> {
+    //    {"email", Model.Email },
+    //    {"password", Model.Password },
+    //    {"confpassword", confPassword},
+    //    {"firstname", Model.FirstName },
+    //    {"lastname", Model.LastName },
+    //    {"address", Model.Address },
+    //    {"city", Model.City },
+    //    {"state", Model.State },
+    //    {"zipcode", Model.Zipcode.ToString() },
+    //    {"phonenumber", Model.PhoneNumber.ToString() }
+    //};
 }
 
 <!DOCTYPE html>
@@ -18,93 +31,94 @@
     </section>
 
     <section id="banner" style="padding: 5em 0 5em">
-        <form onSubmit="return checkPassword(this)" asp-action="BogRegisterValidate">
-            <div class="containerAddProp">
-                <p>
-                    <label class="BogLabel" asp-for="Email">Email Address</label>
-                    <input class="BogInput" type="text" asp-for="Email" 
-                           required 
-                           autofocus
-                           maxlength="50"
-                           size="50"
-                           pattern="^[a-zA-Z0-9._]+@@[a-z0-9.-]+\.[a-z]{3,50}$"
-                           title="Enter email address, e.g. johndoe@email.com (max 50 chars)">
-                </p>
+         <form onSubmit="return checkPassword(this)" asp-action="BogRegisterValidate"> 
 
-                <!----- Password ------------------------------------------------------->
+             <div class="containerAddProp">
+                 <p>
+                     <label class="BogLabel" asp-for="Email">Email Address</label>
+                     <input class="BogInput" type="text" asp-for="Email"
+                            required
+                            autofocus
+                            maxlength="50"
+                            size="50"
+                            pattern="^[a-zA-Z0-9._]+@@[a-z0-9.-]+\.[a-z]{3,50}$"
+                            title="Enter email address, e.g. johndoe@email.com (max 50 chars)">
+                 </p>
 
-                <p>
-                    <label class="BogLabel" asp-for="Password">Password</label>
-                    <input class="BogInput" type="password" asp-for="Password" name="Password"
-                           required 
-                           autofocus
-                           pattern="^[a-zA-Z0-9 .!$]{4,20}$"
-                           maxlength="20"
-                           size="20"
-                           title="Must be 4-20 in length using alpha-numeric and the set of [ !.$] characters" />
-                </p>
+                 <!----- Password ------------------------------------------------------->
 
-                <p>
-                    <label class="BogLabel" for="ConfPassword">Confirmation Password</label>
-                    <input class="BogInput" type="password" for="confPassword" name="ConfPassword"
-                           required 
-                           autofocus
-                           pattern="^[a-zA-Z0-9 .!$]{4,20}$"
-                           maxlength="20"
-                           size="20"
-                           title="Must match password" />
-                </p>
+                 <p>
+                     <label class="BogLabel" asp-for="Password">Password</label>
+                     <input class="BogInput" type="password" asp-for="Password" name="Password"
+                            required
+                            autofocus
+                            pattern="^[a-zA-Z0-9 .!$]{4,20}$"
+                            maxlength="20"
+                            size="20"
+                            title="Must be 4-20 in length using alpha-numeric and the set of [ !.$] characters" />
+                 </p>
 
-                <p>
-                    <label class="BogLabel" asp-for="FirstName">First Name</label>
-                    <input class="BogInput" type="text" asp-for="FirstName" 
-                           required 
-                           autofocus
-                           maxlength="30"
-                           size="30"
-                           pattern="^[a-zA-Z ']{1,30}$"
-                           title="Enter first name">
-                </p>
+                 <p>
+                     <label class="BogLabel" >Confirmation Password</label>
+                     <input class="BogInput" type="password" name="ConfPassword"
+                            required
+                            autofocus
+                            pattern="^[a-zA-Z0-9 .!$]{4,20}$"
+                            maxlength="20"
+                            size="20"
+                            title="Must match password" />
+                 </p>
 
-                <!----- Last Name ------------------------------------------------------>
-                <p>
-                    <label class="BogLabel" asp-for="LastName">Last Name</label>
-                    <input class="BogInput" type="text" asp-for="LastName" 
-                           required 
-                           autofocus
-                           maxlength="30"
-                           size="30"
-                           pattern="^[a-zA-Z ']{1,30}$"
-                           title="Enter last name">
-                </p>
+                 <p>
+                     <label class="BogLabel" asp-for="FirstName">First Name</label>
+                     <input class="BogInput" type="text" asp-for="FirstName"
+                            required
+                            autofocus
+                            maxlength="30"
+                            size="30"
+                            pattern="^[a-zA-Z ']{1,30}$"
+                            title="Enter first name">
+                 </p>
 
-                <partial name="_BogUserAddressView" model="@Model" />
+                 <!----- Last Name ------------------------------------------------------>
+                 <p>
+                     <label class="BogLabel" asp-for="LastName">Last Name</label>
+                     <input class="BogInput" type="text" asp-for="LastName"
+                            required
+                            autofocus
+                            maxlength="30"
+                            size="30"
+                            pattern="^[a-zA-Z ']{1,30}$"
+                            title="Enter last name">
+                 </p>
 
-                <p>
-                    <label class="BogLabel" asp-for="PhoneNumber">Phone Number</label>
-                    <input class="BogInput" type="text" asp-for="PhoneNumber" 
-                           required 
-                           autofocus
-                           maxlength="10"
-                           size="10"
-                           pattern="^[0-9]{10}$"
-                           title="Enter 10-digit phone number">
-                </p>
+                 <partial name="_BogUserAddressView" model="@Model" />
 
-                <p>
-                    <label class="BogLabel" asp-for="RoleIdFk">User Account</label>
-                    <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="2" checked />
-                </p>
+                 <p>
+                     <label class="BogLabel" asp-for="PhoneNumber">Phone Number</label>
+                     <input class="BogInput" type="text" asp-for="PhoneNumber"
+                            required
+                            autofocus
+                            maxlength="10"
+                            size="10"
+                            pattern="^[0-9]{10}$"
+                            title="Enter 10-digit phone number">
+                 </p>
 
-                <p>
-                    <label class="BogLabel" asp-for="RoleIdFk">Admin Account</label>
-                    <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="1" />
-                </p>
+                 <p>
+                     <label class="BogLabel" style="padding-top:0" asp-for="RoleIdFk">User Account</label>
+                     <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="2" checked />
+                 </p>
 
-                <hr />
-                <button class="btn btn-sm btn-success" type="submit">Create Account</button>
-                <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
-            </div>
+                 <p>
+                     <label class="BogLabel" style="padding-top:0" asp-for="RoleIdFk">Admin Account</label>
+                     <input id="BogRadio" type="radio" asp-for="RoleIdFk" value="1" />
+                 </p>
+
+                 <hr />
+                 <button class="btn btn-sm btn-success" type="submit">Create Account</button>
+                 <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
+             </div>
         </form>
     </section>
 

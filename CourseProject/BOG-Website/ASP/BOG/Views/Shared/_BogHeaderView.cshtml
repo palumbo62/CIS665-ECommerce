@@ -44,12 +44,12 @@
                 <li class="nav-item">
                     <a asp-action="index">Home</a>
                 </li>
-                <li class="nav-item" style="text-decoration:none">
-                    <a asp-action="BogProperties">Listings</a>
-                </li>
 
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
+                    <li class="nav-item" style="text-decoration:none">
+                        <a asp-action="BogProperties">Listings</a>
+                    </li>
                     <li class="nav-item">
                         <a asp-action="BogLoginPage">Login/Register</a>
                     </li>
@@ -58,15 +58,18 @@
                 {
                     if (Context.User.IsInRole("Admin"))
                     {
+                        <li class="nav-item" style="text-decoration:none">
+                            <a asp-action="BogProperties">Delete Property</a>
+                        </li>
                         <li class="nav-item">
                             <a asp-action="BogAddProperty">Add Property</a>
                         </li>
-                        @*<li class="nav-item">
-                                <a asp-action="BogDelProperty">Delete Property</a>
-                            </li>*@
                     }
                     else if (Context.User.IsInRole("User"))
                     {
+                        <li class="nav-item" style="text-decoration:none">
+                            <a asp-action="BogProperties">Listings</a>
+                        </li>
                         // Registered User
                         <li class="nav-item">
                             <a asp-action="BogUserProfile" asp-route-userId="@TempData["UserId"]">Account</a>

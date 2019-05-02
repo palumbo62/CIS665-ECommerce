@@ -522,6 +522,13 @@ namespace BOG.Controllers
         [HttpGet]
         public IActionResult BogRegister() {
 
+            var aUser = TempData.Get<UserT>("UserInfo");
+
+            if (aUser != null)
+            {
+                return View(aUser);
+            }
+
             return View();
         }
 
@@ -540,6 +547,8 @@ namespace BOG.Controllers
                     await _bogDbContext.SaveChangesAsync();
 
                     TempData["success"] = "Account succcessfully created. You may now log in!";
+                    TempData["LoginEmai"] = aUser.Email;
+
                     return View("BogLoginPage");
 
                     // Make sure passwords are good
@@ -560,6 +569,7 @@ namespace BOG.Controllers
                 }
                 else
                 {
+                    TempData.Set("UserInfo", aUser);
                     return RedirectToAction("BogShowAlert", 
                                             new { v1 = $"Email address '{aUser.Email}' has already been taken", v2 = "BogRegister", v3 = "Retry?" });
                 }
@@ -569,7 +579,6 @@ namespace BOG.Controllers
 
             return RedirectToAction("BogShowAlert", new { v1 = "Oops! A registration error has occurred!", v2 = "BogRegister", v3 = "Retry?" });
         }
-
 
         /*
         ********************************************************
