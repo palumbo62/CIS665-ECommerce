@@ -23,7 +23,8 @@
                 <partial name="_BogPropertySearchView" model="@propSearchModel" />
 
                 <button type="submit" class="btn btn-lg btn-success fa fa-search"></button>
-                <button type="reset" class="btn btn-sm btn-info">Reset</button>
+                @*<button type="reset" class="btn btn-sm btn-info">Reset</button>*@
+                @*<a asp-action="#" class="btn btn-sm btn-info" onclick="return clearSearchForm(this)">Reset</a>*@
             </form>
         </div>
     </section>
@@ -93,3 +94,37 @@
 
 </body>
 </html>
+
+<script>
+
+    // Function to check Whether both passwords
+    // is same or not.
+    //function clearSearchForm(form) {
+    //    alert("Reset the property seach form");
+    //    city = form.city.value;
+    //    state = form.state.value;
+    //    zipcode = form.zipcode.value;
+    //    proptype = form.proptype.value;
+
+    //    if (city != null) {
+    //        alert(city);
+    //    }
+    //    if (state != null) {
+    //        alert(state);
+    //    }
+    //    if (zipcode != null) {
+    //        alert(zipcode);
+    //    }
+    //    if (proptype != null) {
+    //        alert(proptype);
+    //    }
+
+    //    console.log(form);
+    //    form.city.value = "";
+    //    form.state.value = "";
+    //    form.zipcode.value = "";
+    //    form.proptype.value = "";
+
+    //    return true;
+    //}
+</script>
