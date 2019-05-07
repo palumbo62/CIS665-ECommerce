@@ -1,0 +1,72 @@
+﻿@*Demo 5 - CRUD Basics; LV*@
+
+@model Demo5.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Tara Store - Product Details</h1>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        @*Removed unwanted columns*@
+
+        <dt class="col-sm-2">
+
+            @*Replaced column names as needed*@
+            Product
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModelName)
+        </dd>
+        <dt class="col-sm-2">
+            Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="https://cisweb.biz.colostate.edu/leov/aspcore/images/productpics/@Model.ProductImage" height="100" width="100" alt="@Model.ModelName" />
+        </dd>
+        <dt class="col-sm-2">
+            Price
+        </dt>
+        <dd class="col-sm-10">
+            @Model.UnitCost.ToString("c")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+       
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Availability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Availability)
+        </dd>
+        <dt class="col-sm-2">
+            Category
+        </dt>
+        <dd class="col-sm-10">
+            @*had to correct column here*@
+            @Html.DisplayFor(model => model.CategoryFkNavigation.CategoryName)
+        </dd>
+        <dt class="col-sm-2">
+            Subcategory
+        </dt>
+        <dd class="col-sm-10">
+            @*had to correct column here*@
+            @Html.DisplayFor(model => model.SubCategoryFkNavigation.SubCategoryName)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*comment out if this is not needed*@
+
+    @*<a asp-action="Edit" asp-route-id="@Model.ProductPk">Edit</a> |*@
+
+    <a asp-action="Index">Back to Product List</a>
+</div>

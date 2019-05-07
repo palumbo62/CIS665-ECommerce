@@ -1,0 +1,106 @@
+﻿@model IEnumerable<HandsOnEx4.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tara Store - Products</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a asp-action="Create" class="btn btn-primary">Add Product</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ModelName)*@
+                Product
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>*@
+            <th class="text-right">
+                @*@Html.DisplayNameFor(model => model.UnitCost)*@
+                Price
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.Availability)
+        </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.CategoryFkNavigation)*@
+                Category
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.SubCategoryFkNavigation)*@
+                Subcategory
+            </th>
+            <th>
+                Image
+            </th>
+            <th colspan="2" class="text-center">
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ModelNumber)
+            </td>*@
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ModelName)*@
+                <a asp-action="Details" asp-route-id="@item.ProductPk">@item.ModelName</a>
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ProductImage)
+            </td>*@
+            <td class="text-right">
+                @*@Html.DisplayFor(modelItem => item.UnitCost)*@
+                @item.UnitCost.ToString("c")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability)
+            </td>*@
+            <td>
+                @*@Html.DisplayFor(modelItem => item.CategoryFkNavigation.CategoryImage)*@
+                @Html.DisplayFor(modelItem => item.CategoryFkNavigation.CategoryName)
+
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.SubCategoryFkNavigation.Description)*@
+                @Html.DisplayFor(modelItem => item.SubCategoryFkNavigation.SubCategoryName)
+            </td>
+            <td>
+                <img src="https://cisweb.biz.colostate.edu/leov/aspcore/images/productthumbnails/@item.Thumbnail" 
+                     height="100" width="100" alt="@item.ModelName" />
+            </td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.ProductPk">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductPk">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductPk">Delete</a>
+            </td>*@
+            <td>
+                <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-id="@item.ProductPk">Edit</a>
+            </td>
+            <td>
+                <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.ProductPk">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

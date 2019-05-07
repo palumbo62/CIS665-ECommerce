@@ -1,0 +1,15 @@
+Extract the files from aspDemo5.zip.
+
+Create a new ASP.Net Core Web Application Project within your ASP folder.  Call the project, Demo5.
+
+Add AdminController.cs to the Controllers folder.
+
+Add Category.cs, Product.cs, SubCategory.cs, TaraStoreContext.cs to the Models folder.
+
+Create a new Views Folder, Admin.
+
+Add Create.cshtml, Delete.cshtml, Details.cshtml, Edit.cshtml, Index.cshtml to the Views/Admin folder.
+
+Replace _Layout.cshtml in the Views/Shared folder.
+
+Replace appsettings.json and Startup.cs in the project (i.e., Demo5) folder.

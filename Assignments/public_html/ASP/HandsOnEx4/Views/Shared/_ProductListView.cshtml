@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@*// Partial view to display a single product - can be shared and used from other Views as needed*@
+@model Product
+@*//Bootstrap card - a container used for holding a collection of data*@
+<div class="card border-primary m-1 p-1">
+    <div class="bg-light p-1">
+        <h4>
+            @Model.ModelName
+            <span style="float: right">
+                @*"~/images/LocalImageFolder"*@
+                <img src="https://cisweb.biz.colostate.edu/leov/aspcore/images/productthumbnails/@Model.Thumbnail"
+                     height="100" width="100" />
+            </span>
+        </h4>
+    </div>
+    <div class="card-text p-1">
+        @Model.Description
+
+        @*Again Bootstrap classes are used here - badge present a container with rounder border corners*@
+        <span class="badge badge-pill badge-primary" style="float:right">
+            @Model.UnitCost.ToString("c")
+        </span>
+    </div>
+</div>

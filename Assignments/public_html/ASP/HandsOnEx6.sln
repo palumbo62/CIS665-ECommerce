@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnEx6", "HOE6\HandsOnEx6.csproj", "{95C23705-0202-4326-858F-DB5B339C000F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95C23705-0202-4326-858F-DB5B339C000F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C23705-0202-4326-858F-DB5B339C000F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C23705-0202-4326-858F-DB5B339C000F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C23705-0202-4326-858F-DB5B339C000F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {758CA0F2-2EB8-4AB9-AEEE-BB91E0290E59}
+	EndGlobalSection
+EndGlobal

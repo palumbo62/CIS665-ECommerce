@@ -1,0 +1,56 @@
+﻿@*Demo 4 - DB Basics; LV;*@
+
+@model PaginatedList<Product>
+
+@{
+    ViewData["Title"] = "Sort Filter Pagination Demo";
+}
+<h1>Tara Store</h1>
+
+<form asp-action="SortFilterPageDemo" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Filter by Product Name: <input maxlength="20" type="text" name="searchName" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a asp-action="SortFilterPageDemo">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                <a asp-action="SortFilterPageDemo" asp-route-sortOrder="@ViewData["NameSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Product</a>
+            </th>
+            <th style="width:5%">
+                <a asp-action="SortFilterPageDemo" asp-route-sortOrder="@ViewData["PriceSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Price</a>
+            </th>
+            <th style="width:65%">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align:right">@p.UnitCost.ToString("c2")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+@*the two variables, set above, are used to enable or disable the Previous and Next Links*@
+
+@*if the Previous link is clicked, the query string will have a value of PageIndex-1
+
+if the Next link is clicked, the query string will have a value of PageIndex+1*@
+
+<a asp-action="SortFilterPageDemo" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="btn btn-default @prevDisabled">Previous</a>
+<a asp-action="SortFilterPageDemo" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"class="btn btn-default @nextDisabled">Next</a>
+

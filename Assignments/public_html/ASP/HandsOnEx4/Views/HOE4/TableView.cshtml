@@ -1,0 +1,34 @@
+﻿@*Look in HOE4 Controller for TableView() method which links to this view*@
+
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Table View";
+}
+
+<h1>Tara Store</h1>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Subcategory</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td>@p.UnitCost.ToString("cs")</td>
+                <td>@p.Description</td>
+                <td>@p.SubCategoryFkNavigation.SubCategoryName</td>
+                <td>@p.CategoryFkNavigation.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -23,12 +23,46 @@
     <p>Department: @Model?.Department</p>
     <p>Salary: @($"{Model?.Salary:c0}")</p>*@
 
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Employees</title>
 </head>
 <body style="font-size: large">
+
+    @* Razor code for switch *@
+    @switch (ViewBag.Experience)
+    {
+        case 0:
+            @: OK
+            break;
+        case 1:
+        case 2:
+        case 3:
+            @: Good
+            break;
+        case 4:
+            @: Great
+            break;
+        default:
+            @: @ViewBag.Experience Years - Excellent
+            break;
+    }
+
+    @if (ViewBag.Expience == 0)
+    {
+        @: OK
+    }
+    else if (ViewBag.Experience <= 4)
+    {
+        <b>GOOD</b> @* if not using HTML use this @: Great*@
+    }
+    else
+    {
+        <b>@ViewBag.Experience Years - Great</b>
+    }
+
 
     <table>
         <thead>

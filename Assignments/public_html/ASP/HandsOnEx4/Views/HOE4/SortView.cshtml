@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Product>;
+
+@{
+    ViewData["Title"] = "Sort View";
+}
+
+<h1>Tara Store - Sorted View of Products</h1>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                <!-- Clickable links for column header and sorting by clicking
+                    asp-route- used for specifyig variables back to the controller
+                    we used sortOrder so asp-route-sortOrder -->
+                <a asp-action="SortView" asp-route-sortOrder="@ViewData["NameSortParam"]">Product Name</a>
+            </th>
+            <th style="width:5%">
+                <!-- Clickable links for column header and sorting by clicking
+                    asp-route- used for specifyig variables back to the controller
+                    we used sortOrder so asp-route-sortOrder -->
+                <a asp-action="SortView" asp-route-sortOrder="@ViewData["PriceSortParam"]">Price</a>
+            </th>
+            <th style="width:65%">
+                <!-- This description column is not sortable -->
+                Description
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align: right">@p.UnitCost.ToString("c")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+ </table>

@@ -1,0 +1,27 @@
+Extract the files from aspDemo7.zip.
+
+Create a new ASP.Net Core Web Application Project within your ASP folder.  Call the project, Demo7.
+
+Add AccountController.cs, RestrictController, ShopController.cs to the Controllers folder.
+
+Replace HomeController.cs in the Controllers folder
+
+Add Cart.cs, CartItem.cs, Category.cs, LoginInfo.cs, LoginInput.cs, Product.cs, SessionExtensions.cs, SubCategory.cs, TaraStoreContext.cs, TblOrder.cs, TblOrderDetail.cs to the Models folder.
+
+Replace Index.cshtml in the Views/Home folder.
+
+Create a new Views Folder, Account.
+
+Add Login.cshtml, SignUp.cshtml to the Views/Account folder.
+
+Create a new Views Folder, Restrict.
+
+Add MyOrders.cshtml, OrderConfirmation.cshtml to the Views/Restrict folder.
+
+Replace _Layout.cshtml in the Views/Shared folder.
+
+Create a new Views Folder, Shop.
+
+Add Details.cshtml, MyCart.cshtml, Search.cshtml to the Views/Shop folder.
+
+Replace appsettings.json and Startup.cs in the project (i.e., Demo7) folder.

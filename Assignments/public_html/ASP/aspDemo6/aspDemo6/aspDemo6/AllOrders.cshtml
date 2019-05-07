@@ -1,0 +1,65 @@
+﻿@*Demo 6 - Authentication Basics; LV*@
+
+@model IEnumerable<LoginInfo>
+
+@{
+    ViewData["Title"] = "All Orders";
+}
+
+<h1>Tara Store - Orders</h1>
+
+@* for each customer *@
+
+@foreach (var cust in Model)
+{
+    <div class="card">
+        
+        <h3>@cust.FullName</h3>
+        
+        <div class="card-body">
+
+            @* for each order of a customer *@
+
+            @foreach (var order in cust.TblOrder)
+            {
+                <h4 class="card-title">@($"{order.OrderDate:d}")</h4>
+
+                <table class="table table-sm table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="70%">
+                                Product
+                            </th>
+                            <th width="15%" class="text-right">
+                                Price
+                            </th>
+                            <th width="15%" class="text-right">
+                                Quanitity
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @* for each order detail of an order of a customer *@
+
+                        @foreach (var detail in order.TblOrderDetail)
+                        {
+                            <tr>
+                                <td>
+                                    @detail.ProductFkNavigation.ModelName
+                                </td>
+                                <td class="text-right">
+                                    @detail.ProductFkNavigation.UnitCost.ToString("c")
+                                </td>
+                                <td class="text-right">
+                                    @detail.Quantity
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
+

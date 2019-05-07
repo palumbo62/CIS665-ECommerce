@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Product>;
+
+@{
+    ViewData["Title"] = "Filter View";
+}
+
+<h1>Tara Store - Filtered View of Products</h1>
+
+<!-- Need input tags to allow user to specify seach otptions
+
+    REMEMBER: GET goes thru the URL
+    -->
+
+<form asp-action="FilterView" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <!-- Value contains what user previously set using ViewData -->
+            Filter by Product Name: <input maxlength="20" type="text" name="searchName"
+                                           value="@ViewData["NameFilter"]" />
+            Minimum Price: <input type="number" min="0" max="1000" name="priceMin"
+                                  value="@ViewData["PriceMinFilter"]" />
+            Maximum Price: <input type="number" min="0" max="1000" name="priceMax"
+                                  value="@ViewData["PriceMaxFilter"]" />
+            <input type="submit" value="search" class="btn btn-default" />
+            <a asp-action="FilterView">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                Product Name   
+            </th>
+            <th style="width:5%">
+                Price
+            </th>
+            <th style="width:65%">
+                <!-- This description column is not sortable -->
+                Description
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align: right">@p.UnitCost.ToString("c")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

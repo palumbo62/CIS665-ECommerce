@@ -1,0 +1,44 @@
+﻿@*Demo 4 - DB Basics; LV;*@
+
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Filter Demo";
+}
+<h1>Tara Store</h1>
+<form asp-action="FilterDemo" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Filter by Product Name: <input maxlength="20" type="text" name="searchName" value="@ViewData["NameFilter"]" />
+            Minimum Price: <input type="number" min="0" max="1000" name="priceMin" value="@ViewData["PriceMinFilter"]" />
+            Maximum Price: <input type="number" min="0" max="1000" name="priceMax" value="@ViewData["PriceMaxFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a asp-action="FilterDemo">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                Product
+            </th>
+            <th style="width:5%">
+                Price
+            </th>
+            <th style="width:65%">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align:right">@p.UnitCost.ToString("c2")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

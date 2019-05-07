@@ -1,0 +1,36 @@
+﻿@*Demo 4 - DB Basics; LV;*@
+
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Sort Demo";
+}
+
+<h1>Tara Store</h1>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+
+                @*ViewData elements are used to set up the hyperlinks with appropriate query string values*@
+
+                <a asp-action="SortDemo" asp-route-sortOrder="@ViewData["NameSortParam"]">Product</a>
+            </th>
+            <th style="width:5%">
+                <a asp-action="SortDemo" asp-route-sortOrder="@ViewData["PriceSortParam"]">Price</a>
+            </th>
+            <th style="width:65%">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align:right">@p.UnitCost.ToString("c2")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,33 @@
+﻿@*Demo 4 - DB Basics; LV;*@
+
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Table View";
+}
+
+<h1>Tara Store</h1>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Description</th>
+            <th>Subcategory</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td>@p.UnitCost.ToString("c2")</td>
+                <td>@p.Description</td>
+                <td>@p.SubCategoryFkNavigation.SubCategoryName</td>
+                <td>@p.CategoryFkNavigation.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

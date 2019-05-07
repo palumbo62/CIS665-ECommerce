@@ -23,6 +23,10 @@ namespace HandsOnEx.Controllers
             Employee[] employees = Employee.GetEmployees();
 
             //return View(employees[0]);
+
+            // 4.9.2019  dynamic property passed to the view
+            ViewBag.Experience = 5;
+
             return View(employees);
         }
     }

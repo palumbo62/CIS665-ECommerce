@@ -1,0 +1,54 @@
+﻿@model LoginInfo
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<h1>Sign Up for an Account</h1>
+
+@* If username already exists*@
+
+@if (ViewData["message"] != null)
+{
+    <div class="alert alert-danger">@ViewData["message"]</div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignUp" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label">Password</label>
+                <input asp-for="UserPassword" class="form-control" />
+                <span asp-validation-for="UserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label">Full Name</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create Account" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@{
+    ViewData["Title"] = "SignUp";
+}
+

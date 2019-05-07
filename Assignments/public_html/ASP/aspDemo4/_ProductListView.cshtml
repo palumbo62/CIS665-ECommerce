@@ -1,0 +1,25 @@
+﻿@*Demo 4 - DB Basics; LV;
+    If the same content is used in multiple views, it can be abstracted to a Partial View
+    The Partial View can then be embeded into another view
+    This avoids duplicating the same content in multiple views*@
+
+@model Product
+
+<div class="card border-primary m-1 p-1">
+    <div class="bg-light p-1">
+        <h4>
+            @Model.ModelName
+            <span style="float:right">
+                <img src="https://cisweb.biz.colostate.edu/leov/aspcore/images/productthumbnails/@Model.Thumbnail" height="100" width="100" />
+                @*if the images stored under wwwroot/images, a relative src could be provided as follows:
+                    <img src="~/images/@p.Thumbnail" />*@
+            </span>
+        </h4>
+    </div>
+    <div class="card-text p-1">
+        @Model.Description
+        <span class="badge badge-pill badge-primary" style="float:right">
+            @Model.UnitCost.ToString("c")
+        </span>
+    </div>
+</div>

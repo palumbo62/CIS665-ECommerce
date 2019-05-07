@@ -1,0 +1,48 @@
+﻿@*Demo 4 - DB Basics; LV;*@
+
+@model PaginatedList<Product>
+
+@{
+    ViewData["Title"] = "Pagination Demo";
+}
+<h1>Tara Store</h1>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                Product
+            </th>
+            <th style="width:5%">
+                Price
+            </th>
+            <th style="width:65%">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ModelName</td>
+                <td style="text-align:right">@p.UnitCost.ToString("c2")</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*these two variables are set using the PaginatedList object's HasPreviousPage and HasNextPage properties*@
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+@*the two variables, set above, are used to enable or disable the Previous and Next Links*@
+
+@*if the Previous link is clicked, the query string will have a value of PageIndex-1
+
+if the Next link is clicked, the query string will have a value of PageIndex+1*@
+
+<a asp-action="PaginationDemo" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Previous</a>
+<a asp-action="PaginationDemo" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next</a>
+
