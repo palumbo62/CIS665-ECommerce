@@ -1247,8 +1247,10 @@ form select {
 .PropertyReservationDetailsUser {
     height: 575px;
     width: 800px;
+    /*height: 60%;
+    width: 120%;*/
     overflow: auto;
-    margin: unset;
+    margin: 0;
 }
 
 
