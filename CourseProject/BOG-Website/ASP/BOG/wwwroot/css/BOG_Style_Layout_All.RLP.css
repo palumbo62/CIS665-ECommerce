@@ -1004,9 +1004,10 @@ form select {
 .SearchState label {
     display: inline-block;
     font-size: 16pt;
-    margin-left: 20px;
-    margin-right: 5px;
+    /*margin-left: 20px;
+    margin-right: 5px;*/
     color: white;
+    padding-left: 5px;
     text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
 }
 
@@ -1024,7 +1025,12 @@ form select {
     /*padding-right: 30px;*/
     background-color: white;
     color: black;
-    margin-right: 15px;
+    /*margin-right: 15px;*/
+}
+
+.SearchState button {
+    margin-left: 15px;
+    margin-bottom: 3px;
 }
 
 /*.SearchState button {
