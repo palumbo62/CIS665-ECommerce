@@ -1,0 +1,41 @@
+﻿@model RPFinalExam.Models.NhlPlayer
+
+@{
+    ViewData["Title"] = "NHL Add Player";
+}
+
+<h1>NHL Add Player</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NhlAddPlayer" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NhlTeamFk" class="control-label">Team</label>
+                <select asp-for="NhlTeamFk" class="form-control" asp-items="ViewBag.NhlTeamFk"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NhlPlayerName" class="control-label">Player Name</label>
+                <input asp-for="NhlPlayerName" class="form-control" />
+                <span asp-validation-for="NhlPlayerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NhlPlayerAge" class="control-label">Age</label>
+                <input asp-for="NhlPlayerAge" class="form-control" />
+                <span asp-validation-for="NhlPlayerAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NhlPlayPosition" class="control-label">Position</label>
+                <input asp-for="NhlPlayPosition" class="form-control" />
+                <span asp-validation-for="NhlPlayPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

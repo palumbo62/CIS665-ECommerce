@@ -1,0 +1,25 @@
+﻿@model FilterInfo;
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    var teamList = ViewData["teamList"] as IEnumerable<SelectListItem>;
+}
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<label asp-for="teamFk" style="width:100px">Team Name: </label>
+@Html.DropDownList("teamFk", teamList, "Select")
+
+<label asp-for="playerName" style="width:100px">Player Name:</label>
+<input asp-for="playerName" type="text" name="playerName" />
+<span asp-validation-for="playerName" class="text-danger"></span>
+
+<label asp-for="playerAge" style="width:45px">Age:</label>
+<input asp-for="playerAge" type="text" name="playerAge" size="3"/>
+<span asp-validation-for="playerAge" class="text-danger"></span>
+
+<label asp-for="playerPos" style="width:65px">Position:</label>
+<input asp-for="playerPos" type="text" name="playerPos" size="1"/>
+<span asp-validation-for="playerPos" class="text-danger"></span>
+

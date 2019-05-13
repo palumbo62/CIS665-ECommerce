@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NhlPlayer>
+
+@{
+    ViewData["Title"] = "Search NHL Players";
+    var filterInfo = ViewData["filterInfo"] as FilterInfo;
+    var message = TempData["message"];
+}
+
+@if (message != null) {
+    <div class="alert alert-success">@message</div>
+}
+
+<h1>NHL Player Search</h1>
+<hr />
+<form asp-action="NhlPlayerSearch" method="get">
+    <div class="form-actions no-color">
+        <partial name="_PlayerFilterView" model="@filterInfo" />
+
+        &nbsp;<button type="submit" class="btn btn-primary">Search</button>
+        &nbsp;<a asp-action="NhlPlayerSearch">Back to Full List</a>
+    </div>
+</form>
+<hr />
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:20%">
+                Team Name
+            </th>
+            <th style="width:20%">
+                Name
+            </th>
+            <th style="width:5%">
+                Age
+            </th>
+            <th style="width:5%">
+                Position
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.NhlTeamFkNavigation.NhlTeamName</td>
+                <td>@p.NhlPlayerName</td>
+                <td>@p.NhlPlayerAge</td>
+                <td>@p.NhlPlayPosition</td>
+            </tr>
+        }
+    </tbody>
+</table>
