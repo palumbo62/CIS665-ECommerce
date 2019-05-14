@@ -7,12 +7,8 @@
 
     PHP - Hands-on-Exercise 4
 
-    Develop PHP pages/functions to enable a user to search for actors by last name (the user could enter
-    a full or partial last name), maximum age (use the Age column for the search; not AgeReal) and
-    gender (use radio buttons for gender). The user can choose to provide or not provide values for each
-    search criterion. Retrieve and display all the actors (NameFirst, NameLast, Age and Gender) that
-    match the specified criteria
-  
+    SQL code used by this assignment.
+   
     Filename: PHPHOE4-Sql.php
  */
 

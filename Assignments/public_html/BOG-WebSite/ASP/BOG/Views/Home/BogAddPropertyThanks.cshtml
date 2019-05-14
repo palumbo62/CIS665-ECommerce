@@ -1,0 +1,43 @@
+﻿@model PropertyT
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <h1>Property has been added. @Model.</h1>
+
+    @*Razor block example*@
+
+    <p>
+
+        @*Embedded C#*@
+        @if (true)
+        {
+            @: @Model.Address
+            @: @Model.City
+            @: @Model.State
+            @: @Model.Zipcode
+            @: @Model.DailyPrice
+            @: @Model.NumBedrooms
+            @: @Model.NumBathrooms
+            @: @Model.GuestCnt
+            @: @Model.SqFt
+            @: @Model.ImageName
+        }
+
+        @*Asp-action to show a new View*@
+
+        <br /><br />
+        Click <a asp-action="BogAddProperty">here</a> to add another another property.
+
+    </p>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

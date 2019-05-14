@@ -28,12 +28,12 @@ displayPageHeader("<br />Search for an actor by lastname, age, and/or gender<br 
     <label for="lastname">Actor Last Name:</label>
     <input type="text" name="lastname" id="lastname" maxlength="20"  />
     <label for="age">Actor Age:</label>
-    <input type="number" name="age" id="age" min="0" max="120" style="width: 3"/>
+    <input type="number" name="age" id="age" min="0" max="120" value=21 style="width: 3"/>
 
     <div>
     <label for="gender" id="gender">Actor Gender:</label>
-    <input type="radio" name="gender" value="M" id="gender">Male<br>
-    <input type="radio" name="gender" value="F" id="gender">Female<br>
+    <input type="radio" name="gender" value="M" checked id="gender">&nbsp;Male<br>
+    <input type="radio" name="gender" value="F" id="gender">&nbsp;Female<br>
     </div>
     <p>
       <input name = "search" type="submit" value="Search" />

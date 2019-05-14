@@ -1,0 +1,1 @@
+Scaffold-Dbcontext "Server=buscissql1601\cisweb;Database=PalumboDB;User ID=across;Password=sites;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables RolesT,PropertyT,ReservationT,UserT,CommentsT,PropertyTypeT

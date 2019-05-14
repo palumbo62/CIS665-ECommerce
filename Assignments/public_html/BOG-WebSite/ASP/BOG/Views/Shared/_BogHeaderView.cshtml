@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+
+    var userId = TempData["UserId"];
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>BeOurGuest - Vacation Rentals</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/BOG_Style_Layout_All.RLP.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../fonts/css/font-awesome.css">
+
+    <style>
+        footer1 {color: limegreen}
+    </style>
+
+</head>
+
+<div>
+    <header id="header">
+        <h1>
+            @ViewData["PageTitle"]
+        </h1>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-brand">
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item" style="color: limegreen">
+                        Logged In:&nbsp;
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            @:Admin
+                        }
+                        else
+                        {
+                            @:User
+                        }
+                    </li>
+                }
+
+                <li class="nav-item">
+                    <a asp-action="index">Home</a>
+                </li>
+
+                @if (!Context.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item" style="text-decoration:none">
+                        <a asp-action="BogProperties">Listings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="BogLoginPage">Login/Register</a>
+                    </li>
+                }
+                else
+                {
+                    if (Context.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item" style="text-decoration:none">
+                            <a asp-action="BogProperties">Delete Property</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="BogAddProperty">Add Property</a>
+                        </li>
+                    }
+                    else if (Context.User.IsInRole("User"))
+                    {
+                        <li class="nav-item" style="text-decoration:none">
+                            <a asp-action="BogProperties">Listings</a>
+                        </li>
+                        // Registered User
+                        <li class="nav-item">
+                            <a asp-action="BogUserProfile" asp-route-userId="@TempData["UserId"]">Account</a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a asp-action="BogLogout">Logout</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a asp-action="BogAbout">About</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>

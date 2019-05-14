@@ -1,0 +1,42 @@
+﻿@model PropertyT
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<p>
+    <label class="BogLabel" asp-for="Address">Address:</label>
+    <input class="BogInput" type="text" asp-for="Address" required
+           autofocus
+           maxlength="50"
+           size="50"
+           pattern="^[a-zA-Z0-9 ']{1,30}$"
+           title="Enter home address">
+</p>
+
+<!----- City ----------------------------------------------------------->
+<p>
+    <label class="BogLabel" asp-for="City">City:</label>
+    <input class="BogInput" type="text" asp-for="City" required
+           autofocus
+           maxlength="30"
+           size="30"
+           pattern="^[a-zA-Z ']{1,30}$"
+           title="Enter home city">
+</p>
+
+<!----- State ---------------------------------------------------------->
+<p>
+    <partial name="_BogStateView" model="Model" />
+</p>
+
+<!----- ZIP Code ------------------------------------------------------->
+<p>
+    <label class="BogLabel" asp-for="Zipcode">Zipcode:</label>
+    <input class="BogInput" type="text" asp-for="Zipcode" required
+           autofocus
+           maxlength="5"
+           size="5"
+           pattern="^[0-9]{5}$"
+           title="Enter 5-digit zipcode">
+</p>
+

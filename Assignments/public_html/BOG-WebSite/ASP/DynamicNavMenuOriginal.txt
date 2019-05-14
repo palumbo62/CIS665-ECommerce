@@ -1,0 +1,38 @@
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32("UserLoggedIn") == 1)
+                {
+                    if (HttpContextAccessor.HttpContext.Session.GetInt32("UserRoleType") == 1)
+                    {
+                        // Admin
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">Admin<i class="fa fa-caret-down"></i></button>
+                                <div class="dropdown-content">
+                                    <a asp-action="BogAddProperty" class="dropdown-item">Add Property</a>
+                                    <a asp-action="BogDelProperty" class="dropdown-item">Delete Property</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else if (HttpContextAccessor.HttpContext.Session.GetInt32("UserRoleType") == 2)
+                    {
+                        // Registered User
+                        <li>
+                            <a asp-action="BogUserProfile" asp-route-userId="@userId">Account</a>
+                        </li>
+                    }
+
+                    <li>
+                        <a asp-action="BogLogout">Logout</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-action="BogLoginPage">Login/Register</a>
+                    </li>
+                }
+
+                <li>
+                    <a asp-action="BogAbout">About</a>
+                </li>
+

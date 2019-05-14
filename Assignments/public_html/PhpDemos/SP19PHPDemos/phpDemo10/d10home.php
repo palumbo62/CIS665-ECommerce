@@ -18,7 +18,7 @@ displayPageHeader("Home Page");
 
 // the session array element "userInfo" will be set (see d10loginform.php) if the user has been authenticated
 
-$logFName = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['firstname'] : "";   
+$userName = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['FirstName'] : "";   
 
 ?>
 

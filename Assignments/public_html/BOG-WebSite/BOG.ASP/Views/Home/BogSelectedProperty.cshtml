@@ -1,0 +1,106 @@
+﻿@model PropertyT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Selected Property [ADD ACTUAL PROPERTY ID HERE]";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body style="font-size:12pt">
+    <partial name="_BogHeaderView" />
+
+    <!-- Banner -->
+    <section id="bannerList">
+        <h2>Property View</h2>
+        <!--<form asp-action="BogReservationPage" method="post"> -->
+
+        <form method="post">
+            <input type="hidden" asp-for="PropertyIdPk" />
+
+            <button class="btn btn-primary" asp-controller="Home" asp-action="BogStartReservation">Reserve</button>
+            <button class="btn btn-primary" asp-controller="Home" asp-action="BogViewReservationsByPropId">View Reservations</button>
+            <button class="btn btn-primary" asp-controller="Home" asp-action="BogProperties">Cancel</button>
+        </form>
+    </section>
+
+    <section id="secondbannerList">
+        <form action="BogAddCommentAction" method="post">
+            <ul class="article-list-vertical-Select">
+                <li>
+                    <br />
+                    <h1>DISPLAY PROPERTY TITLE HERE</h1>
+                    <br>
+                    <p>
+                        DISPLAY PROPERTY ATTRIBUTES HERE<br />
+                        DISPLAY PROPERTY ATTRIBUTES HERE<br />
+                        DISPLAY PROPERTY ATTRIBUTES HERE<br />
+                    </p>
+                    <hr />
+                    <br />
+
+                    <!---------------SUBMIT COMMENT---------------------->
+                    <h2>Add Review</h2>
+
+                    <br />
+                    <p>
+                        <label for="RatingID"> Rating: </label>
+                        <select name="RatingID" id="RatingID" required>
+                            <option value="5">5 - Very Satisfied</option>
+                            <option value="4">4 - Satisfied</option>
+                            <option value="3">3 - Fair</option>
+                            <option value="2">2 - Dissatisfied</option>
+                            <option value="1">1 - Very Dissatisfied</option>
+                        </select>
+                        <br />
+                        <br />
+                        <label for="MonthYearVisit"> Date Visted: </label>
+                        <input type="date" name="MonthYearVisit" id="MonthYearVisit"
+                               required
+                               min="1900-01-01" max="01/01/2019" />
+                        <br />
+                        <br />
+                        <label for="comment">Comment: </label>
+                        <br /><br />
+                        <textarea rows="5" cols="50" name="comments" id="comment" placeholder="Enter text here..."></textarea>
+                        <br /><br />
+                        <button name="commentSubmit" type="submit" value="submit">Submit</button>
+                        <hr>
+                    </p>
+                    <br />
+
+                    <!-----REVIEWS POPULATED FROM DB------->
+                    <h2>Reviews</h2>
+                    <p>
+                        ADD REVIEWS FOR PROPERTY HERE
+
+                        <table id="Comments">
+                            <thead>
+                                <tr>
+                                    <th>DateSubmitted</th>
+                                    <th>Rating</th>
+                                    <th>DateOfVisit</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>DISPLAY COMMENT/REVIEW INFO</td>
+                                    <td>DISPLAY COMMENT/REVIEW INFO</td>
+                                    <td>DISPLAY COMMENT/REVIEW INFO</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

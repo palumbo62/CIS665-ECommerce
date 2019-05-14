@@ -1,0 +1,70 @@
+﻿@model ReservationT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = $"BeOurGuest - Reservations";
+
+    var propId = TempData["propId"];
+    var userId = TempData["userId"];
+
+    var prop = Model.PropertyIdFkNavigation;
+
+    var numDays = (Model.CheckOut.Date.Subtract(Model.CheckIn.Date).TotalDays + 1);
+}
+
+<!DOCTYPE html>
+
+<html>
+<partial name="_BogHeaderView" />
+<body>
+
+    <!-- Banner -->
+    <section id="bannerList">
+        <h2>Thank you for booking with us.&nbsp;Your Reservation ID is: @Model.ReservationIdPk</h2>
+
+        <a asp-action="BogProperties" class="btn btn-sm btn-success">Book Another?</a>
+        <a asp-action="BogHome" class="btn btn-sm btn-info">Home</a>
+    </section>
+
+    <section id="secondbannerList" style="padding: 2em 0 7em">
+        <form>
+            <div>
+                <ul class="article-list-vertical-Select">
+                    <li class="PropertyReservationDetailsConfirmed">
+                        <h1>@prop.PropertyTitle</h1>
+                        <hr />
+                        <p>
+                            Check-In Date: &nbsp; @Model.CheckIn.Date.ToString("MM/dd/yyyy")
+                            <br />Check-Out Date: &nbsp; @Model.CheckOut.Date.ToString("MM/dd/yyyy")
+                            <br />Number of Days: &nbsp;  @(Model.CheckOut.Date.Subtract(Model.CheckIn.Date).TotalDays + 1)
+                            <br />Guest Count: &nbsp; @Model.GuestCnt
+                        </p>
+                        <p>
+                            Property ID:&nbsp; @prop.PropertyIdPk
+                            <br />Property Address:&nbsp;@prop.Address &nbsp;@prop.City &nbsp; @prop.State &nbsp; @prop.Zipcode
+                            <br />Property Type:&nbsp;  @prop.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Price Per Night:&nbsp; @prop.DailyPrice.ToString("c")
+                            <br />
+                            <hr />
+                            @if (String.IsNullOrEmpty(prop.ImageName) || (prop.ImageName.Trim().Length == 0))
+                            {
+                                <img style="height: 400px; width: 500px"
+                                     src="~/images/default-house.jpg" alt="Property @prop.PropertyIdPk Info" />
+                            }
+                            else
+                            {
+                                <img style="height: 400px; width: 500px"
+                                     src="~/images/@prop.ImageName" alt="Property @prop.PropertyIdPk Info" />
+                            }
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PropertyT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Current Properties";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body style="font-size:12pt">
+    <partial name="_BogHeaderView" />
+
+    <section id="bannerList">
+        <h2>Narrow your seach here</h2>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form asp-action="BogHomeSearch" method="get">
+                <partial name="_BogPropertySearchView" model="Model" />
+
+                <button name="propSearch" type="submit" value="search">
+                    <i class="btn button-primary fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section id="secondbannerList">
+        <form asp-action="BogSelectedProperty" method="post">
+            <!-- Display the property listings -->
+            <ul class="article-list-vertical">
+                @foreach (var p in Model)
+                {
+                <li>
+                    <font color='#000000' />
+                    <br />Property ID:&nbsp;    @p.PropertyIdPk
+                    <br />Property Title:&nbsp; @p.PropertyTitle
+                    <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
+                    <br />
+                    <br />Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
+                    <br />
+                    <br />Number of Bedrooms:&nbsp; @p.NumBedrooms
+                    <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
+                    <br />Square Footage:&nbsp; @p.SqFt
+                    <br />Number of Guests:&nbsp; @p.GuestCnt
+
+                    <input type="hidden" name="propId" value=@p.PropertyIdPk />;
+
+@*                    <img src=@String.IsNullOrEmpty(p.ImageName) ? "default-house.jpg" : @p.ImageName />*@
+                    <img src=@p.ImageName />
+
+                    <p>Description:&nbsp; @p.Description</p>
+                    <br />
+
+                    <font color='#000000' />
+                    <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
+                    <br />
+                    <br />
+                    <a asp-action="BogSelectedView">View</a>
+                    <a asp-action="BogHome">Home Page</a>
+                </li>
+                }
+            </ul>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

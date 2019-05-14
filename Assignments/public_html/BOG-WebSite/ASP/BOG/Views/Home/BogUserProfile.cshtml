@@ -1,0 +1,103 @@
+﻿@model UserT
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Update Profile";
+
+    var pwTitle = ViewData["PasswordTitle"];
+    var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
+    Model.Password = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<partial name="_BogHeaderView" />
+<body>
+
+    <section id="bannerList">
+        <h2>Enter profile changes to update</h2>
+        <a asp-action="BogChangePassword" asp-route-userid="@Model.UserIdPk"
+           class="btn btn-sm btn-success"
+           title="Change your password">Change Password</a>
+        <a asp-action="BogViewReservationsByUserId" asp-route-userid="@Model.UserIdPk"
+           class="btn btn-sm btn-primary"
+           title="View your upcoming reservation">View Reservations</a>
+    </section>
+
+    <!-- User profile management  -->
+    <section id="banner" style="padding: 5em 0 7em">
+        <form asp-action="BogUserProfileAction" method='post'>
+            <!--<div class="usercontainer">-->
+            <div class="containerAddProp">
+                <input type="hidden" asp-for="UserIdPk" />
+                <input type="hidden" asp-for="RoleIdFk" />
+
+                <!----- Email Id ---------------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="Email">Email Address</label>
+                    <input class="BogInput" asp-for="Email" type="text" id="readonly" readonly
+                           required autofocus
+                           maxlength="50"
+                           size="40"
+                           title="Readonly Field">
+                </p>
+
+                <!----- Password ---------------------------------------------------------->
+                <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"-->
+                <p>
+                    <label class="BogLabel" asp-for="Password">Password</label>
+                    <input type="password" asp-for="Password" required
+                           maxlength="20"
+                           size="20"
+                           title="Enter your password to update profile" />
+                </p>
+
+                <!----- Mobile Number ---------------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="PhoneNumber">Phone Number</label>
+                    <input class="BogInput" type="text" asp-for="PhoneNumber" required
+                           maxlength="10"
+                           pattern="^[0-9]{10}$"
+                           size="10"
+                           title="Enter phone number">
+                </p>
+
+                <!----- First Name ---------------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="FirstName">First Name</label>
+                    <input class="BogInput" type="text" asp-for="FirstName" required
+                           maxlength="30"
+                           pattern="^[a-zA-Z ']+$"
+                           size="30"
+                           title="Enter first name">
+                </p>
+
+                <!----- Last Name ---------------------------------------------------------->
+                <p>
+                    <label class="BogLabel" asp-for="LastName">Last Name</label>
+                    <input class="BogInput" type="text" asp-for="LastName" required
+                           maxlength="30"
+                           pattern="^[a-zA-Z ']+$"
+                           size="30"
+                           title="Enter last name">
+                </p>
+
+                <!----- Address City State Zip------------------------------------------>
+                <partial name="_BogUserAddressView" model="Model" />
+
+                <!--Button Should reach out to php page and confirm user or admin access-->
+                <br />
+                <hr />
+
+                <button class="btn btn-sm btn-success" type="submit" value="update">Update</button>
+                <a asp-action="BogHome" class="btn btn-sm btn-info">Cancel</a>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>

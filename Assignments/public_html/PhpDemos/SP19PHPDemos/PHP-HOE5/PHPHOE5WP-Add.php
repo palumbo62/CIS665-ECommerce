@@ -28,7 +28,7 @@ displayPageHeader("New actor '{$_POST['firstName']}, {$_POST['lastName']}' added
 ?>
 
 <p style="text-align: center">
-    <a href="PHPHOE5WP.php">[Add another movie]</a>
+    <a href="PHPHOE5WP.php">[Add another actor]</a>
 </p>
 
 <?php

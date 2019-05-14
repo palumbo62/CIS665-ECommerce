@@ -1,0 +1,29 @@
+﻿@model BogAlertMsg
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Alert Message";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+
+        @*Razor block example*@
+        <section id="bannerAlert">
+            <h3 class="alert-heading">@Model.alertMsg</h3>
+
+            <br />
+            <a class="btn btn-sm btn-warning" asp-action="@Model.retryPage">@Model.buttonText</a>
+            <a class="btn btn-sm btn-info" asp-action="BogHome">Home Page</a>
+        </section>
+        <section id="bannerAlertFill">
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+    </body>
+</html>

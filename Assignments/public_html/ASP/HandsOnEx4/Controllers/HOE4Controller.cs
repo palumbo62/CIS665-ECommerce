@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HandsOnEx4.Models;
 using Microsoft.AspNetCore.Mvc;
-
-using HandsOnEx4.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
 
 namespace HandsOnEx4.Controllers
 {
@@ -71,7 +67,7 @@ namespace HandsOnEx4.Controllers
 
             // select all products 'p' in the Product table
             var products = from p in aTSContext.Product select p;
-           
+
             // now look at sortOrder parameter to determine how to sort it
             switch (sortOrder)
             {

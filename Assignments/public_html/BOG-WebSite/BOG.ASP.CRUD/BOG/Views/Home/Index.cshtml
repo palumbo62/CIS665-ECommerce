@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <section id="bannerHome">
+        <!-- Home Page Custom Banner-->
+        <h2>BeOurGuest</h2>
+        <p>
+            It's time to enjoy our wide range of vacation homes from city townhomes, <br />
+            country cabins, luxury family homes, and even ocean front condos. <br />
+            Your next getaway is waiting on you!<br />
+        </p>
+        <p>Book your perfect vacation home today! </p><br>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <partial name="_BogPropertySearchView" model=@ViewData["HomeSearch"] />
+
+            <a class="fa fa-search" asp-action="BogHomeSearch" name="propSearch"></a>
+        </div>
+    </section>
+</div>

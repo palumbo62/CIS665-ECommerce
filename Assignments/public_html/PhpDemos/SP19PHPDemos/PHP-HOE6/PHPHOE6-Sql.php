@@ -1,15 +1,15 @@
 <?php
 /*
     Class:         CIS665
-    Assignment:    PHP-HOE5
+    Assignment:    PHP-HOE6
     Name:          Robert Palumbo
-    Due Date:      3.7.2019 @ 11:59pm
+    Due Date:      3.12.2019 @ 11:59pm
 
-    PHP - Hands-on-Exercise 5
+    PHP - Hands-on-Exercise 6
  
     SQL code used by this assignment.
  
-    Filename: PHPHOE5-Sql.php
+    Filename: PHPHOE6-Sql.php
  */
 
 require_once ("PHPHOE6-dbConnExec.php");
@@ -63,6 +63,17 @@ function updateActor($actorPK, $nameFirst, $nameLast, $age, $gender, $actorAgent
 Update Actor
 Set NameFirst = '$nameFirst', NameLast = '$nameLast', Age = $age, 
 Gender = '$gender', ActorAgent = '$actorAgent'
+Where ActorPK = $actorPK
+STR;
+
+    executeQuery($query);
+}
+
+function deleteActor($actorPK)
+{
+    $query = <<<STR
+Delete
+From Actor
 Where ActorPK = $actorPK
 STR;
 

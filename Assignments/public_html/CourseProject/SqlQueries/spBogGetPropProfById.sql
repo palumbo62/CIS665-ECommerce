@@ -27,9 +27,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT p.*, pt.PropertyTypeName FROM PropertyT p
-        INNER JOIN PropertyTypeT pt
-            ON p.[PropertyTypeID.FK] = pt.[PropertyTypeID.PK] 
+	SELECT * FROM PropertyT p
         WHERE p.[PropertyID.PK] = @propId;
 
     IF (@@ROWCOUNT != 1)

@@ -1,0 +1,1262 @@
+/*
+Project Test Template
+Be Our Guest(BOG) Vacation Rentals
+
+Date: 5/11/2019
+
+Filename: BOG_Style_Layout_All.css
+*/
+
+
+/*---------------------------STANDARD CSS STYLE AND LAYOUT FOR ALL WEB PAGES ---------------------------*/
+/*This section contains our default css style and layout for each indicidual page. 
+  Each page will call out to this.css file*/
+
+/*------------------BASICS/HEADER/FOOTER SECTION--------------------------*/
+html {
+    height: 100%;
+    background-size: cover;
+    background-color: #383b43;
+}
+
+body {
+    width: 100%;
+}
+
+body, input, select, textarea {
+    color: #444;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 11pt;
+    font-weight: 400;
+    line-height: 1.65em;
+    position: relative;
+}
+
+a {
+    color: #383b43;
+    text-decoration: none;
+}
+
+    a:active, a:hover {
+        text-decoration: double;
+        color: #007bff;
+    }
+
+
+
+/* Header */
+
+#header {
+    background-color: #383b43;
+    color: white;
+    cursor: default;
+    font-size: 1.5em;
+    height: 100px;
+    line-height: 100px;
+    width: 100%;
+}
+
+    #header h2 {
+        position: center;
+    }
+
+    #header h1 {
+        color: #007bff;
+        font-size: 1.5em;
+        font-style: italic;
+        height: inherit;
+        left: 3em;
+        line-height: inherit;
+        margin: auto;
+        padding: 0;
+        position: absolute;
+    }
+
+        #header h1 a {
+            font-size: 1.25em;
+        }
+
+    #header nav {
+        height: inherit;
+        line-height: inherit;
+        position: absolute;
+        right: 3em;
+        vertical-align: middle;
+    }
+
+header nav > ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+#header nav > ul > li {
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 2em;
+    padding-left: 0;
+}
+
+    #header nav > ul > li a {
+        transition: color 0.2s ease-in-out;
+        color: #ffffff;
+        display: inline-block;
+    }
+
+        #header nav > ul > li a:active, #header nav > ul > li a:hover {
+            color: #007bff;
+        }
+
+/*Footer Styles*/
+
+footer {
+    /*border: 1px solid black;*/
+    background-color: dimgrey;
+    /*clear: left;*/
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*bottom: 0;*/
+    height: 5em;
+    width: 100%;
+    position: static;
+}
+
+    footer p {
+        color: dodgerblue;
+        font-style: normal;
+        font-size: 1.0em;
+        text-align: center;
+        margin: 0;
+    }
+
+    footer p div {
+        color: limegreen;
+    }
+/*---------------------------HOME PAGE-------------------------------*/
+/* BannerHome */
+
+#bannerHome {
+    background-image: url(../images/BOGhouseBanner.jpg);
+    background-position: center center;
+    background-size: cover;
+    color: white;
+    padding: 8em 0 20em;
+    text-align: center;
+    width: 100%;
+    height: 100%
+}
+
+    #bannerHome h2 {
+        font-size: 4em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+        padding-bottom:10px;
+        color: #007bff;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
+
+    #bannerHome p {
+        color: white;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+        font-size: 1.5em;
+        margin-bottom: 1.75em;
+    }
+
+#bannerBlue {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 20em 0em 20em;
+    text-align: center;
+}
+
+#secondBannerHome {
+    background-color: dimgray;
+    background-size: cover;
+    opacity: 0.9;
+    padding: 5em 0 5em;
+    text-align: left;
+}
+
+    #secondBannerHome .column {
+        background-image: url(../images/dark_tint.png);
+    }
+
+    #secondBannerHome h2 {
+        color: #007bff;
+        text-align: center;
+        /*padding: 0px;*/
+        font-size: 2em;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+        line-height: 1em;
+        margin: 0 0 1em 0;
+        padding-top: 100px;
+        padding: 0.1px;
+    }
+
+    #secondBannerHome h3 {
+        color: white;
+        font-size: 1.5em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
+
+    #secondBannerHome #about p {
+        color: white;
+        font-size: 1.2em;
+        line-height: 1em;
+        margin: 0 10em 0 10em;
+        text-align: justify;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
+
+    #secondBannerHome p {
+        color: white;
+        font-size: 1.2em;
+        line-height: 1em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+    }
+
+/*#secondBannerHome button {
+        background-color: deepskyblue;
+        color: white;
+        padding: 8px;
+        margin: 2px 0;
+        border: none;
+        cursor: pointer;
+    }*/
+
+/*---------------------------END OF HOME PAGE-------------------------------*/
+
+
+/*--------------------------ABOUT PAGE-------------------------------*/
+#bannerAbout {
+    background-image: url(../images/banner1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    padding: 4em 0 10em;
+    text-align: center;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
+
+    #bannerAbout h2 {
+        font-size: 4em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+        color: #007bff;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    }
+
+    #bannerAbout p {
+        color: white;
+        text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+        text-align: justify;
+        max-width: 50%;
+        font-size: 1.5em;
+        margin: auto;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    #bannerAbout button {
+        background-color: #007bff;
+        color: white;
+        padding: 8px;
+        margin: 2px 0;
+        border: none;
+        cursor: pointer;
+        width: 8%;
+    }
+
+/*--------------------------LISTINGS PAGE-------------------------------*/
+#bannerAlertFill {
+    height: 66vh;
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#bannerList, #bannerAlert {
+    background-image: url(../images/dark_tint.png);
+    background-position: center center;
+    color: #ffffff;
+    padding: 1em 0 1em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #bannerList h2 {
+        color: white;
+        font-size: 2em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+    }
+
+    #bannerList h3 {
+        color: #007bff;
+        font-size: 2.0em;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 0;
+    }
+
+
+    #bannerList input, #bannerList select {
+        display: inline-block;
+        height: 30px;
+        background-color: white;
+        color: black;
+    }
+
+/* Second Banner */
+
+#secondbannerList {
+    display: block;
+    background-image: url(../images/banner1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-bottom: 1px;
+    text-align: center;
+    height: 650px;
+    width: 100%;
+    overflow: auto;
+    /*position: fixed;*/
+    /*overflow-y: scroll;*/
+}
+
+    #secondbannerList h2 {
+        color: #007bff;
+        text-align: left;
+        font-size: 2em;
+        line-height: 1em;
+        margin-top: 0;
+        margin-left: 230px;
+        padding-top: 0;
+        padding: 0.1px;
+    }
+
+    #secondbannerList h3 {
+        color: black;
+        font-size: 1.5em;
+        line-height: 1em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+    }
+
+    #secondbannerList p {
+        font-size: 11pt;
+        left: 60%;
+        color: black;
+    }
+
+    #secondbannerList form .article-list-vertical-Select button {
+        color: white;
+    }
+/*----------------- LIST STYLE--------------------*/
+.article-list-vertical {
+    width: 50em;
+    text-align: center;
+    padding: 0;
+    opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
+    width: 460px;
+}
+
+    .article-list-vertical ul {
+        width: 800px;
+        overflow: auto;
+    }
+
+    .article-list-vertical li {
+        display: block;
+        box-sizing: border-box;
+        border-radius: 3px;
+        text-align: left;
+        box-shadow: 1px 3px 1px 0 rgba(0, 0, 0, 0.08);
+        border: 6px solid #cfcfcf;
+        padding: 3px;
+        overflow: hidden;
+        /*background-color: #fff;*/
+        background-color: lightcyan;
+        background-color: #efefef;
+        font: normal 13px sans-serif;
+        margin-bottom: 8px;
+        /*max-width: 575px;*/
+    }
+
+.NoPropsFound {
+    text-align: center;
+    font-size: 12pt;
+    color: red;
+}
+
+    /* Article photo */
+
+    .NoPropsFound img {
+        float: none;
+        width: 200px;
+        height: 200px;
+        display: block;
+        border-radius: 9px;
+    }
+
+.article-list-vertical li img {
+    float: right;
+    width: 200px;
+    height: 150px;
+    display: block;
+    border-radius: 9px;
+}
+
+
+.article-list-vertical li div {
+    float: left;
+    box-sizing: border-box;
+    max-width: 350px;
+    padding: 5px;
+    border-color: #007bff;
+}
+
+    /* Article excerpt */
+    .article-list-vertical li div p {
+        line-height: 20px;
+        color: #5d5d5d;
+        margin: 20px 0;
+    }
+
+    /* Article title */
+    .article-list-vertical li div h2 {
+        font-size: 16px;
+        position: absolute;
+        left: -15px;
+        line-height: 20px;
+        color: #5d5d5d;
+        margin: 20px 0;
+    }
+
+        .article-list-vertical li div h2 a {
+            color: #2b2b2b;
+            text-decoration: none;
+        }
+
+@media (max-width: 600px) {
+
+    .article-list-vertical {
+        max-width: 350px;
+    }
+
+        .article-list-vertical li {
+            max-width: 325px;
+        }
+
+            .article-list-vertical li > a {
+                float: none;
+                width: 10%;
+            }
+
+            .article-list-vertical li div {
+                float: none;
+                padding: 30px;
+            }
+}
+/*--------------------------END OF  LISTINGS PAGE-------------------------------*/
+
+
+
+/*--------------------------COMMON CSS FOR LOGIN/REGISTER/ACCOUNT-------------------------------*/
+#banner {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 10em;
+    text-align: center;
+}
+
+#bannerBlue {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 9em 0;
+    text-align: center;
+}
+
+#bannerLogin {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 8em 0;
+    text-align: center;
+}
+
+    #bannerLogin input[id='code'] {
+        color: white;
+    }
+
+#banner input[id='code'] {
+    color: white;
+}
+
+#banner h2 {
+    color: #ffffff;
+    font-size: 4em;
+    line-height: 1.25em;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+}
+
+#banner p {
+    color: white;
+    text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+    font-size: 1.5em;
+    margin-bottom: 1.75em;
+}
+
+#banner h1 {
+    font-size: 35px;
+    position: center;
+    padding-left: 150px;
+}
+
+/*--------------------------LOGIN PAGE-------------------------------*/
+/* Login Table*/
+#bannerLogin form div.containerLogin {
+    border: 8px solid #808080;
+    position: center;
+    background-color: lightgray;
+    opacity: 0.9;
+    width: 500px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+}
+
+    #bannerLogin form div.containerLogin input {
+        margin: 3px;
+        border: 1.5px solid darkgrey;
+        padding-left: 2px;
+        color: black;
+    }
+
+    #bannerLogin form div.containerLogin div {
+        font-size: 16pt;
+        /*color: #007bff;*/
+        color: darkred;
+    }
+
+        #bannerLogin form div.containerLogin div a {
+            font-weight: bolder;
+            color: #007bff;
+        }
+
+/*--------------------------REGISTER PAGE-------------------------------*/
+
+#banner form div.containerRegister {
+    border: 8px solid #808080;
+    background-color: lightgray;
+    width: 700px;
+    padding: 20px;
+    opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #banner form div.containerRegister label {
+        display: inline-block;
+        clear: both;
+        /*float: left;*/
+        padding-top: 5px;
+        padding-right: 5px;
+        text-align: right;
+        margin: 0 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister input {
+        display: inline-block;
+        float: none;
+        border: 1.5px solid darkgrey;
+        /*margin: 0;*/
+        margin: 0 0 2px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister select {
+        display: inline-block;
+        float: none;
+        height: 30px;
+        width: 10em;
+        margin: 5px 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerRegister input[placeholder] {
+        font-weight: lighter;
+        opacity: unset;
+    }
+/*--------------------------REGISTER PAGE-------------------------------*/
+
+/*--------------------------ADD PROPERTY PAGE-------------------------------*/
+.BogLabel {
+    display: block;
+    width: 250px;
+    float: right;
+    margin-bottom: 2px;
+}
+
+.BogInput {
+    display: block;
+    float: none;
+    margin-bottom: 2px;
+}
+
+#BogRadio {
+    display: block;
+    float: none;
+    width: 22px;
+    height: 22px;
+    /*padding-left: 30px;
+    padding-top: 30px;*/
+}
+
+input:read-only {
+    background-color: lightsteelblue;
+}
+
+textarea:read-only {
+    background-color: lightsteelblue;
+}
+
+#banner form div.containerAddProp {
+    border: 8px solid #808080;
+    background-color: lightgray;
+    width: 700px;
+    padding: 20px;
+    opacity: 0.95;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #banner form div.containerAddProp hr {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    #banner form div.containerAddProp p {
+        margin: auto;
+        font-size: 1.0em;
+    }
+
+    #banner form div.containerAddProp label {
+        display: block;
+        clear: both;
+        float: left;
+        padding-top: 5px;
+        padding-right: 5px;
+        text-align: right;
+        margin: 0 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerAddProp input {
+        display: block;
+        float: none;
+        /*margin: 0;*/
+        margin: 0 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerAddProp select {
+        display: block;
+        float: none;
+        height: 30px;
+        width: 10em;
+        margin: 5px 0 5px 0;
+        color: black;
+    }
+
+    #banner form div.containerAddProp textarea {
+        float: none;
+        width: 50%;
+        margin-top: 5px;
+        color: black;
+        overflow: auto;
+    }
+
+    #banner form div.containerAddProp input[placeholder] {
+        font-weight: lighter;
+        opacity: unset;
+    }
+
+    #banner form div.containerAddProp input[type="file"] {
+        float: none;
+        font-weight: lighter;
+        opacity: unset;
+        margin-top: 5px;
+    }
+
+/*--------------------------END OF ADD PROPERTY PAGE------------------------*/
+
+/*--------------------------SELECTED VIEW PAGE------------------------*/
+
+#banner form .containerComment {
+    border: 8px solid #808080;
+    background-color: lightgray;
+    width: 80%;
+    margin: -5% auto;
+    padding: 10px;
+}
+
+#banner .containerComment h3 {
+    color: black;
+    font-size: 2em;
+}
+
+
+#banner form .containerComment label {
+    display: block;
+    float: left;
+    padding-top: 5px;
+    padding-right: 5px;
+    text-align: right;
+    color: black;
+}
+
+#banner form .containerComment h1 {
+    display: block;
+    float: left;
+    font-size: 2em;
+    color: #007bff;
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-left: 0;
+    text-align: left;
+}
+
+#banner form .containerComment p {
+    float: left;
+    font-size: 1em;
+    color: black;
+    padding-left: -300%;
+    text-align: left;
+    /*position: 1px;*/
+}
+
+#banner form .containerComment input {
+    display: block;
+    float: none;
+    margin: 0;
+    margin-left: 11px;
+    color: black;
+}
+
+#banner form .containerComment select {
+    float: none;
+    height: 30px;
+    width: 10em;
+    color: black;
+    margin-left: 30px;
+}
+
+
+#banner form .containerComment textarea {
+    float: none;
+    width: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+    margin-left: 11px;
+}
+
+
+#banner form .containerComment input[placeholder] {
+    font-weight: lighter;
+    opacity: unset;
+}
+
+
+#banner form .containerComment button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin: 2px 0;
+    border: none;
+    cursor: pointer;
+    width: 10em;
+}
+
+
+/* Second Banner on Comments */
+
+#secondBannerReview {
+    background-color: dimgray;
+    background-size: cover;
+    opacity: 0.9;
+    padding: 5em 0 5em;
+    text-align: left;
+}
+
+    /*#secondBannerReview div.column {
+        background-image: url(../images/dark_tint.png);
+    }*/
+
+    #secondBannerReview h2 {
+        color: white;
+        font-size: 3em;
+        text-decoration: underline;
+        line-height: 1.25em;
+        margin: 0 0 0.5em 0;
+        padding: 1%;
+        text-align: left;
+    }
+
+
+    #secondBannerReview p {
+        color: black;
+        font-size: 1.5em;
+        line-height: 1em;
+        margin: 0 0 0.5em 0;
+        padding: 10px;
+    }
+
+
+/*--------------------------END OF COMMENT PAGE------------------------*/
+
+
+/*--------------------------RESERVE PAGE------------------------*/
+
+
+#banner form .containerReserve {
+    border: 8px solid #808080;
+    background-color: lightgray;
+    padding: 20px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 440px;
+}
+
+    #banner form .containerReserve hr {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    #banner form .containerReserve label {
+        display: block;
+        float: left;
+        padding-top: 5px;
+        padding-right: 5px;
+        text-align: justify;
+        color: black;
+        margin-left: 60px;
+    }
+
+    #banner form .containerReserve input[name="checkOutDate"] {
+        display: block;
+        float: left;
+        width: 140px;
+        margin: 0;
+        margin-left: 10px;
+        color: black;
+    }
+
+    #banner form .containerReserve input[name="checkInDate"] {
+        display: block;
+        float: left;
+        width: 140px;
+        margin: 0;
+        margin-left: 22px;
+        color: black;
+    }
+
+    #banner form .containerReserve input[name="guestCnt"] {
+        display: block;
+        float: left;
+        width: 40px;
+        margin: 0;
+        margin-left: 10px;
+        color: black;
+    }
+
+
+/*VIEW RESERVATIONS PAGE*/
+
+#bannerViewRes {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 14em 0 14em;
+    text-align: center;
+}
+
+/*--------------------------END RESERVE PAGE------------------------*/
+
+/*--------------------------USER PROFILE PAGE-------------------------------*/
+
+#bannerRegister {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 5em 0 10em 0;
+    text-align: center;
+}
+
+
+/*--------------------------USER PROFILE PAGE-------------------------------*/
+
+#banner form listingcontainer button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin: 2px 0;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+}
+
+.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/*----------------- FORM STYLE--------------------*/
+
+/*FORMS MIGHT BE STANDARD ACROSS*/
+/* Style the search field */
+form select input[type=text] {
+    width: 20%;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 17px;
+    background: #f1f1f1;
+}
+
+/* Style the submit button */
+form select button {
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    width: 3%;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+
+    form select button:hover {
+        background: #0b7dda;
+    }
+
+/* Clear floats */
+form select::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+form select {
+    width: 10%;
+    height: 27px;
+}
+/*----------------- END OF FORM STYLE--------------------*/
+
+/*.SearchState label {
+    display: inline-block;
+    margin-right: 30px;
+    color: white;
+    text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+}*/
+
+.SearchState select {
+    display: inline-block;
+    height: 30px;
+    padding-right: 30px;
+    /*margin-right: 30px;*/
+}
+
+.SearchState label {
+    display: inline-block;
+    font-size: 16pt;
+    /*margin-left: 20px;
+    margin-right: 5px;*/
+    color: white;
+    padding-left: 5px;
+    text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+}
+
+.SearchState option {
+    display: inline-block;
+    /*    margin-left: 20px;
+    margin-right: 5px;*/
+    color: black;
+    text-shadow: -1px -1px 0 #0b7dda, 1px -1px 0 #0b7dda, -1px 1px 0 #0b7dda, 1px 1px 0 #0b7dda;
+}
+
+.SearchState input {
+    display: inline-block;
+    height: 30px;
+    /*padding-right: 30px;*/
+    background-color: white;
+    color: black;
+    /*margin-right: 15px;*/
+}
+
+.SearchState button {
+    margin-left: 15px;
+    margin-bottom: 3px;
+}
+
+/*.SearchState button {
+    display: inline-block;
+    height: 35px;
+    max-width: 50px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 30px;
+    background-color: #007bff;
+    color: white;
+    margin-right: 30px;
+}*/
+
+/*-----------BANNER SELECTED VIEW---------*/
+#bannerSelect {
+    background-image: url(../images/banner1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+
+    #bannerSelect img {
+        border-radius: 8px;
+        max-width: 30%;
+        height: auto;
+    }
+
+    #bannerSelect input[id='code'] {
+        color: white;
+    }
+
+
+    #bannerSelect h1 {
+        color: #007bff;
+        font-size: 2em;
+        line-height: 0.5em;
+        margin: 0;
+        padding-left: 1px;
+        /*position: left;*/
+    }
+
+    #bannerSelect form p {
+        font-size: 1.5em;
+        margin-bottom: 1.75em;
+        text-align: left;
+    }
+
+
+/*TEST_______________________________*/
+.article-list-vertical-Select {
+    width: 600px;
+    text-align: center;
+    padding: 0;
+    opacity: 0.9;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .article-list-vertical-Select h1 {
+        padding-top: 10px;
+    }
+
+    .article-list-vertical-Select ul {
+        width: 800px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 70%;
+        overflow: auto;
+    }
+
+    .article-list-vertical-Select li {
+        display: block;
+        box-sizing: border-box;
+        border-radius: 3px;
+        text-align: left;
+        box-shadow: 1px 3px 1px 0 rgba(0, 0, 0, 0.08);
+        border: 6px solid #cfcfcf;
+        background-color: #efefef;
+        color: black;
+        font: normal 11px sans-serif;
+        margin-bottom: 8px;
+        max-width: 800px;
+        max-height: 600px;
+        padding: 5px;
+        margin-left: 1%;
+    }
+
+        /* Article photo */
+
+        .article-list-vertical-Select li img {
+            border-radius: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 200px;
+            max-width: 200px;
+            width: 50%;
+        }
+
+        .article-list-vertical-Select li h1 {
+            color: #007bff;
+            font-size: 2em;
+            line-height: 0.5em;
+            margin: 0;
+            padding-left: 6px;
+            /*position: left;*/
+        }
+
+        .article-list-vertical-Select li div {
+            float: left;
+            box-sizing: border-box;
+            max-width: 350px;
+            padding: 5px;
+            border-color: #007bff;
+        }
+
+        .article-list-vertical-Select li p {
+            line-height: 20px;
+            color: black;
+            margin-left: 6px;
+        }
+
+        .article-list-vertical-Select li label {
+            line-height: 20px;
+            color: black;
+            margin-left: 6px;
+        }
+
+        .article-list-vertical-Select li select {
+            width: 25%;
+            margin-left: 44px;
+        }
+
+        .article-list-vertical-Select li input {
+            width: 25%;
+            margin-left: 10px;
+        }
+
+        .article-list-vertical-Select li textarea {
+            width: 400px;
+            margin-left: 8px;
+            resize: none;
+        }
+
+        .article-list-vertical-Select li button {
+            color: white;
+            margin-left: 8px;
+        }
+
+#secondbannerViewList {
+    display: block;
+    position: Center;
+    background-image: url(../images/banner1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding-top: 1%;
+    padding-bottom: 20%;
+    margin-bottom: 3%;
+    text-align: center;
+    height: 70%;
+    width: 100%;
+}
+
+#propertyReviews {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-align: left;
+    font-size: 11pt;
+    line-height: 30px;
+    opacity: 0.9;
+}
+
+    #propertyReviews th {
+        color: black;
+    }
+
+    #propertyReviews td {
+        color: black;
+    }
+
+#validationError {
+    height: 20px;
+    text-align: left;
+}
+
+.PropertyDetails {
+    height: 575px;
+    width: 675px;
+    overflow: auto;
+}
+
+.PropertyReservationDetails {
+    height: 575px;
+    width: 600px;
+    overflow: auto;
+    margin: unset;
+}
+
+.PropertyReservationDetailsConfirmed {
+    height: 500px;
+    width: 600px;
+    overflow: auto;
+    margin: unset;
+}
+
+.PropertyReservationDetailsConfirmed p img {
+    height: 400px;
+    width: 500px;
+}
+
+.PropertyReservationDetailsUser {
+    height: 575px;
+    width: 800px;
+    /*height: 60%;
+    width: 120%;*/
+    overflow: auto;
+    margin: 0;
+}
+
+

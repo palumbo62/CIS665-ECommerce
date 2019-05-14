@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NhlPlayer>
+
+@{
+    ViewData["Title"] = "Search NHL Players";
+}
+
+<h1>NHL Player Search</h1>
+
+<form asp-action="NhlPlayerSearch" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <!-- Value contains what user previously set using ViewData -->
+            Filter by Team: <input maxlength="20" type="text" name="teamFk"
+                                   value="@ViewData["teamFilter"]" />
+            Last Name: <input maxlength="20" type="text" name="pName"
+                              value="@ViewData["nameFilter"]" />
+            Age: <input type="number" min="18" max="100" name="pAge"
+                        value="@ViewData["ageFilter"]" 
+                        title="Enter player's age (18 - 100)"/>
+            Position: <input type="text" pattern="$^[F|D|C]$" name="pPos"
+                             value="@ViewData["posFilter"]" 
+                             title="Enter player's position (F/D/G)" />
+                            
+            <input type="submit" value="search" class="btn btn-default" />
+            <a asp-action="FilterView">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30%">
+                Team Name
+            </th>
+            <th style="width:30%">
+                Name
+            </th>
+            <th style="width:5%">
+                Age
+            </th>
+            <th style="width:10%">
+                Position
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model)
+        {
+        <tr>
+            <td>@p.NhlTeamFkNavigation.NhlTeamName</td>
+            <td>@p.NhlPlayerName</td>
+            <td style="text-align: right">@p.NhlPlayerAge</td>
+            <td style="text-align: right">@p.NhlPlayPosition</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="NhlPlayerSearch">Back to List</a>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PropertyT>;
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{ 
+    Team115DBContext dbContext = (Team115DBContext) ViewData["DBContext"];
+
+}
+
+<!--dynamic menu option for property type-->
+<label for="proptype">Property Type: </label>
+<select for="proptype" name="proptype" id="proptype" >
+    <option value="" disabled selected>Property Type</option>
+    <option value="1">Home</option>
+    <option value="2">Cabin</option>
+    <option value="3">Condo</option>
+    <option value="4">Apartment</option>
+    <option value="5">TinyHome</option>
+    <option value="6">Cottage</option>
+</select>
+
+<label for="city">City:</label>
+<input type="text" for=city name="city"
+       value="@ViewData["SearchCity"]"
+       maxlength="20"
+       size="20">
+
+<!----- State ---------------------------------------------------------->
+<partial name="_BogStateView" model="Model" />
+
+<!----- ZIP Code ---------------------------------------------------------->
+<label for="zipcode">Zipcode:</label>
+<input type="text" for="zipcode" name="zipcode"
+       value="@ViewData["SearchZipcode"]"
+       maxlength="5"
+       size="5"
+       pattern="^[0-9]{5}$"
+       title="Enter 5-digit zipcode">

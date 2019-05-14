@@ -1,0 +1,2 @@
+Scaffold-Dbcontext "Server=buscissql1601\cisweb;Database=Team115DB;User ID=exposed;Password=source;" 
+Microsoft.Entity.FrameworkCore.SqlServer -OutputDir Models -Tables UserT,PropertyT,CommentsT,PropertyTypeT,RolesT,ReservationsT

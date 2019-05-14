@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Log In Page";
+
+    var loginEmail = TempData["LoginEmail"] != null ? TempData["LoginEmail"] : null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+        @if (TempData["success"] != null)
+        {
+            <section id="bannerList">
+                <h2>
+                    @TempData["success"]
+                </h2>
+            </section>
+        }
+        else
+        {
+            <section id="bannerList">
+                <h2>Enter your login credentials</h2>
+            </section>
+        }
+
+        @*<section id="banner">*@
+        <section id="bannerLogin" style="padding: 4em 0 20em">
+            <form asp-action="BogLoginValidate" method="post" class="p-3">
+                <div class="containerLogin">
+                    <input type="text" placeholder="Email Address" name="email" 
+                           value="@loginEmail"
+                           required
+                           maxlength="50"
+                           size="30"
+                           autofocus="autofocus"
+                           title="Enter a valid email address"><br>
+
+                    <input type="password" placeholder="Password" name="password" 
+                           required
+                           maxlength="20"
+                           size="20"
+                           autofocus="autofocus"
+                           title="Enter password"><br>
+
+                    <!--Button Should reach out to php page and confirm user or admin access-->
+                    <br>
+                    <button class="btn btn-sm btn-success" type="submit">Login</button>
+                    <a asp-action="BogHome" class="btn btn-sm btn-primary">Cancel</a>
+                    <br /><br />
+                    
+                    <div>
+                        Click&nbsp;<a asp-action="BogRegister">HERE</a>&nbsp;to create an account!
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+    </body>
+</html>

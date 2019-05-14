@@ -1,0 +1,130 @@
+﻿@model IEnumerable<PropertyT>
+
+@{
+    Layout = null;
+    ViewData["PageTitle"] = "BeOurGuest - Current Properties";
+    ViewData["ReturnAction"] = "BogProperties";
+
+    var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
+}
+
+<!DOCTYPE html>
+
+<html>
+<partial name="_BogHeaderView" />
+<body>
+
+    <section id="bannerList">
+        <h2>Narrow your seach here</h2>
+
+        <!----------Search form inside banner ----------- -->
+        <div class="SearchState">
+            <form asp-action="BogHomeSearch" method="get">
+                <partial name="_BogPropertySearchView" model="@propSearchModel" />
+
+                <button type="submit" class="btn btn-lg btn-success fa fa-search"></button>
+                @*<button type="reset" class="btn btn-sm btn-info">Reset</button>*@
+                @*<a asp-action="#" class="btn btn-sm btn-info" onclick="return clearSearchForm(this)">Reset</a>*@
+            </form>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section id="secondbannerList" style="padding: 2em 0 6em">
+        <form asp-action="@ViewData["ViewAction"]" method="post">
+            <!-- Display the property listings -->
+            <div>
+                <ul class="article-list-vertical-Select">
+                    @foreach (var p in Model)
+                    {
+                        <li>
+                            <h1>@p.PropertyTitle</h1>
+                            <hr />
+                            <p>
+                                Property ID:&nbsp;    @p.PropertyIdPk
+                                <br />Property Address:&nbsp;@p.Address &nbsp;@p.City &nbsp; @p.State &nbsp @p.Zipcode
+                                <br />Property Type:&nbsp;  @p.PropertyTypeIdFkNavigation.PropertyTypeName
+                                <br />Price Per Night:&nbsp; @p.DailyPrice.ToString("c")
+                            </p>
+                            <hr />
+                            <p>
+                                Number of Bedrooms:&nbsp; @p.NumBedrooms
+                                <br />Number of Bathrooms:&nbsp; @p.NumBathrooms
+                                <br />Square Footage:&nbsp; @p.SqFt
+                                <br />Number of Guests:&nbsp; @p.GuestCnt
+                                <br />
+                                <br />Description:&nbsp; @p.Description
+                                <hr>
+
+                                @if (String.IsNullOrEmpty(p.ImageName) || (p.ImageName.Trim().Length == 0))
+                                {
+                                    <img src="~/images/default-house.jpg" alt="Property @p.PropertyIdPk Info" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/@p.ImageName" alt="Property @p.PropertyIdPk Info" />
+                                }
+                            </p>
+
+                            <hr />
+
+                            @if (!Context.User.Identity.IsAuthenticated || Context.User.IsInRole("User"))
+                            {
+                                <a asp-action="BogViewProperty"
+                                   asp-route-propId="@p.PropertyIdPk"
+                                   class="btn btn-sm btn-success">View</a>
+                            }
+                            else
+                            {
+                                <a asp-action="BogDelPropertyAction"
+                                   asp-route-propId="@p.PropertyIdPk"
+                                   class="btn btn-sm btn-warning">Delete</a>
+                            }
+
+                            <a asp-action="BogHome" class="btn btn-sm btn-primary">Home</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display the page footer -->
+    <partial name="_BogFooterView" />
+
+</body>
+</html>
+
+<script>
+
+    // Function to check Whether both passwords
+    // is same or not.
+    //function clearSearchForm(form) {
+    //    alert("Reset the property seach form");
+    //    city = form.city.value;
+    //    state = form.state.value;
+    //    zipcode = form.zipcode.value;
+    //    proptype = form.proptype.value;
+
+    //    if (city != null) {
+    //        alert(city);
+    //    }
+    //    if (state != null) {
+    //        alert(state);
+    //    }
+    //    if (zipcode != null) {
+    //        alert(zipcode);
+    //    }
+    //    if (proptype != null) {
+    //        alert(proptype);
+    //    }
+
+    //    console.log(form);
+    //    form.city.value = "";
+    //    form.state.value = "";
+    //    form.zipcode.value = "";
+    //    form.proptype.value = "";
+
+    //    return true;
+    //}
+</script>

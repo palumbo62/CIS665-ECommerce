@@ -1,0 +1,76 @@
+﻿@model PropertyT
+
+@{
+    Layout = null;
+
+    ViewData["PageTitle"] = $"BeOurGuest - Delete Property";
+
+    var propSearchModel = ViewData["PropSearchModel"] as BogHomeSearch;
+    var propTypeList = ViewData["PropTypeList"] as IEnumerable<SelectListItem>;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+    <partial name="_BogHeaderView" />
+    <body>
+        <section id="bannerList">
+            <h2>Confirm deletion of Property ID @Model.PropertyIdPk</h2>
+
+        </section>
+
+        @*Razor block example*@
+        <section id="secondbannerList" style="padding: 2em 0 1em">
+            <form asp-action="BogDelPropertyConfirmed" method="post">
+                <ul class="article-list-vertical-Select">
+                    <li>
+                        <h1>@Model.PropertyTitle</h1>
+                        <hr />
+                        <p>
+                            Property ID:&nbsp;    @Model.PropertyIdPk
+                            <br />Property Title:&nbsp; @Model.PropertyTitle
+                            <br />Property Type:&nbsp;  @Model.PropertyTypeIdFkNavigation.PropertyTypeName
+                            <br />Price Per Night:&nbsp; @Model.DailyPrice.ToString("c")
+                        </p>
+
+                        <hr />
+                        <p>
+                            Address:&nbsp;@Model.Address &nbsp;@Model.City &nbsp; @Model.State &nbsp @Model.Zipcode
+                            <br />
+                            <br />Number of Bedrooms:&nbsp; @Model.NumBedrooms
+                            <br />Number of Bathrooms:&nbsp; @Model.NumBathrooms
+                            <br />Square Footage:&nbsp; @Model.SqFt
+                            <br />Number of Guests:&nbsp; @Model.GuestCnt
+                            <br />
+                            <br />Description:&nbsp; @Model.Description
+                            <hr>
+
+                            @if (String.IsNullOrEmpty(Model.ImageName) || (Model.ImageName.Trim().Length == 0))
+                            {
+                                <img src="~/images/default-house.jpg" alt="Property @Model.PropertyIdPk Info" />
+                            }
+                            else
+                            {
+                                <img src="~/images/@Model.ImageName" alt="Property @Model.PropertyIdPk Info" />
+                            }
+                        </p>
+
+                        <a asp-action="BogDelPropertyConfirmed"
+                           asp-route-propId="@Model.PropertyIdPk"
+                           class="btn btn-sm btn-danger">Confirm Deletion?</a>
+                        <a asp-action="BogViewReservationsByPropId"
+                           asp-route-propId="@Model.PropertyIdPk"
+                           class="btn btn-sm btn-primary">View Reservations</a>
+
+                        <a asp-action="BogProperties" class="btn btn-sm btn-info">Cancel</a>
+                    </li>
+                </ul>
+            </form>
+        </section>
+
+        <!-- Display the page footer -->
+        <partial name="_BogFooterView" />
+
+    </body>
+</html>
